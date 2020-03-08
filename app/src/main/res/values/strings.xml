@@ -15,5 +15,17 @@
     <string name="yourdata">Your Data</string>
     <string name="account">Account</string>
     <string name="uTrack">µTrack</string>
+    <string name="capturedata">Capture Data</string>
+    <string name="export">Export Data</string>
+    <string name="save">Save</string>
+    <string name="height">Height</string>
+    <string name="wheel">Wheel Size</string>
+    <string name="color">Color</string>
+    <string name="disk">Disk Type</string>
+    <string name="frame">Frame Type</string>
+    <string name="pinion">Pinion</string>
+
+
+
 
 </resources>
