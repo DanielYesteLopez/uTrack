@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/grayColor"
+    >
+    <Button
+        android:id="@+id/signInbutton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/signUpText2"
+        android:ems="10"
+        android:layout_marginTop="10dp"
+        android:background="@color/whiteColor"
+        android:text="@string/signup" />
+
+    <EditText
+        android:background="@color/yellowishColor"
+        android:textColor="@color/blackColor"
+        android:id="@+id/signupUsername2"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:ems="10"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/uTrack"
+        android:hint="@string/username"
+        android:inputType="textPersonName"
+        />
+
+    <EditText
+        android:background="@color/yellowishColor"
+        android:textColor="@color/blackColor"
+        android:id="@+id/signupPassword2"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/signupUsername2"
+        android:ems="10"
+        android:hint="@string/password"
+        android:layout_marginTop="25dp"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/signupbutton2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/signupPassword2"
+        android:ems="10"
+        android:layout_marginTop="25dp"
+        android:background="@color/whiteColor"
+        android:text="@string/signin" />
+
+    <TextView
+        style="@style/WhiteText"
+        android:id="@+id/signUpText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/signupbutton2"
+        android:ems="10"
+        android:layout_marginTop="350dp"
+        android:text="@string/accountmessage2" />
+
+</RelativeLayout>
