@@ -3,27 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grayColor"
+
+    android:background="@color/jorgecolor"
     >
 
-    <ImageView
-        android:layout_marginTop="15dp"
-        android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-
-        />
-
     <Button
-        android:background="@color/whiteColor"
+        android:background="@color/yellowishColor"
+        android:textColor="@color/blackColor"
         android:id="@+id/button4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+
         android:text="@string/usersettings" />
 
     <Button
-        android:background="@color/whiteColor"
+        android:background="@color/yellowishColor"
+        android:textColor="@color/blackColor"
         android:id="@+id/button5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,16 +28,9 @@
 
     <Button
         android:layout_marginTop="25dp"
-        android:id="@+id/button6"
-        android:background="@color/whiteColor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/language" />
-
-    <Button
-        android:layout_marginTop="25dp"
         android:id="@+id/button7"
-        android:background="@color/whiteColor"
+        android:background="@color/yellowishColor"
+        android:textColor="@color/blackColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/info" />
@@ -49,8 +38,10 @@
     <Button
         android:layout_marginTop="25dp"
         android:id="@+id/button8"
-        android:background="@color/whiteColor"
+        android:background="@color/yellowishColor"
+        android:textColor="@color/blackColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/back" />
+
 </LinearLayout>
