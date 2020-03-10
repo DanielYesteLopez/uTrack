@@ -5,31 +5,25 @@
     android:layout_height="match_parent"
     android:background="@color/jorgecolor">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_marginTop="0dp"
-        android:layout_width="match_parent"
-        android:layout_height="320dp" />
-
     <Button
-        android:id="@+id/button"
+        android:id="@+id/trainingbutton2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/whiteColor"
+        android:background="@color/yellowishColor"
         android:layout_marginTop="50dp"
         android:text="@string/training" />
 
     <Button
-        android:id="@+id/button2"
-        android:background="@color/whiteColor"
+        android:id="@+id/databutton2"
+        android:background="@color/yellowishColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/yourdata" />
 
     <Button
-        android:id="@+id/button3"
-        android:background="@color/whiteColor"
+        android:id="@+id/settingsbutton2"
+        android:background="@color/yellowishColor"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

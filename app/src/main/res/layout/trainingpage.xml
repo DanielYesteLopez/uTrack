@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/jorgecolor"
     >
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_marginTop="0dp"
-        android:layout_width="match_parent"
-        android:layout_height="320dp" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/roundbutton"
         android:layout_marginTop="50dp"
         android:text="@string/capturedata" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/databutton"
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
+        android:background="@color/yellowishColor"
         android:layout_marginTop="10dp"
         android:text="@string/export" />
 
     <Button
-        android:id="@+id/button3"
+        android:background="@color/yellowishColor"
+        android:id="@+id/backbutton"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/back" />
+
 </LinearLayout>

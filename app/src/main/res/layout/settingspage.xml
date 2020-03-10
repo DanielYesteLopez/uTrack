@@ -10,7 +10,7 @@
     <Button
         android:background="@color/yellowishColor"
         android:textColor="@color/blackColor"
-        android:id="@+id/button4"
+        android:id="@+id/usersettingsbutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -20,7 +20,7 @@
     <Button
         android:background="@color/yellowishColor"
         android:textColor="@color/blackColor"
-        android:id="@+id/button5"
+        android:id="@+id/accountbutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
@@ -28,7 +28,7 @@
 
     <Button
         android:layout_marginTop="25dp"
-        android:id="@+id/button7"
+        android:id="@+id/infobutton"
         android:background="@color/yellowishColor"
         android:textColor="@color/blackColor"
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
 
     <Button
         android:layout_marginTop="25dp"
-        android:id="@+id/button8"
+        android:id="@+id/backbutton2"
         android:background="@color/yellowishColor"
         android:textColor="@color/blackColor"
         android:layout_width="match_parent"
