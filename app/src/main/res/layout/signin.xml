@@ -24,7 +24,6 @@
         android:layout_alignParentLeft="true"
         android:ems="10"
         android:layout_marginTop="30dp"
-        android:layout_below="@+id/uTrack"
         android:hint="@string/username"
         android:inputType="textPersonName"
         />
