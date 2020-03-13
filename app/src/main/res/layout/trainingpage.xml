@@ -7,21 +7,21 @@
     >
 
 
-
     <Button
         android:id="@+id/databutton"
-        android:layout_width="match_parent"
-
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content"
-        android:background="@color/yellowishColor"
+        android:background="@drawable/roundbutton"
         android:layout_marginTop="10dp"
         android:text="@string/export" />
 
     <Button
-        android:background="@color/yellowishColor"
+        android:background="@drawable/roundbutton"
         android:id="@+id/backbutton"
         android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/back" />
 
