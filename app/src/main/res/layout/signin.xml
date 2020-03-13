@@ -64,6 +64,6 @@
         android:layout_below="@+id/signupbutton2"
         android:ems="10"
         android:layout_marginTop="350dp"
-        android:text="@string/accountmessage2" />
+        android:text="@string/accountmessage1" />
 
 </RelativeLayout>
