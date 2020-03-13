@@ -30,6 +30,7 @@
         android:inputType="textPersonName"
         />
 
+
     <EditText
         android:background="@color/yellowishColor"
         style="@style/BlackText"
@@ -43,18 +44,57 @@
         android:hint="@string/password"
         android:layout_marginTop="25dp"
         android:inputType="textPassword" />
-
+    <EditText
+        android:background="@color/yellowishColor"
+        style="@style/BlackText"
+        android:id="@+id/confirmpassword"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/signupPassword"
+        android:ems="10"
+        android:hint="@string/confirmpassword"
+        android:layout_marginTop="25dp"
+        android:inputType="textPassword" />
+    <EditText
+        android:background="@color/yellowishColor"
+        style="@style/BlackText"
+        android:id="@+id/nametext"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/confirmpassword"
+        android:ems="10"
+        android:hint="@string/askname"
+        android:layout_marginTop="25dp"
+        android:inputType="textPassword" />
     <Button
         android:id="@+id/signupbutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/signupPassword"
+        android:layout_below="@+id/emailtext"
         android:ems="10"
         android:layout_marginTop="25dp"
         android:background="@color/whiteColor"
         android:text="@string/signup" />
+
+    <EditText
+        android:background="@color/yellowishColor"
+        style="@style/BlackText"
+        android:id="@+id/emailtext"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/nametext"
+        android:ems="10"
+        android:hint="@string/email"
+        android:layout_marginTop="25dp"
+        android:inputType="textPassword" />
 
     <TextView
         style="@style/WhiteText"
@@ -65,7 +105,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/signupbutton"
         android:ems="10"
-        android:layout_marginTop="350dp"
-        android:text="@string/accountmessage1" />
+        android:layout_marginTop="100dp"
+        android:text="@string/accountmessage2" />
 
 </RelativeLayout>
