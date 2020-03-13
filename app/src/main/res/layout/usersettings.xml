@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/jorgecolor">
+    android:background="@color/appOrangeMainColor">
     <ScrollView
         android:background="@color/brownyellowColor"
         android:layout_width="match_parent"
@@ -20,49 +20,29 @@
                 android:layout_height="wrap_content"
                 android:text="@string/frame"
                 android:textColor="@color/blackColor"
-                android:textSize="30dp" />
+                android:textSize="30sp" />
 
             <EditText
                 android:id="@+id/editText"
-                android:background="@color/yellowishColor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:layout_marginTop="10dp"
+                android:background="@color/yellowishColor"
+                android:ems="10"
+                android:hint="@string/bike_frame_hint"
                 android:inputType="textPersonName"
-                android:text="Name"
+                android:text="@string/frame"
                 android:textColor="@color/blackColor"
-                android:textSize="30dp" />
+                android:textSize="30sp"
+                android:importantForAutofill="no" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/disk"
+                android:text="@string/height"
                 android:textColor="@color/blackColor"
-                android:textSize="30dp" />
-
-            <EditText
-                android:background="@color/yellowishColor"
-                android:id="@+id/editText2"
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name"
-                android:textColor="@color/blackColor"
-                android:textSize="30dp" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/pinion"
-                android:textColor="@color/blackColor"
-                android:textSize="30dp" />
+                android:textSize="30sp" />
 
             <EditText
                 android:id="@+id/editText3"
@@ -71,73 +51,78 @@
                 android:layout_marginTop="10dp"
                 android:background="@color/yellowishColor"
                 android:ems="10"
+                android:hint="@string/bike_height_hint"
                 android:inputType="textPersonName"
-                android:text="Name"
+                android:text="@string/height"
                 android:textColor="@color/blackColor"
-                android:textSize="30dp" />
+                android:textSize="30sp" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/textView5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/wheel"
+                android:text="@string/disk"
                 android:textColor="@color/blackColor"
-                android:textSize="30dp" />
+                android:textSize="30sp" />
 
             <EditText
+                android:id="@+id/editText2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:background="@color/yellowishColor"
+                android:ems="10"
+                android:hint="@string/bike_disk_hint"
+                android:inputType="textPersonName"
+                android:text="@string/disk"
+                android:textColor="@color/blackColor"
+                android:textSize="30sp"
+                android:autofillHints="" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/pinion"
+                android:textColor="@color/blackColor"
+                android:textSize="30sp" />
+
+            <EditText
                 android:id="@+id/editText4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:background="@color/yellowishColor"
-                android:inputType="textPersonName"
-                android:text="Name"
-                android:textColor="@color/blackColor"
-                android:textSize="30dp" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/color"
-                android:textColor="@color/blackColor"
-                android:textSize="30dp" />
-
-            <EditText
-                android:id="@+id/editText5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@color/yellowishColor"
                 android:ems="10"
+                android:hint="@string/bike_pinion_hint"
                 android:inputType="textPersonName"
-                android:text="Name"
+                android:text="@string/pinion"
                 android:textColor="@color/blackColor"
-                android:textSize="030dp" />
+                android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/disk"
+                android:text="@string/potencia"
                 android:textColor="@color/blackColor"
-                android:textSize="30dp" />
+                android:textSize="30sp" />
 
             <EditText
-                android:layout_marginTop="10dp"
                 android:id="@+id/editText6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name"
+                android:layout_marginTop="10dp"
                 android:background="@color/yellowishColor"
+                android:ems="10"
+                android:hint="@string/bike_potencia_hint"
+                android:inputType="textPersonName"
+                android:text="@string/potencia"
                 android:textColor="@color/blackColor"
-                android:textSize="30dp" />
+                android:textSize="30sp" />
         </LinearLayout>
 
     </ScrollView>
@@ -145,23 +130,23 @@
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="20dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="25dp"
-        android:textColor="@color/blackColor"
         android:background="@color/yellowishColor"
-        android:text="@string/save" />
+        android:text="@string/save"
+        android:textColor="@color/blackColor"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/button3"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/blackColor"
-        android:textSize="20dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:background="@color/yellowishColor"
-        android:text="@string/back" />
+        android:text="@string/back"
+        android:textColor="@color/blackColor"
+        android:textSize="20sp" />
 
 </LinearLayout>
