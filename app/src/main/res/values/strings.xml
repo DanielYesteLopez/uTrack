@@ -31,6 +31,9 @@
     <string name="bike_frame_hint">Frame size</string>
     <string name="bike_pinion_hint">Pinion teeth</string>
     <string name="bike_potencia_hint">potencia</string>
+    <string name="trainingresume">resume</string>
+    <string name="trainingstop">stop</string>
+
 
 
 
