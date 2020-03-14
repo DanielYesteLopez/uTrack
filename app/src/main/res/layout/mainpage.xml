@@ -30,11 +30,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/settings" />-->
-
     <ImageView
         android:id="@+id/imageView_iconMainStart"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -76,6 +76,52 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dataButtonMainpage"
         app:srcCompat="@drawable/icon_settings_mainpage" />
+
+    <TextView
+        android:id="@+id/textViewDataMainpage"
+        android:textColor="@color/textMainColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginEnd="69dp"
+        android:layout_marginRight="69dp"
+        android:fontFamily="@font/audiowide"
+        android:text="@string/yourdata"
+        app:layout_constraintEnd_toStartOf="@+id/settingsButtonMainpage"
+        app:layout_constraintStart_toEndOf="@+id/trainingButtonMainpage"
+        app:layout_constraintTop_toBottomOf="@+id/dataButtonMainpage" />
+
+    <TextView
+        android:id="@+id/textViewTrainingMainpage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginEnd="202dp"
+        android:layout_marginRight="202dp"
+        android:fontFamily="@font/audiowide"
+        android:text="@string/training"
+        android:textColor="@color/textMainColor"
+        app:layout_constraintEnd_toStartOf="@+id/settingsButtonMainpage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/trainingButtonMainpage" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="207dp"
+        android:layout_marginLeft="207dp"
+        android:layout_marginEnd="47dp"
+        android:layout_marginRight="47dp"
+        android:fontFamily="@font/audiowide"
+        android:text="@string/settings"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/textMainColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewTrainingMainpage"
+        app:layout_constraintTop_toBottomOf="@+id/settingsButtonMainpage" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

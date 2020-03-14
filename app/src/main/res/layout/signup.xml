@@ -6,6 +6,7 @@
 
     <Button
         android:id="@+id/signInbutton"
+        android:textColor="@color/textMainColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -16,8 +17,10 @@
         android:text="@string/signin" />
 
     <EditText
-        android:background="@color/yellowishColor"
+        android:background="@color/whiteColor"
+        android:textColor="@color/textMainColor"
         style="@style/BlackText"
+        android:fontFamily="@font/audiowide"
         android:id="@+id/signupUsername"
         android:layout_width="match_parent"
         android:layout_height="30dp"
@@ -32,8 +35,9 @@
 
 
     <EditText
-        android:background="@color/yellowishColor"
-        style="@style/BlackText"
+        android:background="@color/whiteColor"
+        android:fontFamily="@font/audiowide"
+        android:textColor="@color/textMainColor"
         android:id="@+id/signupPassword"
         android:layout_width="match_parent"
         android:layout_height="30dp"
@@ -45,8 +49,9 @@
         android:layout_marginTop="25dp"
         android:inputType="textPassword" />
     <EditText
-        android:background="@color/yellowishColor"
-        style="@style/BlackText"
+        android:background="@color/whiteColor"
+        android:textColor="@color/textMainColor"
+        android:fontFamily="@font/audiowide"
         android:id="@+id/confirmpassword"
         android:layout_width="match_parent"
         android:layout_height="30dp"
@@ -58,8 +63,10 @@
         android:layout_marginTop="25dp"
         android:inputType="textPassword" />
     <EditText
-        android:background="@color/yellowishColor"
+        android:background="@color/whiteColor"
         style="@style/BlackText"
+        android:textColor="@color/textMainColor"
+        android:fontFamily="@font/audiowide"
         android:id="@+id/nametext"
         android:layout_width="match_parent"
         android:layout_height="30dp"
@@ -72,6 +79,8 @@
         android:inputType="textPassword" />
     <Button
         android:id="@+id/signupbutton"
+        android:fontFamily="@font/audiowide"
+        android:textColor="@color/textMainColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -83,9 +92,11 @@
         android:text="@string/signup" />
 
     <EditText
-        android:background="@color/yellowishColor"
+        android:background="@color/whiteColor"
         style="@style/BlackText"
         android:id="@+id/emailtext"
+        android:textColor="@color/textMainColor"
+        android:fontFamily="@font/audiowide"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_alignParentStart="true"
@@ -98,7 +109,9 @@
 
     <TextView
         style="@style/WhiteText"
+        android:textColor="@color/textMainColor"
         android:id="@+id/signInText"
+        android:fontFamily="@font/audiowide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
