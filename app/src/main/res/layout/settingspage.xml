@@ -1,47 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout2"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
 
     android:background="@color/appOrangeMainColor"
-    >
+    android:orientation="vertical">
 
-    <Button
-        android:background="@color/yellowishColor"
-        android:textColor="@color/blackColor"
-        android:id="@+id/usersettingsbutton"
-        android:layout_width="match_parent"
+    <ImageButton
+        android:id="@+id/backButtonSettingsPage"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_revert" />
 
-        android:text="@string/usersettings" />
+    <TextView
+        android:id="@+id/textViewUserSettings_SettingPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:fontFamily="@font/audiowide"
+        android:text="@string/usersettings"
+        android:textAlignment="center"
+        android:textColor="@color/textMainColor"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonUserSettings_SettingsPage"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonUserSettings_SettingsPage" />
 
-    <Button
-        android:background="@color/yellowishColor"
-        android:textColor="@color/blackColor"
+    <ImageButton
+        android:id="@+id/imageButtonUserSettings_SettingsPage"
+        android:layout_width="192dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="128dp"
+        android:adjustViewBounds="true"
+        android:background="@color/appOrangeMainColor"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backButtonSettingsPage"
+        app:srcCompat="@drawable/icon_user_settings" />
+
+    <TextView
+        android:id="@+id/textViewUserAccountSettingsPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:fontFamily="@font/audiowide"
+        android:text="@string/account"
+        android:textAlignment="center"
+        android:textColor="@color/textMainColor"
+        app:layout_constraintEnd_toStartOf="@+id/accountbutton"
+        app:layout_constraintTop_toTopOf="@+id/accountbutton" />
+
+    <ImageButton
         android:id="@+id/accountbutton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="@string/account" />
+        android:layout_width="192dp"
+        android:layout_height="89dp"
+        android:layout_marginTop="32dp"
+        android:adjustViewBounds="true"
+        android:background="@color/appOrangeMainColor"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonUserSettings_SettingsPage"
+        app:srcCompat="@drawable/icono_useraccount_settings" />
 
-    <Button
-        android:layout_marginTop="25dp"
+    <ImageButton
         android:id="@+id/infobutton"
-        android:background="@color/yellowishColor"
-        android:textColor="@color/blackColor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/info" />
+        android:layout_width="60dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="259dp"
+        android:layout_marginBottom="72dp"
+        android:adjustViewBounds="true"
+        android:background="@color/appOrangeMainColor"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accountbutton"
+        app:srcCompat="@drawable/icon_information_settings" />
 
-    <Button
-        android:layout_marginTop="25dp"
-        android:id="@+id/backbutton2"
-        android:background="@color/yellowishColor"
-        android:textColor="@color/blackColor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/back" />
 
-</LinearLayout>
+    <!-- <Button
+         android:background="@color/yellowishColor"
+         android:textColor="@color/blackColor"
+         android:id="@+id/usersettingsbutton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_gravity="center"
+         android:layout_marginTop="50dp"
+
+         android:text="@string/usersettings" />
+
+     <Button
+         android:background="@color/yellowishColor"
+         android:textColor="@color/blackColor"
+         android:id="@+id/accountbutton"
+         android:layout_width="wrap_content"
+         android:layout_gravity="center"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="25dp"
+         android:text="@string/account" />
+
+     <Button
+         android:layout_marginTop="25dp"
+         android:id="@+id/infobutton"
+         android:background="@color/yellowishColor"
+         android:textColor="@color/blackColor"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_gravity="center"
+         android:text="@string/info" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
