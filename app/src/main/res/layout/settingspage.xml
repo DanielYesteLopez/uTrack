@@ -28,7 +28,8 @@
         android:textAlignment="center"
         android:textColor="@color/textMainColor"
         app:layout_constraintEnd_toStartOf="@+id/imageButtonUserSettings_SettingsPage"
-        app:layout_constraintTop_toTopOf="@+id/imageButtonUserSettings_SettingsPage" />
+        app:layout_constraintTop_toTopOf="@+id/imageButtonUserSettings_SettingsPage"
+        android:gravity="center_horizontal" />
 
     <ImageButton
         android:id="@+id/imageButtonUserSettings_SettingsPage"
@@ -53,7 +54,8 @@
         android:textAlignment="center"
         android:textColor="@color/textMainColor"
         app:layout_constraintEnd_toStartOf="@+id/accountbutton"
-        app:layout_constraintTop_toTopOf="@+id/accountbutton" />
+        app:layout_constraintTop_toTopOf="@+id/accountbutton"
+        android:gravity="center_horizontal" />
 
     <ImageButton
         android:id="@+id/accountbutton"

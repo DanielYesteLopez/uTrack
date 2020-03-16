@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/appOrangeMainColor">
+
+    <ImageButton
+        android:id="@+id/backButtonSettingsPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_revert"
+        />
+
     <ScrollView
         android:background="@color/brownyellowColor"
         android:layout_width="match_parent"
@@ -135,17 +147,6 @@
         android:layout_marginTop="25dp"
         android:background="@color/yellowishColor"
         android:text="@string/save"
-        android:textColor="@color/blackColor"
-        android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:background="@color/yellowishColor"
-        android:text="@string/back"
         android:textColor="@color/blackColor"
         android:textSize="20sp" />
 
