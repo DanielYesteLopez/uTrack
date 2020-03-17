@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:id="@+id/userSettingsLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/appOrangeMainColor">
+    android:background="@color/appOrangeMainColor"
+    android:orientation="vertical">
 
     <ImageButton
         android:id="@+id/backButtonSettingsPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_revert"
-        android:contentDescription="@string/back" />
+        app:srcCompat="@android:drawable/ic_menu_revert" />
 
     <ScrollView
-        android:background="@color/brownyellowColor"
         android:layout_width="match_parent"
         android:layout_height="450dp"
-        >
+        android:background="@color/brownyellowColor">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,11 +42,11 @@
                 android:background="@color/yellowishColor"
                 android:ems="10"
                 android:hint="@string/bike_frame_hint"
+                android:importantForAutofill="no"
                 android:inputType="textPersonName"
                 android:text="@string/frame"
                 android:textColor="@color/blackColor"
-                android:textSize="30sp"
-                android:importantForAutofill="no" />
+                android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -61,14 +61,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:autofillHints="@string/height"
                 android:background="@color/yellowishColor"
                 android:ems="10"
                 android:hint="@string/bike_height_hint"
                 android:inputType="textPersonName"
                 android:text="@string/height"
                 android:textColor="@color/blackColor"
-                android:textSize="30sp"
-                android:autofillHints="@string/height" />
+                android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -84,14 +84,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:autofillHints=""
                 android:background="@color/yellowishColor"
                 android:ems="10"
                 android:hint="@string/bike_disk_hint"
                 android:inputType="textPersonName"
                 android:text="@string/disk"
                 android:textColor="@color/blackColor"
-                android:textSize="30sp"
-                android:autofillHints="" />
+                android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -107,14 +107,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:autofillHints="@string/pinion"
                 android:background="@color/yellowishColor"
                 android:ems="10"
                 android:hint="@string/bike_pinion_hint"
                 android:inputType="textPersonName"
                 android:text="@string/pinion"
                 android:textColor="@color/blackColor"
-                android:textSize="30sp"
-                android:autofillHints="@string/pinion" />
+                android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -130,14 +130,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:autofillHints="@string/potencia"
                 android:background="@color/yellowishColor"
                 android:ems="10"
                 android:hint="@string/bike_potencia_hint"
                 android:inputType="textPersonName"
                 android:text="@string/potencia"
                 android:textColor="@color/blackColor"
-                android:textSize="30sp"
-                android:autofillHints="@string/potencia" />
+                android:textSize="30sp" />
         </LinearLayout>
 
     </ScrollView>

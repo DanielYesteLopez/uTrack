@@ -1,51 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@color/appOrangeMainColor"
-    >
+    android:id="@+id/signInLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/appOrangeMainColor">
+
     <Button
         android:id="@+id/signInbutton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/signUpText2"
-        android:ems="10"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:textColor="@color/textMainColor"
-        android:fontFamily="@font/audiowide"
         android:background="@color/whiteColor"
-        android:text="@string/signup" />
+        android:ems="10"
+        android:fontFamily="@font/audiowide"
+        android:text="@string/signup"
+        android:textColor="@color/textMainColor" />
 
     <EditText
-        android:background="@color/whiteColor"
-        android:textColor="@color/textMainColor"
         android:id="@+id/signupUsername2"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
+        android:layout_marginTop="30dp"
+        android:autofillHints="@string/username"
+        android:background="@color/whiteColor"
         android:ems="10"
         android:fontFamily="@font/audiowide"
-        android:layout_marginTop="30dp"
         android:hint="@string/username"
         android:inputType="textPersonName"
-        android:autofillHints="@string/username" />
+        android:textColor="@color/textMainColor" />
 
     <EditText
-        android:background="@color/whiteColor"
-        android:textColor="@color/textMainColor"
         android:id="@+id/signupPassword2"
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:layout_below="@+id/signupUsername2"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/signupUsername2"
-        android:ems="10"
-        android:hint="@string/password"
-        android:fontFamily="@font/audiowide"
         android:layout_marginTop="25dp"
+        android:autofillHints="@string/password"
+        android:background="@color/whiteColor"
+        android:ems="10"
+        android:fontFamily="@font/audiowide"
+        android:hint="@string/password"
         android:inputType="textPassword"
-        android:autofillHints="@string/password" />
+        android:textColor="@color/textMainColor" />
 
     <Button
         android:id="@+id/signupbutton2"
@@ -69,15 +71,15 @@
         android:textColor="@color/textMainColor" />
 
     <TextView
-        style="@style/WhiteText"
         android:id="@+id/signUpText2"
+        style="@style/WhiteText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/signupbutton2"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/signupbutton2"
-        android:ems="10"
         android:layout_marginTop="350dp"
+        android:ems="10"
         android:text="@string/accountmessage1" />
 
 </RelativeLayout>
