@@ -75,11 +75,12 @@
         android:layout_marginRight="40dp"
         android:adjustViewBounds="true"
         android:background="@color/appOrangeMainColor"
+        android:contentDescription="@string/usersettings"
+        android:onClick="onSettingsButtonPressed"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dataButtonMainpage"
-        app:srcCompat="@drawable/icon_settings_mainpage"
-        android:contentDescription="@string/usersettings" />
+        app:srcCompat="@drawable/icon_settings_mainpage" />
 
     <TextView
         android:id="@+id/textViewDataMainpage"
