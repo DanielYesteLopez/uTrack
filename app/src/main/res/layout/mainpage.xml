@@ -47,11 +47,12 @@
         android:layout_height="54dp"
         android:adjustViewBounds="true"
         android:background="@color/appOrangeMainColor"
+        android:contentDescription="@string/training"
+        android:onClick="onTrainingButtonPressed"
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dataButtonMainpage"
-        app:srcCompat="@drawable/icono_training_menu"
-        android:contentDescription="@string/training" />
+        app:srcCompat="@drawable/icono_training_menu" />
 
     <ImageButton
         android:id="@+id/dataButtonMainpage"
@@ -60,12 +61,13 @@
         android:layout_marginTop="32dp"
         android:adjustViewBounds="true"
         android:background="@color/appOrangeMainColor"
+        android:contentDescription="@string/yourdata"
+        android:onClick="onDataButtonPressed"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_iconMainStart"
-        app:srcCompat="@drawable/icon_data_mainpage"
-        android:contentDescription="@string/yourdata" />
+        app:srcCompat="@drawable/icon_data_mainpage" />
 
     <ImageButton
         android:id="@+id/settingsButtonMainpage"

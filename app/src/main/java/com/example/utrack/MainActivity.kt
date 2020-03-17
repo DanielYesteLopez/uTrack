@@ -33,5 +33,9 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun onTrainingButtonPressed(view: View){
+        val intent = Intent(this, TrainingActivity::class.java)
+        startActivity(intent)
+    }
 }
 /*test*/
