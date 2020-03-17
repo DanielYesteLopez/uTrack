@@ -12,7 +12,7 @@ class UserSettingsActivity : AppCompatActivity() {
         setContentView(R.layout.usersettings)
     }
 
-    fun onBackButtonUserSettingsPressed(view: View){
+    fun onBackUserSettingsButtonPressed(view: View){
         val intent = Intent(this, SettingsActivity::class.java)
         startActivity(intent)
     }

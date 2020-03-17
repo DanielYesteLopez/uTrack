@@ -17,12 +17,12 @@ class SettingsActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun onAccountbuttonPressed(view: View){
+    fun onAccountButtonPressed(view: View){
         val intent = Intent(this, AccountSettingsActivity::class.java)
         startActivity(intent)
     }
 
-    fun onBackButtonSettingsPressed(view: View){
+    fun onBackSettingsButtonPressed(view: View){
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }

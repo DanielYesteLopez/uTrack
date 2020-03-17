@@ -27,5 +27,10 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, SettingsActivity::class.java)
         startActivity(intent)
     }
+
+    fun onDataButtonPressed(view: View){
+        val intent = Intent(this, DataActivity::class.java)
+        startActivity(intent)
+    }
 }
 /*test*/
