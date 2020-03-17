@@ -29,7 +29,7 @@
         android:layout_marginTop="30dp"
         android:hint="@string/username"
         android:inputType="textPersonName"
-        />
+        android:autofillHints="@string/username" />
 
     <EditText
         android:background="@color/whiteColor"
@@ -44,7 +44,8 @@
         android:hint="@string/password"
         android:fontFamily="@font/audiowide"
         android:layout_marginTop="25dp"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:autofillHints="@string/password" />
 
     <Button
         android:id="@+id/signupbutton2"

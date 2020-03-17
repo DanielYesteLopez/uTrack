@@ -38,7 +38,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/icon" />
+        app:srcCompat="@drawable/icon"
+        android:contentDescription="@string/uTrack" />
 
     <ImageButton
         android:id="@+id/trainingButtonMainpage"
@@ -49,7 +50,8 @@
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dataButtonMainpage"
-        app:srcCompat="@drawable/icono_training_menu" />
+        app:srcCompat="@drawable/icono_training_menu"
+        android:contentDescription="@string/training" />
 
     <ImageButton
         android:id="@+id/dataButtonMainpage"
@@ -62,7 +64,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_iconMainStart"
-        app:srcCompat="@drawable/icon_data_mainpage" />
+        app:srcCompat="@drawable/icon_data_mainpage"
+        android:contentDescription="@string/yourdata" />
 
     <ImageButton
         android:id="@+id/settingsButtonMainpage"
@@ -75,7 +78,8 @@
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dataButtonMainpage"
-        app:srcCompat="@drawable/icon_settings_mainpage" />
+        app:srcCompat="@drawable/icon_settings_mainpage"
+        android:contentDescription="@string/usersettings" />
 
     <TextView
         android:id="@+id/textViewDataMainpage"

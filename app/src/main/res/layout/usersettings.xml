@@ -13,12 +13,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_revert"
-        />
+        android:contentDescription="@string/back" />
 
     <ScrollView
         android:background="@color/brownyellowColor"
         android:layout_width="match_parent"
-        android:layout_height="425dp"
+        android:layout_height="450dp"
         >
 
         <LinearLayout
@@ -67,7 +67,8 @@
                 android:inputType="textPersonName"
                 android:text="@string/height"
                 android:textColor="@color/blackColor"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:autofillHints="@string/height" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -112,7 +113,8 @@
                 android:inputType="textPersonName"
                 android:text="@string/pinion"
                 android:textColor="@color/blackColor"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:autofillHints="@string/pinion" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -134,20 +136,24 @@
                 android:inputType="textPersonName"
                 android:text="@string/potencia"
                 android:textColor="@color/blackColor"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:autofillHints="@string/potencia" />
         </LinearLayout>
 
     </ScrollView>
 
-    <Button
-        android:id="@+id/button"
+    <ImageButton
+        android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
-        android:background="@color/yellowishColor"
-        android:text="@string/save"
-        android:textColor="@color/blackColor"
-        android:textSize="20sp" />
+        android:layout_marginBottom="25dp"
+        android:adjustViewBounds="true"
+        android:background="@color/appOrangeMainColor"
+        android:contentDescription="@string/saveButton"
+        android:padding="5dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/icon_save_button" />
 
 </LinearLayout>

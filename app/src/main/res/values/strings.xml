@@ -35,6 +35,23 @@
     <string name="trainingstop">stop</string>
     <string name="trainingpouse">pause</string>
     <string name="trainingprogress">training in progress</string>
+    <string name="saveButton">save Button</string>
+    <string name="spflag">spanish flag</string>
+    <string name="frflag">france flag</string>
+    <string name="inflag">english</string>
+    <string name="arflag">arabic flag</string>
+    <string name="geflag">duetch flag</string>
+    <string name="catflag">catalan flag</string>
+    <string name="maintext">Making your pedaling faster</string>
+    <string name="heartrate">xxxyy</string>
+    <string name="speedrate">xxxyy</string>
+    <string name="cadencerate">xxxyy</string>
+    <string name="maxspeed">xxxyy</string>
+    <string name="avgspeed">xxxyy</string>
+    <string name="duracion">xxxyy</string>
+
+
+
 
 
 </resources>

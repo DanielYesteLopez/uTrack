@@ -31,7 +31,7 @@
         android:layout_marginTop="50dp"
         android:hint="@string/username"
         android:inputType="textPersonName"
-        />
+        android:autofillHints="@string/username" />
 
 
     <EditText
@@ -47,7 +47,8 @@
         android:ems="10"
         android:hint="@string/password"
         android:layout_marginTop="25dp"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:autofillHints="@string/password" />
     <EditText
         android:background="@color/whiteColor"
         android:textColor="@color/textMainColor"
@@ -61,7 +62,8 @@
         android:ems="10"
         android:hint="@string/confirmpassword"
         android:layout_marginTop="25dp"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:autofillHints="@string/password" />
     <EditText
         android:background="@color/whiteColor"
         style="@style/BlackText"
@@ -76,7 +78,8 @@
         android:ems="10"
         android:hint="@string/askname"
         android:layout_marginTop="25dp"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:autofillHints="@string/password" />
     <Button
         android:id="@+id/signupbutton"
         android:fontFamily="@font/audiowide"
@@ -105,7 +108,8 @@
         android:ems="10"
         android:hint="@string/email"
         android:layout_marginTop="25dp"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        android:autofillHints="@string/email" />
 
     <TextView
         style="@style/WhiteText"

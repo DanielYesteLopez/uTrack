@@ -13,7 +13,7 @@
         android:layout_marginBottom="100dp"
         android:textColor="@color/textMainColor"
         android:fontFamily="@font/audiowide"
-        android:text="Making your pedaling faster"
+        android:text="@string/maintext"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
