@@ -22,5 +22,10 @@ class SettingsActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun onBackButtonSettingsPressed(view: View){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+
 
 }

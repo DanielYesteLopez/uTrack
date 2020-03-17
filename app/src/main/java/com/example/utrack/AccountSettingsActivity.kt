@@ -1,7 +1,9 @@
 package com.example.utrack
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 
 class AccountSettingsActivity : AppCompatActivity() {
 
@@ -10,5 +12,9 @@ class AccountSettingsActivity : AppCompatActivity() {
         setContentView(R.layout.accountsetting)
     }
 
+    fun onBackButtonAccountSettingsPressed(view: View){
+        val intent = Intent(this, SettingsActivity::class.java)
+        startActivity(intent)
+    }
 
 }
