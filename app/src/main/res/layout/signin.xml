@@ -6,7 +6,7 @@
     android:background="@color/appOrangeMainColor">
 
     <Button
-        android:id="@+id/signInbutton2"
+        android:id="@+id/signInToSignUpButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/signUpText2"
@@ -15,6 +15,7 @@
         android:background="@color/whiteColor"
         android:ems="10"
         android:fontFamily="@font/audiowide"
+        android:onClick="onToSignUpButtonPressed"
         android:text="@string/signup"
         android:textColor="@color/textMainColor" />
 

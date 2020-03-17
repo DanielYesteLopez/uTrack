@@ -40,11 +40,12 @@
         android:layout_marginTop="128dp"
         android:adjustViewBounds="true"
         android:background="@color/appOrangeMainColor"
+        android:contentDescription="@string/usersettings"
+        android:onClick="onUserSettingsButtonPressed"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backButtonSettingsPage"
-        app:srcCompat="@drawable/icon_user_settings"
-        android:contentDescription="@string/usersettings" />
+        app:srcCompat="@drawable/icon_user_settings" />
 
     <TextView
         android:id="@+id/textViewUserAccountSettingsPage"
@@ -67,11 +68,12 @@
         android:layout_marginTop="32dp"
         android:adjustViewBounds="true"
         android:background="@color/appOrangeMainColor"
+        android:contentDescription="@string/account"
+        android:onClick="onAccountButtonPressed"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButtonUserSettings_SettingsPage"
-        app:srcCompat="@drawable/icono_useraccount_settings"
-        android:contentDescription="@string/account" />
+        app:srcCompat="@drawable/icono_useraccount_settings" />
 
     <ImageButton
         android:id="@+id/infobutton"

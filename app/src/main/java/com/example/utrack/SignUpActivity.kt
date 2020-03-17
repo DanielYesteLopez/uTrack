@@ -5,16 +5,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 
-class AccountSettingsActivity : AppCompatActivity() {
+class SignUpActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.accountsetting)
+        setContentView(R.layout.signup)
     }
 
-    fun onBackAccountButtonSettingsPressed(view: View){
-        val intent = Intent(this, SettingsActivity::class.java)
+    fun onSignUpToSignInbuttonPressed(view: View){
+        val intent = Intent(this, SignInActivity::class.java)
         startActivity(intent)
     }
-
 }
