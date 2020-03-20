@@ -43,9 +43,9 @@
                 android:adjustViewBounds="true"
                 android:background="@color/appOrangeMainColor"
                 android:contentDescription="@string/heartrate"
-                android:padding="15dp"
+                android:padding="3dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/icon_trainingpage_heart" />
+                app:srcCompat="@drawable/icon_trainingpage__heart" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -74,7 +74,7 @@
                 android:contentDescription="@string/speedrate"
                 android:padding="3dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/icon_trainingpage_speed" />
+                app:srcCompat="@drawable/icon_trainingpage__speed" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -99,11 +99,11 @@
                 android:layout_height="match_parent"
                 android:layout_weight="7"
                 android:adjustViewBounds="true"
-                android:padding="10dp"
+                android:padding="3dp"
                 android:scaleType="fitCenter"
                 android:background="@color/appOrangeMainColor"
                 android:contentDescription="@string/duration"
-                app:srcCompat="@drawable/icon_trainingpage_duration" />
+                app:srcCompat="@drawable/icon_trainingpage__cadence" />
 
             <TextView
                 android:id="@+id/textView10"
@@ -137,7 +137,7 @@
                 android:adjustViewBounds="true"
                 android:background="@color/appOrangeMainColor"
                 android:contentDescription="@string/avgheartrate"
-                android:padding="15dp"
+                android:padding="3dp"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/icon_trainingpage_avgheart" />
 
@@ -193,11 +193,11 @@
                 android:layout_height="match_parent"
                 android:layout_weight="7"
                 android:adjustViewBounds="true"
-                android:padding="10dp"
+                android:padding="3dp"
                 android:scaleType="fitCenter"
                 android:background="@color/appOrangeMainColor"
                 android:contentDescription="@string/avgcadencerate"
-                app:srcCompat="@drawable/icon_trainingpage_duration"/>
+                app:srcCompat="@drawable/icon_trainingpage_avgcadence"/>
 
             <TextView
                 android:id="@+id/textView14"
@@ -229,6 +229,7 @@
           android:background="@color/appOrangeMainColor"
           android:contentDescription="@string/duration"
           android:scaleType="fitCenter"
+          android:padding="3dp"
           app:srcCompat="@drawable/icon_trainingpage_duration" />
 
       <TextView
@@ -243,6 +244,7 @@
           android:textSize="20sp" />
 
    </LinearLayout>
+
    <ImageView
        android:id="@+id/imageView2"
        android:layout_width="match_parent"
