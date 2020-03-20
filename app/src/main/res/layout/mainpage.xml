@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout"
+    android:id="@+id/mainPageLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/appOrangeMainColor">
@@ -47,11 +47,12 @@
         android:layout_height="54dp"
         android:adjustViewBounds="true"
         android:background="@color/appOrangeMainColor"
+        android:contentDescription="@string/training"
+        android:onClick="onTrainingButtonPressed"
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dataButtonMainpage"
-        app:srcCompat="@drawable/icono_training_menu"
-        android:contentDescription="@string/training" />
+        app:srcCompat="@drawable/icono_training_menu" />
 
     <ImageButton
         android:id="@+id/dataButtonMainpage"
@@ -60,12 +61,13 @@
         android:layout_marginTop="32dp"
         android:adjustViewBounds="true"
         android:background="@color/appOrangeMainColor"
+        android:contentDescription="@string/yourdata"
+        android:onClick="onDataButtonPressed"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_iconMainStart"
-        app:srcCompat="@drawable/icon_data_mainpage"
-        android:contentDescription="@string/yourdata" />
+        app:srcCompat="@drawable/icon_data_mainpage" />
 
     <ImageButton
         android:id="@+id/settingsButtonMainpage"
@@ -75,11 +77,12 @@
         android:layout_marginRight="40dp"
         android:adjustViewBounds="true"
         android:background="@color/appOrangeMainColor"
+        android:contentDescription="@string/usersettings"
+        android:onClick="onSettingsButtonPressed"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dataButtonMainpage"
-        app:srcCompat="@drawable/icon_settings_mainpage"
-        android:contentDescription="@string/usersettings" />
+        app:srcCompat="@drawable/icon_settings_mainpage" />
 
     <TextView
         android:id="@+id/textViewDataMainpage"

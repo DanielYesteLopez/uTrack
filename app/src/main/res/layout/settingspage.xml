@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout2"
+    android:id="@+id/settingsPageLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
@@ -13,10 +13,11 @@
         android:id="@+id/backButtonSettingsPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/back"
+        android:onClick="onBackSettingsButtonPressed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_revert"
-        android:contentDescription="@string/back" />
+        app:srcCompat="@android:drawable/ic_menu_revert" />
 
     <TextView
         android:id="@+id/textViewUserSettings_SettingPage"
@@ -39,11 +40,12 @@
         android:layout_marginTop="128dp"
         android:adjustViewBounds="true"
         android:background="@color/appOrangeMainColor"
+        android:contentDescription="@string/usersettings"
+        android:onClick="onUserSettingsButtonPressed"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backButtonSettingsPage"
-        app:srcCompat="@drawable/icon_user_settings"
-        android:contentDescription="@string/usersettings" />
+        app:srcCompat="@drawable/icon_user_settings" />
 
     <TextView
         android:id="@+id/textViewUserAccountSettingsPage"
@@ -66,11 +68,12 @@
         android:layout_marginTop="32dp"
         android:adjustViewBounds="true"
         android:background="@color/appOrangeMainColor"
+        android:contentDescription="@string/account"
+        android:onClick="onAccountButtonPressed"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButtonUserSettings_SettingsPage"
-        app:srcCompat="@drawable/icono_useraccount_settings"
-        android:contentDescription="@string/account" />
+        app:srcCompat="@drawable/icono_useraccount_settings" />
 
     <ImageButton
         android:id="@+id/infobutton"

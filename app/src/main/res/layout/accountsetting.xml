@@ -1,104 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:id="@+id/accountSettingLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/appOrangeMainColor">
+    android:background="@color/appOrangeMainColor"
+    android:orientation="vertical">
 
     <ImageButton
         android:id="@+id/backButtonSettingsPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/back"
+        android:onClick="onBackAccountButtonSettingsPressed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_revert"
-        android:contentDescription="@string/back" />
+        app:srcCompat="@android:drawable/ic_menu_revert" />
 
     <TextView
         android:id="@+id/accountNameText"
         android:layout_width="wrap_content"
-        android:textColor="@color/blackColor"
         android:layout_height="wrap_content"
-        android:text="@string/username" />
+        android:text="@string/username"
+        android:textColor="@color/blackColor" />
 
     <EditText
         android:id="@+id/accountNameEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:autofillHints="@string/username"
         android:ems="10"
+        android:hint="@string/username"
         android:inputType="textPersonName"
         android:text="@string/username"
-        android:textColor="@color/blackColor"
-        android:autofillHints="@string/username"
-        android:hint="@string/username"/>
+        android:textColor="@color/blackColor" />
+
     <TextView
         android:id="@+id/accountPassText"
         android:layout_width="wrap_content"
-        android:textColor="@color/blackColor"
         android:layout_height="wrap_content"
-        android:text="@string/password" />
+        android:text="@string/password"
+        android:textColor="@color/blackColor" />
 
     <EditText
-        android:inputType="textPassword"
         android:id="@+id/accountPassEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:autofillHints="@string/password"
         android:ems="10"
-        android:text="@string/password"
-        android:textColor="@color/blackColor"
         android:hint="@string/password"
-        android:autofillHints="@string/password" />
+        android:inputType="textPassword"
+        android:text="@string/password"
+        android:textColor="@color/blackColor" />
+
     <TextView
         android:id="@+id/accountPassCheckText"
         android:layout_width="wrap_content"
-        android:textColor="@color/blackColor"
         android:layout_height="wrap_content"
-        android:text="@string/confirmpassword" />
+        android:text="@string/confirmpassword"
+        android:textColor="@color/blackColor" />
 
     <EditText
-        android:inputType="textPassword"
         android:id="@+id/accountPassCheckEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:textColor="@color/blackColor"
         android:autofillHints="@string/confirmpassword"
-        android:hint="@string/password"/>
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:textColor="@color/blackColor" />
+
     <TextView
         android:id="@+id/accountRnameText"
         android:layout_width="wrap_content"
-        android:textColor="@color/blackColor"
         android:layout_height="wrap_content"
-        android:text="@string/askname" />
+        android:text="@string/askname"
+        android:textColor="@color/blackColor" />
 
     <EditText
         android:id="@+id/accountRnameEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:autofillHints="@string/askname"
         android:ems="10"
+        android:hint="@string/askname"
         android:inputType="textPersonName"
         android:text="@string/askname"
-        android:hint="@string/askname"
-        android:textColor="@color/blackColor"
-        android:autofillHints="@string/askname" />
+        android:textColor="@color/blackColor" />
+
     <TextView
         android:id="@+id/accountemailText"
         android:layout_width="wrap_content"
-        android:textColor="@color/blackColor"
         android:layout_height="wrap_content"
-        android:text="@string/email" />
+        android:text="@string/email"
+        android:textColor="@color/blackColor" />
 
     <EditText
         android:id="@+id/accountemailEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:autofillHints="@string/email"
         android:ems="10"
+        android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:text="@string/email"
-        android:hint="@string/email"
-        android:textColor="@color/blackColor"
-        android:autofillHints="@string/email" />
+        android:textColor="@color/blackColor" />
 
     <HorizontalScrollView
         android:layout_width="match_parent"
