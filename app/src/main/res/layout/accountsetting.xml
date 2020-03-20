@@ -128,7 +128,7 @@
                 android:contentDescription="@string/spflag"
                 android:padding="1dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/icon_sp_flag" />
+                app:srcCompat="@drawable/icon_flag_sp" />
 
             <ImageButton
                 android:id="@+id/imageButton9"
@@ -143,7 +143,7 @@
                 android:contentDescription="@string/catflag"
                 android:padding="1dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/icon_catalan_flag" />
+                app:srcCompat="@drawable/icon_flag_cat" />
 
             <ImageButton
                 android:id="@+id/imageButton5"
@@ -158,7 +158,7 @@
                 android:contentDescription="@string/inflag"
                 android:padding="1dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/icon_in_flag" />
+                app:srcCompat="@drawable/icon_flag_in" />
 
             <ImageButton
                 android:id="@+id/imageButton10"
@@ -173,7 +173,7 @@
                 android:contentDescription="@string/geflag"
                 android:padding="1dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/icon_ge_flag" />
+                app:srcCompat="@drawable/icon_flag_ge" />
 
             <ImageButton
                 android:id="@+id/imageButton3"
@@ -188,7 +188,7 @@
                 android:contentDescription="@string/frflag"
                 android:padding="1dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/icon_fr_flag" />
+                app:srcCompat="@drawable/icon_flag_fr" />
 
             <ImageButton
                 android:id="@+id/imageButton8"
@@ -203,7 +203,7 @@
                 android:contentDescription="@string/arflag"
                 android:padding="1dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/icon_arabi_flag" />
+                app:srcCompat="@drawable/icon_flag_arabi" />
 
         </LinearLayout>
     </HorizontalScrollView>
@@ -220,7 +220,7 @@
         android:contentDescription="@string/saveButton"
         android:padding="5dp"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/icon_save_button" />
+        app:srcCompat="@drawable/icon_button_save" />
 
 
 </LinearLayout>

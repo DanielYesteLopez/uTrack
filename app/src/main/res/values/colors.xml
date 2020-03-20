@@ -6,10 +6,12 @@
     <color name="brownColor">#D2691E</color>
     <color name="brownyellowColor">#F99F13</color>
     <color name="yellowbrownColor">#CBA300</color>
-    <color name="appOrangeMainColor">#F9D940</color><!--D38F25-->
+    <color name="appOrangeMainColor">#ffad84</color><!--D38F25-->
     <color name="textMainColor">#3377FF</color>
 
     <color name="yellowishColor">#ECEC4F</color>
+    <color name="rosauserColor">#ff88</color>
+
     <color name="yellowColor">#FFFF00</color>
     <color name="blackColor">#000000</color>
     <color name="grayColor">#524B46</color>

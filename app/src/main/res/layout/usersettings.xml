@@ -11,16 +11,17 @@
         android:id="@+id/backButtonSettingsPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/back"
         android:onClick="onBackUserSettingsButtonPressed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_revert" />
+        app:srcCompat="@android:drawable/ic_menu_revert"
+        android:contentDescription="@string/back" />
 
     <ScrollView
+        android:background="@color/appOrangeMainColor"
         android:layout_width="match_parent"
         android:layout_height="450dp"
-        android:background="@color/brownyellowColor">
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,14 +41,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@color/yellowishColor"
+                android:background="@color/rosauserColor"
                 android:ems="10"
                 android:hint="@string/bike_frame_hint"
-                android:importantForAutofill="no"
                 android:inputType="textPersonName"
                 android:text="@string/frame"
                 android:textColor="@color/blackColor"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:importantForAutofill="no" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -62,14 +63,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:autofillHints="@string/height"
-                android:background="@color/yellowishColor"
+                android:background="@color/rosauserColor"
                 android:ems="10"
                 android:hint="@string/bike_height_hint"
                 android:inputType="textPersonName"
                 android:text="@string/height"
                 android:textColor="@color/blackColor"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:autofillHints="@string/height" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -86,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:autofillHints=""
-                android:background="@color/yellowishColor"
+                android:background="@color/rosauserColor"
                 android:ems="10"
                 android:hint="@string/bike_disk_hint"
                 android:inputType="textPersonName"
@@ -109,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:autofillHints="@string/pinion"
-                android:background="@color/yellowishColor"
+                android:background="@color/rosauserColor"
                 android:ems="10"
                 android:hint="@string/bike_pinion_hint"
                 android:inputType="textPersonName"
@@ -131,14 +132,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:autofillHints="@string/potencia"
-                android:background="@color/yellowishColor"
+                android:background="@color/rosauserColor"
                 android:ems="10"
                 android:hint="@string/bike_potencia_hint"
                 android:inputType="textPersonName"
                 android:text="@string/potencia"
                 android:textColor="@color/blackColor"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:autofillHints="@string/potencia" />
         </LinearLayout>
 
     </ScrollView>
@@ -155,6 +156,6 @@
         android:contentDescription="@string/saveButton"
         android:padding="5dp"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/icon_save_button" />
+        app:srcCompat="@drawable/icon_button_save" />
 
 </LinearLayout>

@@ -45,7 +45,7 @@
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backButtonSettingsPage"
-        app:srcCompat="@drawable/icon_user_settings" />
+        app:srcCompat="@drawable/icon_settings_user" />
 
     <TextView
         android:id="@+id/textViewUserAccountSettingsPage"
@@ -73,7 +73,7 @@
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButtonUserSettings_SettingsPage"
-        app:srcCompat="@drawable/icono_useraccount_settings" />
+        app:srcCompat="@drawable/icon_settings_useraccount" />
 
     <ImageButton
         android:id="@+id/infobutton"
@@ -87,7 +87,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/accountbutton"
-        app:srcCompat="@drawable/icon_information_settings"
+        app:srcCompat="@drawable/icon_settings_information"
         android:contentDescription="@string/info" />
 
 

@@ -43,12 +43,15 @@
     <string name="geflag">duetch flag</string>
     <string name="catflag">catalan flag</string>
     <string name="maintext">Making your pedaling faster</string>
-    <string name="heartrate">xxxyy</string>
-    <string name="speedrate">xxxyy</string>
-    <string name="cadencerate">xxxyy</string>
-    <string name="maxspeed">xxxyy</string>
-    <string name="avgspeed">xxxyy</string>
-    <string name="duracion">xxxyy</string>
+
+    <string name="heartrate">000bpm</string>
+    <string name="speedrate">00\'00kph</string>
+    <string name="cadencerate">000rpm</string>
+    <string name="duration">00,00min</string>
+    <string name="avgheartrate">000bpm</string>
+    <string name="avgspeed">00\'00kph</string>
+    <string name="avgcadencerate">000rpm</string>
+
 
 
 </resources>

@@ -12,7 +12,7 @@
        android:id="@+id/backButtonSettingsPage"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:layout_weight="1"
+       android:layout_weight="0"
        android:contentDescription="@string/back"
        android:onClick="onBackTrainingButtonPressed"
        app:layout_constraintStart_toStartOf="parent"
@@ -22,97 +22,100 @@
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:layout_weight="18"
        android:baselineAligned="false"
-       android:orientation="horizontal"
-       android:weightSum="2">
+       android:orientation="horizontal">
 
       <LinearLayout
           android:layout_width="wrap_content"
           android:layout_height="match_parent"
           android:layout_weight="1"
-          android:orientation="vertical"
-          android:weightSum="6">
+          android:orientation="vertical">
 
          <TableRow
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:layout_weight="2"
              android:weightSum="5">
 
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
+                android:layout_weight="5"
                 android:adjustViewBounds="true"
                 android:background="@color/appOrangeMainColor"
                 android:contentDescription="@string/heartrate"
-                android:padding="20dp"
+                android:padding="15dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/icon_heart_trainingpage" />
+                app:srcCompat="@drawable/icon_trainingpage_heart" />
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="40dp"
-                android:text="@string/heartrate" />
+                android:gravity="center_horizontal"
+                android:padding="30dp"
+                android:text="@string/heartrate"
+                android:textAlignment="center"
+                android:textColor="@color/blackColor"
+                android:textSize="20sp" />
          </TableRow>
 
          <TableRow
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:layout_weight="2"
              android:weightSum="5">
 
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
+                android:layout_weight="5"
                 android:adjustViewBounds="true"
                 android:background="@color/appOrangeMainColor"
                 android:contentDescription="@string/speedrate"
-                android:padding="20dp"
+                android:padding="3dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/icon_heart_trainingpage" />
+                app:srcCompat="@drawable/speed_image_training" />
 
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="40dp"
-                android:text="@string/speedrate" />
+                android:gravity="center_horizontal"
+                android:padding="30dp"
+                android:text="@string/speedrate"
+                android:textAlignment="center"
+                android:textColor="@color/blackColor"
+                android:textSize="20sp" />
          </TableRow>
 
          <TableRow
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:layout_weight="2"
              android:weightSum="5">
 
             <ImageView
                 android:id="@+id/imageView5"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
+                android:layout_weight="7"
                 android:adjustViewBounds="true"
-                android:background="@color/appOrangeMainColor"
-                android:contentDescription="@string/duracion"
-                android:padding="20dp"
+                android:padding="10dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/icon_heart_trainingpage" />
+                android:background="@color/appOrangeMainColor"
+                android:contentDescription="@string/duration"
+                app:srcCompat="@drawable/durat_image_training" />
 
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="40dp"
-                android:text="@string/duracion" />
+                android:padding="30dp"
+                android:gravity="center_horizontal"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textColor="@color/blackColor"
+                android:text="@string/cadencerate" />
          </TableRow>
 
       </LinearLayout>
@@ -121,108 +124,142 @@
           android:layout_width="wrap_content"
           android:layout_height="match_parent"
           android:layout_weight="1"
-          android:orientation="vertical"
-          android:weightSum="6">
+          android:orientation="vertical">
 
          <TableRow
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:layout_weight="2"
              android:weightSum="5">
 
             <ImageView
                 android:id="@+id/imageView6"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
+                android:layout_weight="5"
                 android:adjustViewBounds="true"
                 android:background="@color/appOrangeMainColor"
-                android:contentDescription="@string/cadencerate"
-                android:padding="20dp"
+                android:contentDescription="@string/avgheartrate"
+                android:padding="15dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/icon_heart_trainingpage" />
+                app:srcCompat="@drawable/icon_trainingpage_heart" />
 
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="40dp"
-                android:text="@string/cadencerate" />
+                android:gravity="center_horizontal"
+                android:padding="30dp"
+                android:text="@string/avgheartrate"
+                android:textAlignment="center"
+                android:textColor="@color/blackColor"
+                android:textSize="20sp" />
          </TableRow>
 
          <TableRow
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:layout_weight="2"
              android:weightSum="5">
 
             <ImageView
                 android:id="@+id/imageView7"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
+                android:layout_weight="5"
                 android:adjustViewBounds="true"
+                android:padding="3dp"
+                android:scaleType="fitCenter"
                 android:background="@color/appOrangeMainColor"
                 android:contentDescription="@string/avgspeed"
-                android:padding="20dp"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/icon_heart_trainingpage" />
+                app:srcCompat="@drawable/speed_image_training" />
 
             <TextView
                 android:id="@+id/textView13"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="40dp"
-                android:text="@string/avgspeed" />
+                android:gravity="center_horizontal"
+                android:padding="30dp"
+                android:text="@string/avgspeed"
+                android:textAlignment="center"
+                android:textColor="@color/blackColor"
+                android:textSize="20sp" />
          </TableRow>
 
          <TableRow
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:layout_weight="2"
              android:weightSum="5">
 
             <ImageView
                 android:id="@+id/imageView8"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
+                android:layout_weight="7"
                 android:adjustViewBounds="true"
-                android:background="@color/appOrangeMainColor"
-                android:contentDescription="@string/maxspeed"
-                android:padding="20dp"
+                android:padding="10dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/icon_heart_trainingpage" />
+                android:background="@color/appOrangeMainColor"
+                android:contentDescription="@string/avgcadencerate"
+                app:srcCompat="@drawable/durat_image_training"/>
 
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="40dp"
-                android:text="@string/maxspeed" />
+                android:padding="30dp"
+                android:gravity="center_horizontal"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textColor="@color/blackColor"
+                android:text="@string/avgcadencerate" />
          </TableRow>
       </LinearLayout>
    </LinearLayout>
 
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_weight="23"
+       android:baselineAligned="false"
+       android:orientation="horizontal"
+       android:paddingHorizontal="130dp">
+
+      <ImageView
+          android:id="@+id/imageView0"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:adjustViewBounds="true"
+          android:background="@color/appOrangeMainColor"
+          android:contentDescription="@string/duration"
+          android:scaleType="fitCenter"
+          app:srcCompat="@drawable/durat_image_training" />
+
+      <TextView
+          android:id="@+id/textView15"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:gravity="center_horizontal"
+          android:padding="10dp"
+          android:text="@string/duration"
+          android:textAlignment="center"
+          android:textColor="@color/blackColor"
+          android:textSize="20sp" />
+
+   </LinearLayout>
    <ImageView
        android:id="@+id/imageView2"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:layout_weight="4"
+       android:layout_weight="7"
        android:adjustViewBounds="true"
        android:background="@color/appOrangeMainColor"
        android:contentDescription="@string/trainingprogress"
        android:padding="10dp"
        android:scaleType="fitCenter"
-       app:srcCompat="@drawable/icon_graphicbar_trainingpage" />
+       app:srcCompat="@drawable/icon_trainingpage_graphicbar" />
 
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:layout_weight="0"
        android:orientation="horizontal"
        android:weightSum="6">
 
@@ -232,10 +269,10 @@
           android:layout_height="wrap_content"
           android:layout_weight="2"
           android:gravity="center_horizontal"
-          android:padding="5dp"
-          android:text="@string/trainingstop"
           android:textAlignment="center"
           android:textColor="@color/blackColor"
+          android:text="@string/trainingstop"
+          android:padding="5dp"
           android:textSize="20sp" />
 
       <TextView
@@ -266,45 +303,42 @@
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:layout_weight="7"
-       android:orientation="horizontal"
-       android:weightSum="6">
+       android:orientation="horizontal">
 
       <ImageButton
           android:id="@+id/imageStopButton"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_weight="2"
+          android:layout_weight="11"
+          android:padding="28dp"
           android:adjustViewBounds="true"
+          android:scaleType="fitCenter"
           android:background="@color/appOrangeMainColor"
           android:contentDescription="@string/trainingstop"
-          android:padding="20dp"
-          android:scaleType="fitCenter"
-          app:srcCompat="@drawable/icon_stop_trainingpage" />
+          app:srcCompat="@drawable/icon_trainingpage_stop" />
 
       <ImageButton
           android:id="@+id/imagePouseButton"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-
-          android:layout_weight="2"
+          android:layout_weight="14"
+          android:padding="30dp"
           android:adjustViewBounds="true"
+          android:scaleType="fitCenter"
           android:background="@color/appOrangeMainColor"
           android:contentDescription="@string/trainingpouse"
-          android:padding="20dp"
-          android:scaleType="fitCenter"
-          app:srcCompat="@drawable/icon_pouse_trainingpage" />
+          app:srcCompat="@drawable/icon_trainingpage_pause" />
 
       <ImageButton
           android:id="@+id/imageStartResumeButton"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_weight="2"
+          android:layout_weight="10"
           android:adjustViewBounds="true"
           android:background="@color/appOrangeMainColor"
           android:contentDescription="@string/trainingresume"
-          android:padding="20dp"
+          android:padding="35dp"
           android:scaleType="fitCenter"
-          app:srcCompat="@drawable/icon_play_trainingpage" />
+          app:srcCompat="@drawable/icon_trainingpage_play" />
    </LinearLayout>
 </LinearLayout>
