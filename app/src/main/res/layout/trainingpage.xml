@@ -33,8 +33,7 @@
 
          <TableRow
              android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:weightSum="5">
+             android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -54,28 +53,28 @@
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
                 android:padding="30dp"
-                android:text="@string/heartrate"
                 android:textAlignment="center"
                 android:textColor="@color/blackColor"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:text="@string/heartrate"/>
          </TableRow>
 
          <TableRow
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:weightSum="5">
+             android:weightSum="12">
 
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="5"
+                android:layout_weight="11"
                 android:adjustViewBounds="true"
                 android:background="@color/appOrangeMainColor"
                 android:contentDescription="@string/speedrate"
                 android:padding="3dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/speed_image_training" />
+                app:srcCompat="@drawable/icon_trainingpage_speed" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -83,16 +82,16 @@
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
                 android:padding="30dp"
-                android:text="@string/speedrate"
                 android:textAlignment="center"
                 android:textColor="@color/blackColor"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:text="@string/speedrate"/>
          </TableRow>
 
          <TableRow
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:weightSum="5">
+             android:weightSum="6">
 
             <ImageView
                 android:id="@+id/imageView5"
@@ -104,17 +103,17 @@
                 android:scaleType="fitCenter"
                 android:background="@color/appOrangeMainColor"
                 android:contentDescription="@string/duration"
-                app:srcCompat="@drawable/durat_image_training" />
+                app:srcCompat="@drawable/icon_trainingpage_duration" />
 
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:padding="30dp"
                 android:gravity="center_horizontal"
+                android:padding="30dp"
                 android:textAlignment="center"
-                android:textSize="20sp"
                 android:textColor="@color/blackColor"
+                android:textSize="20sp"
                 android:text="@string/cadencerate" />
          </TableRow>
 
@@ -128,8 +127,7 @@
 
          <TableRow
              android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:weightSum="5">
+             android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/imageView6"
@@ -141,7 +139,7 @@
                 android:contentDescription="@string/avgheartrate"
                 android:padding="15dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/icon_trainingpage_heart" />
+                app:srcCompat="@drawable/icon_trainingpage_avgheart" />
 
             <TextView
                 android:id="@+id/textView12"
@@ -158,19 +156,19 @@
          <TableRow
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:weightSum="5">
+             android:weightSum="12">
 
             <ImageView
                 android:id="@+id/imageView7"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="5"
+                android:layout_weight="11"
                 android:adjustViewBounds="true"
                 android:padding="3dp"
                 android:scaleType="fitCenter"
                 android:background="@color/appOrangeMainColor"
                 android:contentDescription="@string/avgspeed"
-                app:srcCompat="@drawable/speed_image_training" />
+                app:srcCompat="@drawable/icon_trainingpage_avgspeed" />
 
             <TextView
                 android:id="@+id/textView13"
@@ -178,16 +176,16 @@
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
                 android:padding="30dp"
-                android:text="@string/avgspeed"
                 android:textAlignment="center"
                 android:textColor="@color/blackColor"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:text="@string/avgspeed"/>
          </TableRow>
 
          <TableRow
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:weightSum="5">
+             android:weightSum="6">
 
             <ImageView
                 android:id="@+id/imageView8"
@@ -199,7 +197,7 @@
                 android:scaleType="fitCenter"
                 android:background="@color/appOrangeMainColor"
                 android:contentDescription="@string/avgcadencerate"
-                app:srcCompat="@drawable/durat_image_training"/>
+                app:srcCompat="@drawable/icon_trainingpage_duration"/>
 
             <TextView
                 android:id="@+id/textView14"
@@ -231,7 +229,7 @@
           android:background="@color/appOrangeMainColor"
           android:contentDescription="@string/duration"
           android:scaleType="fitCenter"
-          app:srcCompat="@drawable/durat_image_training" />
+          app:srcCompat="@drawable/icon_trainingpage_duration" />
 
       <TextView
           android:id="@+id/textView15"
