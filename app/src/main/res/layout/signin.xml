@@ -66,6 +66,7 @@
         android:layout_marginRight="125dp"
         android:background="@color/whiteColor"
         android:ems="10"
+        android:onClick="onToSignInButtonPressed"
         android:fontFamily="@font/audiowide"
         android:gravity="center"
         android:text="@string/signin"

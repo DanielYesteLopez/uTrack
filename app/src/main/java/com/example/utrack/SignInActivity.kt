@@ -12,8 +12,13 @@ class SignInActivity : AppCompatActivity() {
         setContentView(R.layout.signin)
     }
 
+    fun onToSignInButtonPressed(view: View){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+
     fun onToSignUpButtonPressed(view: View){
-        val intent = Intent(this, SignUpActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 
