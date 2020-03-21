@@ -7,29 +7,6 @@
     android:layout_height="match_parent"
     android:background="@color/appMainColor">
 
-    <!--<Button
-        android:id="@+id/trainingbutton2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/yellowishColor"
-        android:layout_marginTop="50dp"
-        android:text="@string/training" />
-
-    <Button
-        android:id="@+id/databutton2"
-        android:background="@color/yellowishColor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/yourdata" />
-
-    <Button
-        android:id="@+id/settingsbutton2"
-        android:background="@color/yellowishColor"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/settings" />-->
     <ImageView
         android:id="@+id/imageView_iconMainStart"
         android:layout_width="0dp"

@@ -169,15 +169,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save"
-        android:textColor="@color/blackColor"
-        android:layout_gravity="center"
+        android:fontFamily="@font/audiowide"
+        android:textColor="@color/textMainColor"        android:layout_gravity="center"
         android:adjustViewBounds="true"
         android:background="@color/appMainColor"
         android:contentDescription="@string/save"
         android:scaleType="fitCenter"
         android:gravity="center_horizontal"
         android:textAlignment="center"
-        android:textSize="30sp"
+        android:textSize="15sp"
         />
 
 </LinearLayout>

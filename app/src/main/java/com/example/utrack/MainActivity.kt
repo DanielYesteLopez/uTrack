@@ -17,13 +17,12 @@ class MainActivity : AppCompatActivity() {
             // a general rule, you should design your app to hide the status bar whenever you
             // hide the navigation bar.
             //systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
-        //}
-
+        // }
         setContentView(R.layout.mainpage)
 
     }
 
-    fun onSettingsButtonPressed(view : View) {
+    fun onSettingsButtonPressed(view: View) {
         val intent = Intent(this, SettingsActivity::class.java)
         startActivity(intent)
     }

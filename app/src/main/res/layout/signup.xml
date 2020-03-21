@@ -14,7 +14,7 @@
         android:layout_marginTop="10dp"
         android:background="@color/whiteColor"
         android:ems="10"
-        android:onClick="onSignUpToSignInbuttonPressed"
+        android:onClick="onSignUpToSignInButtonPressed"
         android:text="@string/signin"
         android:textColor="@color/textMainColor" />
 

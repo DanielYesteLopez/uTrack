@@ -39,19 +39,19 @@
     <string name="bike_pinion_hint">Pinion teeth</string>
     <string name="bike_potencia_hint">potencia</string>
 
-    <string name="trainingresume">resume</string>
-    <string name="trainingstop">stop</string>
-    <string name="trainingpouse">pause</string>
+    <string name="trainingresume">RESUME</string>
+    <string name="trainingstop">STOP</string>
+    <string name="trainingpouse">PAUSE</string>
     <string name="trainingprogress">training in progress</string>
 
     <string name="saveButton">save Button</string>
-    <string name="save">Save</string>
+    <string name="save">SAVE</string>
 
     <string name="spflag">spanish flag</string>
     <string name="frflag">france flag</string>
     <string name="inflag">english</string>
     <string name="arflag">arabic flag</string>
-    <string name="geflag">duetch flag</string>
+    <string name="geflag">deutch flag</string>
     <string name="catflag">catalan flag</string>
 
     <string name="maintext">Making your pedaling faster</string>
@@ -64,6 +64,10 @@
     <string name="avgheartrate">000bpm</string>
     <string name="avgspeed">00\'00kph</string>
     <string name="avgcadencerate">000rpm</string>
+
+    <string name="informationText">This application was developed to improve your performance as a cyclist. You will have tools for
+    mesure your heart rate, your speed and we will calculate your performance. This application was created by : \n ·Daniel Yeste \n ·JD \n
+        ·JG \n ·DG \n</string>
 
 
 
