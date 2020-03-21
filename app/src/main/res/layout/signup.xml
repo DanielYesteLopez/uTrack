@@ -16,6 +16,7 @@
         android:ems="10"
         android:onClick="onSignUpToSignInbuttonPressed"
         android:text="@string/signin"
+        android:fontFamily="@font/audiowide"
         android:textColor="@color/textMainColor" />
 
     <EditText
