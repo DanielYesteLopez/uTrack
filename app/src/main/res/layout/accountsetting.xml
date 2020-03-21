@@ -200,6 +200,9 @@
         android:id="@+id/save_account_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:fontFamily="@font/audiowide"
+        android:textColor="@color/textMainColor"        
         android:layout_gravity="center"
         android:layout_marginBottom="50dp"
         android:adjustViewBounds="true"
@@ -209,8 +212,9 @@
         android:scaleType="fitCenter"
         android:text="@string/save"
         android:textAlignment="center"
-        android:textColor="@color/blackColor"
-        android:textSize="30sp" />
+        android:textSize="10sp"
+        />
+
 
 
 </LinearLayout>

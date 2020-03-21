@@ -9,10 +9,11 @@ class SignUpActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.AppTheme)
         setContentView(R.layout.signup)
     }
 
-    fun onSignUpToSignInbuttonPressed(view: View){
+    fun onSignUpToSignInButtonPressed(view:View){
         val intent = Intent(this, SignInActivity::class.java)
         startActivity(intent)
     }

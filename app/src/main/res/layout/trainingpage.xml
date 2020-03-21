@@ -268,10 +268,11 @@
           android:layout_weight="2"
           android:gravity="center_horizontal"
           android:textAlignment="center"
-          android:textColor="@color/blackColor"
           android:text="@string/trainingstop"
+          android:fontFamily="@font/audiowide"
+          android:textColor="@color/textMainColor"
           android:padding="5dp"
-          android:textSize="20sp" />
+          android:textSize="12sp" />
 
       <TextView
           android:id="@+id/textView7"
@@ -279,11 +280,12 @@
           android:layout_height="wrap_content"
           android:layout_weight="2"
           android:gravity="center_horizontal"
-          android:padding="5dp"
+          android:padding="3dp"
+          android:fontFamily="@font/audiowide"
+          android:textColor="@color/textMainColor"
           android:text="@string/trainingpouse"
           android:textAlignment="center"
-          android:textColor="@color/blackColor"
-          android:textSize="20sp"/>
+          android:textSize="12sp" />
 
       <TextView
           android:id="@+id/textView2"
@@ -291,9 +293,12 @@
           android:layout_height="wrap_content"
           android:layout_weight="2"
           android:gravity="center_horizontal"
-          android:padding="5dp"
+          android:padding="3dp"
           android:text="@string/trainingresume"
+          android:fontFamily="@font/audiowide"
+          android:textColor="@color/textMainColor"
           android:textAlignment="center"
+          android:textSize="12sp" />
           android:textColor="@color/blackColor"
           android:textSize="20sp" />
 

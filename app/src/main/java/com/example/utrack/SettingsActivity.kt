@@ -27,5 +27,10 @@ class SettingsActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun onInformationButtonPressed(view: View) {
+        val intent = Intent(this, InformationActivity::class.java)
+        startActivity(intent)
+    }
+
 
 }
