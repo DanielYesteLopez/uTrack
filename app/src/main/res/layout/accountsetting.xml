@@ -4,8 +4,9 @@
     android:id="@+id/accountSettingLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/appOrangeMainColor"
-    android:orientation="vertical">
+    android:background="@color/appMainColor"
+    android:orientation="vertical"
+    android:weightSum="20">
 
     <ImageButton
         android:id="@+id/backButtonSettingsPage"
@@ -108,12 +109,14 @@
 
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="130dp">
+        android:layout_height="wrap_content"
+        android:layout_weight="17">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="40">
 
             <ImageButton
                 android:id="@+id/imageButton7"
@@ -122,9 +125,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="25dp"
-                android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:background="@color/appOrangeMainColor"
+                android:background="@color/appMainColor"
                 android:contentDescription="@string/spflag"
                 android:padding="1dp"
                 android:scaleType="fitCenter"
@@ -137,11 +139,10 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="25dp"
-                android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:background="@color/appOrangeMainColor"
+                android:background="@color/appMainColor"
                 android:contentDescription="@string/catflag"
-                android:padding="1dp"
+                android:padding="12dp"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/icon_flag_cat" />
 
@@ -152,9 +153,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="25dp"
-                android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:background="@color/appOrangeMainColor"
+                android:background="@color/appMainColor"
                 android:contentDescription="@string/inflag"
                 android:padding="1dp"
                 android:scaleType="fitCenter"
@@ -167,9 +167,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="25dp"
-                android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:background="@color/appOrangeMainColor"
+                android:background="@color/appMainColor"
                 android:contentDescription="@string/geflag"
                 android:padding="1dp"
                 android:scaleType="fitCenter"
@@ -182,9 +181,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="25dp"
-                android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:background="@color/appOrangeMainColor"
+                android:background="@color/appMainColor"
                 android:contentDescription="@string/frflag"
                 android:padding="1dp"
                 android:scaleType="fitCenter"
@@ -197,11 +195,10 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="25dp"
-                android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:background="@color/appOrangeMainColor"
+                android:background="@color/appMainColor"
                 android:contentDescription="@string/arflag"
-                android:padding="1dp"
+                android:padding="11dp"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/icon_flag_arabi" />
 
@@ -213,14 +210,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:adjustViewBounds="true"
-        android:background="@color/appOrangeMainColor"
+        android:layout_weight="6"
+        android:background="@color/appMainColor"
         android:contentDescription="@string/saveButton"
         android:padding="5dp"
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/icon_button_save" />
+
+    <TextView
+        android:id="@+id/save_account_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:textColor="@color/blackColor"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:background="@color/appMainColor"
+        android:contentDescription="@string/save"
+        android:scaleType="fitCenter"
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        />
 
 
 </LinearLayout>

@@ -3,51 +3,64 @@
     <string name="usersettings">User Settings</string>
     <string name="settings">Settings</string>
     <string name="username">Username</string>
+
     <string name="back">Back</string>
+
     <string name="signin">Sign In</string>
     <string name="signup">Sign Up</string>
     <string name="confirmpassword">Confirm Password</string>
     <string name="askname">Real name</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+
     <string name="accountmessage2">Do you have an account?</string>
     <string name="accountmessage1">Don\'t have an account?</string>
+
     <string name="training">Training</string>
     <string name="language">Language</string>
     <string name="info">Information</string>
     <string name="yourdata">Your Data</string>
     <string name="account">Account</string>
+
     <string name="uTrack">µTrack</string>
+
     <string name="capturedata">Capture Data</string>
     <string name="export">Export Data</string>
-    <string name="save">Save</string>
+
     <string name="height">Height</string>
     <string name="disk">Disk teeth</string>
     <string name="frame">Frame size</string>
     <string name="pinion">Pinion teeth</string>
     <string name="potencia">potencia</string>
+
     <string name="bike_height_hint">Height</string>
     <string name="bike_disk_hint">Disk teeth</string>
     <string name="bike_frame_hint">Frame size</string>
     <string name="bike_pinion_hint">Pinion teeth</string>
     <string name="bike_potencia_hint">potencia</string>
+
     <string name="trainingresume">resume</string>
     <string name="trainingstop">stop</string>
     <string name="trainingpouse">pause</string>
     <string name="trainingprogress">training in progress</string>
+
     <string name="saveButton">save Button</string>
+    <string name="save">Save</string>
+
     <string name="spflag">spanish flag</string>
     <string name="frflag">france flag</string>
     <string name="inflag">english</string>
     <string name="arflag">arabic flag</string>
     <string name="geflag">duetch flag</string>
     <string name="catflag">catalan flag</string>
+
     <string name="maintext">Making your pedaling faster</string>
 
     <string name="heartrate">000bpm</string>
     <string name="speedrate">00\'00kph</string>
     <string name="cadencerate">000rpm</string>
     <string name="duration">00,00min</string>
+
     <string name="avgheartrate">000bpm</string>
     <string name="avgspeed">00\'00kph</string>
     <string name="avgcadencerate">000rpm</string>

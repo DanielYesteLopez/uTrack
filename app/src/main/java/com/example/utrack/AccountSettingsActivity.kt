@@ -16,5 +16,4 @@ class AccountSettingsActivity : AppCompatActivity() {
         val intent = Intent(this, SettingsActivity::class.java)
         startActivity(intent)
     }
-
 }

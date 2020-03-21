@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@color/appOrangeMainColor"
+    android:background="@color/appMainColor"
     android:orientation="vertical">
 
     <ImageButton
@@ -39,7 +39,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="128dp"
         android:adjustViewBounds="true"
-        android:background="@color/appOrangeMainColor"
+        android:background="@color/appMainColor"
         android:contentDescription="@string/usersettings"
         android:onClick="onUserSettingsButtonPressed"
         android:scaleType="fitCenter"
@@ -67,7 +67,7 @@
         android:layout_height="89dp"
         android:layout_marginTop="32dp"
         android:adjustViewBounds="true"
-        android:background="@color/appOrangeMainColor"
+        android:background="@color/appMainColor"
         android:contentDescription="@string/account"
         android:onClick="onAccountButtonPressed"
         android:scaleType="fitCenter"
@@ -82,7 +82,7 @@
         android:layout_marginTop="259dp"
         android:layout_marginBottom="72dp"
         android:adjustViewBounds="true"
-        android:background="@color/appOrangeMainColor"
+        android:background="@color/appMainColor"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

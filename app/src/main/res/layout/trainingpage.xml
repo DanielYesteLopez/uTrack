@@ -4,7 +4,7 @@
     android:id="@+id/trainingPageLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/appOrangeMainColor"
+    android:background="@color/appMainColor"
     android:orientation="vertical"
     android:weightSum="30">
 
@@ -41,7 +41,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="5"
                 android:adjustViewBounds="true"
-                android:background="@color/appOrangeMainColor"
+                android:background="@color/appMainColor"
                 android:contentDescription="@string/heartrate"
                 android:padding="3dp"
                 android:scaleType="fitCenter"
@@ -70,7 +70,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="11"
                 android:adjustViewBounds="true"
-                android:background="@color/appOrangeMainColor"
+                android:background="@color/appMainColor"
                 android:contentDescription="@string/speedrate"
                 android:padding="3dp"
                 android:scaleType="fitCenter"
@@ -101,7 +101,7 @@
                 android:adjustViewBounds="true"
                 android:padding="3dp"
                 android:scaleType="fitCenter"
-                android:background="@color/appOrangeMainColor"
+                android:background="@color/appMainColor"
                 android:contentDescription="@string/duration"
                 app:srcCompat="@drawable/icon_trainingpage__cadence" />
 
@@ -135,7 +135,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="5"
                 android:adjustViewBounds="true"
-                android:background="@color/appOrangeMainColor"
+                android:background="@color/appMainColor"
                 android:contentDescription="@string/avgheartrate"
                 android:padding="3dp"
                 android:scaleType="fitCenter"
@@ -166,7 +166,7 @@
                 android:adjustViewBounds="true"
                 android:padding="3dp"
                 android:scaleType="fitCenter"
-                android:background="@color/appOrangeMainColor"
+                android:background="@color/appMainColor"
                 android:contentDescription="@string/avgspeed"
                 app:srcCompat="@drawable/icon_trainingpage_avgspeed" />
 
@@ -195,7 +195,7 @@
                 android:adjustViewBounds="true"
                 android:padding="3dp"
                 android:scaleType="fitCenter"
-                android:background="@color/appOrangeMainColor"
+                android:background="@color/appMainColor"
                 android:contentDescription="@string/avgcadencerate"
                 app:srcCompat="@drawable/icon_trainingpage_avgcadence"/>
 
@@ -226,7 +226,7 @@
           android:layout_width="wrap_content"
           android:layout_height="match_parent"
           android:adjustViewBounds="true"
-          android:background="@color/appOrangeMainColor"
+          android:background="@color/appMainColor"
           android:contentDescription="@string/duration"
           android:scaleType="fitCenter"
           android:padding="3dp"
@@ -251,7 +251,7 @@
        android:layout_height="wrap_content"
        android:layout_weight="7"
        android:adjustViewBounds="true"
-       android:background="@color/appOrangeMainColor"
+       android:background="@color/appMainColor"
        android:contentDescription="@string/trainingprogress"
        android:padding="10dp"
        android:scaleType="fitCenter"
@@ -313,7 +313,7 @@
           android:padding="28dp"
           android:adjustViewBounds="true"
           android:scaleType="fitCenter"
-          android:background="@color/appOrangeMainColor"
+          android:background="@color/appMainColor"
           android:contentDescription="@string/trainingstop"
           app:srcCompat="@drawable/icon_trainingpage_stop" />
 
@@ -325,7 +325,7 @@
           android:padding="30dp"
           android:adjustViewBounds="true"
           android:scaleType="fitCenter"
-          android:background="@color/appOrangeMainColor"
+          android:background="@color/appMainColor"
           android:contentDescription="@string/trainingpouse"
           app:srcCompat="@drawable/icon_trainingpage_pause" />
 
@@ -335,7 +335,7 @@
           android:layout_height="wrap_content"
           android:layout_weight="10"
           android:adjustViewBounds="true"
-          android:background="@color/appOrangeMainColor"
+          android:background="@color/appMainColor"
           android:contentDescription="@string/trainingresume"
           android:padding="35dp"
           android:scaleType="fitCenter"

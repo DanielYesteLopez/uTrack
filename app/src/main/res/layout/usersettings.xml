@@ -4,8 +4,9 @@
     android:id="@+id/userSettingsLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/appOrangeMainColor"
-    android:orientation="vertical">
+    android:background="@color/appMainColor"
+    android:orientation="vertical"
+    android:weightSum="20">
 
     <ImageButton
         android:id="@+id/backButtonSettingsPage"
@@ -18,15 +19,19 @@
         android:contentDescription="@string/back" />
 
     <ScrollView
-        android:background="@color/appOrangeMainColor"
+        android:background="@color/appMainColor"
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="11"
+        android:padding="5dp"
+        android:layout_marginBottom="5dp"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/textView7"
@@ -149,13 +154,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:adjustViewBounds="true"
-        android:background="@color/appOrangeMainColor"
+        android:layout_weight="16"
+        android:background="@color/appMainColor"
         android:contentDescription="@string/saveButton"
         android:padding="5dp"
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/icon_button_save" />
+
+    <TextView
+        android:id="@+id/save_account_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:textColor="@color/blackColor"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:background="@color/appMainColor"
+        android:contentDescription="@string/save"
+        android:scaleType="fitCenter"
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        />
 
 </LinearLayout>
