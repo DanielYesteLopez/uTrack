@@ -31,13 +31,13 @@
     <string name="disk">Disk teeth</string>
     <string name="frame">Frame size</string>
     <string name="pinion">Pinion teeth</string>
-    <string name="potencia">potencia</string>
+    <string name="potencia">Stem</string>
 
     <string name="bike_height_hint">Height</string>
     <string name="bike_disk_hint">Disk teeth</string>
     <string name="bike_frame_hint">Frame size</string>
     <string name="bike_pinion_hint">Pinion teeth</string>
-    <string name="bike_potencia_hint">potencia</string>
+    <string name="bike_potencia_hint">Stem</string>
 
     <string name="trainingresume">RESUME</string>
     <string name="trainingstop">STOP</string>
@@ -69,6 +69,8 @@
     mesure your heart rate, your speed and we will calculate your performance. This application was created by : \n ·Daniel Yeste \n ·JD \n
         ·JG \n ·DG \n</string>
 
+
+    <string name="durationhint">time</string>
 
 
 </resources>

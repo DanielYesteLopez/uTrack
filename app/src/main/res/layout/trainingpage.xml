@@ -12,7 +12,6 @@
        android:id="@+id/backButtonSettingsPage"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:layout_weight="0"
        android:contentDescription="@string/back"
        android:onClick="onBackTrainingButtonPressed"
        app:layout_constraintStart_toStartOf="parent"
@@ -23,12 +22,13 @@
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:baselineAligned="false"
-       android:orientation="horizontal">
+       android:orientation="horizontal"
+       android:layout_margin="5dp">
 
       <LinearLayout
           android:layout_width="wrap_content"
           android:layout_height="match_parent"
-          android:layout_weight="1"
+          android:layout_weight="4"
           android:orientation="vertical">
 
          <TableRow
@@ -39,11 +39,11 @@
                 android:id="@+id/imageView3"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="5"
+                android:layout_weight="15"
                 android:adjustViewBounds="true"
                 android:background="@color/appMainColor"
                 android:contentDescription="@string/heartrate"
-                android:padding="3dp"
+                android:padding="6dp"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/icon_trainingpage__heart" />
 
@@ -122,7 +122,7 @@
       <LinearLayout
           android:layout_width="wrap_content"
           android:layout_height="match_parent"
-          android:layout_weight="1"
+          android:layout_weight="4"
           android:orientation="vertical">
 
          <TableRow
@@ -133,11 +133,11 @@
                 android:id="@+id/imageView6"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="5"
+                android:layout_weight="15"
                 android:adjustViewBounds="true"
                 android:background="@color/appMainColor"
                 android:contentDescription="@string/avgheartrate"
-                android:padding="3dp"
+                android:padding="6dp"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/icon_trainingpage_avgheart" />
 
@@ -193,11 +193,11 @@
                 android:layout_height="match_parent"
                 android:layout_weight="7"
                 android:adjustViewBounds="true"
-                android:padding="3dp"
-                android:scaleType="fitCenter"
                 android:background="@color/appMainColor"
                 android:contentDescription="@string/avgcadencerate"
-                app:srcCompat="@drawable/icon_trainingpage_avgcadence"/>
+                android:padding="3dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/icon_trainingpage_avgcadence" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -213,47 +213,45 @@
       </LinearLayout>
    </LinearLayout>
 
-   <LinearLayout
+   <TableRow
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:layout_weight="23"
-       android:baselineAligned="false"
-       android:orientation="horizontal"
-       android:paddingHorizontal="130dp">
+       android:layout_weight="3">
 
       <ImageView
           android:id="@+id/imageView0"
-          android:layout_width="wrap_content"
+          android:layout_width="87dp"
           android:layout_height="match_parent"
+          android:layout_weight="3"
           android:adjustViewBounds="true"
           android:background="@color/appMainColor"
           android:contentDescription="@string/duration"
-          android:scaleType="fitCenter"
           android:padding="3dp"
+          android:scaleType="fitCenter"
           app:srcCompat="@drawable/icon_trainingpage_duration" />
 
       <TextView
           android:id="@+id/textView15"
-          android:layout_width="wrap_content"
+          android:layout_width="361dp"
           android:layout_height="match_parent"
           android:gravity="center_horizontal"
           android:padding="10dp"
           android:text="@string/duration"
           android:textAlignment="center"
           android:textColor="@color/blackColor"
-          android:textSize="20sp" />
-
-   </LinearLayout>
+          android:textSize="25sp" />
+   </TableRow>
 
    <ImageView
        android:id="@+id/imageView2"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:layout_weight="7"
+       android:layout_weight="24"
+       android:layout_margin="5dp"
        android:adjustViewBounds="true"
        android:background="@color/appMainColor"
        android:contentDescription="@string/trainingprogress"
-       android:padding="10dp"
+       android:padding="5dp"
        android:scaleType="fitCenter"
        app:srcCompat="@drawable/icon_trainingpage_graphicbar" />
 
@@ -301,6 +299,9 @@
           android:textColor="@color/textMainColor"
           android:textAlignment="center"
           android:textSize="12sp" />
+          android:textColor="@color/blackColor"
+          android:textSize="20sp" />
+
    </LinearLayout>
 
    <LinearLayout
@@ -318,7 +319,8 @@
           android:scaleType="fitCenter"
           android:background="@color/appMainColor"
           android:contentDescription="@string/trainingstop"
-          app:srcCompat="@drawable/icon_trainingpage_stop" />
+          app:srcCompat="@drawable/icon_trainingpage_stop"
+          android:layout_margin="3dp"/>
 
       <ImageButton
           android:id="@+id/imagePouseButton"
@@ -330,7 +332,8 @@
           android:scaleType="fitCenter"
           android:background="@color/appMainColor"
           android:contentDescription="@string/trainingpouse"
-          app:srcCompat="@drawable/icon_trainingpage_pause" />
+          app:srcCompat="@drawable/icon_trainingpage_pause"
+          android:layout_margin="3dp"/>
 
       <ImageButton
           android:id="@+id/imageStartResumeButton"
@@ -342,6 +345,7 @@
           android:contentDescription="@string/trainingresume"
           android:padding="35dp"
           android:scaleType="fitCenter"
-          app:srcCompat="@drawable/icon_trainingpage_play" />
+          app:srcCompat="@drawable/icon_trainingpage_play"
+          android:layout_margin="3dp" />
    </LinearLayout>
 </LinearLayout>

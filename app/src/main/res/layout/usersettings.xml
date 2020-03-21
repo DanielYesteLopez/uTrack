@@ -19,13 +19,14 @@
         android:contentDescription="@string/back" />
 
     <ScrollView
-        android:background="@color/appMainColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="11"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="10"
+        android:background="@color/appMainColor"
         android:padding="5dp"
-        android:layout_marginBottom="5dp"
-        >
+        android:layout_margin="5dp"
+        android:layout_marginVertical="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,42 +50,43 @@
                 android:background="@color/rosauserColor"
                 android:ems="10"
                 android:hint="@string/bike_frame_hint"
+                android:importantForAutofill="no"
                 android:inputType="textPersonName"
                 android:text="@string/frame"
                 android:textColor="@color/blackColor"
-                android:textSize="30sp"
-                android:importantForAutofill="no" />
+                android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/height"
+                android:layout_marginTop="10dp"
                 android:textColor="@color/blackColor"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:text="@string/height" />
 
             <EditText
                 android:id="@+id/editText3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:autofillHints="@string/height"
                 android:background="@color/rosauserColor"
                 android:ems="10"
                 android:hint="@string/bike_height_hint"
                 android:inputType="textPersonName"
                 android:text="@string/height"
                 android:textColor="@color/blackColor"
-                android:textSize="30sp"
-                android:autofillHints="@string/height" />
+                android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/disk"
                 android:textColor="@color/blackColor"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:text="@string/disk"/>
 
             <EditText
                 android:id="@+id/editText2"
@@ -137,14 +139,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:autofillHints="@string/potencia"
                 android:background="@color/rosauserColor"
                 android:ems="10"
                 android:hint="@string/bike_potencia_hint"
                 android:inputType="textPersonName"
                 android:text="@string/potencia"
                 android:textColor="@color/blackColor"
-                android:textSize="30sp"
-                android:autofillHints="@string/potencia" />
+                android:textSize="30sp" />
         </LinearLayout>
 
     </ScrollView>
@@ -156,8 +158,8 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:layout_weight="11"
         android:adjustViewBounds="true"
-        android:layout_weight="16"
         android:background="@color/appMainColor"
         android:contentDescription="@string/saveButton"
         android:padding="5dp"
@@ -170,14 +172,18 @@
         android:layout_height="wrap_content"
         android:text="@string/save"
         android:fontFamily="@font/audiowide"
-        android:textColor="@color/textMainColor"        android:layout_gravity="center"
+        android:textColor="@color/textMainColor"        
+        android:layout_gravity="center"
+        android:layout_marginBottom="50dp"
         android:adjustViewBounds="true"
         android:background="@color/appMainColor"
         android:contentDescription="@string/save"
-        android:scaleType="fitCenter"
         android:gravity="center_horizontal"
+        android:scaleType="fitCenter"
+        android:text="@string/save"
         android:textAlignment="center"
         android:textSize="15sp"
         />
+
 
 </LinearLayout>
