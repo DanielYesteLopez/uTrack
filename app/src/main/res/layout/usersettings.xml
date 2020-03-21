@@ -180,7 +180,6 @@
         android:contentDescription="@string/save"
         android:gravity="center_horizontal"
         android:scaleType="fitCenter"
-        android:text="@string/save"
         android:textAlignment="center"
         android:textSize="15sp"
         />
