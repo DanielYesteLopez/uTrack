@@ -60,11 +60,11 @@
         android:text="@string/account"
         android:textAlignment="center"
         android:textColor="@color/textMainColor"
-        app:layout_constraintEnd_toStartOf="@+id/accountbutton"
-        app:layout_constraintTop_toTopOf="@+id/accountbutton" />
+        app:layout_constraintEnd_toStartOf="@+id/accountButtonSettingsPage"
+        app:layout_constraintTop_toTopOf="@+id/accountButtonSettingsPage" />
 
     <ImageButton
-        android:id="@+id/accountbutton"
+        android:id="@+id/accountButtonSettingsPage"
         android:layout_width="192dp"
         android:layout_height="89dp"
         android:layout_marginTop="32dp"
@@ -78,7 +78,7 @@
         app:srcCompat="@drawable/icon_settings_useraccount" />
 
     <ImageButton
-        android:id="@+id/infobutton"
+        android:id="@+id/informationButtonSettingsPage"
         android:layout_width="60dp"
         android:layout_height="72dp"
         android:layout_marginTop="259dp"
@@ -92,7 +92,7 @@
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accountbutton"
+        app:layout_constraintTop_toBottomOf="@+id/accountButtonSettingsPage"
         app:srcCompat="@drawable/icon_settings_information" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,7 +13,8 @@ class UserSettingsActivity : AppCompatActivity() {
     }
 
     fun onBackUserSettingsButtonPressed(view: View){
-        val intent = Intent(this, SettingsActivity::class.java)
+        val intent =  Intent(this, SettingsActivity::class.java)
+
         startActivity(intent)
     }
 }

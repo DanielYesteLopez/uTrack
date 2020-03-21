@@ -13,11 +13,10 @@
         android:orientation="vertical">
 
         <ImageButton
-            android:id="@+id/backButtonSettingsPage"
+            android:id="@+id/backButtonDataPage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/back"
-            android:onClick="onBackDataButtonPressed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@android:drawable/ic_menu_revert" />
