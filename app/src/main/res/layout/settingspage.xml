@@ -14,7 +14,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/back"
-        android:onClick="onBackSettingsButtonPressed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_revert" />
@@ -23,15 +22,16 @@
         android:id="@+id/textViewUserSettings_SettingPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
+        android:fontFamily="@font/audiowide"
+        android:gravity="center_horizontal"
         android:text="@string/usersettings"
         android:textAlignment="center"
-        android:fontFamily="@font/audiowide"
         android:textColor="@color/textMainColor"
         app:layout_constraintEnd_toStartOf="@+id/imageButtonUserSettings_SettingsPage"
-        app:layout_constraintTop_toTopOf="@+id/imageButtonUserSettings_SettingsPage"
-        android:gravity="center_horizontal" />
+        app:layout_constraintTop_toTopOf="@+id/imageButtonUserSettings_SettingsPage" />
 
     <ImageButton
         android:id="@+id/imageButtonUserSettings_SettingsPage"
@@ -41,7 +41,6 @@
         android:adjustViewBounds="true"
         android:background="@color/appMainColor"
         android:contentDescription="@string/usersettings"
-        android:onClick="onUserSettingsButtonPressed"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backButtonSettingsPage"
@@ -51,32 +50,32 @@
         android:id="@+id/textViewUserAccountSettingsPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:fontFamily="@font/audiowide"
+        android:gravity="center_horizontal"
         android:text="@string/account"
         android:textAlignment="center"
         android:textColor="@color/textMainColor"
-        app:layout_constraintEnd_toStartOf="@+id/accountbutton"
-        app:layout_constraintTop_toTopOf="@+id/accountbutton"
-        android:gravity="center_horizontal" />
+        app:layout_constraintEnd_toStartOf="@+id/accountButtonSettingsPage"
+        app:layout_constraintTop_toTopOf="@+id/accountButtonSettingsPage" />
 
     <ImageButton
-        android:id="@+id/accountbutton"
+        android:id="@+id/accountButtonSettingsPage"
         android:layout_width="192dp"
         android:layout_height="89dp"
         android:layout_marginTop="32dp"
         android:adjustViewBounds="true"
         android:background="@color/appMainColor"
         android:contentDescription="@string/account"
-        android:onClick="onAccountButtonPressed"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButtonUserSettings_SettingsPage"
         app:srcCompat="@drawable/icon_settings_useraccount" />
 
     <ImageButton
-        android:id="@+id/infobutton"
+        android:id="@+id/informationButtonSettingsPage"
         android:layout_width="60dp"
         android:layout_height="72dp"
         android:layout_marginTop="259dp"
@@ -86,11 +85,10 @@
         android:adjustViewBounds="true"
         android:background="@color/appMainColor"
         android:contentDescription="@string/info"
-        android:onClick="onInformationButtonPressed"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accountbutton"
+        app:layout_constraintTop_toBottomOf="@+id/accountButtonSettingsPage"
         app:srcCompat="@drawable/icon_settings_information" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
