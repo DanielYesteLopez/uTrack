@@ -73,6 +73,7 @@
     <string name="savePopUpText">Do you want to save the changes?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="exit">Exit</string>
 
 
 </resources>
