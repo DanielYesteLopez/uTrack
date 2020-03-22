@@ -9,10 +9,9 @@
     android:weightSum="20">
 
     <ImageButton
-        android:id="@+id/backButtonSettingsPage"
+        android:id="@+id/backButtonUserSettingsPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onBackUserSettingsButtonPressed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_revert"

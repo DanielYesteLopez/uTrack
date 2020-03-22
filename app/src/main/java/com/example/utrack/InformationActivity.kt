@@ -18,7 +18,7 @@ class InformationActivity:AppCompatActivity() {
             systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
         }
         setContentView(R.layout.information)
-        val backButton = findViewById<ImageButton>(R.id.backButtonDataPage)
+        val backButton = findViewById<ImageButton>(R.id.backButtonInformationPage)
         backButton.setOnClickListener {
             onBackInformationButtonPressed()
 

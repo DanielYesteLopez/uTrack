@@ -32,15 +32,17 @@ class MainActivity : AppCompatActivity() {
 
     fun onSettingsButtonPressed() {
         startActivity(Intent(applicationContext,SettingsActivity().javaClass))
-
+        this.finish()
     }
 
     fun onDataButtonPressed(){
         startActivity(Intent(applicationContext,DataActivity().javaClass))
+        this.finish()
     }
 
     fun onTrainingButtonPressed(){
         startActivity(Intent(applicationContext,TrainingActivity().javaClass))
+        this.finish()
     }
 }
 /*test*/
