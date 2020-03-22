@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/textViewPopUpSaveUserSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/whiteColor"
+        android:backgroundTint="@color/appMainColor"
+        android:fontFamily="@font/audiowide"
+        android:gravity="center"
+        android:text="@string/savePopUpText"
+        android:textAlignment="center"
+        android:textColor="@color/textMainColor"
+        android:textColorHighlight="@color/rosauserColor" />
+
+    <Button
+        android:id="@+id/buttonYesPopUpSaveUserSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewPopUpSaveUserSettings"
+        android:layout_marginTop="87dp"
+        android:text="@string/yes"
+        android:background="@color/whiteColor"
+        android:ems="5"
+        android:fontFamily="@font/audiowide"
+        android:textColor="@color/textMainColor"/>
+
+    <Button
+        android:id="@+id/buttonNoPopUpSaveUserSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewPopUpSaveUserSettings"
+        android:layout_marginStart="97dp"
+        android:layout_marginLeft="97dp"
+        android:layout_marginTop="89dp"
+        android:layout_toEndOf="@+id/buttonYesPopUpSaveUserSettings"
+        android:layout_toRightOf="@+id/buttonYesPopUpSaveUserSettings"
+        android:text="@string/no"
+        android:background="@color/whiteColor"
+        android:ems="5"
+        android:fontFamily="@font/audiowide"
+        android:textColor="@color/textMainColor"/>
+</RelativeLayout>

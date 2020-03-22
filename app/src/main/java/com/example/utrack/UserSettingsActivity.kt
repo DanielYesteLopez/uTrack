@@ -1,6 +1,7 @@
 package com.example.utrack
 
 import android.content.Intent
+import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -16,6 +17,14 @@ class UserSettingsActivity : AppCompatActivity() {
             onBackUserSettingsButtonPressed()
 
         }
+        val saveButtonUserSettings = findViewById<ImageButton>(R.id.saveButtonUserSettings)
+        saveButtonUserSettings.setOnClickListener{
+            onSaveButtonUserSettingsPressed()
+        }
+    }
+
+    private fun onSaveButtonUserSettingsPressed() {
+
     }
 
     fun onBackUserSettingsButtonPressed(){
