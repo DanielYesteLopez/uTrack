@@ -181,7 +181,7 @@
     </HorizontalScrollView>
 
     <ImageButton
-        android:id="@+id/saveButtonUserSettings"
+        android:id="@+id/saveButtonAccountSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

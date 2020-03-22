@@ -45,11 +45,13 @@ class SettingsActivity : AppCompatActivity() {
     fun onUserSettingsButtonPressed(){
         val intent = Intent(this, UserSettingsActivity::class.java)
         startActivity(intent)
+        this.finish()
     }
 
     fun onAccountButtonPressed(){
         val intent = Intent(this, AccountSettingsActivity::class.java)
         startActivity(intent)
+        this.finish()
     }
 
     fun onBackSettingsButtonPressed(){
@@ -61,6 +63,7 @@ class SettingsActivity : AppCompatActivity() {
     fun onInformationButtonPressed() {
         val intent = Intent(this, InformationActivity::class.java)
         startActivity(intent)
+        this.finish()
     }
 
 

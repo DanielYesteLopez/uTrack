@@ -22,7 +22,7 @@
         <activity android:name=".AccountSettingsActivity" />
         <activity android:name=".UserSettingsActivity" />
         <activity android:name=".MainActivity" />
-
+        <activity android:name=".PopUpActivities"/>
         <activity android:name=".SettingsActivity" />
         <activity android:name=".InformationActivity" />
 
