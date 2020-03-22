@@ -65,9 +65,8 @@
     <string name="avgspeed">00\'00kph</string>
     <string name="avgcadencerate">000rpm</string>
 
-    <string name="informationText">This application was developed to improve your performance as a cyclist. You will have tools for
-    mesure your heart rate, your speed and we will calculate your performance. This application was created by : \n ·Daniel Yeste \n ·JD \n
-        ·JG \n ·DG \n</string>
+    <string name="informationText">This application was developed to improve your performance as a cyclist. All rights reserved. This application was created by : \n ·Daniel Yeste \n ·Joan Domenech \n
+        ·Jorge Vinagre \n ·Daniel Geruous-Fares \n</string>
 
 
     <string name="durationhint">time</string>
