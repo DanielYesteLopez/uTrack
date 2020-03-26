@@ -10,19 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/SplashTheme">
         <activity android:name=".SignUpActivity"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/SplashTheme"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignInActivity" />
+        <activity android:name=".SignInActivity"
+            android:noHistory="true"/>
         <activity android:name=".TrainingActivity" />
         <activity android:name=".DataActivity" />
         <activity android:name=".AccountSettingsActivity" />
         <activity android:name=".UserSettingsActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".PopUpActivities"/>
         <activity android:name=".SettingsActivity" />
         <activity android:name=".InformationActivity" />
 
