@@ -102,7 +102,7 @@
                 android:padding="3dp"
                 android:scaleType="fitCenter"
                 android:background="@color/appMainColor"
-                android:contentDescription="@string/duration"
+                android:contentDescription="@string/cadencerate"
                 app:srcCompat="@drawable/icon_trainingpage__cadence" />
 
             <TextView
@@ -213,6 +213,39 @@
       </LinearLayout>
    </LinearLayout>
 
+   <TableRow
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginHorizontal="50dp"
+       android:layout_gravity="center_horizontal"
+       android:gravity="center_horizontal"
+       android:layout_weight="1">
+
+      <ImageView
+          android:id="@+id/imageView34"
+          android:layout_width="47dp"
+          android:layout_height="match_parent"
+          android:layout_marginHorizontal="15dp"
+          android:adjustViewBounds="true"
+          android:background="@color/appMainColor"
+          android:contentDescription="@string/duration"
+          android:gravity="center_vertical"
+          android:padding="3dp"
+          android:scaleType="fitCenter"
+          app:srcCompat="@drawable/icon_trainingpage_duration" />
+
+      <Chronometer
+          android:id="@+id/c_meter"
+          android:layout_width="180dp"
+          android:layout_height="wrap_content"
+          android:layout_marginHorizontal="15dp"
+          android:gravity="center_vertical"
+          android:padding="10dp"
+          android:textAlignment="gravity"
+          android:textColor="@color/blackColor"
+          android:textSize="20sp" />
+   </TableRow>
+
    <ImageView
        android:id="@+id/imageView2"
        android:layout_width="match_parent"
@@ -222,45 +255,10 @@
        android:adjustViewBounds="true"
        android:background="@color/appMainColor"
        android:contentDescription="@string/trainingprogress"
-       android:padding="5dp"
+       android:padding="20dp"
        android:scaleType="fitCenter"
-       app:srcCompat="@drawable/icon_trainingpage_graphicbar" />
-
-   <TableRow
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_weight="11"
-       android:layout_marginStart="30dp"
-       android:layout_marginEnd="30dp"
-       android:layout_gravity="center"
-       android:layout_marginHorizontal="2dp"
-       android:layout_marginVertical="5dp">
-
-      <ImageView
-          android:id="@+id/imageView0"
-          android:layout_width="wrap_content"
-          android:layout_height="match_parent"
-          android:adjustViewBounds="true"
-          android:layout_marginHorizontal="3dp"
-          android:layout_gravity="center_horizontal"
-          android:background="@color/appMainColor"
-          android:contentDescription="@string/duration"
-          android:padding="5dp"
-          android:scaleType="fitCenter"
-          app:srcCompat="@drawable/icon_trainingpage_duration" />
-
-      <Chronometer
-          android:id="@+id/c_meter"
-          android:layout_width="wrap_content"
-          android:layout_height="match_parent"
-          android:gravity="center_vertical"
-          android:padding="11dp"
-          android:layout_marginHorizontal="15dp"
-          android:textAlignment="gravity"
-          android:textColor="@color/blackColor"
-          android:layout_margin="7dp"
-          android:textSize="26sp" />
-   </TableRow>
+       app:srcCompat="@drawable/icon_trainingpage_graphicbar"
+       android:layout_gravity="center_horizontal"/>
 
    <androidx.constraintlayout.widget.ConstraintLayout
        android:layout_width="match_parent"
@@ -281,7 +279,7 @@
           android:textSize="15sp"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHorizontal_bias="0.1"
+          app:layout_constraintHorizontal_bias="0.2"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent" />
 
@@ -289,8 +287,6 @@
           android:id="@+id/textViewstartresume"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginTop="2dp"
-          android:layout_marginBottom="2dp"
           android:fontFamily="@font/audiowide"
           android:gravity="center_horizontal"
           android:padding="3dp"
@@ -298,17 +294,18 @@
           android:textAlignment="center"
           android:textColor="@color/textMainColor"
           android:textSize="15sp"
+          tools:layout_editor_absoluteX="90dp"
+          tools:layout_editor_absoluteY="2dp"
           app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toStartOf="@+id/textViewpause"
-          app:layout_constraintHorizontal_bias="0.56"
-          app:layout_constraintStart_toEndOf="@+id/textViewstop"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.5"
+          app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent" />
 
       <TextView
           android:id="@+id/textViewpause"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginBottom="4dp"
           android:fontFamily="@font/audiowide"
           android:gravity="center_horizontal"
           android:padding="3dp"
@@ -318,8 +315,8 @@
           android:textSize="15sp"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHorizontal_bias="0.82"
-          app:layout_constraintStart_toEndOf="@+id/textViewstop"
+          app:layout_constraintHorizontal_bias="0.8"
+          app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent" />
 
    </androidx.constraintlayout.widget.ConstraintLayout>
@@ -328,77 +325,89 @@
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:orientation="horizontal"
-       android:layout_weight="14">
+       android:layout_weight="25">
+
+      <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent">
 
       <ImageButton
           android:id="@+id/buttonStop"
           android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_margin="3dp"
-          android:layout_weight="10"
+          android:layout_height="match_parent"
           android:adjustViewBounds="true"
-          android:background="@color/appMainColor"
+          android:background="@color/redColor"
           android:contentDescription="@string/trainingstop"
-          android:padding="30dp"
-          android:scaleType="fitCenter"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHorizontal_bias="0.0"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          app:srcCompat="@drawable/icon_trainingpage_stop" />
+          android:layout_weight="5"
+          android:padding="3dp"
+          android:scaleType="fitCenter" />
 
       <ImageButton
           android:id="@+id/buttonPause"
           android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_margin="3dp"
-          android:layout_weight="10"
+          android:layout_height="match_parent"
           android:adjustViewBounds="true"
-          android:background="@color/appMainColor"
+          android:layout_weight="5"
+          android:background="@color/grayColor"
           android:contentDescription="@string/trainingpouse"
-          android:padding="30dp"
-          android:scaleType="fitCenter"
+          android:padding="3dp"
+          android:scaleType="fitCenter" />
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHorizontal_bias="1.0"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          app:srcCompat="@drawable/icon_trainingpage_pause" />
+          app:layout_constraintTop_toTopOf="parent">
 
       <ImageButton
           android:id="@+id/buttonStart"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_margin="3dp"
-          android:layout_weight="10"
-          android:adjustViewBounds="true"
-          android:background="@color/appMainColor"
           android:contentDescription="@string/trainingstart"
-          android:padding="30dp"
-          android:scaleType="fitCenter"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          app:srcCompat="@drawable/icon_trainingpage_play" />
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:background="@color/greenColor" />
 
-      <ImageButton
-          android:id="@+id/buttonResume"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_margin="3dp"
-          android:layout_weight="10"
-          android:adjustViewBounds="true"
-          android:background="@color/appMainColor"
-          android:contentDescription="@string/trainingstart"
-          android:padding="30dp"
-          android:scaleType="fitCenter"
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          app:srcCompat="@drawable/icon_trainingpage_play" />
+          app:layout_constraintTop_toTopOf="parent">
+
+         <ImageButton
+             android:id="@+id/anotherbutton"
+             android:layout_width="wrap_content"
+             android:layout_height="match_parent"
+             android:adjustViewBounds="true"
+             android:background="@color/colorPrimary"
+             android:contentDescription="@string/trainingstop"
+             android:layout_weight="5"
+             android:padding="3dp"
+             android:visibility="invisible"
+             android:scaleType="fitCenter" />
+
+         <ImageButton
+             android:id="@+id/buttonResume"
+             android:layout_width="wrap_content"
+             android:layout_height="match_parent"
+             android:adjustViewBounds="true"
+             android:background="@color/greenColor"
+             android:contentDescription="@string/trainingresume"
+             android:layout_weight="5"
+             android:padding="3dp"
+             android:scaleType="fitCenter"  />
+
+      </LinearLayout>
 
    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </LinearLayout>
