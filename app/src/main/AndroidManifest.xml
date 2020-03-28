@@ -24,14 +24,15 @@
         <activity
             android:name=".SignInActivity"
             android:noHistory="true" />
-        <activity android:name=".TrainingActivity"/>
+        <activity android:name=".TrainingActivity"
+            android:noHistory="true"/>
         <activity android:name=".DataActivity" />
         <activity android:name=".AccountSettingsActivity" />
         <activity android:name=".UserSettingsActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".InformationActivity" />
-        <activity android:name=".ShowExerciseRecommended" />
+        <activity android:name=".ShowExerciseFragment" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

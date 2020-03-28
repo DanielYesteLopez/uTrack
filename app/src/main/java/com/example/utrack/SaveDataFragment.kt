@@ -8,42 +8,49 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 
-class ShowExerciseRecommended : DialogFragment() {
+class SaveDataFragment : DialogFragment() {
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        super.onCreate(savedInstanceState)
         return activity?.let {
             // Use the Builder class for convenient dialog construction
             val builder = AlertDialog.Builder(it)
-            builder.setMessage(R.string.recomendedexercise)
-                .setPositiveButton(R.string.recomendedexerciseyes,
+            builder.setMessage(R.string.savesession)
+                .setPositiveButton(R.string.yes,
                     DialogInterface.OnClickListener { dialog, id ->
                         // user accept and continue session
-                        sendMessageContinueSession() // continue Session
+                        // TODO guardar la data de la sesion en la base de datos
+                        sendMessageSaveSession()
                     })
-                .setNegativeButton(R.string.recomendedexerciseno,
+                .setNegativeButton(R.string.no,
                     DialogInterface.OnClickListener { dialog, id ->
                         // User cancelled the dialog
-                        sendMessageStopSession() // go to result layout
+                        sendMessagenoSaveSession()
                     })
             // Create the AlertDialog object and return it
-            builder.create() } ?: throw IllegalStateException("Activity cannot be null")
+            builder.create()
+        } ?: throw IllegalStateException("Activity cannot be null")
     }
-    private fun sendMessageContinueSession(){
-        Toast.makeText(
-            this.context,
-            getString(R.string.trainingawesome),
-            Toast.LENGTH_SHORT
-        ).show()
-    } // continue Session
 
-    private fun sendMessageStopSession(){
+    private fun sendMessageSaveSession(){
         Toast.makeText(
             this.context,
-            getString(R.string.trainingsad),
+            getString(R.string.sessionsaved),
             Toast.LENGTH_SHORT
         ).show()
-        // TODO go to result
         val intent = Intent(this.context, DataActivity().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
     } // go to result layout
+
+    private fun sendMessagenoSaveSession(){
+        Toast.makeText(
+            this.context,
+            getString(R.string.sessionnotsaved),
+            Toast.LENGTH_SHORT
+        ).show()
+        val intent = Intent(this.context, MainActivity().javaClass)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
+    } // go to main activity
 }
