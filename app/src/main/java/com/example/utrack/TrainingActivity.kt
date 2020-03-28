@@ -203,6 +203,8 @@ class TrainingActivity : AppCompatActivity() {
     private fun sendNotification() {
         // TODO
         //startActivity(Intent(application,ShowExerciseRecommended().javaClass))
+        val newFragment = ShowExerciseRecommended()
+        newFragment.show(supportFragmentManager, "TODO")
 
     }
 
