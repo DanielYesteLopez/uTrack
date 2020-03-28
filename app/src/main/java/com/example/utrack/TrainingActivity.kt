@@ -1,13 +1,6 @@
 package com.example.utrack
 
-import android.app.Dialog
-import android.app.Notification
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
@@ -18,12 +11,7 @@ import android.widget.Chronometer
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
-import androidx.core.app.TaskStackBuilder
-import androidx.fragment.app.DialogFragment
-
 
 class TrainingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -163,9 +151,7 @@ class TrainingActivity : AppCompatActivity() {
     }
 
     private fun onstopButtonPressed() {
-        //val intent = Intent(application,ShowExerciceRecomended().javaClass)
-        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        //startActivity(intent)
+        // go to show exercice recomendation message
         sendNotification()
     }
 
@@ -202,7 +188,6 @@ class TrainingActivity : AppCompatActivity() {
 
     private fun sendNotification() {
         // TODO
-        //startActivity(Intent(application,ShowExerciseRecommended().javaClass))
         val newFragment = ShowExerciseRecommended()
         newFragment.show(supportFragmentManager, "TODO")
 
