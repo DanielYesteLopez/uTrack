@@ -39,10 +39,14 @@
     <string name="bike_pinion_hint">Pinion teeth</string>
     <string name="bike_potencia_hint">Stem</string>
 
+    <string name="trainingstart">START</string>
     <string name="trainingresume">RESUME</string>
     <string name="trainingstop">STOP</string>
     <string name="trainingpouse">PAUSE</string>
     <string name="trainingprogress">training in progress</string>
+    <string name="trainingfinilized">training finished</string>
+    <string name="trainingpaused">training paused</string>
+
 
     <string name="saveButton">save Button</string>
     <string name="save">SAVE</string>
