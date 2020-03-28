@@ -24,8 +24,7 @@
         <activity
             android:name=".SignInActivity"
             android:noHistory="true" />
-        <activity android:name=".TrainingActivity"
-            android:launchMode="singleInstance"/>
+        <activity android:name=".TrainingActivity"/>
         <activity android:name=".DataActivity" />
         <activity android:name=".AccountSettingsActivity" />
         <activity android:name=".UserSettingsActivity" />
