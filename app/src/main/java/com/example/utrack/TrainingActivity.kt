@@ -1,6 +1,5 @@
 package com.example.utrack
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -100,7 +99,6 @@ class TrainingActivity : AppCompatActivity() {
         stopButton.setOnClickListener {
             if(isWorking || ispaused) {
                 val myExerciseFragment = ShowExerciseFragment()
-                val mySaveFragment = SaveDataFragment()
                 pauseButton.callOnClick()
                 // go to show exercice recomendation message
                 //resumeButton.callOnClick()

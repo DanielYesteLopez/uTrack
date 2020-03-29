@@ -1,7 +1,7 @@
 package com.example.utrack
 
 import android.app.Dialog
-import android.content.DialogInterface
+import android.content.DialogInterface.OnClickListener
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -9,32 +9,33 @@ import androidx.fragment.app.DialogFragment
 
 class ShowExerciseFragment : DialogFragment() {
 
-    private var onposButtonClickLisnter: DialogInterface.OnClickListener? = null
-    private var onnegButtonClickLisnter: DialogInterface.OnClickListener? = null
-    private var onconButtonClickLisnter: DialogInterface.OnClickListener? = null
+    private var onposButtonClickLisnter: OnClickListener? = null
+    private var onnegButtonClickLisnter: OnClickListener? = null
+    private var onconButtonClickLisnter: OnClickListener? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        super.onCreate(savedInstanceState)
         return getFragmentDialog()
     }
 
-    fun getFragmentDialog(): Dialog {
+    private fun getFragmentDialog(): Dialog {
         return activity?.let {
             // Use the Builder class for convenient dialog construction
             val builder = AlertDialog.Builder(it)
 
-            onposButtonClickLisnter = DialogInterface.OnClickListener { dialog, id ->
+            onposButtonClickLisnter = OnClickListener { _, _ ->
                 // user accept and continue session (the user do tha last exercise )
                 sendMessageContinueSession()
             }
 
-            onnegButtonClickLisnter = DialogInterface.OnClickListener { dialog, id ->
+            onnegButtonClickLisnter = OnClickListener { _, _ ->
                 // user finish training
                 val mySaveFragment = SaveDataFragment()
                 mySaveFragment.show(activity?.supportFragmentManager!!, R.string.notefication.toString())
                 sendMessageStopSession()
             }
 
-            onconButtonClickLisnter = DialogInterface.OnClickListener { dialog, id ->
+            onconButtonClickLisnter = OnClickListener { _, _ ->
                 // User cancelled the dialog
                 sendMessageContinueSession()
             }
@@ -63,6 +64,7 @@ class ShowExerciseFragment : DialogFragment() {
         ).show()
     } // stop Session
 /*
+// wonderfull setters
     fun setOnPositiveButtonClickLisnter(onPosButtonClickLisnter: DialogInterface.OnClickListener?) {
         this.onposButtonClickLisnter = onPosButtonClickLisnter
     }
