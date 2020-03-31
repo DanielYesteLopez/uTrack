@@ -1,0 +1,49 @@
+@startuml
+left to right direction
+:UnRegistered User: as nrUser
+:User: as User
+
+Rectangle uTrack {
+(UC1. Sign Up) as (SignUp)
+(UC2. Sign in) as (SignIn)
+(UC3. Start Training) as (ETraining)
+(UC3.1 Pause Training) as (PTraining)
+(UC3.3 Resume Training) as (RTraining)
+(UC3.2 Stop Training) as (STraining)
+(UC3.4 Do Recommended Exercise) as (DTraining)
+(UC4. Finish Training) as (FTraining)
+(UC4.1 Save Training) as (saveTraining)
+(UC4.2 Delete Training) as (deleteTraining)
+(UC5 Visualise Data) as (VData)
+(UC5.2 Delete Data) as (DData)
+(UC5.1 Export Data) as (EData)
+(UC6 Configure App) as (GApp)
+(UC6.2 Configure Bicycle) as (GBicycle)
+(UC6.3 See Information) as (SInformation)
+(UC6.1 Configure Account) as (GAccount)
+(UC7. Delete Client) as (DClient)
+(UC8. Add Client) as (AClient)
+}
+
+
+nrUser -- (SignUp)
+User -- (SignIn)
+User -- (ETraining)
+User -- FTraining
+User -- (VData)
+User -- (GApp)
+ETraining <.. STraining: <<extends>>
+ETraining <.. PTraining: <<extends>>
+ETraining <|-- RTraining
+RTraining .> PTraining: <<extends>>
+RTraining .> STraining: <<extends>>
+FTraining ..> STraining: <<extends>>
+STraining <.. DTraining: <<extends>>
+FTraining <.. saveTraining: <<extends>>
+FTraining <.. deleteTraining: <<extends>>
+VData <.. DData: <<extends>>
+VData <.. EData: <<extends>>
+GApp <.. GAccount: <<extends>>
+GApp <.. GBicycle: <<extends>>
+GApp <.. SInformation: <<extends>>
+@enduml
