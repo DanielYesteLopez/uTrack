@@ -1,0 +1,36 @@
+@startuml
+
+class Data {
+}
+class Estadistica {
+}
+class Sensor {
+}
+class Entrenamiento {
+}
+class Ejercicio_Recomendado {
+}
+class Usuario_no_registrado {
+}
+class uTrack {
+}
+class Usuario {
+}
+class Bicicleta {
+}
+class Ejercicio {
+}
+
+uTrack "1" --> "*" Data : "posse datos"
+uTrack "1" --> "*" Usuario : "contiente"
+Data "*" --> "*" Estadistica : "crea"
+Usuario "1" --> "*" Estadistica : "Visualitza"
+Usuario_no_registrado "1" --> "1" Usuario : "se convierte"
+Usuario "1" --> "1" Bicicleta : "tiene"
+Usuario "1" --> "1..*" Entrenamiento : "Hace"
+Entrenamiento "1" --> "1..*" Ejercicio : "Contiene"
+Entrenamiento "1" --> "0,1" Ejercicio_Recomendado : "Tiene"
+Entrenamiento "1" --> "*" Sensor : "Usa"
+Sensor "1" --> "*" Data : "recolecta"
+
+@enduml
