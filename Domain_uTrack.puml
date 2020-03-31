@@ -2,35 +2,35 @@
 
 class Data {
 }
-class Estadistica {
+class Statistic {
 }
 class Sensor {
 }
-class Entrenamiento {
+class Training {
 }
-class Ejercicio_Recomendado {
+class Recommended_Exercise {
 }
-class Usuario_no_registrado {
+class Unregistered_User {
 }
 class uTrack {
 }
-class Usuario {
+class User {
 }
-class Bicicleta {
+class Bicycle {
 }
-class Ejercicio {
+class Exercise {
 }
 
-uTrack "1" --> "*" Data : "posse datos"
-uTrack "1" --> "*" Usuario : "contiente"
-Data "*" --> "*" Estadistica : "crea"
-Usuario "1" --> "*" Estadistica : "Visualitza"
-Usuario_no_registrado "1" --> "1" Usuario : "se convierte"
-Usuario "1" --> "1" Bicicleta : "tiene"
-Usuario "1" --> "1..*" Entrenamiento : "Hace"
-Entrenamiento "1" --> "1..*" Ejercicio : "Contiene"
-Entrenamiento "1" --> "0,1" Ejercicio_Recomendado : "Tiene"
-Entrenamiento "1" --> "*" Sensor : "Usa"
-Sensor "1" --> "*" Data : "recolecta"
+uTrack "1" --> "*" Data : "Has data"
+uTrack "1" --> "*" User : "Has"
+Data "*" --> "*" Statistic : "Create"
+User "1" --> "*" Statistic : "See"
+Unregistered_User "1" --> "1" User : "Transform to"
+User "1" --> "1" Bicycle : "Has"
+User "1" --> "1..*" Training : "Do"
+Training "1" --> "1..*" Exercise : "Has"
+Training "1" --> "0,1" Recommended_Exercise : "Has"
+Training "1" --> "*" Sensor : "Usa"
+Sensor "1" --> "*" Data : "Provide"
 
 @enduml
