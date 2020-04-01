@@ -48,7 +48,7 @@
                 app:srcCompat="@drawable/icon_trainingpage__heart" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/heartratetext"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
@@ -77,7 +77,7 @@
                 app:srcCompat="@drawable/icon_trainingpage__speed" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/speedratetext"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
@@ -106,7 +106,7 @@
                 app:srcCompat="@drawable/icon_trainingpage__cadence" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/cadenceratetext"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
@@ -142,7 +142,7 @@
                 app:srcCompat="@drawable/icon_trainingpage_avgheart" />
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/avgheartratetext"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
@@ -171,7 +171,7 @@
                 app:srcCompat="@drawable/icon_trainingpage_avgspeed" />
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/agspeedratetext"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
@@ -200,7 +200,7 @@
                 app:srcCompat="@drawable/icon_trainingpage_avgcadence" />
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/avgcadenceratetext"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:padding="30dp"

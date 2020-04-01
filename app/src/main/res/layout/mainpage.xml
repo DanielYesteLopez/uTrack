@@ -117,7 +117,8 @@
         app:layout_constraintEnd_toStartOf="@+id/settingsButtonMainpage"
         app:layout_constraintStart_toEndOf="@+id/trainingButtonMainpage"
         app:layout_constraintTop_toBottomOf="@+id/textViewDataMainpage"
-        app:srcCompat="@drawable/icon_mainpage_exit" />
+        app:srcCompat="@drawable/icon_mainpage_exit"
+        android:contentDescription="@string/exit" />
 
     <TextView
         android:id="@+id/textViewExitMainpage"

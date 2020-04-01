@@ -26,6 +26,8 @@
 
     <string name="capturedata">Capture Data</string>
     <string name="export">Export Data</string>
+    <string name="clear">Clear Data</string>
+
 
     <string name="height">Height</string>
     <string name="disk">Disk teeth</string>
@@ -54,7 +56,6 @@
     <string name="spflag">spanish flag</string>
     <string name="frflag">france flag</string>
     <string name="inflag">english</string>
-    <string name="arflag">arabic flag</string>
     <string name="geflag">deutch flag</string>
     <string name="catflag">catalan flag</string>
 
@@ -86,8 +87,6 @@
     <string name="trainingsad">May be next time</string>
     <string name="sessionsaved">Session saved</string>
     <string name="sessionnotsaved">well done</string>
-    <string name="savedata">Save data</string>
-    <string name="nosavedata">no thanks</string>
     <string name="savesession">Save Session?</string>
     <string name="continuesesion">Continue</string>
     <string name="notefication">Hay wait</string>
