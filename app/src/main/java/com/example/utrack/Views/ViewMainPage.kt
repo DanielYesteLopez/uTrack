@@ -1,6 +1,5 @@
-package com.example.utrack
+package com.example.utrack.Views
 
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -8,10 +7,13 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.utrack.Presenters.PresenterMainPage
+import com.example.utrack.R
 import kotlin.system.exitProcess
 
-class MainActivity : AppCompatActivity() {
+class ViewMainPage : AppCompatActivity() {
     private var doubleBackToExitPressedOnce = false
+    private var presenterMain  = PresenterMainPage()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -22,61 +24,28 @@ class MainActivity : AppCompatActivity() {
         buttonsMainActivityManagement()
         doubleBackToExitPressedOnce = false
     }
-
-     private fun buttonsMainActivityManagement(){
+    fun buttonsMainActivityManagement(){
         val settingsButton = findViewById<ImageButton>(R.id.settingsButtonMainpage)
         val dataButton = findViewById<ImageButton>(R.id.dataButtonMainpage)
         val trainingButton = findViewById<ImageButton>(R.id.trainingButtonMainpage)
         val exitButton = findViewById<ImageButton>(R.id.exitButtonMainpage)
         settingsButton.setOnClickListener {
-            onSettingsButtonPressed()
+            presenterMain.onSettingsButtonPressed(this.applicationContext)
         }
         dataButton.setOnClickListener {
-            onDataButtonPressed()
+            presenterMain.onDataButtonPressed(this.applicationContext)
         }
         trainingButton.setOnClickListener {
-            onTrainingButtonPressed()
+            presenterMain.onTrainingButtonPressed(this.applicationContext)
         }
         exitButton.setOnClickListener{
-            onExitButtonPressed()
+            presenterMain.onExitButtonPressed(this)
         }
 
     }
 
-    override fun onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            Toast.makeText(this, "Bye Bye!", Toast.LENGTH_SHORT).show()
-            super.onBackPressed()
-            return
-        }
-        doubleBackToExitPressedOnce = true
-        Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show()
-        Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
-    }
 
 
-    private fun onExitButtonPressed() {
-        this.finish()
-        exitProcess(0)
-    }
-
-    private fun onSettingsButtonPressed() {
-        val intent = Intent(applicationContext,SettingsActivity().javaClass)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        startActivity(intent)
-    }
-
-    private fun onDataButtonPressed(){
-        val intent = Intent(applicationContext,DataActivity().javaClass)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        startActivity(intent)
-    }
-
-    private fun onTrainingButtonPressed(){
-        val intent = Intent(applicationContext,TrainingActivity().javaClass)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        startActivity(intent)
-    }
 
     private fun hideNav() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -101,4 +70,18 @@ class MainActivity : AppCompatActivity() {
             hideNav()
         }
     }
+
+
+    override fun onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            Toast.makeText(this, "Bye Bye!", Toast.LENGTH_SHORT).show()
+            super.onBackPressed()
+            return
+        }
+        doubleBackToExitPressedOnce = true
+        Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show()
+        Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
+    }
+
+
 }

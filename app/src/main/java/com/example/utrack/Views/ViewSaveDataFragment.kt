@@ -1,4 +1,4 @@
-package com.example.utrack
+package com.example.utrack.Views
 
 import android.app.Dialog
 import android.content.DialogInterface.OnClickListener
@@ -7,8 +7,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.example.utrack.R
 
-class SaveDataFragment : DialogFragment() {
+class ViewSaveDataFragment : DialogFragment() {
 
     private var onPosSaveButtonClickLisnter: OnClickListener? = null
     private var onNegSaveButtonClickLisnter: OnClickListener? = null
@@ -46,7 +47,7 @@ class SaveDataFragment : DialogFragment() {
             getString(R.string.sessionsaved),
             Toast.LENGTH_SHORT
         ).show()
-        val intent = Intent(this.context, DataActivity().javaClass)
+        val intent = Intent(this.context, ViewData().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
     } // go to result layout
@@ -57,7 +58,7 @@ class SaveDataFragment : DialogFragment() {
             getString(R.string.sessionnotsaved),
             Toast.LENGTH_SHORT
         ).show()
-        val intent = Intent(this.context, MainActivity().javaClass)
+        val intent = Intent(this.context, ViewMainPage().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
     } // go to main activity

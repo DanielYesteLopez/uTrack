@@ -1,15 +1,14 @@
-package com.example.utrack
+package com.example.utrack.Views
 
 import android.content.Intent
 import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import android.widget.ImageButton
-import androidx.appcompat.app.AppCompatActivity
+import com.example.utrack.R
 
-class InformationActivity:AppCompatActivity() {
+class ViewData : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,16 +16,17 @@ class InformationActivity:AppCompatActivity() {
         //window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         //window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         //hideNav()
-        setContentView(R.layout.information)
-        val backButton = findViewById<ImageButton>(R.id.backButtonInformationPage)
+        setContentView(R.layout.showdata)
+        val backButton = findViewById<ImageButton>(R.id.backButtonDataPage)
         backButton.setOnClickListener {
-            onBackInformationButtonPressed()
+            onBackDataButtonPressed()
 
         }
+
     }
 
-    private fun onBackInformationButtonPressed(){
-        val intent = Intent(application,SettingsActivity().javaClass)
+    private fun onBackDataButtonPressed(){
+        val intent = Intent(application, ViewMainPage().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
     }

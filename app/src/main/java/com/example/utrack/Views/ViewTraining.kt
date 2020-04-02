@@ -1,4 +1,4 @@
-package com.example.utrack
+package com.example.utrack.Views
 
 import android.content.Intent
 import android.os.Build
@@ -12,8 +12,9 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.utrack.R
 
-class TrainingActivity : AppCompatActivity() {
+class ViewTraining : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +66,7 @@ class TrainingActivity : AppCompatActivity() {
                 meter.start()
                 isWorking = true
                 ispaused = false
-                Toast.makeText(this@TrainingActivity,
+                Toast.makeText(this@ViewTraining,
                     getString(R.string.trainingprogress),
                     Toast.LENGTH_SHORT).show()
             }
@@ -90,7 +91,7 @@ class TrainingActivity : AppCompatActivity() {
                 isWorking = false
                 ispaused = true
                 Toast.makeText(
-                    this@TrainingActivity,
+                    this@ViewTraining,
                     getString(R.string.trainingpaused),
                     Toast.LENGTH_SHORT).show()
             }
@@ -98,7 +99,8 @@ class TrainingActivity : AppCompatActivity() {
 
         stopButton.setOnClickListener {
             if(isWorking || ispaused) {
-                val myExerciseFragment = ShowExerciseFragment()
+                val myExerciseFragment =
+                    ViewShowExerciseFragment()
                 pauseButton.callOnClick()
                 // go to show exercice recomendation message
                 //resumeButton.callOnClick()
@@ -110,7 +112,7 @@ class TrainingActivity : AppCompatActivity() {
     }
 
     private fun onBackTrainingButtonPressed() {
-        val intent = Intent(application, MainActivity().javaClass)
+        val intent = Intent(application, ViewMainPage().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
     }
