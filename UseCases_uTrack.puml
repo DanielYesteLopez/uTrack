@@ -14,6 +14,7 @@ Rectangle uTrack {
 (UC4. Finish Training) as (FTraining)
 (UC4.1 Save Training) as (saveTraining)
 (UC4.2 Delete Training) as (deleteTraining)
+(UC4.3 Stop Recommended Exercise) as (STrainingRecomended)
 (UC5 Visualise Data) as (VData)
 (UC5.2 Delete Data) as (DData)
 (UC5.1 Export Data) as (EData)
@@ -21,29 +22,28 @@ Rectangle uTrack {
 (UC6.2 Configure Bicycle) as (GBicycle)
 (UC6.3 See Information) as (SInformation)
 (UC6.1 Configure Account) as (GAccount)
-(UC7. Delete Client) as (DClient)
-(UC8. Add Client) as (AClient)
 }
 
 
 nrUser -- (SignUp)
 User -- (SignIn)
 User -- (ETraining)
-User -- FTraining
 User -- (VData)
 User -- (GApp)
 ETraining <.. STraining: <<extends>>
 ETraining <.. PTraining: <<extends>>
 ETraining <|-- RTraining
-RTraining .> PTraining: <<extends>>
-RTraining .> STraining: <<extends>>
+RTraining .right.> PTraining: <<extends>>
+RTraining .left.> STraining: <<extends>>
 FTraining ..> STraining: <<extends>>
 STraining <.. DTraining: <<extends>>
 FTraining <.. saveTraining: <<extends>>
 FTraining <.. deleteTraining: <<extends>>
+DTraining <.left. STrainingRecomended: <<extends>>
 VData <.. DData: <<extends>>
 VData <.. EData: <<extends>>
 GApp <.. GAccount: <<extends>>
 GApp <.. GBicycle: <<extends>>
 GApp <.. SInformation: <<extends>>
+
 @enduml
