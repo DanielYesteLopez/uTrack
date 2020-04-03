@@ -1,0 +1,91 @@
+@startuml
+
+title uTrack
+
+left to right direction
+
+package class {
+
+package Model {
+
+class Database
+class User
+class Exercise
+class Training
+class Session
+class Sensor
+class ArrayList
+class UserBike
+class UserData
+class RecommendedExercise
+class Fachada
+class File
+}
+
+package View {
+
+class AccountSettingsActivity
+class DataActivity
+class InformationActivity
+class MainActivity
+class SaveDataFragment
+class SettingsActivity
+class ShowExerciseFragment
+class SignInActivity
+class SignUpActivity
+class TrainingActivity
+class UserSettingsActivity
+}
+
+package Presenter{
+
+class PresenterLogin
+class PresenterMaster
+class PresenterTraining
+class PresenterShowdata
+class PresenterMainPage
+class PresenterAccountSettings
+class PresenterSettings
+class PresenterUserSettings
+
+}
+}
+
+PresenterLogin -- SignUpActivity
+PresenterLogin -- SignInActivity
+PresenterMainPage -- MainActivity
+PresenterTraining -- TrainingActivity
+PresenterShowdata -- DataActivity
+PresenterSettings -- SettingsActivity
+PresenterSettings -- InformationActivity
+PresenterSettings --- PresenterAccountSettings
+PresenterAccountSettings -- AccountSettingsActivity
+PresenterUserSettings -- UserSettingsActivity
+PresenterSettings --- PresenterUserSettings
+PresenterTraining -- ShowExerciseFragment
+PresenterTraining -- SaveDataFragment
+
+PresenterMaster --- PresenterSettings
+PresenterMaster --- PresenterTraining
+PresenterMaster --- PresenterMainPage
+PresenterMaster --- PresenterShowdata
+PresenterMaster --- PresenterLogin
+
+PresenterMaster -- Fachada
+Fachada -- Database
+
+Fachada -- Sensor
+Fachada -- User
+Fachada -- Training
+User <|-- UserBike
+User <|-- UserData
+Session -- Exercise
+
+Training -- Session
+Session -- RecommendedExercise
+ArrayList -left- RecommendedExercise
+ArrayList -left- Session
+File <|-left- Session
+
+@enduml
+
