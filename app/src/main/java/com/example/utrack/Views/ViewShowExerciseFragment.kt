@@ -1,4 +1,4 @@
-package com.example.utrack
+package com.example.utrack.Views
 
 import android.app.Dialog
 import android.content.DialogInterface.OnClickListener
@@ -6,8 +6,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.example.utrack.R
 
-class ShowExerciseFragment : DialogFragment() {
+class ViewShowExerciseFragment : DialogFragment() {
 
     private var onposButtonClickLisnter: OnClickListener? = null
     private var onnegButtonClickLisnter: OnClickListener? = null
@@ -30,7 +31,8 @@ class ShowExerciseFragment : DialogFragment() {
 
             onnegButtonClickLisnter = OnClickListener { _, _ ->
                 // user finish training
-                val mySaveFragment = SaveDataFragment()
+                val mySaveFragment =
+                    ViewSaveDataFragment()
                 mySaveFragment.show(activity?.supportFragmentManager!!, R.string.notefication.toString())
                 sendMessageStopSession()
             }

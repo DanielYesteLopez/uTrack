@@ -1,15 +1,15 @@
-package com.example.utrack
+package com.example.utrack.Views
 
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
-import android.widget.*
+import android.widget.ImageButton
+import android.widget.Toast
+import com.example.utrack.R
 
-class UserSettingsActivity : AppCompatActivity() {
+class ViewAccountSettings : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,49 +17,23 @@ class UserSettingsActivity : AppCompatActivity() {
         //window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         //window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         //hideNav()
-        setContentView(R.layout.usersettings)
-        val backButton = findViewById<ImageButton>(R.id.backButtonUserSettingsPage)
+        setContentView(R.layout.accountsetting)
+        val backButton = findViewById<ImageButton>(R.id.backButtonAccountSettingsPage)
         backButton.setOnClickListener {
-            onBackUserSettingsButtonPressed()
-
+            onBackAccountButtonSettingsPressed()
         }
         val saveButtonUserSettings = findViewById<ImageButton>(R.id.saveButtonAccountSettings)
         saveButtonUserSettings.setOnClickListener{
-            onSaveButtonUserSettingsPressed()
+            onSaveButtonAccountSettingsPressed()
         }
     }
 
-    private fun onSaveButtonUserSettingsPressed() {
-        /*val inflater: LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view = inflater.inflate(R.layout.popupsave_usersettings,userSettingsLayout)
-        val popupWindow = PopupWindow(
-            view,
-            RelativeLayout.LayoutParams.WRAP_CONTENT,
-            RelativeLayout.LayoutParams.WRAP_CONTENT
-        )
-        val buttonYes = view.findViewById<Button>(R.id.buttonYesPopUpSaveUserSettings)
-        val buttonNo = view.findViewById<Button>(R.id.buttonNoPopUpSaveUserSettings)
-        buttonNo.setOnClickListener{
-            popupWindow.dismiss()
-        }
-        buttonYes.setOnClickListener{
-            popupWindow.dismiss()
-        }
-        popupWindow.setOnDismissListener {
-            Toast.makeText(applicationContext,"Popup closed", Toast.LENGTH_SHORT).show()
-        }
-
-        popupWindow.showAtLocation(
-            userSettingsLayout, // Location to display popup window
-            Gravity.CENTER, // Exact position of layout to display popup
-            0, // X offset
-            0 // Y offset
-        )*/
+    private fun onSaveButtonAccountSettingsPressed() {
         Toast.makeText(applicationContext,"Saved!",Toast.LENGTH_SHORT).show()
     }
 
-    private fun onBackUserSettingsButtonPressed(){
-        val intent = Intent(application,SettingsActivity().javaClass)
+    private fun onBackAccountButtonSettingsPressed(){
+        val intent = Intent(application, ViewSettings().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
     }
@@ -79,8 +53,8 @@ class UserSettingsActivity : AppCompatActivity() {
                             or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                             or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                             or View.SYSTEM_UI_FLAG_FULLSCREEN)
-    }
 
+    }
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus) {

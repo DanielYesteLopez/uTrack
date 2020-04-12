@@ -1,16 +1,14 @@
-package com.example.utrack
+package com.example.utrack.Views
 
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
-import android.widget.Button
+import android.widget.ImageButton
+import androidx.appcompat.app.AppCompatActivity
+import com.example.utrack.R
 
-class SignInActivity : AppCompatActivity() {
-
+class ViewSettings : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,29 +16,50 @@ class SignInActivity : AppCompatActivity() {
         //window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         //window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         //hideNav()
-        setContentView(R.layout.signin)
-        manageSignInButtons()
+        setContentView(R.layout.settingspage)
+        manageButtonsSettings()
     }
 
-    private fun manageSignInButtons() {
-        val signInButton = findViewById<Button>(R.id.buttonSingIn_InSingIn)
-        val singOutButton = findViewById<Button>(R.id.signInToSignUpButton)
-        signInButton.setOnClickListener{
-            onToSignInButtonPressed()
+    private fun manageButtonsSettings() {
+        val userSettinggsButton = findViewById<ImageButton>(R.id.imageButtonUserSettings_SettingsPage)
+        val accountSettingsButton = findViewById<ImageButton>(R.id.accountButtonSettingsPage)
+        val backSettingsButton = findViewById<ImageButton>(R.id.backButtonSettingsPage)
+        val informationSettingsButton = findViewById<ImageButton>(R.id.informationButtonSettingsPage)
+        userSettinggsButton.setOnClickListener{
+            onUserSettingsButtonPressed()
         }
-        singOutButton.setOnClickListener{
-            onToSignUpButtonPressed()
+        accountSettingsButton.setOnClickListener{
+            onAccountButtonPressed()
         }
+        backSettingsButton.setOnClickListener{
+            onBackSettingsButtonPressed()
+        }
+        informationSettingsButton.setOnClickListener{
+            onInformationButtonPressed()
+        }
+
     }
 
-    private fun onToSignInButtonPressed(){
-        val intent = Intent(application,MainActivity().javaClass)
+    private fun onUserSettingsButtonPressed(){
+        val intent = Intent(this, ViewUserSettings::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
     }
 
-    private fun onToSignUpButtonPressed(){
-        val intent = Intent(application,SignUpActivity().javaClass)
+    private fun onAccountButtonPressed(){
+        val intent = Intent(this, ViewAccountSettings::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
+    }
+
+    private fun onBackSettingsButtonPressed(){
+        val intent = Intent(this, ViewMainPage::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
+    }
+
+    private fun onInformationButtonPressed() {
+        val intent = Intent(this, ViewInformation::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
     }
@@ -62,12 +81,11 @@ class SignInActivity : AppCompatActivity() {
                             or View.SYSTEM_UI_FLAG_FULLSCREEN)
 
     }
+
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus) {
             hideNav()
         }
     }
-
-
 }

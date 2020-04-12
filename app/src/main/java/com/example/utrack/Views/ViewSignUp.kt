@@ -1,16 +1,14 @@
-package com.example.utrack
+package com.example.utrack.Views
 
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
-import android.widget.ImageButton
-import android.widget.Toast
+import android.widget.Button
+import com.example.utrack.R
 
-class AccountSettingsActivity : AppCompatActivity() {
+class ViewSignUp : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,23 +16,16 @@ class AccountSettingsActivity : AppCompatActivity() {
         //window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         //window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         //hideNav()
-        setContentView(R.layout.accountsetting)
-        val backButton = findViewById<ImageButton>(R.id.backButtonAccountSettingsPage)
-        backButton.setOnClickListener {
-            onBackAccountButtonSettingsPressed()
-        }
-        val saveButtonUserSettings = findViewById<ImageButton>(R.id.saveButtonAccountSettings)
-        saveButtonUserSettings.setOnClickListener{
-            onSaveButtonAccountSettingsPressed()
+        setTheme(R.style.AppTheme)
+        setContentView(R.layout.signup)
+        val singInButton = findViewById<Button>(R.id.signUpToSignInbutton)
+        singInButton.setOnClickListener{
+            onSignUpToSignInButtonPressed()
         }
     }
 
-    private fun onSaveButtonAccountSettingsPressed() {
-        Toast.makeText(applicationContext,"Saved!",Toast.LENGTH_SHORT).show()
-    }
-
-    private fun onBackAccountButtonSettingsPressed(){
-        val intent = Intent(application,SettingsActivity().javaClass)
+    private fun onSignUpToSignInButtonPressed(){
+        val intent = Intent(application, ViewSignIn().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
     }
