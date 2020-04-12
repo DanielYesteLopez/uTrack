@@ -10,6 +10,7 @@ import com.example.utrack.Views.ViewTraining
 import kotlin.system.exitProcess
 
 class PresenterMainPage {
+    //Working presenter
     fun onSettingsButtonPressed(applicationContext: Context) {
         val intent = Intent(applicationContext,
             ViewSettings().javaClass)
