@@ -1,18 +1,14 @@
 package com.example.utrack.Views
 
-import android.os.Build
+
 import android.os.Bundle
-import android.os.Handler
-import android.view.View
 import android.widget.ImageButton
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.example.utrack.Presenters.PresenterMainPage
 import com.example.utrack.R
-import kotlin.system.exitProcess
+import com.example.utrack.mc.MainViewClass
 
-class ViewMainPage : AppCompatActivity() {
-    private var doubleBackToExitPressedOnce = false
+class ViewMainPage : MainViewClass() {
+
     private var presenterMain  = PresenterMainPage()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,45 +39,4 @@ class ViewMainPage : AppCompatActivity() {
         }
 
     }
-
-
-
-
-    private fun hideNav() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            window.decorView.systemUiVisibility = (
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            or View.SYSTEM_UI_FLAG_FULLSCREEN
-                            or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
-        }else
-            window.decorView.systemUiVisibility = (
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            or View.SYSTEM_UI_FLAG_FULLSCREEN)
-
-    }
-    override fun onWindowFocusChanged(hasFocus: Boolean) {
-        super.onWindowFocusChanged(hasFocus)
-        if (hasFocus) {
-            hideNav()
-        }
-    }
-
-
-    override fun onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            Toast.makeText(this, "Bye Bye!", Toast.LENGTH_SHORT).show()
-            super.onBackPressed()
-            return
-        }
-        doubleBackToExitPressedOnce = true
-        Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show()
-        Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
-    }
-
-
 }
