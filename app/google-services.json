@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "839332833883",
+    "firebase_url": "https://utrack-fc609.firebaseio.com",
+    "project_id": "utrack-fc609",
+    "storage_bucket": "utrack-fc609.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:839332833883:android:17ecc12374e904dc20ad7e",
+        "android_client_info": {
+          "package_name": "com.example.utrack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "839332833883-e0fq1gqgaj9kehvku4djr6htp4vmp7vt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBw3MYo2-6swz9TYa3vgOB2kYJFQJKuGbQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "839332833883-e0fq1gqgaj9kehvku4djr6htp4vmp7vt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
