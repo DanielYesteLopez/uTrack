@@ -90,7 +90,7 @@
         android:id="@+id/signupbutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/emailtext"
+        android:layout_below="@+id/singupEmail"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="25dp"
@@ -101,7 +101,7 @@
         android:textColor="@color/textMainColor" />
 
     <EditText
-        android:id="@+id/emailtext"
+        android:id="@+id/singupEmail"
         style="@style/BlackText"
         android:layout_width="match_parent"
         android:layout_height="30dp"

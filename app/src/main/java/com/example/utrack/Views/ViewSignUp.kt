@@ -1,15 +1,16 @@
 package com.example.utrack.Views
 
-import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
+import com.example.utrack.Presenters.PresenterLogin
 import com.example.utrack.R
 
 class ViewSignUp : AppCompatActivity() {
-
+    var presenterLogin = PresenterLogin()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -19,16 +20,14 @@ class ViewSignUp : AppCompatActivity() {
         setTheme(R.style.AppTheme)
         setContentView(R.layout.signup)
         val singInButton = findViewById<Button>(R.id.signUpToSignInbutton)
+        val userName = findViewById<EditText>(R.id.signupUsername).text.toString()
+        val userEmail = findViewById<EditText>(R.id.singupEmail).text.toString()
+        val userPassword = findViewById<EditText>(R.id.signupPassword).text.toString()
         singInButton.setOnClickListener{
-            onSignUpToSignInButtonPressed()
+            presenterLogin.onSignUpToSignInButtonPressed(this.applicationContext,userName,userEmail,userPassword)
         }
     }
 
-    private fun onSignUpToSignInButtonPressed(){
-        val intent = Intent(application, ViewSignIn().javaClass)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        startActivity(intent)
-    }
 
     private fun hideNav() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
