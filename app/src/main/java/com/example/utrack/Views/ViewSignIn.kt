@@ -6,11 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
+import com.example.utrack.Presenters.PresenterLogin
 import com.example.utrack.R
 
 class ViewSignIn : AppCompatActivity() {
 
-
+    var presenterLogin = PresenterLogin()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -24,18 +26,14 @@ class ViewSignIn : AppCompatActivity() {
     private fun manageSignInButtons() {
         val signInButton = findViewById<Button>(R.id.buttonSingIn_InSingIn)
         val singOutButton = findViewById<Button>(R.id.signInToSignUpButton)
+        val signInUsernameLogin = findViewById<EditText>(R.id.signInUsernameLogin).text.toString()
+        val signInPasswordLogin = findViewById<EditText>(R.id.signInPasswordLogin).text.toString()
         signInButton.setOnClickListener{
-            onToSignInButtonPressed()
+            presenterLogin.onToSignInButtonPressed(this.applicationContext,signInUsernameLogin,signInPasswordLogin)
         }
         singOutButton.setOnClickListener{
             onToSignUpButtonPressed()
         }
-    }
-
-    private fun onToSignInButtonPressed(){
-        val intent = Intent(application, ViewMainPage().javaClass)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        startActivity(intent)
     }
 
     private fun onToSignUpButtonPressed(){

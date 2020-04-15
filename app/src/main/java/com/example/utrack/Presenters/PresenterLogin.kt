@@ -5,20 +5,16 @@ import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import com.example.utrack.Views.ViewData
 import com.example.utrack.Views.ViewSignIn
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
 class PresenterLogin {
-    var mDataFirebase = FirebaseDatabase.getInstance()
-    var mDatabaseReference = mDataFirebase.reference.child("Users")
-    var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    private var mDataFirebase = FirebaseDatabase.getInstance()
+    private var mDatabaseReference = mDataFirebase.reference.child("Users")
+    private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
     fun onSignUpToSignInButtonPressed(applicationContext: Context,userName:String,userEmail:String,userPassword:String) {
          createNewAccount(applicationContext,userName,userEmail,userPassword)
-        /*val intent = Intent(application, ViewSignIn().javaClass)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        startActivity(intent)*/
     }
 
     private fun createNewAccount(
@@ -34,7 +30,7 @@ class PresenterLogin {
                 val userId = mAuth.currentUser!!.uid
                 val currentUserDb = mDatabaseReference.child(userId)
                 currentUserDb.child("name").setValue(userName)
-                updateUI(applicationContext)
+                updateUIToSingIn(applicationContext)
 
             }else{
                 Log.d("Error","Error")
@@ -60,11 +56,36 @@ class PresenterLogin {
             }
     }
 
-    private fun updateUI(applicationContext: Context) {
+    private fun updateUIToSingIn(applicationContext: Context) {
         val intent = Intent(applicationContext,
             ViewSignIn().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         ContextCompat.startActivity(applicationContext,intent,null)
     }
+
+    fun onToSignInButtonPressed(
+        applicationContext: Context,
+        signInUsernameLogin: String,
+        signInPasswordLogin: String
+    ) {
+        mAuth.signInWithEmailAndPassword(signInUsernameLogin,signInPasswordLogin).addOnCompleteListener { task->
+            if (task.isSuccessful){
+                updateUIToMainPage(applicationContext)
+            }else{
+                Toast.makeText(applicationContext, "Authentication failed.",
+                    Toast.LENGTH_SHORT).show()
+            }
+        }
+
+    }
+
+    private fun updateUIToMainPage(applicationContext: Context) {
+        val intent = Intent(applicationContext,
+            ViewSignIn().javaClass)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        ContextCompat.startActivity(applicationContext,intent,null)
+    }
+
+
 
 }

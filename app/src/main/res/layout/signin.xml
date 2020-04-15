@@ -19,7 +19,7 @@
         android:textColor="@color/textMainColor" />
 
     <EditText
-        android:id="@+id/signupUsername2"
+        android:id="@+id/signInUsernameLogin"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_alignParentStart="true"
@@ -34,10 +34,10 @@
         android:textColor="@color/textMainColor" />
 
     <EditText
-        android:id="@+id/signupPassword2"
+        android:id="@+id/signInPasswordLogin"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_below="@+id/signupUsername2"
+        android:layout_below="@+id/signInUsernameLogin"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="25dp"
@@ -53,7 +53,7 @@
         android:id="@+id/buttonSingIn_InSingIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/signupPassword2"
+        android:layout_below="@+id/signInPasswordLogin"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
