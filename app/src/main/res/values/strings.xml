@@ -91,4 +91,13 @@
     <string name="continuesesion">Continue</string>
     <string name="notefication">Hay wait</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bluetooth">If you have speed or cadence sensor choose device to start session, if not start session without one \n </string>
+    <string name="choose_device">Choose Device</string>
+    <string name="continue_without_device">Start Session</string>
+    <string name="blutooth_not_available">Bluetooth is not available</string>
+    <string name="bluetooth_available">Bluetooth is available</string>
+    <string name="paired_devices">Paired Devices</string>
+
 </resources>

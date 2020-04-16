@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.utrack">
 
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon_app_utrack"
@@ -20,19 +24,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Views.ViewSignIn"
             android:noHistory="true" />
-        <activity android:name=".Views.ViewTraining"
-            android:noHistory="true"/>
+        <activity
+            android:name=".Views.ViewTraining"
+            android:noHistory="true" />
         <activity android:name=".Views.ViewData" />
         <activity android:name=".Views.ViewAccountSettings" />
         <activity android:name=".Views.ViewUserSettings" />
         <activity android:name=".Views.ViewMainPage" />
         <activity android:name=".Views.ViewSettings" />
-        <activity android:name=".Views.ViewInformation"/>
-        <activity android:name=".Views.ViewShowExerciseFragment" />
+        <activity android:name=".Views.ViewInformation" />
+        <activity android:name=".Views.FragmentShowExercise" />
+        <activity android:name=".Views.ViewBluetoothPairing" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
