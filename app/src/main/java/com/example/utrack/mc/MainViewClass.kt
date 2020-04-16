@@ -5,10 +5,11 @@ import android.os.Handler
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.utrack.ic.NaviInterface
 import com.example.utrack.ic.ViewInterface
 
 abstract class MainViewClass : AppCompatActivity(),
-    ViewInterface {
+    ViewInterface, NaviInterface {
 
     override var doubleBackToExitPressedOnce: Boolean = false
 
