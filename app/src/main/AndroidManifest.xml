@@ -27,9 +27,7 @@
         <activity
             android:name=".Views.ViewSignIn"
             android:noHistory="true" />
-        <activity
-            android:name=".Views.ViewTraining"
-            android:noHistory="true" />
+        <activity android:name=".Views.ViewTraining" />
         <activity android:name=".Views.ViewData" />
         <activity android:name=".Views.ViewAccountSettings" />
         <activity android:name=".Views.ViewUserSettings" />

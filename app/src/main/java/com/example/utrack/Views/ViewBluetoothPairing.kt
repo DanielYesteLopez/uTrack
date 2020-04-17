@@ -7,7 +7,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.example.utrack.Model.Training
 import com.example.utrack.R
 import kotlinx.android.synthetic.main.activity_bluetooth_pairing.*
 
@@ -21,83 +20,28 @@ class ViewBluetoothPairing : AppCompatActivity() {
         setContentView(R.layout.activity_bluetooth_pairing)
         //init bluetooth adapter
         val bAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
-        //cheak if blutooth is on/off
-        if(bAdapter==null){
-            bluetoothStatusTv.text = getText(R.string.blutooth_not_available)
-        }
-        else{
-            bluetoothStatusTv.text = getText(R.string.bluetooth_available)
-        }
-        // set image according to bluetooth status
-        if (bAdapter != null) {
-            if(bAdapter.isEnabled){
-                //Bluetooth is on
-                bluetoothIv.setImageResource(R.drawable.icon_bluetooth_on)
-            }
-            else{
-                //Bluetooth is off
-                bluetoothIv.setImageResource(R.drawable.icon_bluetooth_off)
-            }
-        }
-        //turn on blutooth
-        turnOnBtn.setOnClickListener {
-            if (bAdapter != null) {
-                if(bAdapter.isEnabled){
-                    //already enable
-                    Toast.makeText(this,"Alreay on", Toast.LENGTH_LONG).show()
-                } else{
-                    // turn on
-                    val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-                    startActivityForResult(intent, REQUEST_CODE_ENABLE_BLUETOOTH)
-                }
-            }
-        }
-        //turn off blutooth
-        turnOffBtn.setOnClickListener {
-            if (bAdapter != null) {
-                if(!bAdapter.isEnabled){
-                    //already disable
-                    Toast.makeText(this,"Already off", Toast.LENGTH_LONG).show()
-                } else{
-                    // turn off
-                    bAdapter.disable()
-                    bluetoothIv.setImageResource(R.drawable.icon_bluetooth_off)
-                    Toast.makeText(this,"Already turned off", Toast.LENGTH_LONG).show()
-                }
-            }
-        }
-        //discoverable the bluetooth
-        discoverableBtn.setOnClickListener {
-            if (bAdapter != null) {
-                if(!bAdapter.isDiscovering){
-                    Toast.makeText(this,"Making you device discoverable", Toast.LENGTH_LONG).show()
-                    val intent = Intent(Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE))
-                    startActivityForResult(intent, REQUEST_CODE_DISCOVERABLE_BLUETOOTH)
-                }
+        //check if blutooth is on/off
+        if(bAdapter==null){ bluetoothStatusTv.text = getText(R.string.blutooth_not_available)
+        } else { bluetoothStatusTv.text = getText(R.string.bluetooth_available)
+            // set image according to bluetooth status
+            if(bAdapter.isEnabled){ bluetoothIv.setImageResource(R.drawable.icon_bluetooth_on) //Bluetooth is on
+            } else{ bluetoothIv.setImageResource(R.drawable.icon_bluetooth_off) //Bluetooth is off
+                turnBluetoothOn(bAdapter) //turn on bluetooth request
             }
         }
         // paired devices
         pairedBtn.setOnClickListener {
-            if (bAdapter != null) {
-                if(bAdapter.isEnabled){
-                    pairedTv.text = getString(R.string.paired_devices)
-                    // get list of paired Devices
-                    val pairedDevices: Set<BluetoothDevice>? = bAdapter.bondedDevices
-                    pairedDevices?.forEach { device ->
-                        val deviceName = device.name
-                        val deviceAddress = device.address
-                        val deviceclass = device.bluetoothClass
-                        val deviceuuid = device.uuids
-                        pairedTv.append("\nDevice: $deviceName, $deviceAddress, $deviceclass, $deviceuuid")
-                    }
-                    // TODO missing
-                } else{
-                    Toast.makeText(this,"Turn on bluetooth first", Toast.LENGTH_LONG).show()
-                }
+            if(bAdapter != null){
+               if(!bAdapter.isEnabled) {
+                   Toast.makeText(this, "Turn on bluetooth first", Toast.LENGTH_LONG).show()
+               }
             }
+            getPairedDevices(bAdapter)
         }
+        // back button
         backButtonBluetoothPage.setOnClickListener{
-            onBackBluetoothButtonPressed()
+            turnBluetoothOff(bAdapter) //turn off blutooth if user press back button
+            onBackBluetoothButtonPressed() // go back to exercise
         }
     }
 
@@ -112,6 +56,14 @@ class ViewBluetoothPairing : AppCompatActivity() {
                     Toast.makeText(this,"Could not enable bluetooth", Toast.LENGTH_LONG).show()
                 }
 
+            REQUEST_CODE_DISCOVERABLE_BLUETOOTH ->
+                if(resultCode == Activity.RESULT_OK){
+                    bluetoothIv.setImageResource(R.drawable.icon_bluetooth_on)
+                    Toast.makeText(this,"Bluetooth is on", Toast.LENGTH_LONG).show()
+                }
+                else{
+                    Toast.makeText(this,"Could not enable bluetooth", Toast.LENGTH_LONG).show()
+                }
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
@@ -120,5 +72,55 @@ class ViewBluetoothPairing : AppCompatActivity() {
         val intent = Intent(application, ViewTraining().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
+    }
+
+    private fun getPairedDevices(bAdapter :  BluetoothAdapter?){
+/*        turnBluetoothOn(bAdapter)
+        if (bAdapter != null){
+            if (bAdapter.isEnabled) { pairedTv.text = getString(R.string.paired_devices)
+                val pairedDevices: Set<BluetoothDevice>? = bAdapter.bondedDevices // get list of paired Devices
+                pairedDevices?.forEach { device ->
+                    val deviceName = device.name
+                    //val deviceAddress = device.address
+                    pairedTv.append("\nDevice: $deviceName")
+                }
+            }
+        }*/
+    }
+
+    private fun turnBluetoothOn(bAdapter :  BluetoothAdapter? ){
+        //check if blutooth is on/off
+       if (bAdapter!=null){
+           if(!bAdapter.isEnabled){
+               //turn on bluetooth request
+               val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+               startActivityForResult(intent, REQUEST_CODE_ENABLE_BLUETOOTH)
+           }
+       } else {
+           Toast.makeText(this,"Bluetooth is not supported in this device", Toast.LENGTH_LONG).show()
+       }
+    }
+    // de momento no es necesaria
+    private fun makeBluetoothDiscoverable(bAdapter :  BluetoothAdapter? ){
+        //make bluetooth discoverable
+        if (bAdapter != null){
+            if(!bAdapter.isDiscovering){
+                // turn on bluetooth and make it discoverable
+                val intent = Intent(Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE))
+                startActivityForResult(intent, REQUEST_CODE_DISCOVERABLE_BLUETOOTH)
+            }
+        } else {
+            Toast.makeText(this,"Bluetooth is not supported in this device", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun turnBluetoothOff(bAdapter: BluetoothAdapter?){
+        if (bAdapter != null) {
+            if(bAdapter.isEnabled){
+                // turn off
+                bAdapter.disable()
+                bluetoothIv.setImageResource(R.drawable.icon_bluetooth_off)
+            }
+        }
     }
 }

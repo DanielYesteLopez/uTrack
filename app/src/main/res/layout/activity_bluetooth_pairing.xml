@@ -20,59 +20,26 @@
         android:id="@+id/bluetoothStatusTv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:gravity="center_horizontal"
         android:padding="5dp"
         android:text=""
-        android:layout_margin="10dp"
         android:textAlignment="center"
         android:textColor="#000"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/bluetoothIv"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bluetoothIv"
         app:layout_constraintStart_toEndOf="@+id/backButtonBluetoothPage"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/bluetoothIv"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:contentDescription="@string/bluetooth"
         android:src="@drawable/icon_bluetooth_off"
-        app:layout_constraintBottom_toTopOf="@+id/turnOnBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/turnOnBtn"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minWidth="200dp"
-        android:text="TurnON"
-        app:layout_constraintBottom_toTopOf="@+id/turnOffBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/turnOffBtn"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minWidth="200dp"
-        android:text="TurnOFF"
-        app:layout_constraintBottom_toTopOf="@+id/discoverableBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/discoverableBtn"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minWidth="200dp"
-        android:text="Discoverable"
-        app:layout_constraintBottom_toTopOf="@+id/pairedBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/pairedBtn"
@@ -80,18 +47,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minWidth="200dp"
-        android:text="Get Peired Devices"
+        android:layout_margin="15dp"
+        android:text="@string/peired_devices"
         app:layout_constraintBottom_toTopOf="@+id/pairedTv"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bluetoothStatusTv" />
 
-    <TextView
+    <ListView
         android:id="@+id/pairedTv"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:background="@color/whiteColor"
         android:padding="5dp"
-        android:textColor="#000"
+        android:textColor="@color/blackColor"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pairedBtn" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
