@@ -4,14 +4,17 @@ import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.AdapterView.OnItemClickListener
+import android.widget.ArrayAdapter
+import android.widget.ListView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.utrack.R
 import kotlinx.android.synthetic.main.activity_bluetooth_pairing.*
 
-class ViewBluetoothPairing : AppCompatActivity() {
 
+class ViewBluetoothPairing : AppCompatActivity() {
     private val REQUEST_CODE_ENABLE_BLUETOOTH:Int = 1
     private val REQUEST_CODE_DISCOVERABLE_BLUETOOTH:Int = 2
 
@@ -75,17 +78,38 @@ class ViewBluetoothPairing : AppCompatActivity() {
     }
 
     private fun getPairedDevices(bAdapter :  BluetoothAdapter?){
-/*        turnBluetoothOn(bAdapter)
+        turnBluetoothOn(bAdapter)
         if (bAdapter != null){
-            if (bAdapter.isEnabled) { pairedTv.text = getString(R.string.paired_devices)
+            if (bAdapter.isEnabled) {
                 val pairedDevices: Set<BluetoothDevice>? = bAdapter.bondedDevices // get list of paired Devices
-                pairedDevices?.forEach { device ->
-                    val deviceName = device.name
-                    //val deviceAddress = device.address
-                    pairedTv.append("\nDevice: $deviceName")
+                //val notpairedDevices: Set<BluetoothDevice>?
+                val devices : Array<String> = databaseList()
+                var device : BluetoothDevice
+                devices[0] = getString(R.string.paired_devices)
+                if (pairedDevices != null) {
+                    for (i:Int in pairedDevices.indices){
+                        device = pairedDevices.elementAt(i)
+                        val deviceName = device.name
+                        //val deviceAddress = device.address
+                        devices[i+1] = "\nDevice: $deviceName"
+                    }
+                }
+                // Create an array adapter
+                val adapter: ArrayAdapter<String?> =
+                    ArrayAdapter<String?>(
+                        this,
+                        android.R.layout.simple_list_item_1,
+                        devices
+                    )
+                pairedTv.adapter = adapter
+                // Set item click listener
+                pairedTv.onItemClickListener = OnItemClickListener { parent, view, position, id ->
+                    val deviceName: String = devices[position]
+                    Toast.makeText(this@ViewBluetoothPairing, deviceName, Toast.LENGTH_SHORT).show()
+                    // TODO after item selected pair device and go back to training page
                 }
             }
-        }*/
+        }
     }
 
     private fun turnBluetoothOn(bAdapter :  BluetoothAdapter? ){
