@@ -5,17 +5,18 @@ import android.os.Handler
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.utrack.ic.NaviInterface
 import com.example.utrack.ic.ViewInterface
 
 abstract class SecondViewClass : AppCompatActivity(),
-    ViewInterface {
+    ViewInterface, NaviInterface {
 
     override var doubleBackToExitPressedOnce: Boolean = false
-
 
     override fun setDoubleBack(bool:Boolean){
         this.doubleBackToExitPressedOnce = bool
     }
+
     override fun getDoubleBack() : Boolean {
         return doubleBackToExitPressedOnce
     }
@@ -23,7 +24,6 @@ abstract class SecondViewClass : AppCompatActivity(),
     override fun onBackPressed() {
         super.onBackPressed()
         return
-
     }
 
     override fun onCreateHideNavBar(){

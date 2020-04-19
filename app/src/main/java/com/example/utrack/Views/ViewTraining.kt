@@ -20,6 +20,12 @@ class ViewTraining : SecondViewClass() {
 
         // start activity
         setContentView(R.layout.trainingpage)
+
+        // cheak bluetooth connection
+        val myBluetoothFragment =
+            FragmentBluetooth()
+        myBluetoothFragment.show(supportFragmentManager, R.string.notefication.toString())
+
         // non global atributs
         val startTextView: TextView = findViewById(R.id.textViewstartresume)
         val pauseTextView: TextView = findViewById(R.id.textViewpause)
@@ -92,7 +98,7 @@ class ViewTraining : SecondViewClass() {
         stopButton.setOnClickListener {
             if(isWorking || ispaused) {
                 val myExerciseFragment =
-                    ViewShowExerciseFragment()
+                    FragmentShowExercise()
                 pauseButton.callOnClick()
                 // go to show exercice recomendation message
                 //resumeButton.callOnClick()
