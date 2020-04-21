@@ -5,6 +5,7 @@ import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.example.utrack.Views.ViewMainPage
 import com.example.utrack.Views.ViewSignIn
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -13,23 +14,42 @@ class PresenterLogin {
     private var mDataFirebase = FirebaseDatabase.getInstance()
     private var mDatabaseReference = mDataFirebase.reference.child("Users")
     private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
-    fun onSignUpToSignInButtonPressed(applicationContext: Context,userName:String,userEmail:String,userPassword:String) {
-         createNewAccount(applicationContext,userName,userEmail,userPassword)
+    fun onSignUpToSignInButtonPressed(
+        applicationContext: Context,
+        userName: String,
+        userEmail: String,
+        userPassword: String,
+        userConfirmPassword: String,
+        userRealName: String
+    ) {
+        if(userName.isNotEmpty()&&userEmail.isNotEmpty()&&userPassword.isNotEmpty()&&userConfirmPassword.isNotEmpty()&&userRealName.isNotEmpty()) {
+            if (userPassword.equals(userConfirmPassword)){
+                createNewAccount(applicationContext, userName, userEmail, userPassword, userRealName)
+            }else{
+                Toast.makeText(applicationContext,"Your passwords doesn't match",Toast.LENGTH_SHORT).show()
+            }
+        }else{
+            Toast.makeText(applicationContext,"Please,fill al the data",Toast.LENGTH_LONG).show()
+        }
+
     }
 
     private fun createNewAccount(
         applicationContext: Context,
         userName: String,
         userEmail: String,
-        userPassword: String
+        userPassword: String,
+        userRealName: String
     ) {
         mAuth.createUserWithEmailAndPassword(userEmail,userPassword).addOnCompleteListener { task->
             if (task.isSuccessful){
+                Toast.makeText(applicationContext, "Authentication failed.",
+                    Toast.LENGTH_SHORT).show()
                 verifyEmail(applicationContext)
                 Log.d("UserCreated", "createUserWithEmail:success")
-                val userId = mAuth.currentUser!!.uid
-                val currentUserDb = mDatabaseReference.child(userId)
+                val currentUserDb = mDatabaseReference.child(clearEmailForKey(userEmail))
                 currentUserDb.child("name").setValue(userName)
+                currentUserDb.child("real_name").setValue(userRealName)
                 updateUIToSingIn(applicationContext)
 
             }else{
@@ -86,6 +106,17 @@ class PresenterLogin {
         ContextCompat.startActivity(applicationContext,intent,null)
     }
 
+    fun signUpToSignInbutton(applicationContext: Context) {
+        val intent = Intent(applicationContext,
+            ViewMainPage().javaClass)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        ContextCompat.startActivity(applicationContext,intent,null)
+    }
+
+    fun clearEmailForKey(userEmail: String): String {
+        userEmail.replace(".",",")
+        return userEmail
+    }
 
 
 }

@@ -20,7 +20,7 @@
         android:textColor="@color/textMainColor" />
 
     <EditText
-        android:id="@+id/signupUsername"
+        android:id="@+id/signUpUsername"
         style="@style/BlackText"
         android:layout_width="match_parent"
         android:layout_height="30dp"
@@ -38,10 +38,11 @@
 
 
     <EditText
-        android:id="@+id/signupPassword"
+        android:id="@+id/signUpPassword"
+        style="@style/BlackText"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_below="@+id/signupUsername"
+        android:layout_below="@+id/signUpUsername"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="25dp"
@@ -54,10 +55,11 @@
         android:textColor="@color/textMainColor" />
 
     <EditText
-        android:id="@+id/confirmpassword"
+        android:id="@+id/signUpConfirmPassword"
+        style="@style/BlackText"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_below="@+id/signupPassword"
+        android:layout_below="@+id/signUpPassword"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="25dp"
@@ -70,11 +72,11 @@
         android:textColor="@color/textMainColor" />
 
     <EditText
-        android:id="@+id/nametext"
+        android:id="@+id/signUpRealName"
         style="@style/BlackText"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_below="@+id/confirmpassword"
+        android:layout_below="@+id/signUpConfirmPassword"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="25dp"
@@ -87,10 +89,10 @@
         android:textColor="@color/textMainColor" />
 
     <Button
-        android:id="@+id/signupbutton"
+        android:id="@+id/signUpButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/singupEmail"
+        android:layout_below="@+id/signUpEmail"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="25dp"
@@ -101,11 +103,11 @@
         android:textColor="@color/textMainColor" />
 
     <EditText
-        android:id="@+id/singupEmail"
+        android:id="@+id/signUpEmail"
         style="@style/BlackText"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_below="@+id/nametext"
+        android:layout_below="@+id/signUpRealName"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="25dp"
@@ -122,7 +124,7 @@
         style="@style/WhiteText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/signupbutton"
+        android:layout_below="@+id/signUpButton"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="100dp"

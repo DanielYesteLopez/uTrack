@@ -10,21 +10,23 @@ import com.example.utrack.Presenters.PresenterLogin
 import com.example.utrack.R
 
 class ViewSignUp : AppCompatActivity() {
-    var presenterLogin = PresenterLogin()
+    private var presenterLogin = PresenterLogin()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //requestWindowFeature(Window.FEATURE_NO_TITLE)
-        //window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
-        //window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-        //hideNav()
         setTheme(R.style.AppTheme)
         setContentView(R.layout.signup)
-        val singInButton = findViewById<Button>(R.id.signUpToSignInbutton)
-        val userName = findViewById<EditText>(R.id.signupUsername).text.toString()
-        val userEmail = findViewById<EditText>(R.id.singupEmail).text.toString()
-        val userPassword = findViewById<EditText>(R.id.signupPassword).text.toString()
+        val singInButton = findViewById<Button>(R.id.signUpButton)
+        val signUpToSignInbutton = findViewById<Button>(R.id.signUpToSignInbutton)
         singInButton.setOnClickListener{
-            presenterLogin.onSignUpToSignInButtonPressed(this.applicationContext,userName,userEmail,userPassword)
+            val userName = findViewById<EditText>(R.id.signUpUsername).text.toString()
+            val userEmail = findViewById<EditText>(R.id.signUpEmail).text.toString()
+            val userPassword = findViewById<EditText>(R.id.signUpPassword).text.toString()
+            val userConfirmPassword = findViewById<EditText>(R.id.signUpConfirmPassword).text.toString()
+            val userRealName = findViewById<EditText>(R.id.signUpRealName).text.toString()
+            presenterLogin.onSignUpToSignInButtonPressed(this.applicationContext,userName,userEmail,userPassword,userConfirmPassword,userRealName)
+        }
+        signUpToSignInbutton.setOnClickListener {
+            presenterLogin.signUpToSignInbutton(this.applicationContext)
         }
     }
 
