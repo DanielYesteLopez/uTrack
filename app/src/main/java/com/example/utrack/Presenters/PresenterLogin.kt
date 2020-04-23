@@ -23,10 +23,16 @@ class PresenterLogin {
         userRealName: String
     ) {
         if(userName.isNotEmpty()&&userEmail.isNotEmpty()&&userPassword.isNotEmpty()&&userConfirmPassword.isNotEmpty()&&userRealName.isNotEmpty()) {
-            if (userPassword.equals(userConfirmPassword)){
-                createNewAccount(applicationContext, userName, userEmail, userPassword, userRealName)
-            }else{
-                Toast.makeText(applicationContext,"Your passwords doesn't match",Toast.LENGTH_SHORT).show()
+            when {
+                userPassword.length<6 -> {
+                    Toast.makeText(applicationContext,"Your password is too short",Toast.LENGTH_SHORT).show()
+                }
+                userPassword.equals(userConfirmPassword) -> {
+                    createNewAccount(applicationContext, userName, userEmail, userPassword, userRealName)
+                }
+                else -> {
+                    Toast.makeText(applicationContext,"Your passwords doesn't match",Toast.LENGTH_SHORT).show()
+                }
             }
         }else{
             Toast.makeText(applicationContext,"Please,fill al the data",Toast.LENGTH_LONG).show()
@@ -47,9 +53,11 @@ class PresenterLogin {
                     Toast.LENGTH_SHORT).show()
                 verifyEmail(applicationContext)
                 Log.d("UserCreated", "createUserWithEmail:success")
-                val currentUserDb = mDatabaseReference.child(clearEmailForKey(userEmail))
+                val userId = mAuth.currentUser!!.uid
+                val currentUserDb = mDatabaseReference.child(userId)
                 currentUserDb.child("name").setValue(userName)
                 currentUserDb.child("real_name").setValue(userRealName)
+                currentUserDb.child("email").setValue(clearEmailForKey(userEmail))
                 updateUIToSingIn(applicationContext)
 
             }else{
@@ -114,8 +122,8 @@ class PresenterLogin {
     }
 
     fun clearEmailForKey(userEmail: String): String {
-        userEmail.replace(".",",")
-        return userEmail
+        var clearUserEmail = userEmail.replace(".",",")
+        return clearUserEmail
     }
 
 
