@@ -11,7 +11,7 @@
         android:theme="@style/SplashTheme">
 
         <activity
-            android:name=".Views.ViewSignUp"
+            android:name=".views.ViewSignUp"
             android:noHistory="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -22,17 +22,17 @@
         </activity>
 
         <activity
-            android:name=".Views.ViewSignIn"
+            android:name=".views.ViewSignIn"
             android:noHistory="true" />
-        <activity android:name=".Views.ViewTraining"
+        <activity android:name=".views.ViewTraining"
             android:noHistory="true"/>
-        <activity android:name=".Views.ViewData" />
-        <activity android:name=".Views.ViewAccountSettings" />
-        <activity android:name=".Views.ViewUserSettings" />
-        <activity android:name=".Views.ViewMainPage" />
-        <activity android:name=".Views.ViewSettings" />
-        <activity android:name=".Views.ViewInformation"/>
-        <activity android:name=".Views.ViewShowExerciseFragment" />
+        <activity android:name=".views.ViewData" />
+        <activity android:name=".views.ViewAccountSettings" />
+        <activity android:name=".views.ViewUserSettings" />
+        <activity android:name=".views.ViewMainPage" />
+        <activity android:name=".views.ViewSettings" />
+        <activity android:name=".views.ViewInformation"/>
+        <activity android:name=".views.ViewShowExerciseFragment" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
