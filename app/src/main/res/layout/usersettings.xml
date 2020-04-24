@@ -35,14 +35,20 @@
 
             <TextView
                 android:id="@+id/textView7"
+                style="@style/BlackText"
+                android:textSize="23sp"
+                android:textColor="@color/textMainColor"
+                android:fontFamily="@font/audiowide"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/frame"
-                android:textColor="@color/blackColor"
-                android:textSize="30sp" />
+                android:text="@string/frame" />
 
             <EditText
                 android:id="@+id/editText"
+                style="@style/BlackText"
+                android:textSize="23sp"
+                android:textColor="@color/textMainColor"
+                android:fontFamily="@font/audiowide"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -50,18 +56,17 @@
                 android:ems="10"
                 android:hint="@string/bike_frame_hint"
                 android:importantForAutofill="no"
-                android:inputType="textPersonName"
-                android:text="@string/frame"
-                android:textColor="@color/blackColor"
-                android:textSize="30sp" />
+                android:inputType="textPersonName" />
 
             <TextView
                 android:id="@+id/textView2"
+                style="@style/BlackText"
+                android:textSize="23sp"
+                android:textColor="@color/textMainColor"
+                android:fontFamily="@font/audiowide"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/blackColor"
-                android:textSize="30sp"
                 android:text="@string/height" />
 
             <EditText
@@ -69,26 +74,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                style="@style/BlackText"
+                android:textSize="23sp"
+                android:textColor="@color/textMainColor"
+                android:fontFamily="@font/audiowide"
                 android:autofillHints="@string/height"
                 android:background="@color/rosauserColor"
                 android:ems="10"
                 android:hint="@string/bike_height_hint"
-                android:inputType="textPersonName"
-                android:text="@string/height"
-                android:textColor="@color/blackColor"
-                android:textSize="30sp" />
+                android:inputType="textPersonName" />
 
             <TextView
                 android:id="@+id/textView5"
+                style="@style/BlackText"
+                android:textSize="23sp"
+                android:textColor="@color/textMainColor"
+                android:fontFamily="@font/audiowide"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/blackColor"
-                android:textSize="30sp"
                 android:text="@string/disk"/>
 
             <EditText
                 android:id="@+id/editText2"
+                style="@style/BlackText"
+                android:textSize="23sp"
+                android:textColor="@color/textMainColor"
+                android:fontFamily="@font/audiowide"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -96,10 +108,7 @@
                 android:background="@color/rosauserColor"
                 android:ems="10"
                 android:hint="@string/bike_disk_hint"
-                android:inputType="textPersonName"
-                android:text="@string/disk"
-                android:textColor="@color/blackColor"
-                android:textSize="30sp" />
+                android:inputType="textPersonName" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -107,22 +116,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/pinion"
-                android:textColor="@color/blackColor"
-                android:textSize="30sp" />
+                style="@style/BlackText"
+                android:textSize="23sp"
+                android:textColor="@color/textMainColor"
+                android:fontFamily="@font/audiowide" />
 
             <EditText
                 android:id="@+id/editText4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:autofillHints="@string/pinion"
                 android:background="@color/rosauserColor"
                 android:ems="10"
                 android:hint="@string/bike_pinion_hint"
                 android:inputType="textPersonName"
-                android:text="@string/pinion"
-                android:textColor="@color/blackColor"
-                android:textSize="30sp" />
+                style="@style/BlackText"
+                android:textSize="23sp"
+                android:textColor="@color/textMainColor"
+                android:fontFamily="@font/audiowide" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -130,8 +141,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/potencia"
-                android:textColor="@color/blackColor"
-                android:textSize="30sp" />
+                style="@style/BlackText"
+                android:textSize="23sp"
+                android:textColor="@color/textMainColor"
+                android:fontFamily="@font/audiowide" />
 
             <EditText
                 android:id="@+id/editText6"
@@ -143,9 +156,10 @@
                 android:ems="10"
                 android:hint="@string/bike_potencia_hint"
                 android:inputType="textPersonName"
-                android:text="@string/potencia"
-                android:textColor="@color/blackColor"
-                android:textSize="30sp" />
+                style="@style/BlackText"
+                android:textSize="23sp"
+                android:textColor="@color/textMainColor"
+                android:fontFamily="@font/audiowide" />
         </LinearLayout>
 
     </ScrollView>
