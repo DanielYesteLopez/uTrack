@@ -49,8 +49,6 @@ class PresenterLogin {
     ) {
         mAuth.createUserWithEmailAndPassword(userEmail,userPassword).addOnCompleteListener { task->
             if (task.isSuccessful){
-                Toast.makeText(applicationContext, "Authentication failed.",
-                    Toast.LENGTH_SHORT).show()
                 verifyEmail(applicationContext)
                 Log.d("UserCreated", "createUserWithEmail:success")
                 val userId = mAuth.currentUser!!.uid
@@ -96,27 +94,35 @@ class PresenterLogin {
         signInUsernameLogin: String,
         signInPasswordLogin: String
     ) {
-        mAuth.signInWithEmailAndPassword(signInUsernameLogin,signInPasswordLogin).addOnCompleteListener { task->
-            if (task.isSuccessful){
-                updateUIToMainPage(applicationContext)
-            }else{
-                Toast.makeText(applicationContext, "Authentication failed.",
-                    Toast.LENGTH_SHORT).show()
-            }
+        if(signInUsernameLogin.isEmpty() || signInPasswordLogin.isEmpty()){
+            Toast.makeText(applicationContext,
+                "Please fill all the data",
+                Toast.LENGTH_SHORT).show()
+        }else{
+            mAuth.signInWithEmailAndPassword(signInUsernameLogin,signInPasswordLogin).addOnCompleteListener { task->
+                if (task.isSuccessful){
+                    updateUIToMainPage(applicationContext)
+                }else{
+                    Toast.makeText(applicationContext, "Authentication failed.",
+                        Toast.LENGTH_SHORT).show()
+                }
+
+        }
+
         }
 
     }
 
     private fun updateUIToMainPage(applicationContext: Context) {
         val intent = Intent(applicationContext,
-            ViewSignIn().javaClass)
+            ViewMainPage().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         ContextCompat.startActivity(applicationContext,intent,null)
     }
 
     fun signUpToSignInbutton(applicationContext: Context) {
         val intent = Intent(applicationContext,
-            ViewMainPage().javaClass)
+            ViewSignIn().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         ContextCompat.startActivity(applicationContext,intent,null)
     }
