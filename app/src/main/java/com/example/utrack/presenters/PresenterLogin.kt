@@ -7,7 +7,9 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.utrack.views.ViewMainPage
 import com.example.utrack.views.ViewSignIn
+import com.google.firebase.FirebaseError
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -54,6 +56,8 @@ class PresenterLogin {
     ) {
         mAuth.createUserWithEmailAndPassword(userEmail,userPassword).addOnCompleteListener { task->
             if (task.isSuccessful){
+                Toast.makeText(applicationContext, "Authentication failed.",
+                    Toast.LENGTH_SHORT).show()
                 verifyEmail(applicationContext)
                 Log.d("UserCreated", "createUserWithEmail:success")
                 val userId = mAuth.currentUser!!.uid
@@ -154,7 +158,7 @@ class PresenterLogin {
     }
 
     fun clearEmailForKey(userEmail: String): String {
-        val clearUserEmail = userEmail.replace(".",",")
+        var clearUserEmail = userEmail.replace(".",",")
         return clearUserEmail
     }
 
