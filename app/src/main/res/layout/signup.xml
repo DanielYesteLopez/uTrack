@@ -14,18 +14,16 @@
         android:layout_marginTop="10dp"
         android:background="@color/whiteColor"
         android:ems="10"
-        android:onClick="onSignUpToSignInButtonPressed"
         android:text="@string/signin"
         android:fontFamily="@font/audiowide"
         android:textColor="@color/textMainColor" />
 
     <EditText
-        android:id="@+id/signupUsername"
+        android:id="@+id/signUpUsername"
         style="@style/BlackText"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="50dp"
         android:autofillHints="@string/username"
@@ -38,12 +36,12 @@
 
 
     <EditText
-        android:id="@+id/signupPassword"
+        android:id="@+id/signUpPassword"
+        style="@style/BlackText"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_below="@+id/signupUsername"
+        android:layout_below="@+id/signUpUsername"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_marginTop="25dp"
         android:autofillHints="@string/password"
         android:background="@color/whiteColor"
@@ -54,12 +52,12 @@
         android:textColor="@color/textMainColor" />
 
     <EditText
-        android:id="@+id/confirmpassword"
+        android:id="@+id/signUpConfirmPassword"
+        style="@style/BlackText"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_below="@+id/signupPassword"
+        android:layout_below="@+id/signUpPassword"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_marginTop="25dp"
         android:autofillHints="@string/password"
         android:background="@color/whiteColor"
@@ -70,13 +68,12 @@
         android:textColor="@color/textMainColor" />
 
     <EditText
-        android:id="@+id/nametext"
+        android:id="@+id/signUpRealName"
         style="@style/BlackText"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_below="@+id/confirmpassword"
+        android:layout_below="@+id/signUpConfirmPassword"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_marginTop="25dp"
         android:autofillHints="@string/password"
         android:background="@color/whiteColor"
@@ -87,12 +84,11 @@
         android:textColor="@color/textMainColor" />
 
     <Button
-        android:id="@+id/signupbutton"
+        android:id="@+id/signUpButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/emailtext"
+        android:layout_below="@+id/signUpEmail"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_marginTop="25dp"
         android:background="@color/whiteColor"
         android:ems="10"
@@ -101,13 +97,12 @@
         android:textColor="@color/textMainColor" />
 
     <EditText
-        android:id="@+id/emailtext"
+        android:id="@+id/signUpEmail"
         style="@style/BlackText"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_below="@+id/nametext"
+        android:layout_below="@+id/signUpRealName"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_marginTop="25dp"
         android:autofillHints="@string/email"
         android:background="@color/whiteColor"
@@ -122,9 +117,8 @@
         style="@style/WhiteText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/signupbutton"
+        android:layout_below="@+id/signUpButton"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_marginTop="100dp"
         android:ems="10"
         android:fontFamily="@font/audiowide"

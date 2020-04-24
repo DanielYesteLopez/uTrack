@@ -29,17 +29,17 @@
     <string name="clear">Clear Data</string>
 
 
-    <string name="height">Height</string>
-    <string name="disk">Disk teeth</string>
-    <string name="frame">Frame size</string>
-    <string name="pinion">Pinion teeth</string>
-    <string name="potencia">Stem</string>
+    <string name="height">Height:</string>
+    <string name="disk">Disk teeth:</string>
+    <string name="frame">Frame size:</string>
+    <string name="pinion">Pinion teeth:</string>
+    <string name="potencia">Stem:</string>
 
-    <string name="bike_height_hint">Height</string>
-    <string name="bike_disk_hint">Disk teeth</string>
-    <string name="bike_frame_hint">Frame size</string>
-    <string name="bike_pinion_hint">Pinion teeth</string>
-    <string name="bike_potencia_hint">Stem</string>
+    <string name="bike_height_hint">Put the height here</string>
+    <string name="bike_disk_hint">Put the disk teeth here</string>
+    <string name="bike_frame_hint">Put the frame size here</string>
+    <string name="bike_pinion_hint">Put the pinion teeth here</string>
+    <string name="bike_potencia_hint">Put the stem here</string>
 
     <string name="trainingstart">START</string>
     <string name="trainingresume">RESUME</string>
