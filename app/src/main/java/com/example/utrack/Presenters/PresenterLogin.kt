@@ -7,10 +7,17 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.utrack.Views.ViewMainPage
 import com.example.utrack.Views.ViewSignIn
+import com.google.firebase.FirebaseError
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+
 
 class PresenterLogin {
+    var presenterMaster = PresenterMaster()
     private var mDataFirebase = FirebaseDatabase.getInstance()
     private var mDatabaseReference = mDataFirebase.reference.child("Users")
     private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -101,6 +108,7 @@ class PresenterLogin {
         }else{
             mAuth.signInWithEmailAndPassword(signInUsernameLogin,signInPasswordLogin).addOnCompleteListener { task->
                 if (task.isSuccessful){
+                    setUserData()
                     updateUIToMainPage(applicationContext)
                 }else{
                     Toast.makeText(applicationContext, "Authentication failed.",
@@ -111,6 +119,26 @@ class PresenterLogin {
 
         }
 
+    }
+
+    private fun setUserData() {
+        val userDataMap = mutableMapOf<String,String>()
+        val userDatabaseLocation = mDatabaseReference.child(mAuth.currentUser!!.uid)
+        userDatabaseLocation.addListenerForSingleValueEvent(object : ValueEventListener{
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val children = snapshot.children
+                children.forEach {
+                    userDataMap[it.key.toString()] = it.value.toString()
+                }
+                presenterMaster.addNewUser(userDataMap)
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+                Log.d("Oncancelled","Error")
+            }
+        })
+       // Log.d("TestData",userDatabaseLocation.child("name").toString())
     }
 
     private fun updateUIToMainPage(applicationContext: Context) {
@@ -128,7 +156,7 @@ class PresenterLogin {
     }
 
     fun clearEmailForKey(userEmail: String): String {
-        var clearUserEmail = userEmail.replace(".",",")
+        val clearUserEmail = userEmail.replace(".",",")
         return clearUserEmail
     }
 
