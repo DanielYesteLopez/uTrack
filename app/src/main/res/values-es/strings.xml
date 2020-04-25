@@ -34,13 +34,13 @@
         <string name="disk">Dientes del disco:</string>
         <string name="frame">Tamaño del rectangulo:</string>
         <string name="pinion">Dientes del piñon:</string>
-        <string name="potencia">Stem:</string><!--TODO: QUE COÑO ES STEM-->
+        <string name="potencia">Rueda:</string>
 
         <string name="bike_height_hint">Introduce la altura de tu bicicleta aquí</string>
         <string name="bike_disk_hint">Introduce los dientes del disco de tu bicicleta aquí</string>
         <string name="bike_frame_hint">Introduce el tamaño del rectangulo de tu bicicleta aquí</string>
         <string name="bike_pinion_hint">Introduce los dientes del piñon de tu bicicleta aquí</string>
-        <string name="bike_potencia_hint">Put the stem here</string><!--TODO: QUE COÑO ES STEM-->
+        <string name="bike_potencia_hint">Introduce la rueda de tu bicicleta aquí</string>
 
         <string name="trainingstart">START</string>
         <string name="trainingresume">RESUMIR</string>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">uTrack</string>
+    <string name="usersettings">Options d\'Utilisateur</string>
+    <string name="settings">Options</string>
+    <string name="username">Nom d\'Utilisateur</string>
+
+    <string name="back">En arrière</string>
+
+    <string name="signin">Se connecter</string>
+    <string name="signup">S\'inscrire</string>
+    <string name="confirmpassword">Confirmer le mot de passe</string>
+    <string name="askname">Vrai nom</string>
+    <string name="email">Email</string>
+    <string name="password">Mot de passe</string>
+
+    <string name="accountmessage2">Avez-vous un compte?</string>
+    <string name="accountmessage1">Vous n\'avez pas un compte?</string>
+
+    <string name="training">Formation</string>
+    <string name="language">Langue</string>
+    <string name="info">Information</string>
+    <string name="yourdata">Tes données</string>
+    <string name="account">Compte</string>
+
+    <string name="uTrack">µTrack</string>
+
+    <string name="capturedata">Enregister les données</string>
+    <string name="export">Exporter des données</string>
+    <string name="clear">Effacer les données</string>
+
+
+    <string name="height">Hauteur:</string>
+    <string name="disk">Dents de disque:</string>
+    <string name="frame">Taille du rectangle:</string>
+    <string name="pinion">Dents de pin:</string>
+    <string name="potencia">Roue:</string>
+
+    <string name="bike_height_hint">Entrez la hauteur de votre vélo ici</string>
+    <string name="bike_disk_hint">Entrez les dents du disque de votre vélo ici</string>
+    <string name="bike_frame_hint">Entrez les taille du rectangle de votre vélo ici</string>
+    <string name="bike_pinion_hint">Entrez les dents de pin de votre vélo ici</string>
+    <string name="bike_potencia_hint">Entrez le Roue de votre vélo ici</string>
+
+    <string name="trainingstart">START</string>
+    <string name="trainingresume">SOMMAIRE</string>
+    <string name="trainingstop">STOP</string>
+    <string name="trainingpouse">PAUSE</string>
+    <string name="trainingprogress">Formation en cours</string>
+    <string name="trainingfinilized">Formation terminée</string>
+    <string name="trainingpaused">Formation suspendu</string>
+
+
+    <string name="saveButton">Bouton enregistrer</string>
+    <string name="save">ENREGISTRER</string>
+
+    <string name="spflag">drapeau espagnol</string>
+    <string name="frflag">drapeau français</string>
+    <string name="inflag">drapeau anglais</string>
+    <string name="geflag">drapeau allemand</string>
+    <string name="catflag">drapeau catalan</string>
+
+    <string name="maintext">Vous faire pédaler plus vite</string>
+
+    <string name="heartrate">000bpm</string>
+    <string name="speedrate">00\'00kph</string>
+    <string name="cadencerate">000rpm</string>
+    <string name="duration">00,00min</string>
+
+    <string name="avgheartrate">000bpm</string>
+    <string name="avgspeed">00\'00kph</string>
+    <string name="avgcadencerate">000rpm</string>
+
+    <string name="informationText">Cette application a été créée pour vous permettre de vous améliorer en tant que cycliste. Tous droits réservës. Créé par: \n ·Daniel Yeste \n ·Joan Domenech \n
+        ·Jorge Vinagre \n ·Daniel Geruous-Fares \n</string>
+
+
+    <string name="durationhint">temps</string>
+    <string name="savePopUpText">Voleus-vous enregistrer les modifications?</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="exit">Sortez</string>
+    <!-- TODO class exercise that contain a string table full of exercises like this one -->
+    <string name="recomendedexercise">do for 10 minuts free laps on avg speed of up to 30 km/h on a stable cadence. \nYou are ready to go</string>
+    <string name="recomendedexerciseyes">Allez-y!</string>
+    <string name="recomendedexerciseno">Un atre jour</string>
+    <string name="trainingawesome">Super</string>
+    <string name="trainingsad">peut-être un atre jour</string>
+    <string name="sessionsaved">Session enregistrée</string>
+    <string name="sessionnotsaved">bravo</string>
+    <string name="savesession">Enregistrer la Session?</string>
+    <string name="continuesesion">Continuer</string>
+    <string name="notefication">Hey attend</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bluetooth">If you have speed or cadence sensor choose device to start session, if not start session without one \n </string>
+    <string name="choose_device">choisir l\'appareil</string>
+    <string name="continue_without_device">Commencer Session</string>
+    <string name="blutooth_not_available">Bluetooth non dis
+        ponible</string>
+    <string name="bluetooth_available">Bluetooth disponible</string>
+    <string name="paired_devices">Paired Devices</string>
+    <string name="peired_devices">Peired Devices</string>
+</resources>

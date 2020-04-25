@@ -3,7 +3,7 @@
     <string name="app_name">uTrack</string>
     <string name="usersettings">Opcions d\'Usuari</string>
     <string name="settings">Opcions</string>
-    <string name="username">Nom d\'Usuario</string>
+    <string name="username">Nom d\'Usuari</string>
 
     <string name="back">Endarrere</string>
 
@@ -17,7 +17,7 @@
     <string name="accountmessage2">Tens un compte?</string>
     <string name="accountmessage1">No tens un compte?</string>
 
-    <string name="training">Entrenament</string>
+    <string name="training">Entrenar</string>
     <string name="language">Llengua</string>
     <string name="info">Informació</string>
     <string name="yourdata">Les teves dades</string>
@@ -34,13 +34,13 @@
     <string name="disk">Dents del disc:</string>
     <string name="frame">Tamany del rectangle:</string>
     <string name="pinion">Dents del pinyó:</string>
-    <string name="potencia">Stem:</string><!--TODO: QUE COÑO ES STEM-->
+    <string name="potencia">Roda:</string>
 
     <string name="bike_height_hint">Introdueix la altura de la teva bicicleta aquí</string>
-    <string name="bike_disk_hint">Introdueix els dents del disc de la teva bicicleta aquí</string>
+    <string name="bike_disk_hint">Introdueix les dents del disc de la teva bicicleta aquí</string>
     <string name="bike_frame_hint">Introdueix el tamany del rectangle de la teva bicicleta aquí</string>
-    <string name="bike_pinion_hint">Introdueix els dents del pinyó de la teva bicicleta aquí</string>
-    <string name="bike_potencia_hint">Put the stem here</string><!--TODO: QUE COÑO ES STEM-->
+    <string name="bike_pinion_hint">Introdueix les dents del pinyó de la teva bicicleta aquí</string>
+    <string name="bike_potencia_hint">Introdueix la roda de la teva bicicleta aquí</string>
 
     <string name="trainingstart">START</string>
     <string name="trainingresume">RESUMIR</string>
@@ -97,7 +97,8 @@
     <string name="bluetooth">If you have speed or cadence sensor choose device to start session, if not start session without one \n </string>
     <string name="choose_device">Escollir dispositiu</string>
     <string name="continue_without_device">Començar Sessió</string>
-    <string name="blutooth_not_available">Bluetooth no disponible</string>
+    <string name="blutooth_not_available">Bluetooth no dis
+        ponible</string>
     <string name="bluetooth_available">Bluetooth disponible</string>
     <string name="paired_devices">Paired Devices</string>
     <string name="peired_devices">Peired Devices</string>
