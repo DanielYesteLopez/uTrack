@@ -82,23 +82,23 @@
         <string name="exit">Salir</string>
         <!-- TODO class exercise that contain a string table full of exercises like this one -->
         <string name="recomendedexercise">do for 10 minuts free laps on avg speed of up to 30 km/h on a stable cadence. \nYou are ready to go</string>
-        <string name="recomendedexerciseyes">Let\'s go</string>
-        <string name="recomendedexerciseno">Another day</string>
-        <string name="trainingawesome">Awesome</string>
-        <string name="trainingsad">May be next time</string>
-        <string name="sessionsaved">Session saved</string>
-        <string name="sessionnotsaved">well done</string>
-        <string name="savesession">Save Session?</string>
-        <string name="continuesesion">Continue</string>
-        <string name="notefication">Hay wait</string>
+        <string name="recomendedexerciseyes">Vamos!</string>
+        <string name="recomendedexerciseno">Otro dia</string>
+        <string name="trainingawesome">Genial</string>
+        <string name="trainingsad">Quiza otro dia</string>
+        <string name="sessionsaved">Sesión guardada</string>
+        <string name="sessionnotsaved">bien hecho</string>
+        <string name="savesession">Guardar Sesión?</string>
+        <string name="continuesesion">Continuar</string>
+        <string name="notefication">Hey espera</string>
 
         <!-- TODO: Remove or change this placeholder text -->
         <string name="hello_blank_fragment">Hello blank fragment</string>
         <string name="bluetooth">If you have speed or cadence sensor choose device to start session, if not start session without one \n </string>
-        <string name="choose_device">Choose Device</string>
-        <string name="continue_without_device">Start Session</string>
-        <string name="blutooth_not_available">Bluetooth is not available</string>
-        <string name="bluetooth_available">Bluetooth is available</string>
+        <string name="choose_device">Escoger dispositivo</string>
+        <string name="continue_without_device">Empezar Sesión</string>
+        <string name="blutooth_not_available">Bluetooth no disponible</string>
+        <string name="bluetooth_available">Bluetooth disponible</string>
         <string name="paired_devices">Paired Devices</string>
         <string name="peired_devices">Peired Devices</string>
 </resources>
