@@ -44,7 +44,7 @@
                 android:text="@string/frame" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/editTextFrameSize"
                 style="@style/BlackText"
                 android:textSize="23sp"
                 android:textColor="@color/textMainColor"
@@ -56,7 +56,7 @@
                 android:ems="10"
                 android:hint="@string/bike_frame_hint"
                 android:importantForAutofill="no"
-                android:inputType="textPersonName" />
+                android:inputType="numberSigned" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -70,7 +70,7 @@
                 android:text="@string/height" />
 
             <EditText
-                android:id="@+id/editText3"
+                android:id="@+id/editTextHeight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -82,7 +82,7 @@
                 android:background="@color/rosauserColor"
                 android:ems="10"
                 android:hint="@string/bike_height_hint"
-                android:inputType="textPersonName" />
+                android:inputType="numberSigned"/>
 
             <TextView
                 android:id="@+id/textView5"
@@ -96,7 +96,7 @@
                 android:text="@string/disk"/>
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/editTextDiskTeeth"
                 style="@style/BlackText"
                 android:textSize="23sp"
                 android:textColor="@color/textMainColor"
@@ -108,7 +108,7 @@
                 android:background="@color/rosauserColor"
                 android:ems="10"
                 android:hint="@string/bike_disk_hint"
-                android:inputType="textPersonName" />
+                android:inputType="numberSigned" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -122,14 +122,14 @@
                 android:fontFamily="@font/audiowide" />
 
             <EditText
-                android:id="@+id/editText4"
+                android:id="@+id/editTextPinionTeeth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@color/rosauserColor"
                 android:ems="10"
                 android:hint="@string/bike_pinion_hint"
-                android:inputType="textPersonName"
+                android:inputType="numberSigned"
                 style="@style/BlackText"
                 android:textSize="23sp"
                 android:textColor="@color/textMainColor"
@@ -148,7 +148,7 @@
                 android:fontFamily="@font/audiowide" />
 
             <EditText
-                android:id="@+id/editText6"
+                android:id="@+id/editTextStem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -156,7 +156,7 @@
                 android:background="@color/rosauserColor"
                 android:ems="10"
                 android:hint="@string/bike_potencia_hint"
-                android:inputType="textPersonName"
+                android:inputType="numberSigned"
                 style="@style/BlackText"
                 android:textSize="23sp"
                 android:textColor="@color/textMainColor"

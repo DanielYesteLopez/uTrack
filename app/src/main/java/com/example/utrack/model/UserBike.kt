@@ -1,4 +1,4 @@
 package com.example.utrack.model
 
-class UserBike {
+data class UserBike(var frameSize:Int,var height:Int,var diskTeeth:Int,var pinionTeeth:Int) {
 }

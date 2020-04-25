@@ -1,10 +1,7 @@
 package com.example.utrack.views
 
 import android.content.Intent
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import com.example.utrack.presenters.PresenterLogin
@@ -32,19 +29,7 @@ class ViewSignIn : SecondViewClass() {
             presenterLogin.onToSignInButtonPressed(this.applicationContext,signInUsernameLogin,signInPasswordLogin)
         }
         singOutButton.setOnClickListener{
-            onToSignUpButtonPressed()
+            presenterLogin.onToSignUpFromSignInButtonPressed(applicationContext)
         }
-    }
-
-    private fun onToSignInButtonPressed(){
-        val intent = Intent(application, ViewMainPage().javaClass)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        startActivity(intent)
-    }
-
-    private fun onToSignUpButtonPressed(){
-        val intent = Intent(application, ViewSignUp().javaClass)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        startActivity(intent)
     }
 }

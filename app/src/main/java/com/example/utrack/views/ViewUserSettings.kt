@@ -1,13 +1,18 @@
 package com.example.utrack.views
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
+import android.view.LayoutInflater
 import android.widget.*
 import com.example.utrack.R
 import com.example.utrack.mc.SecondViewClass
+import com.example.utrack.presenters.PresenterSettings
+import kotlinx.android.synthetic.main.usersettings.*
 
 class ViewUserSettings : SecondViewClass() {
-
+    var presenterSettings = PresenterSettings()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // hide navigation bar
@@ -21,12 +26,18 @@ class ViewUserSettings : SecondViewClass() {
         }
         val saveButtonUserSettings = findViewById<ImageButton>(R.id.saveButtonAccountSettings)
         saveButtonUserSettings.setOnClickListener{
-            onSaveButtonUserSettingsPressed()
+            val frameSizeValue = findViewById<EditText>(R.id.editTextFrameSize).text.toString().toInt()
+            val heightValue = findViewById<EditText>(R.id.editTextHeight).text.toString().toInt()
+            val diskTeethValue = findViewById<EditText>(R.id.editTextDiskTeeth).text.toString().toInt()
+            val pinionTeethValue = findViewById<EditText>(R.id.editTextPinionTeeth).text.toString().toInt()
+            val stemValue = findViewById<EditText>(R.id.editTextStem).text.toString().toInt()
+            presenterSettings.onSaveButtonUserSettingsPressed(applicationContext,frameSizeValue,heightValue,
+                diskTeethValue,pinionTeethValue,stemValue)
         }
     }
 
     private fun onSaveButtonUserSettingsPressed() {
-        /*val inflater: LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+       /* val inflater: LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.popupsave_usersettings,userSettingsLayout)
         val popupWindow = PopupWindow(
             view,
