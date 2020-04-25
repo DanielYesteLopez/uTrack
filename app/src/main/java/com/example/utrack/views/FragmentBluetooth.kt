@@ -6,10 +6,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.FragmentActivity
 import com.example.utrack.R
 import com.example.utrack.mc.MainFragmentClass
+import com.example.utrack.presenters.PresenterTraining
 
 class FragmentBluetooth : MainFragmentClass() {
+
+    private val presenterTraining = PresenterTraining()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreate(savedInstanceState)
@@ -20,15 +24,12 @@ class FragmentBluetooth : MainFragmentClass() {
         return activity?.let {
             // Use the Builder class for convenient dialog construction
             val builder = AlertDialog.Builder(it)
-            setOnPositiveButtonClickListener(OnClickListener { _, _ ->
-                sendMessagePosButtonPressed()
-
-            })
-
-            setOnNegativeButtonClickListener(OnClickListener { _, _ ->
-                sendMessageNegButtonPressed()
-            })
-
+            setOnPositiveButtonClickListener(
+                OnClickListener { _, _ -> sendPosButtonPressed(it) }
+            )
+            setOnNegativeButtonClickListener(
+                OnClickListener { _, _ -> sendNegButtonPressed(it) }
+            )
             builder.setMessage(R.string.bluetooth)
                 .setPositiveButton(R.string.choose_device, onPosButtonClickListener)
                 .setNegativeButton(R.string.continue_without_device, onNegButtonClickListener)
@@ -36,15 +37,11 @@ class FragmentBluetooth : MainFragmentClass() {
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
-    override fun sendMessagePosButtonPressed(){
-        Toast.makeText(
-            this.context,
-            getString(R.string.sessionsaved),
-            Toast.LENGTH_SHORT
-        ).show()
-        val intent = Intent(this.context, ViewBluetoothPairing().javaClass)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        startActivity(intent)
-    } // go to result layout
+    override fun sendPosButtonPressed(fragmentActivity:FragmentActivity){
+        presenterTraining.onConnectDevicesBLuetoothButtonPressed(fragmentActivity)
+    } // go to bluetooth fragment
 
+    override fun sendNegButtonPressed(fragmentActivity: FragmentActivity) {
+        presenterTraining.onStartTrainingBLuetoothButtonPressed(fragmentActivity)
+    }
 }

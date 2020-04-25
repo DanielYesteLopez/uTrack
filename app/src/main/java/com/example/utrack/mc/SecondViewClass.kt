@@ -1,9 +1,7 @@
 package com.example.utrack.mc
 
 import android.os.Build
-import android.os.Handler
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.utrack.ic.NaviInterface
 import com.example.utrack.ic.ViewInterface

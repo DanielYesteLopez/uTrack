@@ -6,10 +6,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.FragmentActivity
 import com.example.utrack.R
 import com.example.utrack.mc.MainFragmentClass
+import com.example.utrack.presenters.PresenterTraining
 
 class FragmentSaveData : MainFragmentClass() {
+
+    private val presenterTraining = PresenterTraining()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreate(savedInstanceState)
@@ -20,43 +24,29 @@ class FragmentSaveData : MainFragmentClass() {
         return activity?.let {
             // Use the Builder class for convenient dialog construction
             val builder = AlertDialog.Builder(it)
-            onPosButtonClickListener = OnClickListener { _, _ ->
-                // user accept and continue session
-                // TODO guardar la data de la sesion en la base de datos
-                sendMessagePosButtonPressed()
-            }
-
-            onNegButtonClickListener = OnClickListener { _, _ ->
-                // User cancelled the dialog
-                sendMessageNegButtonPressed()
-            }
+            setOnPositiveButtonClickListener(
+                OnClickListener { _, _ -> sendPosButtonPressed(it) }
+            )
+            setOnNegativeButtonClickListener(
+                OnClickListener { _, _ -> sendNegButtonPressed(it) }
+            )
 
             builder.setMessage(R.string.savesession)
                 .setPositiveButton(R.string.yes,onPosButtonClickListener)
                 .setNegativeButton(R.string.no,onNegButtonClickListener)
-        // Create the AlertDialog object and return it
-        builder.create()
-    } ?: throw IllegalStateException("Activity cannot be null")
-}
-    override fun sendMessagePosButtonPressed(){
-        Toast.makeText(
-            this.context,
-            getString(R.string.sessionsaved),
-            Toast.LENGTH_SHORT
-        ).show()
-        val intent = Intent(this.context, ViewData().javaClass)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        startActivity(intent)
+            // Create the AlertDialog object and return it
+            builder.create()
+        } ?: throw IllegalStateException("Activity cannot be null")
+    }
+
+    override fun sendPosButtonPressed(fragmentActivity: FragmentActivity){
+        // TODO("Guardar la data de la session en la base de datos")
+        presenterTraining.onPosSaveDataButtonPressed(fragmentActivity)
     } // go to result layout
 
-    override fun sendMessageNegButtonPressed(){
-        Toast.makeText(
-            this.context,
-            getString(R.string.sessionnotsaved),
-            Toast.LENGTH_SHORT
-        ).show()
-        val intent = Intent(this.context, ViewMainPage().javaClass)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        startActivity(intent)
+    override fun sendNegButtonPressed(fragmentActivity: FragmentActivity){
+        // User cancelled the dialog
+        // nothing is saved
+        presenterTraining.onNegSaveDataButtonPressed(fragmentActivity)
     } // go to main activity
 }

@@ -2,6 +2,7 @@ package com.example.utrack.ic
 
 import android.app.Dialog
 import android.content.DialogInterface
+import androidx.fragment.app.FragmentActivity
 
 interface FragmentInterface {
     // var
@@ -19,7 +20,7 @@ interface FragmentInterface {
     fun getOnNegativeButtonClickListener() : DialogInterface.OnClickListener?
     fun getOnNeutralButtonClickListener() : DialogInterface.OnClickListener?
     // message
-    fun sendMessagePosButtonPressed()
-    fun sendMessageNegButtonPressed()
-    fun sendMessageCanButtonPressed()
+    fun sendPosButtonPressed(fragmentActivity: FragmentActivity)
+    fun sendNegButtonPressed(fragmentActivity: FragmentActivity)
+    fun sendCanButtonPressed(fragmentActivity: FragmentActivity)
 }

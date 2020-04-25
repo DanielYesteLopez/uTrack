@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:minWidth="200dp"
         android:layout_margin="15dp"
-        android:text="@string/peired_devices"
+        android:text="@string/discover_devices"
         app:layout_constraintBottom_toTopOf="@+id/pairedTv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

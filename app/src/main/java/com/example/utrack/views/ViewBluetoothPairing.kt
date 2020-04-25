@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_bluetooth_pairing.*
 
 
 class ViewBluetoothPairing : AppCompatActivity() {
+
     private val REQUEST_CODE_ENABLE_BLUETOOTH:Int = 1
     private val REQUEST_CODE_DISCOVERABLE_BLUETOOTH:Int = 2
 
@@ -84,7 +85,7 @@ class ViewBluetoothPairing : AppCompatActivity() {
                 //val notpairedDevices: Set<BluetoothDevice>?
                 val devices : Array<String> = databaseList()
                 var device : BluetoothDevice
-                devices[0] = getString(R.string.paired_devices)
+                devices[0] = getString(R.string.discover_devices)
                 if (pairedDevices != null) {
                     for (i:Int in pairedDevices.indices){
                         device = pairedDevices.elementAt(i)

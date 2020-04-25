@@ -3,6 +3,7 @@ package com.example.utrack.mc
 import android.content.DialogInterface
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentActivity
 import com.example.utrack.R
 import com.example.utrack.ic.FragmentInterface
 
@@ -39,21 +40,21 @@ abstract class MainFragmentClass : DialogFragment(), FragmentInterface {
     }
 
     // message
-    override fun sendMessagePosButtonPressed(){
+    override fun sendPosButtonPressed(fragmentActivity: FragmentActivity){
         Toast.makeText(
             this.context, "Positive button pressed",
             Toast.LENGTH_SHORT
         ).show()
     }
 
-    override fun sendMessageNegButtonPressed(){
+    override fun sendNegButtonPressed(fragmentActivity: FragmentActivity){
         Toast.makeText(
             this.context, "Negative button pressed",
             Toast.LENGTH_SHORT
         ).show()
     }
 
-    override fun sendMessageCanButtonPressed(){
+    override fun sendCanButtonPressed(fragmentActivity: FragmentActivity){
         Toast.makeText(
             this.context, "Cancel button pressed",
             Toast.LENGTH_SHORT
