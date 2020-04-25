@@ -35,10 +35,4 @@ class ViewSignUp : SecondViewClass() {
             presenterLogin.signUpToSignInbutton(this.applicationContext)
         }
     }
-
-    private fun onSignUpToSignInButtonPressed(){
-        val intent = Intent(application, ViewSignIn().javaClass)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        startActivity(intent)
-    }
 }

@@ -7,9 +7,8 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.utrack.views.ViewMainPage
 import com.example.utrack.views.ViewSignIn
-import com.google.firebase.FirebaseError
+import com.example.utrack.views.ViewSignUp
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -65,6 +64,7 @@ class PresenterLogin {
                 currentUserDb.child("name").setValue(userName)
                 currentUserDb.child("real_name").setValue(userRealName)
                 currentUserDb.child("email").setValue(clearEmailForKey(userEmail))
+                presenterMaster.initializeBikeDatabase(userId)
                 updateUIToSingIn(applicationContext)
 
             }else{
@@ -160,6 +160,13 @@ class PresenterLogin {
     fun clearEmailForKey(userEmail: String): String {
         var clearUserEmail = userEmail.replace(".",",")
         return clearUserEmail
+    }
+
+    fun onToSignUpFromSignInButtonPressed(applicationContext: Context) {
+        val intent = Intent(applicationContext,
+            ViewSignUp().javaClass)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        ContextCompat.startActivity(applicationContext,intent,null)
     }
 
 

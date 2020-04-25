@@ -8,4 +8,12 @@ class PresenterMaster {
         facade.setUserData(userDataMap)
     }
 
+    fun setBikeSettings(userBikeSettingsMap: MutableMap<String, Int>) {
+        facade.setBikeSettings(userBikeSettingsMap)
+    }
+
+    fun initializeBikeDatabase(userId: String) {
+        facade.initializeBikeDatabase(userId)
+    }
+
 }
