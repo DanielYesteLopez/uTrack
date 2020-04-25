@@ -8,7 +8,11 @@ class Database {
     private var mDatabaseReferenceBikeSettings = mDataFirebase.reference.child("BikeSettings")
     private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
     fun saveDatabaseBikeSettings(userBikeSettingsMap: MutableMap<String, Int>) {
-
+        val currentUserDb = mDatabaseReferenceBikeSettings.child(mAuth.currentUser!!.uid)
+        currentUserDb.child("frame_size").setValue(userBikeSettingsMap.getValue("frame_size"))
+        currentUserDb.child("height").setValue(userBikeSettingsMap.getValue("height"))
+        currentUserDb.child("disk_teeth").setValue(userBikeSettingsMap.getValue("disk_teeth"))
+        currentUserDb.child("pinion_teeth").setValue(userBikeSettingsMap.getValue("pinion_teeth"))
     }
 
     fun initializeBikeDatabase(userId: String) {
