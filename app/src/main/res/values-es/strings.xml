@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <resources>
+        <string name="app_name">uTrack</string>
+        <string name="usersettings">Opciones de Usuario</string>
+        <string name="settings">Opciones</string>
+        <string name="username">Nombre de Usuario</string>
+
+        <string name="back">Atras</string>
+
+        <string name="signin">Loguear-se</string>
+        <string name="signup">Registrar-se</string>
+        <string name="confirmpassword">Confirmar contraseña</string>
+        <string name="askname">Nombre real</string>
+        <string name="email">Email</string>
+        <string name="password">Contraseña</string>
+
+        <string name="accountmessage2">Tienes una cuenta?</string>
+        <string name="accountmessage1">No tienes cuenta?</string>
+
+        <string name="training">Entrenamiento</string>
+        <string name="language">Lengua</string>
+        <string name="info">Informacion</string>
+        <string name="yourdata">Tus datos</string>
+        <string name="account">Cuenta</string>
+
+        <string name="uTrack">µTrack</string>
+
+        <string name="capturedata">Grabar datos</string>
+        <string name="export">Exportar datos</string>
+        <string name="clear">Borrar datos</string>
+
+
+        <string name="height">Altura:</string>
+        <string name="disk">Dientes del disco:</string>
+        <string name="frame">Tamaño del rectangulo:</string>
+        <string name="pinion">Dientes del piñon:</string>
+        <string name="potencia">Stem:</string><!--TODO: QUE COÑO ES STEM-->
+
+        <string name="bike_height_hint">Introduce la altura de tu bicicleta aquí</string>
+        <string name="bike_disk_hint">Introduce los dientes del disco de tu bicicleta aquí</string>
+        <string name="bike_frame_hint">Introduce el tamaño del rectangulo de tu bicicleta aquí</string>
+        <string name="bike_pinion_hint">Introduce los dientes del piñon de tu bicicleta aquí</string>
+        <string name="bike_potencia_hint">Put the stem here</string><!--TODO: QUE COÑO ES STEM-->
+
+        <string name="trainingstart">START</string>
+        <string name="trainingresume">RESUMIR</string>
+        <string name="trainingstop">STOP</string>
+        <string name="trainingpouse">PAUSA</string>
+        <string name="trainingprogress">entrenamiento en proceso</string>
+        <string name="trainingfinilized">entrenamiento acabado</string>
+        <string name="trainingpaused">entrenamiento pausado</string>
+
+
+        <string name="saveButton">Boton de guardado</string>
+        <string name="save">GUARDAR</string>
+
+        <string name="spflag">bandera española</string>
+        <string name="frflag">bandera francesa</string>
+        <string name="inflag">bandera inglesa</string>
+        <string name="geflag">bandera alemana</string>
+        <string name="catflag">bandera catalana</string>
+
+        <string name="maintext">Haciendo que pedalees mas rapido</string>
+
+        <string name="heartrate">000bpm</string>
+        <string name="speedrate">00\'00kph</string>
+        <string name="cadencerate">000rpm</string>
+        <string name="duration">00,00min</string>
+
+        <string name="avgheartrate">000bpm</string>
+        <string name="avgspeed">00\'00kph</string>
+        <string name="avgcadencerate">000rpm</string>
+
+        <string name="informationText">Esta aplicacion fue creada para que mejores como ciclista. Todos los derechos reservados. Creada por: \n ·Daniel Yeste \n ·Joan Domenech \n
+        ·Jorge Vinagre \n ·Daniel Geruous-Fares \n</string>
+
+
+        <string name="durationhint">tiempo</string>
+        <string name="savePopUpText">Quieres guardar los cambios?</string>
+        <string name="yes">Si</string>
+        <string name="no">No</string>
+        <string name="exit">Salir</string>
+        <!-- TODO class exercise that contain a string table full of exercises like this one -->
+        <string name="recomendedexercise">do for 10 minuts free laps on avg speed of up to 30 km/h on a stable cadence. \nYou are ready to go</string>
+        <string name="recomendedexerciseyes">Let\'s go</string>
+        <string name="recomendedexerciseno">Another day</string>
+        <string name="trainingawesome">Awesome</string>
+        <string name="trainingsad">May be next time</string>
+        <string name="sessionsaved">Session saved</string>
+        <string name="sessionnotsaved">well done</string>
+        <string name="savesession">Save Session?</string>
+        <string name="continuesesion">Continue</string>
+        <string name="notefication">Hay wait</string>
+
+        <!-- TODO: Remove or change this placeholder text -->
+        <string name="hello_blank_fragment">Hello blank fragment</string>
+        <string name="bluetooth">If you have speed or cadence sensor choose device to start session, if not start session without one \n </string>
+        <string name="choose_device">Choose Device</string>
+        <string name="continue_without_device">Start Session</string>
+        <string name="blutooth_not_available">Bluetooth is not available</string>
+        <string name="bluetooth_available">Bluetooth is available</string>
+        <string name="paired_devices">Paired Devices</string>
+        <string name="peired_devices">Peired Devices</string>
+</resources>
