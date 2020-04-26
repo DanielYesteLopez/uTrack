@@ -10,10 +10,11 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.utrack.R
+import com.example.utrack.mc.SecondViewClass
 import kotlinx.android.synthetic.main.activity_bluetooth_pairing.*
 
 
-class ViewBluetoothPairing : AppCompatActivity() {
+class ViewBluetoothPairing : SecondViewClass() {
     private val REQUEST_CODE_ENABLE_BLUETOOTH:Int = 1
     private val REQUEST_CODE_DISCOVERABLE_BLUETOOTH:Int = 2
 
