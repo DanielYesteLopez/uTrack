@@ -13,7 +13,7 @@ import com.example.utrack.presenters.PresenterTraining
 
 class FragmentBluetooth : MainFragmentClass() {
 
-    private val presenterTraining = PresenterTraining()
+    private var presenterTraining = PresenterTraining()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreate(savedInstanceState)

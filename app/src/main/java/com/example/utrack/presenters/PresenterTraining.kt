@@ -9,14 +9,12 @@ import com.example.utrack.R
 import com.example.utrack.views.*
 
 class PresenterTraining {
-
     /* presenter View Training */
     fun onBackTrainingButtonPressed(applicationContext: Context) {
         val intent = Intent(applicationContext, ViewMainPage().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         ContextCompat.startActivity(applicationContext,intent,null)
     }
-
     fun onStopTrainigButtonPressed(applicationContext: Context) {
         val myExerciseFragment =
             FragmentShowExercise()
@@ -24,18 +22,15 @@ class PresenterTraining {
             myExerciseFragment.show(it, R.string.notefication.toString())
         }
     }
-
     fun onResumeTrainingButtonPressed(applicationContext: Context?) {
         // TODO("Not yet implemented")
     }
-
     fun onStartTrainigButtonPressed(applicationContext: Context?) {
         Toast.makeText(applicationContext,
             applicationContext?.resources?.getString(R.string.trainingprogress),
             Toast.LENGTH_SHORT
         ).show()
     }
-
     fun onPauseTrainigButtonPressed(applicationContext: Context?) {
         Toast.makeText(
             applicationContext,
@@ -43,7 +38,6 @@ class PresenterTraining {
             Toast.LENGTH_SHORT
         ).show()
     }
-
     /* presenter show recommended exercise */
     fun onCanShowExerciseButtonPressed(fragmentActivity:FragmentActivity) {
         Toast.makeText(
@@ -52,7 +46,6 @@ class PresenterTraining {
             Toast.LENGTH_SHORT
         ).show()
     }
-
     fun onNegShowExerciseButtonPressed(fragmentActivity:FragmentActivity) {
         // user finish training
         val appContext :Context = fragmentActivity.applicationContext
@@ -65,7 +58,6 @@ class PresenterTraining {
             FragmentSaveData()
         mySaveFragment.show(fragmentActivity.supportFragmentManager, R.string.notefication.toString())
     }
-
     fun onPosShowExerciseButtonPressed(fragmentActivity:FragmentActivity) {
         val appContext :Context = fragmentActivity.applicationContext
         Toast.makeText(
@@ -74,7 +66,6 @@ class PresenterTraining {
             Toast.LENGTH_SHORT
         ).show()
     }
-
     /* presenter save data */
     fun onPosSaveDataButtonPressed(fragmentActivity: FragmentActivity) {
         val appContext :Context = fragmentActivity.applicationContext
@@ -85,9 +76,9 @@ class PresenterTraining {
         ).show()
         val intent = Intent(appContext, ViewData().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        appContext.startActivity(intent)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        ContextCompat.startActivity(appContext,intent,null)
     }
-
     fun onNegSaveDataButtonPressed(fragmentActivity : FragmentActivity) {
         val appContext :Context = fragmentActivity.applicationContext
         Toast.makeText(
@@ -97,21 +88,17 @@ class PresenterTraining {
         ).show()
         val intent = Intent(appContext, ViewMainPage().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        appContext.startActivity(intent)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        ContextCompat.startActivity(appContext,intent,null)
     }
     /* presenter bluetooth */
     fun onConnectDevicesBLuetoothButtonPressed(fragmentActivity: FragmentActivity) {
         val appContext :Context = fragmentActivity.applicationContext
-        Toast.makeText(
-            appContext,
-            appContext.resources.getString(R.string.bluetooth),
-            Toast.LENGTH_SHORT
-        ).show()
         val intent = Intent(appContext, ViewBluetoothPairing().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        appContext.startActivity(intent)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        ContextCompat.startActivity(appContext,intent,null)
     }
-
     fun onStartTrainingBLuetoothButtonPressed(fragmentActivity: FragmentActivity) {
         val appContext :Context = fragmentActivity.applicationContext
         Toast.makeText(
@@ -121,5 +108,12 @@ class PresenterTraining {
         ).show()
     }
     /* presenter view bluetooth */
+    fun onBackBluetoothButtonPressed(applicationContext: Context) {
+        val intent = Intent(applicationContext, ViewTraining().javaClass)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        ContextCompat.startActivity(applicationContext,intent,null)
+    }
+
 
 }

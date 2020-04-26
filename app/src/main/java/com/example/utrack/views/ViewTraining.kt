@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.trainingpage.*
 
 class ViewTraining : SecondViewClass() {
 
-    private val presenterTraining = PresenterTraining()
+    private var presenterTraining = PresenterTraining()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,11 +88,6 @@ class ViewTraining : SecondViewClass() {
         buttonStop.setOnClickListener {
             if(isWorking || ispaused) {
                 buttonPause.callOnClick()
-/*                val myExerciseFragment =
-                    FragmentShowExercise()
-                // show exercice recomendation message
-                //resumeButton.callOnClick()
-                myExerciseFragment.show(supportFragmentManager, getString(R.string.notefication))*/
                 presenterTraining.onStopTrainigButtonPressed(this@ViewTraining)
             }
         }
