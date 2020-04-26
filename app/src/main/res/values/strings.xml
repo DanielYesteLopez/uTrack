@@ -74,7 +74,7 @@
         ·Jorge Vinagre \n ·Daniel Geruous-Fares \n</string>
 
 
-    <string name="duration_hint" tools:ignore="MissingTranslation">time</string>
+    <string name="durationhint">time</string>
     <string name="savePopUpText">Do you want to save the changes?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
@@ -96,7 +96,7 @@
     <string name="continue_without_device">Start Session</string>
     <string name="blutooth_not_available">Bluetooth is not available</string>
     <string name="bluetooth_available">Bluetooth is available</string>
-    <string name="discover_devices" tools:ignore="MissingTranslation">Discover Devices</string>
-    <string name="refreshDiscovering" tools:ignore="MissingTranslation">Refresh Scan</string>
+    <string name="discover_devices">Discover Devices</string>
+    <string name="refreshDiscovering">Refresh Scan</string>
 
 </resources>
