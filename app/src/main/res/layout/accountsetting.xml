@@ -105,10 +105,9 @@
         android:inputType="textEmailAddress"
         android:text="@string/email"
         android:textColor="@color/blackColor" />
-
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_weight="12"
         android:layout_marginVertical="10dp">
 
@@ -117,67 +116,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/imageButton7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="25dp"
-                android:adjustViewBounds="true"
-                android:background="@color/appMainColor"
-                android:contentDescription="@string/spflag"
-                android:padding="1dp"
-                android:layout_margin="5dp"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/icon_flag_sp" />
-
-            <ImageButton
-                android:id="@+id/imageButton5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="25dp"
-                android:adjustViewBounds="true"
-                android:background="@color/appMainColor"
-                android:contentDescription="@string/inflag"
-                android:padding="1dp"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/icon_flag_in"
-                android:layout_margin="5dp"/>
-
-            <ImageButton
-                android:id="@+id/imageButton10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="25dp"
-                android:adjustViewBounds="true"
-                android:background="@color/appMainColor"
-                android:contentDescription="@string/geflag"
-                android:padding="1dp"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/icon_flag_ge"
-                android:layout_margin="5dp"/>
-
-            <ImageButton
-                android:id="@+id/imageButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="25dp"
-                android:adjustViewBounds="true"
-                android:background="@color/appMainColor"
-                android:contentDescription="@string/frflag"
-                android:padding="1dp"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/icon_flag_fr"
-                android:layout_margin="5dp"/>
-
         </LinearLayout>
+
     </HorizontalScrollView>
 
     <ImageButton
