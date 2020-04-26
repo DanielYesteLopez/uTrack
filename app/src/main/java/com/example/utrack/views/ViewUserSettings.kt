@@ -26,12 +26,12 @@ class ViewUserSettings : SecondViewClass() {
         }
         val saveButtonUserSettings = findViewById<ImageButton>(R.id.saveButtonAccountSettings)
         saveButtonUserSettings.setOnClickListener{
-            val frameSizeValue = findViewById<EditText>(R.id.editTextFrameSize).text.toString().toInt()
-            val heightValue = findViewById<EditText>(R.id.editTextHeight).text.toString().toInt()
-            val diskTeethValue = findViewById<EditText>(R.id.editTextDiskTeeth).text.toString().toInt()
-            val pinionTeethValue = findViewById<EditText>(R.id.editTextPinionTeeth).text.toString().toInt()
-            val stemValue = findViewById<EditText>(R.id.editTextStem).text.toString().toInt()
-            presenterSettings.onSaveButtonUserSettingsPressed(applicationContext,frameSizeValue,heightValue,
+            val frameSizeValue = findViewById<EditText>(R.id.editTextFrameSize).text.toString()
+            val heightValue = findViewById<EditText>(R.id.editTextHeight).text.toString()
+            val diskTeethValue = findViewById<EditText>(R.id.editTextDiskTeeth).text.toString()
+            val pinionTeethValue = findViewById<EditText>(R.id.editTextPinionTeeth).text.toString()
+            val stemValue = findViewById<EditText>(R.id.editTextStem).text.toString()
+            presenterSettings.onSaveButtonUserSettingsPressed(frameSizeValue,heightValue,
                 diskTeethValue,pinionTeethValue,stemValue)
         }
     }
