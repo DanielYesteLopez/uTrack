@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">uTrack</string>
+    <string name="usersettings">Opcions d\'Usuari</string>
+    <string name="settings">Opcions</string>
+    <string name="username">Nom d\'Usuari</string>
+
+    <string name="back">Endarrere</string>
+
+    <string name="signin">Loguejar-se</string>
+    <string name="signup">Registrar-se</string>
+    <string name="confirmpassword">Confirmar contrasenya</string>
+    <string name="askname">Nom real</string>
+    <string name="email">Email</string>
+    <string name="password">Contrasenya</string>
+
+    <string name="accountmessage2">Tens un compte?</string>
+    <string name="accountmessage1">No tens un compte?</string>
+
+    <string name="training">Entrenar</string>
+    <string name="language">Llengua</string>
+    <string name="info">Informació</string>
+    <string name="yourdata">Les teves dades</string>
+    <string name="account">Compte</string>
+
+    <string name="uTrack">µTrack</string>
+
+    <string name="capturedata">Gravar dades</string>
+    <string name="export">Exportar dades</string>
+    <string name="clear">Borrar dades</string>
+
+
+    <string name="height">Altura:</string>
+    <string name="disk">Dents del disc:</string>
+    <string name="frame">Tamany del rectangle:</string>
+    <string name="pinion">Dents del pinyó:</string>
+    <string name="potencia">Roda:</string>
+
+    <string name="bike_height_hint">Introdueix la altura de la teva bicicleta aquí</string>
+    <string name="bike_disk_hint">Introdueix les dents del disc de la teva bicicleta aquí</string>
+    <string name="bike_frame_hint">Introdueix el tamany del rectangle de la teva bicicleta aquí</string>
+    <string name="bike_pinion_hint">Introdueix les dents del pinyó de la teva bicicleta aquí</string>
+    <string name="bike_potencia_hint">Introdueix la roda de la teva bicicleta aquí</string>
+
+    <string name="trainingstart">START</string>
+    <string name="trainingresume">RESUMIR</string>
+    <string name="trainingstop">STOP</string>
+    <string name="trainingpouse">PAUSA</string>
+    <string name="trainingprogress">entrenament en procés</string>
+    <string name="trainingfinilized">entrenament acabat</string>
+    <string name="trainingpaused">entrenament pausat</string>
+
+
+    <string name="saveButton">Botó de guardat</string>
+    <string name="save">GUARDAR</string>
+
+    <string name="spflag">bandera española</string>
+    <string name="frflag">bandera francesa</string>
+    <string name="inflag">bandera anglesa</string>
+    <string name="geflag">bandera alemana</string>
+    <string name="catflag">bandera catalana</string>
+
+    <string name="maintext">Fent que pedalis més rapid</string>
+
+    <string name="heartrate">000bpm</string>
+    <string name="speedrate">00\'00kph</string>
+    <string name="cadencerate">000rpm</string>
+    <string name="duration">00,00min</string>
+
+    <string name="avgheartrate">000bpm</string>
+    <string name="avgspeed">00\'00kph</string>
+    <string name="avgcadencerate">000rpm</string>
+
+    <string name="informationText">Aquesta aplicació ha estat creada per a que milloris com a ciclista. Tots els drets reservats. Creada per: \n ·Daniel Yeste \n ·Joan Domenech \n
+        ·Jorge Vinagre \n ·Daniel Geruous-Fares \n</string>
+
+
+    <string name="durationhint">temps</string>
+    <string name="savePopUpText">Vols guardar els canvis?</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+    <string name="exit">Sortir</string>
+    <!-- TODO class exercise that contain a string table full of exercises like this one -->
+    <string name="recomendedexercise">do for 10 minuts free laps on avg speed of up to 30 km/h on a stable cadence. \nYou are ready to go</string>
+    <string name="recomendedexerciseyes">Endavant!</string>
+    <string name="recomendedexerciseno">Un altre dia</string>
+    <string name="trainingawesome">Genial</string>
+    <string name="trainingsad">Potser un altre dia</string>
+    <string name="sessionsaved">Sessió guardada</string>
+    <string name="sessionnotsaved">ben fet</string>
+    <string name="savesession">Guardar Sessió?</string>
+    <string name="continuesesion">Continuar</string>
+    <string name="notefication">Hey espera</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bluetooth">If you have speed or cadence sensor choose device to start session, if not start session without one \n </string>
+    <string name="choose_device">Escollir dispositiu</string>
+    <string name="continue_without_device">Començar Sessió</string>
+    <string name="blutooth_not_available">Bluetooth no dis
+        ponible</string>
+    <string name="bluetooth_available">Bluetooth disponible</string>
+    <string name="paired_devices">Paired Devices</string>
+    <string name="peired_devices">Peired Devices</string>
+</resources>
