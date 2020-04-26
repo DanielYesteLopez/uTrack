@@ -100,6 +100,6 @@
     <string name="blutooth_not_available">Bluetooth no dis
         ponible</string>
     <string name="bluetooth_available">Bluetooth disponible</string>
-    <string name="paired_devices">Paired Devices</string>
-    <string name="peired_devices">Peired Devices</string>
+    <string name="discover_devices">Discover Devices</string>
+    <string name="refreshDiscovering">Discobrir dispositius</string>
 </resources>

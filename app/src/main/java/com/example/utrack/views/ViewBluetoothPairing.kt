@@ -85,7 +85,7 @@ class ViewBluetoothPairing : SecondViewClass() {
                 //val notpairedDevices: Set<BluetoothDevice>?
                 val devices : Array<String> = databaseList()
                 var device : BluetoothDevice
-                devices[0] = getString(R.string.paired_devices)
+                devices[0] = getString(R.string.discover_devices)
                 if (pairedDevices != null) {
                     for (i:Int in pairedDevices.indices){
                         device = pairedDevices.elementAt(i)

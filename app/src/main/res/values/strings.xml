@@ -98,7 +98,6 @@
     <string name="continue_without_device">Start Session</string>
     <string name="blutooth_not_available">Bluetooth is not available</string>
     <string name="bluetooth_available">Bluetooth is available</string>
-    <string name="paired_devices">Paired Devices</string>
-    <string name="peired_devices">Peired Devices</string>
+    <string name="discover_devices">Discover Devices</string>
 
 </resources>
