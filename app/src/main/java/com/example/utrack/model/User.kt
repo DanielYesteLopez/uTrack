@@ -20,11 +20,13 @@ class User {
             userBike.height = userBikeSettingsMap.getValue("height")
             userBike.diskTeeth = userBikeSettingsMap.getValue("disk_teeth")
             userBike.pinionTeeth = userBikeSettingsMap.getValue("pinion_teeth")
+            userBike.stem = userBikeSettingsMap.getValue("stem")
         }else {
             userBike = UserBike(userBikeSettingsMap.getValue("frame_size"),
                 userBikeSettingsMap.getValue("height"),
                 userBikeSettingsMap.getValue("disk_teeth"),
-                userBikeSettingsMap.getValue("pinion_teeth"))
+                userBikeSettingsMap.getValue("pinion_teeth"),
+                userBikeSettingsMap.getValue("stem"))
         }
     }
 }

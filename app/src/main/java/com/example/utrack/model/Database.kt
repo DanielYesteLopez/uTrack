@@ -13,6 +13,7 @@ class Database {
         currentUserDb.child("height").setValue(userBikeSettingsMap.getValue("height"))
         currentUserDb.child("disk_teeth").setValue(userBikeSettingsMap.getValue("disk_teeth"))
         currentUserDb.child("pinion_teeth").setValue(userBikeSettingsMap.getValue("pinion_teeth"))
+        currentUserDb.child("stem").setValue(userBikeSettingsMap.getValue("stem"))
     }
 
     fun initializeBikeDatabase(userId: String) {
@@ -21,5 +22,6 @@ class Database {
         currentUserDb.child("height").setValue(0)
         currentUserDb.child("disk_teeth").setValue(0)
         currentUserDb.child("pinion_teeth").setValue(0)
+        currentUserDb.child("stem").setValue(0)
     }
 }

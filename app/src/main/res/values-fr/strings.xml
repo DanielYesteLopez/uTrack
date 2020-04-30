@@ -32,9 +32,9 @@
 
     <string name="height">Hauteur:</string>
     <string name="disk">Dents de disque:</string>
-    <string name="frame">Taille du rectangle:</string>
+    <string name="frame">cadre:</string>
     <string name="pinion">Dents de pin:</string>
-    <string name="potencia">Roue:</string>
+    <string name="potencia">Ptence de guidon:</string>
 
     <string name="bike_height_hint">Entrez la hauteur de votre vélo ici</string>
     <string name="bike_disk_hint">Entrez les dents du disque de votre vélo ici</string>
@@ -96,7 +96,8 @@
     <string name="bluetooth">If you have speed or cadence sensor choose device to start session, if not start session without one \n </string>
     <string name="choose_device">choisir l\'appareil</string>
     <string name="continue_without_device">Commencer Session</string>
-    <string name="blutooth_not_available">Bluetooth non disponible</string>
+    <string name="blutooth_not_available">Bluetooth non dis
+        ponible</string>
     <string name="bluetooth_available">Bluetooth disponible</string>
     <string name="discover_devices">Discover Devices</string>
     <string name="refreshDiscovering">Refresh Scan</string>
