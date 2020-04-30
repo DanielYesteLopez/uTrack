@@ -92,13 +92,11 @@
     <string name="continuesesion">Continuar</string>
     <string name="notefication">Hey espera</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="bluetooth">If you have speed or cadence sensor choose device to start session, if not start session without one \n </string>
+    <string name="bluetooth">You are not connected to a device, please connect to one or start session without one \n </string>
     <string name="choose_device">Escollir dispositiu</string>
     <string name="continue_without_device">Començar Sessió</string>
-    <string name="blutooth_not_available">Bluetooth no dis
-        ponible</string>
+    <string name="blutooth_not_available">Bluetooth no disponible</string>
     <string name="bluetooth_available">Bluetooth disponible</string>
     <string name="discover_devices">Discobrir dispositius</string>
-    <string name="refreshDiscovering">Refresh Scan</string>
+    <string name="refresh_discovering">Refresh Scan</string>
 </resources>

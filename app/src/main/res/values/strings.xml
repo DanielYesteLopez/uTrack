@@ -53,11 +53,11 @@
     <string name="saveButton">save Button</string>
     <string name="save">SAVE</string>
 
-    <string name="spflag">spanish flag</string>
-    <string name="frflag">france flag</string>
-    <string name="inflag">english</string>
-    <string name="geflag">deutch flag</string>
-    <string name="catflag">catalan flag</string>
+    <string name="spflag">Spanish flag</string>
+    <string name="frflag">French flag</string>
+    <string name="inflag">British flag</string>
+    <string name="geflag">German flag</string>
+    <string name="catflag">Catalan flag</string>
 
     <string name="maintext">Making your pedaling faster</string>
 
@@ -80,16 +80,16 @@
     <string name="no">No</string>
     <string name="exit">Exit</string>
     <!-- TODO class exercise that contain a string table full of exercises like this one -->
-    <string name="recomendedexercise">do for 10 minuts free laps on avg speed of up to 30 km/h on a stable cadence. \nYou are ready to go</string>
+    <string name="recomendedexercise">do for 10 minutes free laps on avg speed of up to 30 km/h on a stable cadence. \nYou are ready to go</string>
     <string name="recomendedexerciseyes">Let\'s go</string>
     <string name="recomendedexerciseno">Another day</string>
     <string name="trainingawesome">Awesome</string>
-    <string name="trainingsad">May be next time</string>
+    <string name="trainingsad">Maybe next time</string>
     <string name="sessionsaved">Session saved</string>
     <string name="sessionnotsaved">well done</string>
     <string name="savesession">Save Session?</string>
     <string name="continuesesion">Continue</string>
-    <string name="notefication">Hay wait</string>
+    <string name="notefication">Hey wait</string>
 
     <string name="bluetooth">You are not connected to a device, please connect to one or start session without one \n </string>
     <string name="choose_device">Choose Device</string>
@@ -97,6 +97,5 @@
     <string name="blutooth_not_available">Bluetooth is not available</string>
     <string name="bluetooth_available">Bluetooth is available</string>
     <string name="discover_devices">Discover Devices</string>
-    <string name="refreshDiscovering">Refresh Scan</string>
-
+    <string name="refresh_discovering">Refresh Scan</string>
 </resources>
