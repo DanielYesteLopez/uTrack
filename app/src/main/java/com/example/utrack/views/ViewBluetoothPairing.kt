@@ -19,6 +19,7 @@ import com.example.utrack.R
 import com.example.utrack.mc.SecondViewClass
 import com.example.utrack.presenters.PresenterTraining
 import kotlinx.android.synthetic.main.activity_bluetooth_pairing.*
+import java.lang.Thread.sleep
 
 
 class ViewBluetoothPairing : SecondViewClass() {
@@ -30,7 +31,8 @@ class ViewBluetoothPairing : SecondViewClass() {
     //init bluetooth adapter
     private var bAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
     private var devicesList: ArrayList<BluetoothDevice> = ArrayList()
-
+    private var devicesListNames: ArrayList<String> = ArrayList()
+    private lateinit var  arrayadapter: ArrayAdapter<BluetoothDevice>
     /**
      * Broadcast Receiver for changes made to bluetooth states such as:
      * 1) Discoverability mode on/off or expire.
@@ -79,15 +81,19 @@ class ViewBluetoothPairing : SecondViewClass() {
                     // object and its info from the Intent.
                     val device: BluetoothDevice? =
                         intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
-                    Log.d("Bluetooth",
-                        "onReceive: " + device?.name + ": " + device?.address)
-                    if (device != null) {
-                        devicesList.add(device)
+                    Log.d("Bluetooth", "onReceive: " + device?.name + ": " + device?.address)
+                    if (device != null){
+                        if (!devicesList.contains(device)) {
+                            devicesList.add(device)
+                            devicesListNames.add(device.name)
+                            arrayadapter.notifyDataSetChanged()
+                        }
                     }
                 }
             }
         }
     }
+
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -172,9 +178,10 @@ class ViewBluetoothPairing : SecondViewClass() {
                 } else {
                     Toast.makeText(
                         this,
-                        "Could not enable discovering",
+                        "NOT IMPLEMENTED YET",
                         Toast.LENGTH_LONG
                     ).show()
+                    Log.d("Bluetooth", "go to hell")
                 }
         }
         super.onActivityResult(requestCode, resultCode, data)
@@ -186,12 +193,14 @@ class ViewBluetoothPairing : SecondViewClass() {
 
     private fun turnBluetoothOn() {
         //check if blutooth is on/off
+        Log.d("Bluetooth", "turning on bluetooth")
         if (bAdapter != null) {
             if (!bAdapter!!.isEnabled) {
                 //turn on bluetooth request
                 val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
                 startActivityForResult(intent, REQUESTCODEENABLEBLUETOOTH)
             }
+            Log.d("Bluetooth", "bluetooth turned on")
         } else {
             Toast.makeText(
                 this,
@@ -220,23 +229,24 @@ class ViewBluetoothPairing : SecondViewClass() {
                 val pairedDevices: Set<BluetoothDevice>? =
                     bAdapter!!.bondedDevices // get list of paired Devices
                 devicesList = ArrayList()
+                devicesListNames = ArrayList()
                 if (pairedDevices != null) {
                     if (pairedDevices.isNotEmpty()) {
                         pairedDevices.forEach { device ->
                             devicesList.add(device)
+                            devicesListNames.add(device.name)
                         }
                     }
                 }
                 // discover devices
                 discoverBluetoothDevice()
                 // Create an array adapter
-                val adapter: ArrayAdapter<BluetoothDevice> =
-                    ArrayAdapter<BluetoothDevice>(
+                arrayadapter = ArrayAdapter<BluetoothDevice>(
                         this,
                         android.R.layout.simple_list_item_1,
                         devicesList
                     )
-                pairedTv.adapter = adapter
+                pairedTv.adapter = arrayadapter
 
                 // Set item click listener
                 pairedTv.onItemClickListener = OnItemClickListener { _, _, position, _ ->
@@ -282,8 +292,11 @@ class ViewBluetoothPairing : SecondViewClass() {
             if (bAdapter!!.isDiscovering) {
                 bAdapter!!.cancelDiscovery()
             }
+            Log.d("Bluetooth", "checking permissions")
             checkBTPermissions()
+            Log.d("Bluetooth", "asking for discoverable")
             makeBluetoothDiscoverable()
+            Log.d("Bluetooth", "start discovery")
             bAdapter!!.startDiscovery()
             // Register for broadcasts when a device is discovered.
             val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)

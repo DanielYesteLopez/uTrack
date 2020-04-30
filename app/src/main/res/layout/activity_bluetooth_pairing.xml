@@ -57,12 +57,10 @@
     <ListView
         android:id="@+id/pairedTv"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="600dp"
         android:layout_margin="20dp"
         android:background="@color/whiteColor"
         android:padding="5dp"
-        android:textColor="@color/blackColor"
-        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
