@@ -115,5 +115,7 @@ class PresenterTraining {
         ContextCompat.startActivity(applicationContext,intent,null)
     }
 
+    fun onDiscoverBluetoothButtonPressed(applicationContext: Context){
 
+    }
 }
