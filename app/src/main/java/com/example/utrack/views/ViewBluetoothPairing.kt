@@ -3,6 +3,7 @@ package com.example.utrack.views
 import android.Manifest
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -18,7 +19,8 @@ import com.example.utrack.R
 import com.example.utrack.mc.SecondViewClass
 import com.example.utrack.presenters.PresenterTraining
 import kotlinx.android.synthetic.main.activity_bluetooth_pairing.*
-import android.bluetooth.BluetoothDevice
+import kotlinx.coroutines.delay
+
 
 class ViewBluetoothPairing : SecondViewClass() {
 
@@ -31,44 +33,69 @@ class ViewBluetoothPairing : SecondViewClass() {
     private var bAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
     private var devicesList: ArrayList<BluetoothDevice> = ArrayList()
     private lateinit var  arrayAdapter: ArrayAdapter<String>
+
     /**
      * Broadcast Receiver for changes made to bluetooth states such as:
      * 1) Discoverability mode on/off or expire.
+     * 2) for ACTION_FOUND Bluetooth Device Discovery.
+     *
      */
     private val receiver2: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val action = intent.action
             if (action == BluetoothAdapter.ACTION_SCAN_MODE_CHANGED) {
                 val mode =
-                    intent.getIntExtra(BluetoothAdapter.EXTRA_SCAN_MODE, BluetoothAdapter.ERROR)
-                when (mode) {
+                    intent.getIntExtra(
+                        BluetoothAdapter.EXTRA_SCAN_MODE,
+                        BluetoothAdapter.ERROR
+                    )
+                when (mode)
+                {
                     BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE ->
-                        Log.d("Bluetooth",
+                    {
+                        Log.d(
+                            "Bluetooth",
                             "receiver2: Discoverability Enabled."
                         )
+                    }
+
                     BluetoothAdapter.SCAN_MODE_CONNECTABLE ->
+                    {
                         Log.d("Bluetooth",
                             "receiver2: Discoverability Disabled. Able to receive connections."
                         )
+                    }
+
                     BluetoothAdapter.SCAN_MODE_NONE ->
+                    {
                         Log.d("Bluetooth",
                             "receiver2: Discoverability Disabled. Not able to receive connections."
                         )
+                    }
+
                     BluetoothAdapter.STATE_CONNECTING ->
+                    {
                         Log.d("Bluetooth",
                             "receiver2: Connecting...."
                         )
+                    }
+
                     BluetoothAdapter.STATE_CONNECTED ->
+                    {
                         Log.d("Bluetooth",
                             "Receiver2: Connected."
                         )
+                    }
                 }
             }
         }
     }
 
-
-    // Create a BroadcastReceiver for ACTION_FOUND.
+    /**
+     * Broadcast Receiver for changes made to bluetooth states such as:
+     * 1) for ACTION_FOUND Bluetooth Device Discovery.
+     *
+     */
     private val receiver1 = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val action: String? = intent.action
@@ -81,14 +108,21 @@ class ViewBluetoothPairing : SecondViewClass() {
                     // object and its info from the Intent.
                     val device: BluetoothDevice? =
                         intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
-                    Log.d("Bluetooth", "onReceive: " + device?.name + ": " + device?.address)
+                    val rssi: Int =
+                        intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE).toInt()
+                    /* log is for debug */
+                    Log.d("Bluetooth1", "onReceive: " + device?.name + ": " + device?.address)
+                    Log.d("Bluetooth2", "onReceive: $rssi")
+
                     if (device != null)
                     {
-                        if (!devicesList.contains(device) &&
-                            !device.name.isNullOrEmpty()
-                        ){
+                        if (!(devicesList.contains(device)) &&
+                            !(device.name.isNullOrEmpty()) &&
+                            (rssi >= -90))
+                        {
+                            /* rssi for testing only user do not need to see it */
                             devicesList.add(device)
-                            arrayAdapter.add("${device.name} \n ${device.address}")
+                            arrayAdapter.add("${device.name} \n ${device.address} - $rssi")
                             arrayAdapter.notifyDataSetChanged()
                         }
                     }
@@ -101,39 +135,16 @@ class ViewBluetoothPairing : SecondViewClass() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bluetooth_pairing)
+
         bAdapter = BluetoothAdapter.getDefaultAdapter()
-        //check if blutooth is on/off
-        if (bAdapter == null) {
-            bluetoothStatusTv.text = getText(R.string.blutooth_not_available)
-        } else {
-            bluetoothStatusTv.text = getText(R.string.bluetooth_available)
-            // set image according to bluetooth status
-            if (bAdapter!!.isEnabled) {
-                bluetoothIv.setImageResource(R.drawable.icon_bluetooth_on) //Bluetooth is on
-            } else {
-                bluetoothIv.setImageResource(R.drawable.icon_bluetooth_off) //Bluetooth is off
-                turnBluetoothOn() //turn on bluetooth request
-            }
-        }
+        devicesList = ArrayList()
+        arrayAdapter = ArrayAdapter<String>(applicationContext, android.R.layout.simple_list_item_1)
+        //turn on blutooth and ask for permission
+        turnBluetoothOn()
         getDiscoverableDevices()
         discoverBtn.setOnClickListener {
             discoverBtn.setText(R.string.refresh_discovering)
-            if (bAdapter != null) {
-                if (!bAdapter!!.isEnabled) {
-                    Toast.makeText(
-                        this,
-                        "Turn on bluetooth first",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-                getDiscoverableDevices()
-            } else {
-                Toast.makeText(
-                    this,
-                    "Turn on bluetooth first",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
+            getDiscoverableDevices()
         }
         // back button
         backButtonBluetoothPage.setOnClickListener {
@@ -151,158 +162,102 @@ class ViewBluetoothPairing : SecondViewClass() {
         super.onDestroy()
         // unregister the ACTION_FOUND receiver.
         unregisterReceiver(receiver1)
+        // unregister the Discoverability receiver.
         unregisterReceiver(receiver2)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
             REQUESTCODEENABLEBLUETOOTH ->
+            {
                 if (resultCode == Activity.RESULT_OK) {
-                    if (bAdapter!!.isEnabled) {
-                        bluetoothIv.setImageResource(R.drawable.icon_bluetooth_on)
-                        Toast.makeText(
-                            this,
-                            "Bluetooth is on",
-                            Toast.LENGTH_LONG
-                        ).show()
+                    if (bAdapterIsEnabled()) {
+                        bluetoothIv.setImageResource(R.drawable.icon_bluetooth_on) //Bluetooth is on
+                        bAdapterEnable()
                     }
                 } else {
-                    Toast.makeText(
-                        this,
-                        "Could not enable bluetooth",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    bluetoothIv.setImageResource(R.drawable.icon_bluetooth_off) //Bluetooth is off
                 }
+            }
             REQUESTCODEDISCOVERABLEBLUETOOTH ->
-                if (resultCode == Activity.RESULT_OK) {
-                    if (bAdapter!!.isEnabled) {
-                        bluetoothIv.setImageResource(R.drawable.icon_bluetooth_on)
-                        Toast.makeText(
-                            this,
-                            "Bluetooth is on",
-                            Toast.LENGTH_LONG
-                        ).show()
+            {
+                // result is equal to time duration
+                if (resultCode == 200) {
+                    if (bAdapterIsEnabled()) {
+                        bluetoothIv.setImageResource(R.drawable.icon_bluetooth_on) //Bluetooth is on
                     }
                 } else {
-                    Toast.makeText(
-                        this,
-                        "NOT IMPLEMENTED YET",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    Log.d("Bluetooth", "go to hell")
+                    bluetoothIv.setImageResource(R.drawable.icon_bluetooth_off) //Bluetooth is off
                 }
+            }
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    private fun turnBluetoothOn() {
-        //check if blutooth is on/off
-        Log.d("Bluetooth", "turning on bluetooth")
-        if (bAdapter != null) {
-            if (!bAdapter!!.isEnabled) {
-                //turn on bluetooth request
-                val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-                startActivityForResult(intent, REQUESTCODEENABLEBLUETOOTH)
-            }
-            Log.d("Bluetooth", "bluetooth turned on")
-        } else {
-            Toast.makeText(
-                this,
-                "Bluetooth is not supported in this device",
-                Toast.LENGTH_LONG
-            ).show()
-        }
-    }
-
-    private fun turnBluetoothOff() {
-        if (bAdapter != null) {
-            if (bAdapter!!.isEnabled) {
-                // turn off
-                bAdapter!!.disable()
-                bluetoothIv.setImageResource(R.drawable.icon_bluetooth_off)
-            }
-        }
-    }
-
     @RequiresApi(Build.VERSION_CODES.M)
     private fun getDiscoverableDevices() {
-        if (bAdapter != null) {
-            if (bAdapter!!.isEnabled) {
-                // query paired devices
-                val pairedDevices: Set<BluetoothDevice>? =
-                    bAdapter!!.bondedDevices // get list of paired Devices
-                devicesList = ArrayList()
-                // Create an array adapter
-                arrayAdapter =
-                    ArrayAdapter<String>(
-                        applicationContext,
-                        android.R.layout.simple_list_item_1
-                    )
-                //devicesListNames = ArrayList()
-                if (pairedDevices != null) {
-                    if (pairedDevices.isNotEmpty()) {
-                        pairedDevices.forEach { device : BluetoothDevice ->
-                            devicesList.add(device)
-                            arrayAdapter.add("${device.name} \n ${device.address}")
-                        }
-                    }
-                }
-            }
-            // discover devices
+        if (bAdapterIsEnabled()) {
+            // create array list for new devices
+            devicesList = ArrayList()
+            // Create an array adapter
+            arrayAdapter = ArrayAdapter<String>(applicationContext, android.R.layout.simple_list_item_1)
+            // 1 query paired devices
+            queryPairedDevices()
+            // 2 discover new devices
             discoverBluetoothDevice()
+            // 3 add array adapter to pairedTv (which is a list view)
             pairedTv.adapter = arrayAdapter
-            // Set item click listener
+            // 4 Set item click listener
             pairedTv.onItemClickListener = OnItemClickListener { _, _, position, _ ->
                 val device: BluetoothDevice = devicesList[position]
-                val deviceName = device.name
-                val deviceHardwareAddress = device.address // MAC address
-                // TODO after item selected pair device and go back to training page
-                Toast.makeText(
+                presenterTraining.onBluetoothDeviceChosen(
                     this@ViewBluetoothPairing,
-                    deviceName,
-                    Toast.LENGTH_SHORT
-                ).show()
-                // take user back to training page
+                    device)
             }
         }
     }
 
-    private fun makeBluetoothDiscoverable() {
-        //make bluetooth discoverable
-        if (bAdapter != null) {
-            if (!bAdapter!!.isDiscovering) {
-                // turn on bluetooth and make it discoverable
-                val intent = Intent(Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE))
-                startActivityForResult(intent, REQUESTCODEDISCOVERABLEBLUETOOTH)
-
-                val filter = IntentFilter(BluetoothAdapter.ACTION_SCAN_MODE_CHANGED)
-                registerReceiver(receiver2, filter)
+    private fun queryPairedDevices(){
+        val pairedDevices: Set<BluetoothDevice>? = bAdapter!!.bondedDevices // get list of paired Devices
+        if (pairedDevices != null) {
+            if (pairedDevices.isNotEmpty()) {
+                pairedDevices.forEach { device : BluetoothDevice ->
+                    devicesList.add(device)
+                    arrayAdapter.add("${device.name} \n ${device.address}")
+                }
             }
-        } else {
-            Toast.makeText(
-                this,
-                "Bluetooth is not supported in this device",
-                Toast.LENGTH_LONG
-            ).show()
         }
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun discoverBluetoothDevice() {
         //make bluetooth discoverable
-        if (bAdapter != null) {
-            if (bAdapter!!.isDiscovering) {
-                bAdapter!!.cancelDiscovery()
-            }
+        if (bAdapterIsNotNull()) {
+            bAdapterCancelDiscovery()
             Log.d("Bluetooth", "checking permissions")
             checkBTPermissions()
-            Log.d("Bluetooth", "asking for discoverable")
-            makeBluetoothDiscoverable()
-            Log.d("Bluetooth", "start discovery")
-            bAdapter!!.startDiscovery()
+            bAdapterStartDiscovery()
             // Register for broadcasts when a device is discovered.
-            val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
-            registerReceiver(receiver1, filter)
+            registerReceiver1BroadCasts()
+        } else {
+            Toast.makeText(
+                this,
+                "Bluetooth is not supported in this device2",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
+
+    private fun makeBluetoothDiscoverable() {
+        //make bluetooth discoverable
+        if (bAdapterIsNotNull()) {
+            if (bAdapterIsNotDiscovering()) {
+                // turn on bluetooth and make it discoverable
+                val intent = Intent(Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE))
+                intent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 200)
+                startActivityForResult(intent, REQUESTCODEDISCOVERABLEBLUETOOTH)
+                registerReceiver2BroadCasts()
+            }
         } else {
             Toast.makeText(
                 this,
@@ -312,8 +267,14 @@ class ViewBluetoothPairing : SecondViewClass() {
         }
     }
 
-    private fun getBluetoothAdabter() {
-        this.bAdapter = BluetoothAdapter.getDefaultAdapter()
+    private fun registerReceiver1BroadCasts(){
+        val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
+        registerReceiver(receiver1, filter)
+    }
+
+    private fun registerReceiver2BroadCasts(){
+        val filter = IntentFilter(BluetoothAdapter.ACTION_SCAN_MODE_CHANGED)
+        registerReceiver(receiver2, filter)
     }
 
     private fun bAdapterIsNull() : Boolean{
@@ -335,48 +296,75 @@ class ViewBluetoothPairing : SecondViewClass() {
         return !(bAdapterIsEnabled())
     }
 
-    private fun bAdapterIsDescovering() : Boolean{
+    private fun bAdapterIsDiscovering() : Boolean{
         if (bAdapterIsNotNull()){
             return (bAdapter!!.isDiscovering)
         }
         return false
     }
 
-    private fun bAdapterIsNotDescovering() : Boolean{
-        return !(bAdapterIsDescovering())
+    private fun bAdapterIsNotDiscovering() : Boolean{
+        return !(bAdapterIsDiscovering())
     }
 
-    private fun bAdapterStartDescovery(){
+    private fun bAdapterStartDiscovery(){
         if (bAdapterIsNotNull()) {
-            if (bAdapterIsDescovering()){
-                bAdapter!!.cancelDiscovery()
-            }
+            Log.d("Bluetooth", "asking for discoverable")
+            makeBluetoothDiscoverable()
+            Log.d("Bluetooth", "start discovery")
             bAdapter!!.startDiscovery()
         }
     }
 
-    private fun bAdapterEnable(applicationContext: Context){
-        if(bAdapterIsNotEnabled()){
-            bAdapter!!.enable()
+    private fun bAdapterCancelDiscovery(){
+        if (bAdapterIsDiscovering()){
+            bAdapter!!.cancelDiscovery()
         }
-
     }
 
-    private fun bAdapterDisable(){
+    /**
+    * Enable Bluetooth by asking permission
+    */
+    private fun turnBluetoothOn() {
+        //check if blutooth is on/off
+        if (bAdapterIsNull()) {
+            bluetoothStatusTv.text = getText(R.string.blutooth_not_available)
+        } else {
+            bluetoothStatusTv.text = getText(R.string.bluetooth_available)
+            // set image according to bluetooth status
+            if (bAdapterIsEnabled()) {
+                bluetoothIv.setImageResource(R.drawable.icon_bluetooth_on) //Bluetooth is on
+            } else {
+                bluetoothIv.setImageResource(R.drawable.icon_bluetooth_off) //Bluetooth is off
+                Log.d("Bluetooth", "turning on bluetooth")
+                //turn on bluetooth request
+                val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+                startActivityForResult(intent, REQUESTCODEENABLEBLUETOOTH)
+                Log.d("Bluetooth", "bluetooth turned on")
+            }
+        }
+    }
+
+    /**
+     * to turn off bluetooth no need for permission
+     */
+    private fun turnBluetoothOff() {
         if (bAdapterIsEnabled()) {
             // turn off
             bAdapter!!.disable()
         }
+        bluetoothIv.setImageResource(R.drawable.icon_bluetooth_off)
     }
 
-    private fun getArrayAdapter() : ArrayAdapter<String> {
-        return this.arrayAdapter
+    /**
+     * once permission is asked
+     * this method replace turn on bluetooth after permission is asked
+     */
+    private fun bAdapterEnable(){
+        if(bAdapterIsNotEnabled()){
+            bAdapter!!.enable()
+        }
     }
-
-    private fun getDevicesList() : ArrayList<BluetoothDevice> {
-        return this.devicesList
-    }
-
 
     /**
      * This method is required for all devices running API23+

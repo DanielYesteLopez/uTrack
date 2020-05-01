@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.trainingpage.*
 class ViewTraining : SecondViewClass() {
 
     private var presenterTraining = PresenterTraining()
+    private var myBluetoothFragment = FragmentBluetooth()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,8 +22,7 @@ class ViewTraining : SecondViewClass() {
         setContentView(R.layout.trainingpage)
 
         // check bluetooth connection
-        val myBluetoothFragment =
-            FragmentBluetooth()
+
         myBluetoothFragment.show(supportFragmentManager, getString(R.string.notefication))
 
         c_meter.base = SystemClock.elapsedRealtime()
@@ -56,7 +56,7 @@ class ViewTraining : SecondViewClass() {
                 c_meter.start()
                 isWorking = true
                 ispaused = false
-                presenterTraining.onStartTrainigButtonPressed(this@ViewTraining)
+                presenterTraining.onStartTrainingButtonPressed(this@ViewTraining)
             }
         }
 
@@ -81,14 +81,14 @@ class ViewTraining : SecondViewClass() {
                 pauseOffset = SystemClock.elapsedRealtime() - c_meter.base
                 isWorking = false
                 ispaused = true
-                presenterTraining.onPauseTrainigButtonPressed(this@ViewTraining)
+                presenterTraining.onPauseTrainingButtonPressed(this@ViewTraining)
             }
         }
 
         buttonStop.setOnClickListener {
             if(isWorking || ispaused) {
                 buttonPause.callOnClick()
-                presenterTraining.onStopTrainigButtonPressed(this@ViewTraining)
+                presenterTraining.onStopTrainingButtonPressed(this@ViewTraining)
             }
         }
         backButtonTrainingPage.setOnClickListener {
@@ -96,4 +96,6 @@ class ViewTraining : SecondViewClass() {
         }
         // exit on create
     }
+
+
 }

@@ -2,9 +2,7 @@ package com.example.utrack.views
 
 import android.app.Dialog
 import android.content.DialogInterface.OnClickListener
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
 import com.example.utrack.R
@@ -38,10 +36,10 @@ class FragmentBluetooth : MainFragmentClass() {
         } ?: throw IllegalStateException("Activity cannot be null")
     }
     override fun sendPosButtonPressed(fragmentActivity:FragmentActivity){
-        presenterTraining.onConnectDevicesBLuetoothButtonPressed(fragmentActivity)
+        presenterTraining.onConnectDevicesBluetoothButtonPressed(fragmentActivity)
     } // go to bluetooth fragment
 
     override fun sendNegButtonPressed(fragmentActivity: FragmentActivity) {
-        presenterTraining.onStartTrainingBLuetoothButtonPressed(fragmentActivity)
+        presenterTraining.onStartTrainingBluetoothButtonPressed(fragmentActivity)
     }
 }

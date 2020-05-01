@@ -1,5 +1,6 @@
 package com.example.utrack.presenters
 
+import android.bluetooth.BluetoothDevice
 import android.content.Context
 import android.content.Intent
 import android.widget.Toast
@@ -15,34 +16,35 @@ class PresenterTraining {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         ContextCompat.startActivity(applicationContext,intent,null)
     }
-    fun onStopTrainigButtonPressed(applicationContext: Context) {
+    fun onStopTrainingButtonPressed(applicationContext: Context) {
         val myExerciseFragment =
             FragmentShowExercise()
         myExerciseFragment.activity?.supportFragmentManager?.let {
             myExerciseFragment.show(it, R.string.notefication.toString())
         }
     }
-    fun onResumeTrainingButtonPressed(applicationContext: Context?) {
+    fun onResumeTrainingButtonPressed(applicationContext: Context) {
         // TODO("Not yet implemented")
     }
-    fun onStartTrainigButtonPressed(applicationContext: Context?) {
+    fun onStartTrainingButtonPressed(applicationContext: Context) {
         Toast.makeText(applicationContext,
-            applicationContext?.resources?.getString(R.string.trainingprogress),
+            applicationContext.resources.getString(R.string.trainingprogress),
             Toast.LENGTH_SHORT
         ).show()
     }
-    fun onPauseTrainigButtonPressed(applicationContext: Context?) {
+    fun onPauseTrainingButtonPressed(applicationContext: Context) {
         Toast.makeText(
             applicationContext,
-            applicationContext?.resources?.getString(R.string.trainingpaused),
+            applicationContext.resources.getString(R.string.trainingpaused),
             Toast.LENGTH_SHORT
         ).show()
     }
     /* presenter show recommended exercise */
     fun onCanShowExerciseButtonPressed(fragmentActivity:FragmentActivity) {
+        val appContext :Context = fragmentActivity.applicationContext
         Toast.makeText(
-            fragmentActivity.applicationContext,
-            fragmentActivity.resources.getString(R.string.trainingpaused),
+            appContext,
+            appContext.resources.getString(R.string.trainingpaused),
             Toast.LENGTH_SHORT
         ).show()
     }
@@ -92,14 +94,14 @@ class PresenterTraining {
         ContextCompat.startActivity(appContext,intent,null)
     }
     /* presenter bluetooth */
-    fun onConnectDevicesBLuetoothButtonPressed(fragmentActivity: FragmentActivity) {
+    fun onConnectDevicesBluetoothButtonPressed(fragmentActivity: FragmentActivity) {
         val appContext :Context = fragmentActivity.applicationContext
         val intent = Intent(appContext, ViewBluetoothPairing().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         ContextCompat.startActivity(appContext,intent,null)
     }
-    fun onStartTrainingBLuetoothButtonPressed(fragmentActivity: FragmentActivity) {
+    fun onStartTrainingBluetoothButtonPressed(fragmentActivity: FragmentActivity) {
         val appContext :Context = fragmentActivity.applicationContext
         Toast.makeText(
             appContext,
@@ -115,7 +117,17 @@ class PresenterTraining {
         ContextCompat.startActivity(applicationContext,intent,null)
     }
 
-    fun onDiscoverBluetoothButtonPressed(applicationContext: Context){
-
+    fun onBluetoothDeviceChosen(applicationContext: Context,_device: BluetoothDevice) {
+        val deviceName = _device.name
+        //val deviceHardwareAddress = device.address // MAC address
+        Toast.makeText(
+            applicationContext,
+            deviceName,
+            Toast.LENGTH_SHORT
+        ).show()
+        // connect Device
+        // TODO
+        // take user back to training page
+        // TODO
     }
 }
