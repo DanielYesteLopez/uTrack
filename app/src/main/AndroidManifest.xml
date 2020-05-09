@@ -7,7 +7,8 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -41,9 +42,18 @@
         <activity android:name=".views.FragmentShowExercise" />
         <activity android:name=".views.ViewBluetoothPairing" />
 
+        <service
+            android:name=".services.LocationService"
+            android:enabled="true"
+            android:exported="false" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAN6Q4mmYrCuiFe7-9foKmQgcvairVKnSw"/>
+
     </application>
 
 </manifest>

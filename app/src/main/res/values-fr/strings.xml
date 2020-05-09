@@ -99,4 +99,8 @@
     <string name="bluetooth_available">Bluetooth disponible</string>
     <string name="discover_devices">Discobrir dispositivos</string>
     <string name="refresh_discovering">Refresh Scan</string>
+
+    <string name="title_location_permission">Location permission</string>
+    <string name="text_location_permission">please activate Location for better performence</string>
+    <string name="ok">"activate "</string>
 </resources>
