@@ -11,7 +11,10 @@ import com.example.utrack.presenters.PresenterTraining
 
 class FragmentBluetooth : MainFragmentClass() {
 
-    private var presenterTraining = PresenterTraining()
+    private var presenterTraining =
+        this@FragmentBluetooth.activity?.applicationContext?.let {
+        PresenterTraining(it)
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreate(savedInstanceState)
@@ -36,10 +39,10 @@ class FragmentBluetooth : MainFragmentClass() {
         } ?: throw IllegalStateException("Activity cannot be null")
     }
     override fun sendPosButtonPressed(fragmentActivity:FragmentActivity){
-        presenterTraining.onConnectDevicesBluetoothButtonPressed(fragmentActivity)
+        presenterTraining?.onConnectDevicesBluetoothButtonPressed(fragmentActivity)
     } // go to bluetooth fragment
 
     override fun sendNegButtonPressed(fragmentActivity: FragmentActivity) {
-        presenterTraining.onStartTrainingBluetoothButtonPressed(fragmentActivity)
+        presenterTraining?.onStartTrainingBluetoothButtonPressed(fragmentActivity)
     }
 }

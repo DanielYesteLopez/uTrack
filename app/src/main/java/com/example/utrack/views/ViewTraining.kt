@@ -6,10 +6,6 @@ import android.app.AlertDialog
 import android.content.*
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
-import android.hardware.Sensor
-import android.hardware.SensorEvent
-import android.hardware.SensorEventListener
-import android.hardware.SensorManager
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
@@ -17,41 +13,23 @@ import android.os.IBinder
 import android.os.SystemClock
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.utrack.R
 import com.example.utrack.mc.SecondViewClass
 import com.example.utrack.presenters.PresenterTraining
-import com.example.utrack.services.LocationService
+import com.example.utrack.model.services.LocationService
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.trainingpage.*
-import kotlin.math.pow
-import kotlin.math.sqrt
 
-class ViewTraining : SecondViewClass(), SensorEventListener {
+class ViewTraining : SecondViewClass() {
 
     private val TAG = "MainActivity"
     val MY_PERMISSIONS_REQUEST_LOCATION = 99
-    private var locationService: LocationService? = null
-    private var locationUpdateReceiver: BroadcastReceiver? = null
-    private var predictedLocationReceiver: BroadcastReceiver? = null
-    private lateinit var mSensorManager: SensorManager
-    private var mLinerAcceleration: Sensor? = null
-    private var mGyroScope: Sensor? = null
-    private var resume = false
-    private var counterdatareaded : Int = 0
-    private var accelerityAct : Float = 0.0F
-    private var accelerityAnt : Float = 0.0F
-    private var accelerityList : ArrayList<Float>? = null
-    private var velocityActT : Float = 0.0F
-    private var positionActT : Float = 0.0F
-    private var velocityListT : ArrayList<Float>? = null
-    private var positionListT : ArrayList<Float>? = null
-    private var epsilon : Float = 0.1F
-
-    private var presenterTraining = PresenterTraining()
-    private var myBluetoothFragment = FragmentBluetooth()
+    private var presenterTraining : PresenterTraining? = null
+    private var myBluetoothFragment: FragmentBluetooth? = null
 
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,9 +39,13 @@ class ViewTraining : SecondViewClass(), SensorEventListener {
         super.onCreate(savedInstanceState)
         // start activity
         setContentView(R.layout.trainingpage)
+        // ini
+        presenterTraining = PresenterTraining(this@ViewTraining)
+        myBluetoothFragment = FragmentBluetooth()
+
         // check bluetooth connection
-        myBluetoothFragment.show(supportFragmentManager, getString(R.string.notefication))
-        mSensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        myBluetoothFragment.let { it?.show(supportFragmentManager, getString(R.string.notefication)) }
+        //mSensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -79,68 +61,17 @@ class ViewTraining : SecondViewClass(), SensorEventListener {
         } else {
             startService()
         }
+        presenterTraining.let { it?.registerSensorListenerAccelerate() }
 
-        locationUpdateReceiver = object : BroadcastReceiver() {
-            override fun onReceive(context: Context, intent: Intent) {
-                val newLocation :Location? = intent.getParcelableExtra("location")
-                val latLng = LatLng(newLocation!!.latitude, newLocation.longitude)
-                this@ViewTraining.locationService?.let{
-                    if (it.isLogging) {
-                        Log.d(TAG,"->> $latLng")
-                        // --- >> findViewById<TextView>(R.id.location).text = latLng.toString()
-                        Log.d(TAG,"is Logging")
-                    }
-                }
-            }
+        locationUpdateReceiver.let{
+            LocalBroadcastManager.getInstance(this
+            ).registerReceiver(it, IntentFilter("LocationUpdated"))
         }
 
-        predictedLocationReceiver = object : BroadcastReceiver() {
-            override fun onReceive(context: Context, intent: Intent) {
-                val predictedLocation: Location? = intent.getParcelableExtra("location")
-                val latLng = LatLng(predictedLocation!!.latitude, predictedLocation.longitude)
-                Log.d(TAG,"$latLng")
-            }
+        predictedLocationReceiver.let{
+            LocalBroadcastManager.getInstance(this
+            ).registerReceiver(it, IntentFilter("PredictLocation"))
         }
-
-        locationUpdateReceiver?.let{
-            LocalBroadcastManager.getInstance(
-                this
-            ).registerReceiver(
-                it,
-                IntentFilter("LocationUpdated"
-                )
-            )
-        }
-
-        predictedLocationReceiver?.let{
-            LocalBroadcastManager.getInstance(
-                this
-            ).registerReceiver(
-                it,
-                IntentFilter("PredictLocation"
-                )
-            )
-        }
-
-        checkSensor()
-        mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION)?.let {
-            mLinerAcceleration = it
-        }
-        mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)?.let {
-            mGyroScope = it
-        }
-        accelerityAct = 0.0F
-        accelerityAnt = 0.0F
-        accelerityList = ArrayList()
-        accelerityList?.add(accelerityAct)
-        counterdatareaded = 0
-        velocityActT = 0.0F
-        positionActT  = 0.0F
-        velocityListT  = ArrayList()
-        positionListT = ArrayList()
-        velocityListT?.add(velocityActT)
-        positionListT?.add(positionActT)
-        epsilon = 0.01F
 
         c_meter.base = SystemClock.elapsedRealtime()
 
@@ -173,16 +104,14 @@ class ViewTraining : SecondViewClass(), SensorEventListener {
                 c_meter.start()
                 isWorking = true
                 ispaused = false
-                resumeReading()
-                this@ViewTraining.locationService?.startLogging()
-                presenterTraining.onStartTrainingButtonPressed(this@ViewTraining)
+                presenterTraining.let {  it?.onStartTrainingButtonPressed(this@ViewTraining) }
             }
         }
 
         buttonResume.setOnClickListener {
             if (!isWorking) {
                 buttonStart.callOnClick()
-                presenterTraining.onResumeTrainingButtonPressed(this@ViewTraining)
+                //presenterTraining.let { it?.onResumeTrainingButtonPressed(this@ViewTraining) }
             }
         }
 
@@ -200,22 +129,50 @@ class ViewTraining : SecondViewClass(), SensorEventListener {
                 pauseOffset = SystemClock.elapsedRealtime() - c_meter.base
                 isWorking = false
                 ispaused = true
-                presenterTraining.onPauseTrainingButtonPressed(this@ViewTraining)
+                presenterTraining.let { it?.onPauseTrainingButtonPressed(this@ViewTraining)  }
             }
         }
 
         buttonStop.setOnClickListener {
             if(isWorking || ispaused) {
                 buttonPause.callOnClick()
-                pauseReading()
-                this@ViewTraining.locationService?.stopLogging()
-                presenterTraining.onStopTrainingButtonPressed(this@ViewTraining)
+                val myExerciseFragment = FragmentShowExercise()
+                myExerciseFragment.show(supportFragmentManager, getString(R.string.notefication))
+                //presenterTraining.let { it?.onStopTrainingButtonPressed(this@ViewTraining)  }
             }
         }
         backButtonTrainingPage.setOnClickListener {
-            presenterTraining.onBackTrainingButtonPressed(this@ViewTraining)
+            presenterTraining.let { it?.onBackTrainingButtonPressed(this@ViewTraining) }
         }
         // exit on create
+    }
+
+
+    private var locationUpdateReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val newLocation = intent.getParcelableExtra<Location>("location")
+            val latLng = LatLng(newLocation?.latitude!!, newLocation.longitude)
+//            findViewById<TextView>(R.id.location).text = latLng.toString()
+//            findViewById<TextView>(R.id.liner).text = (presenter.let { it?.getAcceleration() }).toString()
+//            findViewById<TextView>(R.id.speed_trapezi).text = (presenter.let { it?.getSpeedTrapezi() }).toString()
+//            findViewById<TextView>(R.id.distance_trapezi).text = (presenter.let { it?.getPositionTrapeze() }).toString()
+//            findViewById<TextView>(R.id.speed_gps).text = (presenter.let { it?.getSpeedGPS() }).toString()
+//            findViewById<TextView>(R.id.distance_gps).text = (presenter.let { it?.getDistanceGPS() }).toString()
+            var formatTemplate = "%3f%3s"
+            findViewById<TextView>(R.id.cadenceratetext).text = formatTemplate.format((presenterTraining.let { it?.getAcceleration() }),"rpm")
+            findViewById<TextView>(R.id.speedratetext).text = formatTemplate.format((presenterTraining.let { it?.getSpeedGPS() }),"m/s")
+            //findViewById<>(R.id.).text = (presenterTraining.let { it?.getDistanceGPS() }).toString()
+
+            presenterTraining.let { it?.onReceiveLocation(latLng) }
+        }
+    }
+
+    private var predictedLocationReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val predictedLocation = intent.getParcelableExtra<Location>("location")
+            val latLng = LatLng(predictedLocation?.latitude!!, predictedLocation.longitude)
+            presenterTraining.let { it?.onReceivePredictedLocation(latLng)}
+        }
     }
 
     private val serviceConnection = object : ServiceConnection {
@@ -230,8 +187,7 @@ class ViewTraining : SecondViewClass(), SensorEventListener {
             val name = className.className
             Log.d(TAG,"connection established")
             if (name.endsWith("LocationService")) {
-                locationService = (service as LocationService.LocationServiceBinder).service
-                this@ViewTraining.locationService?.startUpdatingLocation()
+                presenterTraining.let { it?.onServiceConnected(className, service) }
             }
         }
 
@@ -243,21 +199,15 @@ class ViewTraining : SecondViewClass(), SensorEventListener {
          */
         override fun onServiceDisconnected(className: ComponentName) {
             if (className.className == "LocationService") {
-                this@ViewTraining.locationService?.stopUpdatingLocation()
-                locationService = null
+                presenterTraining.let { it?.onServiceDisconnected(className) }
             }
         }
     }
 
     public override fun onDestroy() {
         try {
-            if (locationUpdateReceiver != null) {
-                unregisterReceiver(locationUpdateReceiver)
-            }
-
-            if (predictedLocationReceiver != null) {
-                unregisterReceiver(predictedLocationReceiver)
-            }
+            unregisterReceiver(locationUpdateReceiver)
+            unregisterReceiver(predictedLocationReceiver)
         } catch (ex: IllegalArgumentException) {
             ex.printStackTrace()
         }
@@ -265,8 +215,7 @@ class ViewTraining : SecondViewClass(), SensorEventListener {
     }
 
     override fun onResume() {
-        super.onResume()
-        mSensorManager.registerListener(this, mLinerAcceleration, SensorManager.SENSOR_DELAY_NORMAL)
+        presenterTraining.let { it?.registerSensorListenerAccelerate() }
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -284,19 +233,12 @@ class ViewTraining : SecondViewClass(), SensorEventListener {
             //startService()
 
         }
+        super.onResume()
     }
 
     override fun onPause() {
+        presenterTraining.let { it?.unRegisterSensorListenerAccelerate() }
         super.onPause()
-        mSensorManager.unregisterListener(this)
-    }
-
-    private fun resumeReading() {
-        this.resume = true
-    }
-
-    private fun pauseReading() {
-        this.resume = false
     }
 
     private fun checkLocationPermission(): Boolean {
@@ -383,117 +325,5 @@ class ViewTraining : SecondViewClass(), SensorEventListener {
             this.application.startService(locationServiceStart)
         }
         this.application.bindService(locationServiceStart, serviceConnection, Context.BIND_AUTO_CREATE)
-    }
-
-    private fun checkSensor() {
-        // see if the phone has the sensor
-        if (mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION) != null) {
-            // Success!
-            Log.d("Sensor Manager", "yes liner accelerometer")
-        } else {
-            // Failure!
-            Log.d("Sensor Manager", "no liner accelerometer")
-        }
-        // see if the phone has the sensor
-        /*if (mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE) != null) {
-            // Success!
-            Log.d("Sensor Manager", "yes gyroscope")
-        } else {
-            // Failure!
-            Log.d("Sensor Manager", "no gyroscope")
-        }*/
-    }
-
-    private fun computeSumXYZ(a: Float, b: Float, c: Float): Float {
-        val a_2 = a.pow(2)
-        val b_2 = b.pow(2)
-        val c_2 = c.pow(2)
-        var res = (a_2 + b_2 + c_2)
-        res = sqrt(res)
-        return res
-    }
-
-    private fun doubleIntegration(
-        _acc_act : Float,
-        _acc_ant : Float,
-        _velocity : Float,
-        _position : Float,
-        _delta_t : Int
-    ) : ArrayList<Float> {
-        val count = counterdatareaded
-        val accAct = _acc_act
-        val accAnt = _acc_ant
-
-        var velocity = _velocity
-        var position = _position
-        if (count == 1) {
-            velocity = _velocity
-            position = _position
-        }
-        if (count >= 2){
-            if(accAct < accAnt){
-                velocity = (integrationTrapeze(accAnt, accAct, _delta_t))
-            }else {
-                velocity = (integrationTrapeze(accAnt, accAct, _delta_t))
-            }
-            position = (integrationTrapeze(_velocity, velocity, _delta_t))
-        }
-        val res : ArrayList<Float> = ArrayList()
-        res.add(velocity)
-        res.add(position)
-        return res
-    }
-
-    /**
-     * h = 1 estamos usando dos puntos a y b sin tomar puntos en medio
-     *
-     */
-    private fun integrationTrapeze(_acc_ant : Float, _acc_act : Float, _delta_t: Int) : Float{
-        val fa = _acc_ant
-        val fb = _acc_act
-        var value = (fa + fb) / 2
-        value *= _delta_t
-        return value
-    }
-
-    /**
-     * sensor listener
-     */
-    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-        Log.d("sensor:", "accuracy changed")
-    }
-
-    /**
-     * sensor listener
-     */
-    override fun onSensorChanged(event: SensorEvent?) {
-        if (event != null && resume) {
-            if (event.sensor.type == Sensor.TYPE_LINEAR_ACCELERATION) {
-                accelerityAct = computeSumXYZ(event.values[0], event.values[1], event.values[2])
-                if (accelerityAct < epsilon){
-                    accelerityAct = 0.0F
-                }
-                counterdatareaded += 1
-                // delta_t change to real value
-                val valuesT =
-                    doubleIntegration(
-                        accelerityAct,
-                        accelerityAnt,
-                        velocityActT,
-                        positionActT,
-                        100
-                    )
-                velocityActT = valuesT[0]
-                positionActT = valuesT[1]
-                accelerityList?.add(accelerityAct)
-                velocityListT?.add(velocityActT)
-                positionListT?.add(positionActT)
-                // --- >> findViewById<TextView>(R.id.liner).text = accelerityAct.toString()
-                val aux = velocityActT/10
-                // --- >> findViewById<TextView>(R.id.speed_trapezi).text = aux.toString()
-                // --- >> findViewById<TextView>(R.id.distance_trapezi).text = positionAct_t.toString()
-                accelerityAnt = accelerityAct
-            }
-        }
     }
 }

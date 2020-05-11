@@ -1,4 +1,4 @@
-package com.example.utrack.services
+package com.example.utrack.model.services
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -105,13 +105,13 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
      */
     override fun onLocationChanged(newLocation: Location?) {
         newLocation?.let{
-            Log.d(LOG_TAG, "Location -> (" + it.latitude + "," + it.longitude + ")")
             gpsCount++
             if (isLogging) {
                 Log.d(LOG_TAG, "going to filter this location")
-                // TODO come see me
-                val bool = filterAndAddLocation(it)
-                Log.d(LOG_TAG, "this location got $bool")
+
+                if (filterAndAddLocation(it)){
+                    Log.d(LOG_TAG, "Location -> (" + it.latitude + "," + it.longitude + ")")
+                }
             }
             Log.d(LOG_TAG, "Broadcast for the new location")
             val intent = Intent("LocationUpdated")
@@ -231,11 +231,11 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
                 )
                 gpsCount = 0
             } catch (e: IllegalArgumentException) {
-                Log.e(LOG_TAG, e.localizedMessage)
+                Log.e(LOG_TAG, e.localizedMessage!!)
             } catch (e: SecurityException) {
-                Log.e(LOG_TAG, e.localizedMessage)
+                Log.e(LOG_TAG, e.localizedMessage!!)
             } catch (e: RuntimeException) {
-                Log.e(LOG_TAG, e.localizedMessage)
+                Log.e(LOG_TAG, e.localizedMessage!!)
             }
         }
     }
@@ -373,9 +373,33 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
         val notification = notificationBuilder.setOngoing(true)
             .setSmallIcon(R.mipmap.ic_launcher)
             .setPriority(PRIORITY_MIN)
-            .setCategory(Notification.CATEGORY_SERVICE)
+            //.setCategory(Notification.CATEGORY_SERVICE)
             .build()
         startForeground(101, notification)
+    }
+
+    private fun getLastLocation() : Location {
+        if(locationList.isEmpty()){
+            throw java.lang.Exception("Location is empty")
+        }else if (locationList.size == 1){
+            throw java.lang.Exception("Location is one")
+        }
+        return locationList[locationList.lastIndex-1]
+    }
+
+    private fun getActualLocation() : Location {
+        if(locationList.isEmpty()){
+            throw java.lang.Exception("Location is empty")
+        }
+        return locationList.last()
+    }
+
+    fun getLastLocationSpeed() : Float {
+        return getActualLocation().speed
+    }
+
+    fun getDistanceLocations() : Float {
+        return getLastLocation().distanceTo(getActualLocation())
     }
 
     /**

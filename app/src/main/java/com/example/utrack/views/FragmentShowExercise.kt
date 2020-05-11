@@ -1,6 +1,7 @@
 package com.example.utrack.views
 
 import android.app.Dialog
+import android.content.Context
 import android.content.DialogInterface.OnClickListener
 import android.os.Bundle
 import android.widget.Toast
@@ -11,7 +12,10 @@ import com.example.utrack.mc.MainFragmentClass
 import com.example.utrack.presenters.PresenterTraining
 
 class FragmentShowExercise : MainFragmentClass() {
-    private var presenterTraining = PresenterTraining()
+    private var presenterTraining =
+        this@FragmentShowExercise.activity?.applicationContext?.let {
+        PresenterTraining(it)
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreate(savedInstanceState)
@@ -43,18 +47,37 @@ class FragmentShowExercise : MainFragmentClass() {
     }
 
     override fun sendPosButtonPressed(fragmentActivity: FragmentActivity) {
+        // TODO
         // user accept and continue session (the user do tha last exercise )
         // user training progress should partitioned and the training should continue
-        presenterTraining.onPosShowExerciseButtonPressed(fragmentActivity)
+        //presenterTraining?.onPosShowExerciseButtonPressed(fragmentActivity)
+        Toast.makeText(
+            fragmentActivity,
+            fragmentActivity.getString(R.string.trainingawesome),
+            Toast.LENGTH_SHORT
+        ).show()
     } // do recomended exercise
 
     override fun sendCanButtonPressed(fragmentActivity: FragmentActivity) {
         // User cancelled the dialog
-        presenterTraining.onCanShowExerciseButtonPressed(fragmentActivity)
+        Toast.makeText(
+           fragmentActivity,
+           fragmentActivity.resources.getString(R.string.trainingpaused),
+            Toast.LENGTH_SHORT
+        ).show()
+        //presenterTraining?.onCanShowExerciseButtonPressed(fragmentActivity)
     } // continue Session should resume the training
 
     override fun sendNegButtonPressed(fragmentActivity: FragmentActivity) {
         // user finish training
-        presenterTraining.onNegShowExerciseButtonPressed(fragmentActivity)
+        Toast.makeText(
+            fragmentActivity,
+            fragmentActivity.getString(R.string.trainingsad),
+            Toast.LENGTH_SHORT
+        ).show()
+        val mySaveFragment =
+            FragmentSaveData()
+        mySaveFragment.show(fragmentActivity.supportFragmentManager, getString(R.string.notefication))
+        //presenterTraining?.onNegShowExerciseButtonPressed(fragmentActivity)
     } // stop Session (user is been asked nether save the session or not)
 }

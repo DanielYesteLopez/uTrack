@@ -43,7 +43,7 @@
         <activity android:name=".views.ViewBluetoothPairing" />
 
         <service
-            android:name=".services.LocationService"
+            android:name="com.example.utrack.model.services.LocationService"
             android:enabled="true"
             android:exported="false" />
 

@@ -11,7 +11,10 @@ import com.example.utrack.presenters.PresenterTraining
 
 class FragmentSaveData : MainFragmentClass() {
 
-    private var presenterTraining = PresenterTraining()
+    private var presenterTraining =
+        this@FragmentSaveData.activity?.applicationContext?.let {
+        PresenterTraining(it)
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreate(savedInstanceState)
@@ -37,14 +40,16 @@ class FragmentSaveData : MainFragmentClass() {
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
+    // BUG when save button pressed no action is taken  TODO fix it
     override fun sendPosButtonPressed(fragmentActivity: FragmentActivity){
         // TODO("Guardar la data de la session en la base de datos")
-        presenterTraining.onPosSaveDataButtonPressed(fragmentActivity)
+        presenterTraining?.onPosSaveDataButtonPressed(fragmentActivity)
     } // go to result layout
 
+    // BUG when no save button pressed no action is taken  TODO fix it
     override fun sendNegButtonPressed(fragmentActivity: FragmentActivity){
         // User cancelled the dialog
         // nothing is saved
-        presenterTraining.onNegSaveDataButtonPressed(fragmentActivity)
+        presenterTraining?.onNegSaveDataButtonPressed(fragmentActivity)
     } // go to main activity
 }

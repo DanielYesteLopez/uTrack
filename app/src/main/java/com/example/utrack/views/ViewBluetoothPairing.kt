@@ -24,7 +24,7 @@ import kotlinx.coroutines.delay
 
 class ViewBluetoothPairing : SecondViewClass() {
 
-    private var presenterTraining = PresenterTraining()
+    private var presenterTraining = PresenterTraining(this@ViewBluetoothPairing.applicationContext)
 
     private val REQUESTCODEENABLEBLUETOOTH: Int = 1
     private val REQUESTCODEDISCOVERABLEBLUETOOTH: Int = 2
