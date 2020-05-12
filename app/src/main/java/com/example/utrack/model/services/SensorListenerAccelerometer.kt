@@ -186,6 +186,13 @@ class SensorListenerAccelerometer(context: Context) : SensorEventListener {
         this.accelerityAct = accelerity
     }
 
+    fun getAccelerationAVG() : Double {
+        var totalAcceleration : Float = 0f
+        for (i in 0 until accelerityList?.size!! - 1) {
+            totalAcceleration += accelerityList!![i]
+        }
+        return (totalAcceleration/ accelerityList?.size!!).toDouble()
+    }
 
     fun registerListener() {
         mSensorManager.registerListener(this, mLinerAcceleration, SensorManager.SENSOR_DELAY_NORMAL)

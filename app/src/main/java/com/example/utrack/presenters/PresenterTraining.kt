@@ -61,6 +61,12 @@ class PresenterTraining private constructor(context: Context) {
         ).show()
     }
 
+    fun getTrainigInfo(): ArrayList<Double>? {
+        val info = locationService?.getTrainingLocationInfo()
+        info?.add(sensorListenerAccelerometro.getAccelerationAVG())
+        return info
+    }
+
     fun onReceiveLocation(latLng: LatLng) {
         this.locationService?.let{
             if (it.isLogging) {
@@ -114,7 +120,7 @@ class PresenterTraining private constructor(context: Context) {
     fun getSpeedGPS() : Float {
         var value = 0.0F
         try {
-            value = locationService.let { it?.getLastLocationSpeed()!! }
+            value = locationService.let { it?.getLocationSpeed()!! }
         }catch (e : Exception){
             Log.d(TAG, "error getting speed GPS")
         }

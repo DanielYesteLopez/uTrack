@@ -19,6 +19,7 @@ import java.io.FileWriter
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 @Suppress("DEPRECATION")
 class LocationService: Service(), LocationListener, GpsStatus.Listener {
@@ -42,6 +43,11 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
     private val gpsFreqInMillis = 5000
     private val gpsFreqInDistance = 2  // in meters
     var isLogging: Boolean = false
+
+    private var currentTimeInMillis : Long = 0L
+    private var elapsedTimeInSeconds : Long = 0L
+    private var totalDistanceInMeters : Float = 0f
+    private var totalSpeedInMpS = 0f
 
     init {
         isLocationManagerUpdatingLocation = false
@@ -178,16 +184,28 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
      */
     fun stopLogging() {
         if (locationList.size > 1 /*&& batteryLevelArray.size > 1*/) {
-            val currentTimeInMillis = SystemClock.elapsedRealtimeNanos() / 1000000
-            val elapsedTimeInSeconds = (currentTimeInMillis - runStartTimeInMillis) / 1000
-            var totalDistanceInMeters = 0f
+            currentTimeInMillis = SystemClock.elapsedRealtimeNanos() / 1000000
+            elapsedTimeInSeconds = (currentTimeInMillis - runStartTimeInMillis) / 1000
+            totalDistanceInMeters = 0f
+            totalSpeedInMpS = 0f
             for (i in 0 until locationList.size - 1) {
                 totalDistanceInMeters += locationList[i].distanceTo(locationList[i + 1])
+                totalSpeedInMpS += getLocationSpeed()
             }
-            Log.d(LOG_TAG,"saving log $elapsedTimeInSeconds $totalDistanceInMeters")
-            saveLog(elapsedTimeInSeconds, totalDistanceInMeters.toDouble(), gpsCount)
+
+            //Log.d(LOG_TAG,"saving log $elapsedTimeInSeconds $totalDistanceInMeters")
+            //saveLog(elapsedTimeInSeconds, totalDistanceInMeters.toDouble(), gpsCount)
         }
         isLogging = false
+    }
+
+    fun getTrainingLocationInfo() : ArrayList<Double> {
+        var ret : ArrayList<Double> = ArrayList()
+        ret.add(elapsedTimeInSeconds.toDouble())
+        ret.add(totalDistanceInMeters.toDouble())
+        val avgSpeed = (totalSpeedInMpS/locationList.size).toDouble()
+        ret.add(avgSpeed)
+        return ret
     }
 
     /**
@@ -394,7 +412,7 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
         return locationList.last()
     }
 
-    fun getLastLocationSpeed() : Float {
+    fun getLocationSpeed() : Float {
         return getActualLocation().speed
     }
 
