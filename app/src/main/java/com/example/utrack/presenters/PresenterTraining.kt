@@ -23,7 +23,7 @@ class PresenterTraining {
         }
     }
     fun onResumeTrainingButtonPressed(applicationContext: Context?) {
-        // TODO("Not yet implemented")
+        // TODO("Not implemented yet")
     }
     fun onStartTrainigButtonPressed(applicationContext: Context?) {
         Toast.makeText(applicationContext,
