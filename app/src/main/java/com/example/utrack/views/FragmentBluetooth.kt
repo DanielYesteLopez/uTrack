@@ -2,20 +2,15 @@ package com.example.utrack.views
 
 import android.app.Dialog
 import android.content.DialogInterface.OnClickListener
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
 import com.example.utrack.R
 import com.example.utrack.mc.MainFragmentClass
-import com.example.utrack.presenters.PresenterTraining
 
 class FragmentBluetooth : MainFragmentClass() {
-
-    private var presenterTraining =
-        this@FragmentBluetooth.activity?.applicationContext?.let {
-        PresenterTraining(it)
-    }
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreate(savedInstanceState)
         return getFragmentDialog()
@@ -39,10 +34,19 @@ class FragmentBluetooth : MainFragmentClass() {
         } ?: throw IllegalStateException("Activity cannot be null")
     }
     override fun sendPosButtonPressed(fragmentActivity:FragmentActivity){
-        presenterTraining?.onConnectDevicesBluetoothButtonPressed(fragmentActivity)
+        Toast.makeText(this.context,
+            getString(R.string.choose_device),
+            Toast.LENGTH_SHORT
+        ).show()
+        val intent = Intent(this.context, ViewBluetoothPairing().javaClass)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent,null)
     } // go to bluetooth fragment
 
     override fun sendNegButtonPressed(fragmentActivity: FragmentActivity) {
-        presenterTraining?.onStartTrainingBluetoothButtonPressed(fragmentActivity)
+        Toast.makeText(this.context,
+            this.resources.getString(R.string.trainingstart),
+            Toast.LENGTH_SHORT
+        ).show()
     }
 }

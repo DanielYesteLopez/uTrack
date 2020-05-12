@@ -19,12 +19,11 @@ import com.example.utrack.R
 import com.example.utrack.mc.SecondViewClass
 import com.example.utrack.presenters.PresenterTraining
 import kotlinx.android.synthetic.main.activity_bluetooth_pairing.*
-import kotlinx.coroutines.delay
 
 
 class ViewBluetoothPairing : SecondViewClass() {
 
-    private var presenterTraining = PresenterTraining(this@ViewBluetoothPairing.applicationContext)
+    //private var presenterTraining = PresenterTraining(this@ViewBluetoothPairing.applicationContext)
 
     private val REQUESTCODEENABLEBLUETOOTH: Int = 1
     private val REQUESTCODEDISCOVERABLEBLUETOOTH: Int = 2
@@ -149,7 +148,7 @@ class ViewBluetoothPairing : SecondViewClass() {
         // back button
         backButtonBluetoothPage.setOnClickListener {
             turnBluetoothOff() //turn off bluetooth if user press back button
-            presenterTraining.onBackBluetoothButtonPressed(applicationContext) // go back to exercise
+            PresenterTraining.getInstance(applicationContext).onBackBluetoothButtonPressed() // go back to exercise
         }
     }
 
@@ -210,9 +209,7 @@ class ViewBluetoothPairing : SecondViewClass() {
             // 4 Set item click listener
             pairedTv.onItemClickListener = OnItemClickListener { _, _, position, _ ->
                 val device: BluetoothDevice = devicesList[position]
-                presenterTraining.onBluetoothDeviceChosen(
-                    this@ViewBluetoothPairing,
-                    device)
+                PresenterTraining.getInstance(applicationContext).onBluetoothDeviceChosen(device)
             }
         }
     }

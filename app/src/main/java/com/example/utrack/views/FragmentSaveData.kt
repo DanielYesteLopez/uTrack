@@ -2,19 +2,15 @@ package com.example.utrack.views
 
 import android.app.Dialog
 import android.content.DialogInterface.OnClickListener
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
 import com.example.utrack.R
 import com.example.utrack.mc.MainFragmentClass
-import com.example.utrack.presenters.PresenterTraining
 
 class FragmentSaveData : MainFragmentClass() {
-
-    private var presenterTraining =
-        this@FragmentSaveData.activity?.applicationContext?.let {
-        PresenterTraining(it)
-    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreate(savedInstanceState)
@@ -40,16 +36,31 @@ class FragmentSaveData : MainFragmentClass() {
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
-    // BUG when save button pressed no action is taken  TODO fix it
     override fun sendPosButtonPressed(fragmentActivity: FragmentActivity){
         // TODO("Guardar la data de la session en la base de datos")
-        presenterTraining?.onPosSaveDataButtonPressed(fragmentActivity)
+        Toast.makeText(
+            this.context,
+            getString(R.string.sessionsaved),
+            Toast.LENGTH_SHORT
+        ).show()
+        val intent = Intent(this.context, ViewData().javaClass)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent,null)
     } // go to result layout
 
-    // BUG when no save button pressed no action is taken  TODO fix it
     override fun sendNegButtonPressed(fragmentActivity: FragmentActivity){
         // User cancelled the dialog
         // nothing is saved
-        presenterTraining?.onNegSaveDataButtonPressed(fragmentActivity)
+        Toast.makeText(
+            this.context,
+            getString(R.string.sessionnotsaved),
+            Toast.LENGTH_SHORT
+        ).show()
+        val intent = Intent(this.context, ViewMainPage().javaClass)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent,null)
+
     } // go to main activity
 }

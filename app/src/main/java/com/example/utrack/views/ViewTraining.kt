@@ -28,7 +28,7 @@ class ViewTraining : SecondViewClass() {
 
     private val TAG = "MainActivity"
     val MY_PERMISSIONS_REQUEST_LOCATION = 99
-    private var presenterTraining : PresenterTraining? = null
+    //private var presenterTraining : PresenterTraining? = null
     private var myBluetoothFragment: FragmentBluetooth? = null
 
     @SuppressLint("SourceLockedOrientationActivity")
@@ -40,12 +40,10 @@ class ViewTraining : SecondViewClass() {
         // start activity
         setContentView(R.layout.trainingpage)
         // ini
-        presenterTraining = PresenterTraining(this@ViewTraining)
+        PresenterTraining.getInstance(this@ViewTraining)
         myBluetoothFragment = FragmentBluetooth()
-
         // check bluetooth connection
         myBluetoothFragment.let { it?.show(supportFragmentManager, getString(R.string.notefication)) }
-        //mSensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -61,7 +59,7 @@ class ViewTraining : SecondViewClass() {
         } else {
             startService()
         }
-        presenterTraining.let { it?.registerSensorListenerAccelerate() }
+        PresenterTraining.getInstance(this@ViewTraining).registerSensorListenerAccelerate()
 
         locationUpdateReceiver.let{
             LocalBroadcastManager.getInstance(this
@@ -104,14 +102,14 @@ class ViewTraining : SecondViewClass() {
                 c_meter.start()
                 isWorking = true
                 ispaused = false
-                presenterTraining.let {  it?.onStartTrainingButtonPressed(this@ViewTraining) }
+                PresenterTraining.getInstance(this@ViewTraining).onStartTrainingButtonPressed()
             }
         }
 
         buttonResume.setOnClickListener {
             if (!isWorking) {
                 buttonStart.callOnClick()
-                //presenterTraining.let { it?.onResumeTrainingButtonPressed(this@ViewTraining) }
+                PresenterTraining.getInstance(this@ViewTraining).onResumeTrainingButtonPressed()
             }
         }
 
@@ -129,7 +127,7 @@ class ViewTraining : SecondViewClass() {
                 pauseOffset = SystemClock.elapsedRealtime() - c_meter.base
                 isWorking = false
                 ispaused = true
-                presenterTraining.let { it?.onPauseTrainingButtonPressed(this@ViewTraining)  }
+                PresenterTraining.getInstance(this@ViewTraining).onPauseTrainingButtonPressed()
             }
         }
 
@@ -138,11 +136,11 @@ class ViewTraining : SecondViewClass() {
                 buttonPause.callOnClick()
                 val myExerciseFragment = FragmentShowExercise()
                 myExerciseFragment.show(supportFragmentManager, getString(R.string.notefication))
-                //presenterTraining.let { it?.onStopTrainingButtonPressed(this@ViewTraining)  }
+                PresenterTraining.getInstance(this@ViewTraining).onStopTrainingButtonPressed()
             }
         }
         backButtonTrainingPage.setOnClickListener {
-            presenterTraining.let { it?.onBackTrainingButtonPressed(this@ViewTraining) }
+            PresenterTraining.getInstance(this@ViewTraining).onBackTrainingButtonPressed()
         }
         // exit on create
     }
@@ -158,12 +156,15 @@ class ViewTraining : SecondViewClass() {
 //            findViewById<TextView>(R.id.distance_trapezi).text = (presenter.let { it?.getPositionTrapeze() }).toString()
 //            findViewById<TextView>(R.id.speed_gps).text = (presenter.let { it?.getSpeedGPS() }).toString()
 //            findViewById<TextView>(R.id.distance_gps).text = (presenter.let { it?.getDistanceGPS() }).toString()
-            var formatTemplate = "%3f%3s"
-            findViewById<TextView>(R.id.cadenceratetext).text = formatTemplate.format((presenterTraining.let { it?.getAcceleration() }),"rpm")
-            findViewById<TextView>(R.id.speedratetext).text = formatTemplate.format((presenterTraining.let { it?.getSpeedGPS() }),"m/s")
+            val formatTemplate = "%2f%3s"
+            findViewById<TextView>(R.id.cadenceratetext).text =
+                formatTemplate.format(
+                    PresenterTraining.getInstance(this@ViewTraining).getAcceleration(),"rpm")
+            findViewById<TextView>(R.id.speedratetext).text =
+                formatTemplate.format(
+                    PresenterTraining.getInstance(this@ViewTraining).getSpeedGPS(),"m/s")
             //findViewById<>(R.id.).text = (presenterTraining.let { it?.getDistanceGPS() }).toString()
-
-            presenterTraining.let { it?.onReceiveLocation(latLng) }
+            PresenterTraining.getInstance(this@ViewTraining).onReceiveLocation(latLng)
         }
     }
 
@@ -171,7 +172,7 @@ class ViewTraining : SecondViewClass() {
         override fun onReceive(context: Context, intent: Intent) {
             val predictedLocation = intent.getParcelableExtra<Location>("location")
             val latLng = LatLng(predictedLocation?.latitude!!, predictedLocation.longitude)
-            presenterTraining.let { it?.onReceivePredictedLocation(latLng)}
+            PresenterTraining.getInstance(this@ViewTraining).onReceivePredictedLocation(latLng)
         }
     }
 
@@ -187,7 +188,7 @@ class ViewTraining : SecondViewClass() {
             val name = className.className
             Log.d(TAG,"connection established")
             if (name.endsWith("LocationService")) {
-                presenterTraining.let { it?.onServiceConnected(className, service) }
+                PresenterTraining.getInstance(this@ViewTraining).onServiceConnected(service)
             }
         }
 
@@ -199,7 +200,7 @@ class ViewTraining : SecondViewClass() {
          */
         override fun onServiceDisconnected(className: ComponentName) {
             if (className.className == "LocationService") {
-                presenterTraining.let { it?.onServiceDisconnected(className) }
+                PresenterTraining.getInstance(this@ViewTraining).onServiceDisconnected()
             }
         }
     }
@@ -215,7 +216,7 @@ class ViewTraining : SecondViewClass() {
     }
 
     override fun onResume() {
-        presenterTraining.let { it?.registerSensorListenerAccelerate() }
+        PresenterTraining.getInstance(this@ViewTraining).registerSensorListenerAccelerate()
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -237,7 +238,7 @@ class ViewTraining : SecondViewClass() {
     }
 
     override fun onPause() {
-        presenterTraining.let { it?.unRegisterSensorListenerAccelerate() }
+        PresenterTraining.getInstance(this@ViewTraining).unRegisterSensorListenerAccelerate()
         super.onPause()
     }
 
