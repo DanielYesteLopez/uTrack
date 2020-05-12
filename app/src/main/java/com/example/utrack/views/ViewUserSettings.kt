@@ -22,8 +22,8 @@ class ViewUserSettings : SecondViewClass() {
         val backButton = findViewById<ImageButton>(R.id.backButtonUserSettingsPage)
         backButton.setOnClickListener {
             onBackUserSettingsButtonPressed()
-
         }
+
         val saveButtonUserSettings = findViewById<ImageButton>(R.id.saveButtonAccountSettings)
         saveButtonUserSettings.setOnClickListener{
             val frameSizeValue = findViewById<EditText>(R.id.editTextFrameSize).text.toString()

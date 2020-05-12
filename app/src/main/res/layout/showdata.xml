@@ -47,10 +47,14 @@
             app:srcCompat="@android:drawable/ic_menu_upload" />
     </LinearLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </ScrollView>
+    <ListView
+        android:id="@+id/showDataList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:foreground="@color/appMainColor"
+        android:foregroundGravity="top|bottom|center_vertical|center|center_horizontal"
+        android:keepScreenOn="false"
+        android:verticalScrollbarPosition="defaultPosition" />
 
 </LinearLayout>
