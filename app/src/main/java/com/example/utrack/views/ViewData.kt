@@ -8,7 +8,7 @@ import com.example.utrack.mc.SecondViewClass
 import com.example.utrack.presenters.PresenterShowData
 
 class ViewData : SecondViewClass() {
-    var presenterShowData : PresenterShowData? = null
+    //var presenterShowData : PresenterShowData? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,14 +16,12 @@ class ViewData : SecondViewClass() {
         onCreateHideNavBar()
 
         setContentView(R.layout.showdata)
-        presenterShowData = PresenterShowData(this@ViewData)
-        presenterShowData!!.visualizeSessionList(this)
+        PresenterShowData.getInstance(this)
+        PresenterShowData.getInstance(this).visualizeSessionList(this)
         val backButton = findViewById<ImageButton>(R.id.backButtonDataPage)
         backButton.setOnClickListener {
             onBackDataButtonPressed()
         }
-
-
     }
 
     private fun onBackDataButtonPressed(){

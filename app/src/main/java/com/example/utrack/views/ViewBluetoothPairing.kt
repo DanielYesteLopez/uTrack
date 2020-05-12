@@ -209,7 +209,7 @@ class ViewBluetoothPairing : SecondViewClass() {
             // 4 Set item click listener
             pairedTv.onItemClickListener = OnItemClickListener { _, _, position, _ ->
                 val device: BluetoothDevice = devicesList[position]
-                PresenterTraining.getInstance(applicationContext).onBluetoothDeviceChosen(device)
+                PresenterTraining.getInstance(this).onBluetoothDeviceChosen(device)
             }
         }
     }

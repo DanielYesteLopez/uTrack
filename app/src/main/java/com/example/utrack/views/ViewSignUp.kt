@@ -13,7 +13,7 @@ import com.example.utrack.mc.SecondViewClass
 
 
 class ViewSignUp : SecondViewClass() {
-    private var presenterLogin = PresenterLogin()
+    //private var presenterLogin = PresenterLogin()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // hide navigation bar
@@ -21,6 +21,7 @@ class ViewSignUp : SecondViewClass() {
 
         setTheme(R.style.AppTheme)
         setContentView(R.layout.signup)
+        PresenterLogin.getInstance(this)
         val singInButton = findViewById<Button>(R.id.signUpButton)
         val signUpToSignInbutton = findViewById<Button>(R.id.signUpToSignInbutton)
         singInButton.setOnClickListener{
@@ -29,10 +30,10 @@ class ViewSignUp : SecondViewClass() {
             var userPassword = findViewById<EditText>(R.id.signUpPassword).text.toString()
             var userConfirmPassword = findViewById<EditText>(R.id.signUpConfirmPassword).text.toString()
             var userRealName = findViewById<EditText>(R.id.signUpRealName).text.toString()
-            presenterLogin.onSignUpToSignInButtonPressed(this.applicationContext,userName,userEmail,userPassword,userConfirmPassword,userRealName)
+            PresenterLogin.getInstance(this).onSignUpToSignInButtonPressed(this.applicationContext,userName,userEmail,userPassword,userConfirmPassword,userRealName)
         }
         signUpToSignInbutton.setOnClickListener {
-            presenterLogin.signUpToSignInbutton(this.applicationContext)
+            PresenterLogin.getInstance(this).signUpToSignInbutton(this.applicationContext)
         }
     }
 }

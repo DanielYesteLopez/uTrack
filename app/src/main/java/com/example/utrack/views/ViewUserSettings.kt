@@ -9,16 +9,18 @@ import android.widget.*
 import com.example.utrack.R
 import com.example.utrack.mc.SecondViewClass
 import com.example.utrack.presenters.PresenterSettings
+import com.example.utrack.presenters.PresenterUserSettings
 import kotlinx.android.synthetic.main.usersettings.*
 
 class ViewUserSettings : SecondViewClass() {
-    var presenterSettings = PresenterSettings()
+    //var presenterSettings = PresenterSettings()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // hide navigation bar
         onCreateHideNavBar()
 
         setContentView(R.layout.usersettings)
+        PresenterSettings.getInstance(this)
         val backButton = findViewById<ImageButton>(R.id.backButtonUserSettingsPage)
         backButton.setOnClickListener {
             onBackUserSettingsButtonPressed()
@@ -31,7 +33,7 @@ class ViewUserSettings : SecondViewClass() {
             val diskTeethValue = findViewById<EditText>(R.id.editTextDiskTeeth).text.toString()
             val pinionTeethValue = findViewById<EditText>(R.id.editTextPinionTeeth).text.toString()
             val stemValue = findViewById<EditText>(R.id.editTextStem).text.toString()
-            presenterSettings.onSaveButtonUserSettingsPressed(frameSizeValue,heightValue,
+            PresenterSettings.getInstance(this).onSaveButtonUserSettingsPressed(frameSizeValue,heightValue,
                 diskTeethValue,pinionTeethValue,stemValue)
         }
     }

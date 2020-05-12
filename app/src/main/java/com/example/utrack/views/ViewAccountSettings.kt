@@ -6,6 +6,8 @@ import android.widget.ImageButton
 import android.widget.Toast
 import com.example.utrack.R
 import com.example.utrack.mc.SecondViewClass
+import com.example.utrack.presenters.PresenterAccountSettings
+import com.example.utrack.presenters.PresenterSettings
 
 class ViewAccountSettings : SecondViewClass() {
 
@@ -15,6 +17,7 @@ class ViewAccountSettings : SecondViewClass() {
         onCreateHideNavBar()
 
         setContentView(R.layout.accountsetting)
+        PresenterAccountSettings.getInstance(this)
         val backButton = findViewById<ImageButton>(R.id.backButtonAccountSettingsPage)
         backButton.setOnClickListener {
             onBackAccountButtonSettingsPressed()

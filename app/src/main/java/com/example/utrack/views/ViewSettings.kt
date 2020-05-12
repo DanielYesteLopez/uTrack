@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.ImageButton
 import com.example.utrack.R
 import com.example.utrack.mc.SecondViewClass
+import com.example.utrack.presenters.PresenterSettings
 
 class ViewSettings : SecondViewClass() {
 
@@ -14,6 +15,7 @@ class ViewSettings : SecondViewClass() {
         onCreateHideNavBar()
 
         setContentView(R.layout.settingspage)
+        PresenterSettings.getInstance(this)
         manageButtonsSettings()
     }
 

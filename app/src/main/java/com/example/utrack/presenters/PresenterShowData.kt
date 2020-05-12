@@ -11,45 +11,41 @@ import androidx.annotation.RequiresApi
 import com.example.utrack.model.Session
 import com.example.utrack.R
 
-class PresenterShowData (context : Context) {
-    var presenterMaster : PresenterMaster? = null
+class PresenterShowData private constructor (context : Context) {
+    //var presenterMaster : PresenterMaster? = PresenterMaster()
     private lateinit var  arrayAdapter: ArrayAdapter<String>
-    private val _context = context
-
-    init {
-        presenterMaster = PresenterMaster()
-    }
+    private val con = context
+    companion object : SingletonHolder<PresenterShowData, Context>(::PresenterShowData)
 
     fun addSession(session: Session) {
-        presenterMaster?.addSession(session)
+        PresenterMaster.getInstance(con).addSession(session)
     }
 
     fun deleteSession(index: Int) {
-        presenterMaster?.deleteSession(index)
+        PresenterMaster.getInstance(con).deleteSession(index)
     }
 
     fun deleteAll(){
-        presenterMaster?.deleteAll()
+        PresenterMaster.getInstance(con).deleteAll()
     }
 
     fun exportSession(path: String) {
-        presenterMaster?.exportSession(path)
+        PresenterMaster.getInstance(con).exportSession(path)
     }
 
     fun getSessionList() : ArrayList<Session>? {
-        return presenterMaster?.getSessionList()
+        return PresenterMaster.getInstance(con).getSessionList()
     }
 
     fun getSession(index : Int) : Session? {
-        return presenterMaster?.getSession(index)
+        return PresenterMaster.getInstance(con).getSession(index)
     }
-
 
      fun visualizeSessionList(activity : Activity) {
         val sessionsList = getSessionList()
 
         // Create an array adapter
-        arrayAdapter =  ArrayAdapter<String>(_context, android.R.layout.simple_list_item_1)
+        arrayAdapter =  ArrayAdapter<String>(con, android.R.layout.simple_list_item_1)
 
         if (sessionsList?.isNotEmpty()!!) {
             activity.findViewById<ListView>(R.id.showDataList).adapter = arrayAdapter
@@ -58,7 +54,7 @@ class PresenterShowData (context : Context) {
                 AdapterView.OnItemClickListener { _, _, position, _ ->
                     var actual_session = getSession(position)
                     if (actual_session != null) {
-                        Toast.makeText(_context, actual_session.toString(),
+                        Toast.makeText(con, actual_session.toString(),
                             Toast.LENGTH_SHORT).show()
                     }
                     // take user back to training page

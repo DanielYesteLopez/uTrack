@@ -1,10 +1,14 @@
 package com.example.utrack.presenters
 
+import android.content.Context
 import com.example.utrack.model.Facade
 import com.example.utrack.model.Session
 
-class PresenterMaster {
+class PresenterMaster private constructor (context: Context) {
     val facade = Facade()
+    private var con = context
+    companion object : SingletonHolder<PresenterMaster, Context>(::PresenterMaster)
+
     fun addNewUser(userDataMap: MutableMap<String, String>) {
         facade.setUserData(userDataMap)
     }

@@ -15,7 +15,7 @@ class SessionList {
     }
 
     fun addSession(session: Session) {
-        sessionList?.add(session);
+        sessionList?.add(session)
     }
 
     fun deleteSession(index: Int) {

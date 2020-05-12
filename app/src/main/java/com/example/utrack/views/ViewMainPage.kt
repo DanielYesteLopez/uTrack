@@ -8,14 +8,14 @@ import com.example.utrack.R
 import com.example.utrack.mc.MainViewClass
 
 class ViewMainPage : MainViewClass() {
-
-    private var presenterMain  = PresenterMainPage()
+    //private var presenterMain  = PresenterMainPage()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // hide navigation bar
         onCreateHideNavBar()
 
         setContentView(R.layout.mainpage)
+        PresenterMainPage.getInstance(this)
         buttonsMainActivityManagement()
         doubleBackToExitPressedOnce = false
     }
@@ -25,16 +25,16 @@ class ViewMainPage : MainViewClass() {
         val trainingButton = findViewById<ImageButton>(R.id.trainingButtonMainpage)
         val exitButton = findViewById<ImageButton>(R.id.exitButtonMainpage)
         settingsButton.setOnClickListener {
-            presenterMain.onSettingsButtonPressed(this.applicationContext)
+            PresenterMainPage.getInstance(this).onSettingsButtonPressed(this.applicationContext)
         }
         dataButton.setOnClickListener {
-            presenterMain.onDataButtonPressed(this.applicationContext)
+            PresenterMainPage.getInstance(this).onDataButtonPressed(this.applicationContext)
         }
         trainingButton.setOnClickListener {
-            presenterMain.onTrainingButtonPressed(this.applicationContext)
+            PresenterMainPage.getInstance(this).onTrainingButtonPressed(this.applicationContext)
         }
         exitButton.setOnClickListener{
-            presenterMain.onExitButtonPressed(this)
+            PresenterMainPage.getInstance(this).onExitButtonPressed(this)
         }
 
     }

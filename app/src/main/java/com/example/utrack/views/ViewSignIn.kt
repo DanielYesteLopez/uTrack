@@ -9,14 +9,14 @@ import com.example.utrack.R
 import com.example.utrack.mc.SecondViewClass
 
 class ViewSignIn : SecondViewClass() {
-
-    var presenterLogin = PresenterLogin()
+    //var presenterLogin = PresenterLogin()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // hide navigation bar
         onCreateHideNavBar()
 
         setContentView(R.layout.signin)
+        PresenterLogin.getInstance(this)
         manageSignInButtons()
     }
 
@@ -26,10 +26,10 @@ class ViewSignIn : SecondViewClass() {
         signInButton.setOnClickListener{
             val signInUsernameLogin = findViewById<EditText>(R.id.signInUsernameLogin).text.toString()
             val signInPasswordLogin = findViewById<EditText>(R.id.signInPasswordLogin).text.toString()
-            presenterLogin.onToSignInButtonPressed(this.applicationContext,signInUsernameLogin,signInPasswordLogin)
+            PresenterLogin.getInstance(this).onToSignInButtonPressed(this.applicationContext,signInUsernameLogin,signInPasswordLogin)
         }
         singOutButton.setOnClickListener{
-            presenterLogin.onToSignUpFromSignInButtonPressed(applicationContext)
+            PresenterLogin.getInstance(this).onToSignUpFromSignInButtonPressed(applicationContext)
         }
     }
 }

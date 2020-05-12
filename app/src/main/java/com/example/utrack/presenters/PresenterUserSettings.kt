@@ -1,4 +1,8 @@
 package com.example.utrack.presenters
 
-class PresenterUserSettings {
+import android.content.Context
+
+class PresenterUserSettings private constructor (context : Context) {
+    private var con : Context = context
+    companion object : SingletonHolder<PresenterUserSettings, Context>(::PresenterUserSettings)
 }
