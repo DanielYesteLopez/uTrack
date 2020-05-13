@@ -145,6 +145,8 @@ class Facade (context : Context){
                             Toast.LENGTH_SHORT).show()
                     }
                 }
+        } else {
+            activity.findViewById<ListView>(R.id.showDataList).adapter = arrayAdapter
         }
     }
 

@@ -53,6 +53,7 @@ class ViewData : SecondViewClass() {
     private fun onClearButtonPressed() {
         PresenterShowData.getInstance(this).deleteAll()
         Toast.makeText(this, "All sesions deleted", Toast.LENGTH_SHORT).show()
+        PresenterShowData.getInstance(this).visualizeSessionList(this)
     }
 
     private fun onExportButtonPressed() {
