@@ -17,7 +17,9 @@ class ViewData : SecondViewClass() {
 
         setContentView(R.layout.showdata)
         PresenterShowData.getInstance(this)
+
         PresenterShowData.getInstance(this).visualizeSessionList(this)
+
         val backButton = findViewById<ImageButton>(R.id.backButtonDataPage)
         backButton.setOnClickListener {
             onBackDataButtonPressed()
@@ -28,5 +30,10 @@ class ViewData : SecondViewClass() {
         val intent = Intent(application, ViewMainPage().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
+    }
+
+    override fun onResume() {
+        PresenterShowData.getInstance(this).visualizeSessionList(this)
+        super.onResume()
     }
 }

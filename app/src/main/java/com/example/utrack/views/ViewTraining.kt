@@ -156,7 +156,7 @@ class ViewTraining : SecondViewClass() {
 //            findViewById<TextView>(R.id.distance_trapezi).text = (presenter.let { it?.getPositionTrapeze() }).toString()
 //            findViewById<TextView>(R.id.speed_gps).text = (presenter.let { it?.getSpeedGPS() }).toString()
 //            findViewById<TextView>(R.id.distance_gps).text = (presenter.let { it?.getDistanceGPS() }).toString()
-            val formatTemplate = "%2f%3s"
+            val formatTemplate = "%.2f%3s"
             findViewById<TextView>(R.id.cadenceratetext).text =
                 formatTemplate.format(
                     PresenterTraining.getInstance(this@ViewTraining).getAcceleration(),"rpm")

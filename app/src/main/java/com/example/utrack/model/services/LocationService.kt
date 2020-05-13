@@ -40,7 +40,7 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
     private var runStartTimeInMillis: Long = 0
 
     private var gpsCount: Int = 0
-    private val gpsFreqInMillis = 5000
+    private val gpsFreqInMillis = 2000
     private val gpsFreqInDistance = 2  // in meters
     var isLogging: Boolean = false
 

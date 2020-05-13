@@ -18,9 +18,6 @@ class PresenterTraining private constructor(context: Context) {
 
     private val TAG = "MainActivity"
     private var con : Context = context
-    private var locationService: LocationService? = null
-    private var sensorListenerAccelerometro : SensorListenerAccelerometer = SensorListenerAccelerometer(context)
-
     companion object : SingletonHolder<PresenterTraining, Context>(::PresenterTraining)
 
 
@@ -31,110 +28,66 @@ class PresenterTraining private constructor(context: Context) {
         ContextCompat.startActivity(con,intent,null)
     }
     fun onStopTrainingButtonPressed() {
-        Toast.makeText(con,
-            con.resources?.getString(R.string.trainingstop),
-            Toast.LENGTH_SHORT
-        ).show()
+        PresenterMaster.getInstance(con).onStopTrainingButtonPressed()
     }
     fun onResumeTrainingButtonPressed() {
-        Toast.makeText(con,
-            con.resources?.getString(R.string.trainingresume),
-            Toast.LENGTH_SHORT
-        ).show()
+        PresenterMaster.getInstance(con).onResumeTrainingButtonPressed()
     }
 
     fun onStartTrainingButtonPressed() {
-        sensorListenerAccelerometro.resumeReading()
-        locationService?.startLogging()
-        Toast.makeText(con,
-            con.resources?.getString(R.string.trainingprogress),
-            Toast.LENGTH_SHORT
-        ).show()
+       PresenterMaster.getInstance(con).onStartTrainingButtonPressed()
     }
     fun onPauseTrainingButtonPressed() {
-        sensorListenerAccelerometro.pauseReading()
-        locationService?.stopLogging()
-        Toast.makeText(
-            con,
-            con.resources?.getString(R.string.trainingpaused),
-            Toast.LENGTH_SHORT
-        ).show()
+        PresenterMaster.getInstance(con).onPauseTrainingButtonPressed()
     }
 
     fun getTrainigInfo(): ArrayList<Double>? {
-        val info = locationService?.getTrainingLocationInfo()
-        info?.add(sensorListenerAccelerometro.getAccelerationAVG())
-        return info
+        return PresenterMaster.getInstance(con).getTrainigInfo()
     }
 
     fun onReceiveLocation(latLng: LatLng) {
-        this.locationService?.let{
-            if (it.isLogging) {
-                Log.d(TAG," new ->> $latLng")
-                Log.d(TAG,"is Logging")
-            }
-        }
+        PresenterMaster.getInstance(con).onReceiveLocation(latLng)
     }
 
     fun onReceivePredictedLocation(latLng: LatLng) {
-        this.locationService?.let{
-            if (it.isLogging) {
-                Log.d(TAG,"predicted ->> $latLng")
-                //findViewById<TextView>(R.id.location).text = latLng.toString()
-                Log.d(TAG,"is Logging")
-            }
-        }
+        PresenterMaster.getInstance(con).onReceivePredictedLocation(latLng)
     }
 
     fun onServiceConnected(service: IBinder) {
-        this.locationService = (service as LocationService.LocationServiceBinder).service
-        this.locationService?.startUpdatingLocation()
+        PresenterMaster.getInstance(con).onServiceConnected(service)
     }
 
     fun onServiceDisconnected() {
-        this.locationService?.stopUpdatingLocation()
-        this.locationService = null
+        PresenterMaster.getInstance(con).onServiceDisconnected()
     }
 
     fun registerSensorListenerAccelerate(){
-        sensorListenerAccelerometro.registerListener()
+        PresenterMaster.getInstance(con).unRegisterSensorListenerAccelerate()
     }
 
 
     fun unRegisterSensorListenerAccelerate(){
-        sensorListenerAccelerometro.unregisterListener()
+        PresenterMaster.getInstance(con).unRegisterSensorListenerAccelerate()
     }
 
     fun getAcceleration() : Float {
-        return sensorListenerAccelerometro.getAccelerateActual()
+        return  PresenterMaster.getInstance(con).getAcceleration()
     }
 
     fun getSpeedTrapezi() : Float{
-        return sensorListenerAccelerometro.getVelocityActual()
+        return PresenterMaster.getInstance(con).getSpeedTrapezi()
     }
 
-    fun getPositionTrapeze() : Float{
-        return sensorListenerAccelerometro.getPositionActual()
+    fun getPositionTrapeze() : Float {
+        return  PresenterMaster.getInstance(con).getPositionTrapeze()
     }
 
     fun getSpeedGPS() : Float {
-        var value = 0.0F
-        try {
-            value = locationService.let { it?.getLocationSpeed()!! }
-        }catch (e : Exception){
-            Log.d(TAG, "error getting speed GPS")
-        }
-        return value
+        return  PresenterMaster.getInstance(con).getSpeedGPS()
     }
 
     fun getDistanceGPS() : Float {
-        var value = 0.0F
-        try {
-            value = locationService.let { it?.getDistanceLocations()!! }
-        }catch (e : Exception){
-            Log.d(TAG, "error getting distance GPS")
-        }
-        return value
+        return  PresenterMaster.getInstance(con).getDistanceGPS()
     }
 
     /* presenter show recommended exercise */
@@ -212,6 +165,14 @@ class PresenterTraining private constructor(context: Context) {
 //        ).show()
 //    }
 
+    fun onPosSaveDataButtonPressed() {
+        PresenterMaster.getInstance(con).onPosSaveDataButtonPressed()
+    }
+
+    fun onNegSaveDataButtonPressed() {
+        PresenterMaster.getInstance(con).onNegSaveDataButtonPressed()
+    }
+
     /* presenter view bluetooth */
     fun onBackBluetoothButtonPressed() {
         val intent = Intent(con, ViewTraining().javaClass)
@@ -220,16 +181,6 @@ class PresenterTraining private constructor(context: Context) {
     }
 
     fun onBluetoothDeviceChosen(_device: BluetoothDevice) {
-        val deviceName = _device.name
-        //val deviceHardwareAddress = device.address // MAC address
-        Toast.makeText(
-            con,
-            deviceName,
-            Toast.LENGTH_SHORT
-        ).show()
-        // connect Device
-        // TODO
-        // take user back to training page
-        // TODO
+        PresenterMaster.getInstance(con).onBluetoothDeviceChosen(_device)
     }
 }

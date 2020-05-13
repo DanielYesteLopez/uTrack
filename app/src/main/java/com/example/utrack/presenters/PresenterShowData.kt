@@ -13,8 +13,8 @@ import com.example.utrack.R
 
 class PresenterShowData private constructor (context : Context) {
     //var presenterMaster : PresenterMaster? = PresenterMaster()
-    private lateinit var  arrayAdapter: ArrayAdapter<String>
     private val con = context
+
     companion object : SingletonHolder<PresenterShowData, Context>(::PresenterShowData)
 
     fun addSession(session: Session) {
@@ -25,7 +25,7 @@ class PresenterShowData private constructor (context : Context) {
         PresenterMaster.getInstance(con).deleteSession(index)
     }
 
-    fun deleteAll(){
+    fun deleteAll() {
         PresenterMaster.getInstance(con).deleteAll()
     }
 
@@ -33,32 +33,15 @@ class PresenterShowData private constructor (context : Context) {
         PresenterMaster.getInstance(con).exportSession(path)
     }
 
-    fun getSessionList() : ArrayList<Session>? {
+    fun getSessionList(): ArrayList<Session>? {
         return PresenterMaster.getInstance(con).getSessionList()
     }
 
-    fun getSession(index : Int) : Session? {
+    fun getSession(index: Int): Session? {
         return PresenterMaster.getInstance(con).getSession(index)
     }
 
-     fun visualizeSessionList(activity : Activity) {
-        val sessionsList = getSessionList()
-
-        // Create an array adapter
-        arrayAdapter =  ArrayAdapter<String>(con, android.R.layout.simple_list_item_1)
-
-        if (sessionsList?.isNotEmpty()!!) {
-            activity.findViewById<ListView>(R.id.showDataList).adapter = arrayAdapter
-            // Set item click listener
-            activity.findViewById<ListView>(R.id.showDataList).onItemClickListener =
-                AdapterView.OnItemClickListener { _, _, position, _ ->
-                    var actual_session = getSession(position)
-                    if (actual_session != null) {
-                        Toast.makeText(con, actual_session.toString(),
-                            Toast.LENGTH_SHORT).show()
-                    }
-                    // take user back to training page
-                }
-            }
-        }
+    fun visualizeSessionList(activity: Activity) {
+        PresenterMaster.getInstance(con).visualizeSessionList(activity)
     }
+}
