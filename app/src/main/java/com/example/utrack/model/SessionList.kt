@@ -1,5 +1,6 @@
 package com.example.utrack.model
 
+import android.annotation.SuppressLint
 import android.util.Log
 import java.io.FileWriter
 import java.io.IOException
@@ -29,7 +30,8 @@ class SessionList {
     }
 
     fun deleteAll(){
-        sessionList?.clear()
+        if (sessionList?.isEmpty()!!) Log.d("deleteAll", "The list is empty")
+        else sessionList?.clear()
     }
 
     fun getSession(index: Int) : Session? {
@@ -48,6 +50,7 @@ class SessionList {
         return sessionList
     }
 
+    @SuppressLint("SimpleDateFormat")
     fun exportSession(path: String) {
         val fileNameDateTimeFormat = SimpleDateFormat("yyyy_MMdd_HHmm")
         val filePath = (path + "/"

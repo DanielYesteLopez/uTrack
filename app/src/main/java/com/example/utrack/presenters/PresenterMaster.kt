@@ -22,7 +22,7 @@ import com.google.android.gms.maps.model.LatLng
 import java.lang.Exception
 
 class PresenterMaster private constructor (context: Context) {
-    val facade = Facade()
+    val facade = Facade(context)
     private var con = context
     private lateinit var arrayAdapter: ArrayAdapter<String>
 
@@ -44,9 +44,17 @@ class PresenterMaster private constructor (context: Context) {
         facade.initializeBikeDatabase(userId)
     }
 
-    fun addSession(session: Session) {
-        facade.addSession(session)
+    fun addSession() {
+        val arra = getTrainigInfo()
+        facade.addNewSession(arra)
+    }
 
+    fun onNegSaveDataButtonPressed() {
+        // TODO nada de momento
+    }
+
+    fun visualizeSessionList(activity: Activity) {
+        facade.visualizeSessionList(activity)
     }
 
     fun deleteSession(index: Int) {
@@ -75,6 +83,7 @@ class PresenterMaster private constructor (context: Context) {
             Toast.LENGTH_SHORT
         ).show()
     }
+
     fun onResumeTrainingButtonPressed() {
         Toast.makeText(con,
             con.resources?.getString(R.string.trainingresume),
@@ -90,6 +99,7 @@ class PresenterMaster private constructor (context: Context) {
             Toast.LENGTH_SHORT
         ).show()
     }
+
     fun onPauseTrainingButtonPressed() {
         sensorListenerAccelerometro.pauseReading()
         locationService?.stopLogging()
@@ -138,7 +148,6 @@ class PresenterMaster private constructor (context: Context) {
     fun registerSensorListenerAccelerate(){
         sensorListenerAccelerometro.registerListener()
     }
-
 
     fun unRegisterSensorListenerAccelerate(){
         sensorListenerAccelerometro.unregisterListener()
@@ -222,42 +231,6 @@ class PresenterMaster private constructor (context: Context) {
 //        ).show()
 //    }
 
-    /* presenter save data */
-    fun onPosSaveDataButtonPressed() {
-        val arra = getTrainigInfo()
-        val session : Session = Session()
-        session.setId(getSessionList()?.size!!)
-        if (arra != null) {
-            session.setValues(arra)
-        }
-        addSession(session)
-    }
-
-    fun onNegSaveDataButtonPressed() {
-        // TODO nada de momento
-    }
-
-    fun visualizeSessionList(activity: Activity) {
-        val sessionsList = getSessionList()
-        // Create an array adapter
-        arrayAdapter =  ArrayAdapter<String>(con, android.R.layout.simple_list_item_1)
-
-        if (sessionsList?.isNotEmpty()!!) {
-            for (session : Session in sessionsList) {
-                arrayAdapter.add(session.toString())
-            }
-            activity.findViewById<ListView>(R.id.showDataList).adapter = arrayAdapter
-            // Set item click listener
-            activity.findViewById<ListView>(R.id.showDataList).onItemClickListener =
-                AdapterView.OnItemClickListener { _, _, position, _ ->
-                    val actual_session = getSession(position)
-                    if (actual_session != null) {
-                        Toast.makeText(con, actual_session.toString(),
-                            Toast.LENGTH_SHORT).show()
-                    }
-                }
-        }
-    }
 
     /* presenter bluetooth */
 //  fun onConnectDevicesBluetoothButtonPressed() {

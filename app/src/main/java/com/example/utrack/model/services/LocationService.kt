@@ -200,7 +200,7 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
     }
 
     fun getTrainingLocationInfo() : ArrayList<Double> {
-        var ret : ArrayList<Double> = ArrayList()
+        val ret : ArrayList<Double> = ArrayList()
         ret.add(elapsedTimeInSeconds.toDouble())
         ret.add(totalDistanceInMeters.toDouble())
         val avgSpeed = (totalSpeedInMpS/locationList.size).toDouble()

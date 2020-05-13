@@ -103,5 +103,6 @@
     <string name="title_location_permission">Location permission</string>
     <string name="text_location_permission">please activate Location for better performance</string>
     <string name="ok">"activate "</string>
+    <string name="textViewSessionsRealitzades">Sessions realitzades</string>
 
 </resources>

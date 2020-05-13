@@ -4,18 +4,11 @@ import android.bluetooth.BluetoothDevice
 import android.content.Context
 import android.content.Intent
 import android.os.IBinder
-import android.util.Log
-import android.widget.Toast
 import androidx.core.content.ContextCompat
-import com.example.utrack.R
-import com.example.utrack.model.services.LocationService
-import com.example.utrack.model.services.SensorListenerAccelerometer
 import com.example.utrack.views.*
 import com.google.android.gms.maps.model.LatLng
-import java.lang.Exception
 
 class PresenterTraining private constructor(context: Context) {
-
     private val TAG = "MainActivity"
     private var con : Context = context
     companion object : SingletonHolder<PresenterTraining, Context>(::PresenterTraining)
@@ -27,9 +20,11 @@ class PresenterTraining private constructor(context: Context) {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         ContextCompat.startActivity(con,intent,null)
     }
+
     fun onStopTrainingButtonPressed() {
         PresenterMaster.getInstance(con).onStopTrainingButtonPressed()
     }
+
     fun onResumeTrainingButtonPressed() {
         PresenterMaster.getInstance(con).onResumeTrainingButtonPressed()
     }
@@ -37,6 +32,7 @@ class PresenterTraining private constructor(context: Context) {
     fun onStartTrainingButtonPressed() {
        PresenterMaster.getInstance(con).onStartTrainingButtonPressed()
     }
+
     fun onPauseTrainingButtonPressed() {
         PresenterMaster.getInstance(con).onPauseTrainingButtonPressed()
     }
@@ -62,9 +58,8 @@ class PresenterTraining private constructor(context: Context) {
     }
 
     fun registerSensorListenerAccelerate(){
-        PresenterMaster.getInstance(con).unRegisterSensorListenerAccelerate()
+        PresenterMaster.getInstance(con).registerSensorListenerAccelerate()
     }
-
 
     fun unRegisterSensorListenerAccelerate(){
         PresenterMaster.getInstance(con).unRegisterSensorListenerAccelerate()
@@ -166,7 +161,7 @@ class PresenterTraining private constructor(context: Context) {
 //    }
 
     fun onPosSaveDataButtonPressed() {
-        PresenterMaster.getInstance(con).onPosSaveDataButtonPressed()
+        PresenterMaster.getInstance(con).addSession()
     }
 
     fun onNegSaveDataButtonPressed() {

@@ -47,7 +47,6 @@ class FragmentSaveData : MainFragmentClass() {
         PresenterTraining.getInstance(this.requireContext()).onPosSaveDataButtonPressed()
         val intent = Intent(this.context, ViewData().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent,null)
     } // go to result layout
 
@@ -61,7 +60,6 @@ class FragmentSaveData : MainFragmentClass() {
         ).show()
         val intent = Intent(this.context, ViewMainPage().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent,null)
 
     } // go to main activity

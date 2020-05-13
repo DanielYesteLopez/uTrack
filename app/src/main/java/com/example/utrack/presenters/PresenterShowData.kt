@@ -12,14 +12,10 @@ import com.example.utrack.model.Session
 import com.example.utrack.R
 
 class PresenterShowData private constructor (context : Context) {
-    //var presenterMaster : PresenterMaster? = PresenterMaster()
+
     private val con = context
 
     companion object : SingletonHolder<PresenterShowData, Context>(::PresenterShowData)
-
-    fun addSession(session: Session) {
-        PresenterMaster.getInstance(con).addSession(session)
-    }
 
     fun deleteSession(index: Int) {
         PresenterMaster.getInstance(con).deleteSession(index)

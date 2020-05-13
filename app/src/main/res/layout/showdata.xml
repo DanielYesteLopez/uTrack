@@ -23,7 +23,7 @@
             app:srcCompat="@android:drawable/ic_menu_revert" />
 
         <View
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="?android:attr/listDivider" />
@@ -47,12 +47,19 @@
             app:srcCompat="@android:drawable/ic_menu_upload" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/textViewSessionsRealitzades"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="@string/textViewSessionsRealitzades"
+        android:textAppearance="@style/BlackText" />
+
     <ListView
         android:id="@+id/showDataList"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="false"
-        android:foreground="@color/appMainColor"
         android:foregroundGravity="top|bottom|center_vertical|center|center_horizontal"
         android:keepScreenOn="false"
         android:verticalScrollbarPosition="defaultPosition" />
