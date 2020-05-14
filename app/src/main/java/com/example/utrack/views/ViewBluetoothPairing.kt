@@ -19,6 +19,7 @@ import com.example.utrack.R
 import com.example.utrack.mc.SecondViewClass
 import com.example.utrack.presenters.PresenterTraining
 import kotlinx.android.synthetic.main.activity_bluetooth_pairing.*
+import kotlin.collections.ArrayList
 
 
 class ViewBluetoothPairing : SecondViewClass() {
@@ -27,11 +28,21 @@ class ViewBluetoothPairing : SecondViewClass() {
 
     private val REQUESTCODEENABLEBLUETOOTH: Int = 1
     private val REQUESTCODEDISCOVERABLEBLUETOOTH: Int = 2
+//    private val SELECT_DEVICE_REQUEST_CODE = 42
+//
+//    private val deviceManager: CompanionDeviceManager by lazy(LazyThreadSafetyMode.NONE) {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            getSystemService(CompanionDeviceManager::class.java)
+//        } else {
+//            TODO("VERSION.SDK_INT < O")
+//        }
+//    }
+
 
     //init bluetooth adapter
     private var bAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
     private var devicesList: ArrayList<BluetoothDevice> = ArrayList()
-    private lateinit var  arrayAdapter: ArrayAdapter<String>
+    private lateinit var arrayAdapter: ArrayAdapter<String>
 
     /**
      * Broadcast Receiver for changes made to bluetooth states such as:
@@ -178,8 +189,7 @@ class ViewBluetoothPairing : SecondViewClass() {
                     bluetoothIv.setImageResource(R.drawable.icon_bluetooth_off) //Bluetooth is off
                 }
             }
-            REQUESTCODEDISCOVERABLEBLUETOOTH ->
-            {
+            REQUESTCODEDISCOVERABLEBLUETOOTH -> {
                 // result is equal to time duration
                 if (resultCode == 200) {
                     if (bAdapterIsEnabled()) {
@@ -189,6 +199,16 @@ class ViewBluetoothPairing : SecondViewClass() {
                     bluetoothIv.setImageResource(R.drawable.icon_bluetooth_off) //Bluetooth is off
                 }
             }
+//            SELECT_DEVICE_REQUEST_CODE -> when(resultCode) {
+//                Activity.RESULT_OK -> {
+//                    // User has chosen to pair with the Bluetooth device.
+//                    val deviceToPair: BluetoothDevice? =
+//                        data?.getParcelableExtra(CompanionDeviceManager.EXTRA_DEVICE)
+//                    deviceToPair?.createBond()
+//                    Log.d("bluetooth", "estamos en ello please wait")
+//                    // ... Continue interacting with the paired device.
+//                }
+//            }
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
@@ -213,6 +233,43 @@ class ViewBluetoothPairing : SecondViewClass() {
             }
         }
     }
+//
+//    @RequiresApi(Build.VERSION_CODES.O)
+//    fun pairDevice(_device : BluetoothDevice?) {
+//        // To skip filtering based on name and supported feature flags (UUIDs),
+//        // don't include calls to setNamePattern() and addServiceUuid(),
+//        // respectively. This example uses Bluetooth.
+//        val deviceFilter: BluetoothDeviceFilter = BluetoothDeviceFilter.Builder()
+//            .setNamePattern(Pattern.compile(_device?.name!!))
+//            .addServiceUuid(_device.uuids[0],null)
+//            .build()
+//
+//        // The argument provided in setSingleDevice() determines whether a single
+//        // device name or a list of device names is presented to the user as
+//        // pairing options.
+//        val pairingRequest: AssociationRequest = AssociationRequest.Builder()
+//            .addDeviceFilter(deviceFilter)
+//            .setSingleDevice(true)
+//            .build()
+//
+//        // When the app tries to pair with the Bluetooth device, show the
+//        // appropriate pairing request dialog to the user.
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            deviceManager.associate(pairingRequest,
+//                object : CompanionDeviceManager.Callback() {
+//
+//                    override fun onDeviceFound(chooserLauncher: IntentSender) {
+//                        startIntentSenderForResult(chooserLauncher,
+//                            SELECT_DEVICE_REQUEST_CODE, null, 0, 0, 0)
+//                    }
+//
+//                    override fun onFailure(error: CharSequence?) {
+//                        // Handle failure
+//                    }
+//                }, null)
+//        }
+//
+//    }
 
     private fun queryPairedDevices(){
         val pairedDevices: Set<BluetoothDevice>? = bAdapter!!.bondedDevices // get list of paired Devices

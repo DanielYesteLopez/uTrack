@@ -51,16 +51,10 @@ class FragmentSaveData : MainFragmentClass() {
     } // go to result layout
 
     override fun sendNegButtonPressed(fragmentActivity: FragmentActivity){
-        // User cancelled the dialog
         // nothing is saved
-        Toast.makeText(
-            this.context,
-            getString(R.string.sessionnotsaved),
-            Toast.LENGTH_SHORT
-        ).show()
+        PresenterTraining.getInstance(this.requireContext()).onNegSaveDataButtonPressed()
         val intent = Intent(this.context, ViewMainPage().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent,null)
-
     } // go to main activity
 }

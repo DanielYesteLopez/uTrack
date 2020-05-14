@@ -49,13 +49,9 @@ class Facade (context : Context){
         sessionList?.addSession(session)
     }
 
-    fun addNewSession(values: ArrayList<Double>?) {
-        val arra = values
-        val session : Session = Session()
+    fun addNewSession(_session: Session) {
+        val session : Session = _session
         session.setId(getSessionList()?.size!!)
-        if (arra != null) {
-            session.setValues(arra)
-        }
         addSession(session)
     }
 
@@ -124,7 +120,6 @@ class Facade (context : Context){
 //            Toast.LENGTH_SHORT
 //        ).show()
 //    }
-
 
     fun visualizeSessionList(activity: Activity) {
         val sessionsList = getSessionList()

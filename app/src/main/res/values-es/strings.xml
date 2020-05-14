@@ -81,7 +81,7 @@
         <string name="no">No</string>
         <string name="exit">Salir</string>
         <!-- TODO class exercise that contain a string table full of exercises like this one -->
-        <string name="recomendedexercise">do for 10 minuts free laps on avg speed of up to 30 km/h on a stable cadence. \nYou are ready to go</string>
+    <string name="recomendedexercise"> Recommended Exercise?. \nYou are ready to go</string>
         <string name="recomendedexerciseyes">Vamos!</string>
         <string name="recomendedexerciseno">Otro día</string>
         <string name="trainingawesome">Genial</string>

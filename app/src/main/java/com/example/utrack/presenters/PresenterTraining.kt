@@ -4,7 +4,9 @@ import android.bluetooth.BluetoothDevice
 import android.content.Context
 import android.content.Intent
 import android.os.IBinder
+import android.util.Log
 import androidx.core.content.ContextCompat
+import com.example.utrack.model.Session
 import com.example.utrack.views.*
 import com.google.android.gms.maps.model.LatLng
 
@@ -13,6 +15,7 @@ class PresenterTraining private constructor(context: Context) {
     private var con : Context = context
     companion object : SingletonHolder<PresenterTraining, Context>(::PresenterTraining)
 
+    private var session : Session? = null
 
     /* presenter View Training */
     fun onBackTrainingButtonPressed() {
@@ -37,8 +40,8 @@ class PresenterTraining private constructor(context: Context) {
         PresenterMaster.getInstance(con).onPauseTrainingButtonPressed()
     }
 
-    fun getTrainigInfo(): ArrayList<Double>? {
-        return PresenterMaster.getInstance(con).getTrainigInfo()
+    fun getTrainigInfo(): ArrayList<ArrayList<Double>>? {
+        return PresenterMaster.getInstance(con).getTrainingInfo()
     }
 
     fun onReceiveLocation(latLng: LatLng) {
@@ -85,37 +88,27 @@ class PresenterTraining private constructor(context: Context) {
         return  PresenterMaster.getInstance(con).getDistanceGPS()
     }
 
+    fun clearDataTraining() {
+        PresenterMaster.getInstance(con).clearDataLocation()
+    }
+
     /* presenter show recommended exercise */
-//    fun onCanShowExerciseButtonPressed(fragmentActivity:FragmentActivity) {
-//        //val appContext :Context = fragmentActivity.applicationContext
-//        Toast.makeText(
-//            fragmentActivity.applicationContext,
-//            fragmentActivity.resources.getString(R.string.trainingpaused),
-//            Toast.LENGTH_SHORT
-//        ).show()
-//    }
-//
-//    fun onNegShowExerciseButtonPressed(fragmentActivity:FragmentActivity) {
-//        // user finish training
-//        val appContext :Context = fragmentActivity.applicationContext
-//        Toast.makeText(
-//            appContext,
-//            appContext.getString(R.string.trainingsad),
-//            Toast.LENGTH_SHORT
-//        ).show()
-//        val mySaveFragment =
-//            FragmentSaveData()
-//        mySaveFragment.show(fragmentActivity.supportFragmentManager, R.string.notefication.toString())
-//    }
-//
-//    fun onPosShowExerciseButtonPressed(fragmentActivity:FragmentActivity) {
-//        val appContext :Context = fragmentActivity.applicationContext
-//        Toast.makeText(
-//            appContext,
-//            appContext.getString(R.string.trainingawesome),
-//            Toast.LENGTH_SHORT
-//        ).show()
-//    }
+    fun onCanShowExerciseButtonPressed() {
+        // do nothing
+        Log.d(TAG, "user cancel stop training")
+    }
+
+    fun onNegShowExerciseButtonPressed() {
+        Log.d(TAG,"create dummy recomended exercise")
+        PresenterMaster.getInstance(con).createDummyTraining()
+    }
+
+    fun onPosShowExerciseButtonPressed() {
+        //
+        Log.d(TAG,"positive button")
+        PresenterMaster.getInstance(con).createTrainingWithRecommendedExercise()
+    }
+
     /* presenter save data */
 //    fun onPosSaveDataButtonPressed(fragmentActivity: FragmentActivity) {
 //        val appContext :Context = fragmentActivity.applicationContext
@@ -161,7 +154,7 @@ class PresenterTraining private constructor(context: Context) {
 //    }
 
     fun onPosSaveDataButtonPressed() {
-        PresenterMaster.getInstance(con).addSession()
+        session?.let { PresenterMaster.getInstance(con).addSession(it) }
     }
 
     fun onNegSaveDataButtonPressed() {
@@ -177,5 +170,13 @@ class PresenterTraining private constructor(context: Context) {
 
     fun onBluetoothDeviceChosen(_device: BluetoothDevice) {
         PresenterMaster.getInstance(con).onBluetoothDeviceChosen(_device)
+    }
+
+    fun createNewSession() {
+        session = PresenterMaster.getInstance(con).createNewSession()
+    }
+
+    fun getDescriptionRecommendedExercise(): String {
+        return PresenterMaster.getInstance(con).getRecommendedExerciseDescription()
     }
 }

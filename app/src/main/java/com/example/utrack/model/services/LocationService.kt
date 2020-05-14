@@ -15,11 +15,9 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.PRIORITY_MIN
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.utrack.R
-import java.io.FileWriter
-import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.math.max
+import kotlin.math.min
 
 @Suppress("DEPRECATION")
 class LocationService: Service(), LocationListener, GpsStatus.Listener {
@@ -47,7 +45,9 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
     private var currentTimeInMillis : Long = 0L
     private var elapsedTimeInSeconds : Long = 0L
     private var totalDistanceInMeters : Float = 0f
-    private var totalSpeedInMpS = 0f
+    private var totalSpeedInMps = 0f
+    private var maxSpeedInMps = 0f
+    private var minSpeedInMps = 0f
 
     init {
         isLocationManagerUpdatingLocation = false
@@ -179,6 +179,10 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
         isLogging = true
     }
 
+    fun pouseLogging() {
+        isLogging = false
+    }
+
     /**
      *
      */
@@ -187,25 +191,54 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
             currentTimeInMillis = SystemClock.elapsedRealtimeNanos() / 1000000
             elapsedTimeInSeconds = (currentTimeInMillis - runStartTimeInMillis) / 1000
             totalDistanceInMeters = 0f
-            totalSpeedInMpS = 0f
+            totalSpeedInMps = 0f
+            var speed: Float
             for (i in 0 until locationList.size - 1) {
                 totalDistanceInMeters += locationList[i].distanceTo(locationList[i + 1])
-                totalSpeedInMpS += getLocationSpeed()
+                speed = getLocationSpeed()
+                totalSpeedInMps += speed
+                if (i == 0) {
+                    minSpeedInMps = speed
+                    maxSpeedInMps = speed
+                } else {
+                    if (minSpeedInMps > speed) {
+                        minSpeedInMps = speed
+                    }
+                    if (maxSpeedInMps < speed) {
+                        maxSpeedInMps = speed
+                    }
+                }
             }
-
             //Log.d(LOG_TAG,"saving log $elapsedTimeInSeconds $totalDistanceInMeters")
             //saveLog(elapsedTimeInSeconds, totalDistanceInMeters.toDouble(), gpsCount)
         }
         isLogging = false
     }
 
-    fun getTrainingLocationInfo() : ArrayList<Double> {
-        val ret : ArrayList<Double> = ArrayList()
-        ret.add(elapsedTimeInSeconds.toDouble())
-        ret.add(totalDistanceInMeters.toDouble())
-        val avgSpeed = (totalSpeedInMpS/locationList.size).toDouble()
-        ret.add(avgSpeed)
+    fun getTrainingLocationInfo() : ArrayList<ArrayList<Double>> {
+        val ret : ArrayList<ArrayList<Double>> = ArrayList()
+        val time : ArrayList<Double> = ArrayList()
+        val distance : ArrayList<Double> = ArrayList()
+        val speed : ArrayList<Double> = ArrayList()
+        time.add(elapsedTimeInSeconds.toDouble())
+        distance.add(totalDistanceInMeters.toDouble())
+        val avgSpeed = (totalSpeedInMps/locationList.size).toDouble()
+        speed.add(minSpeedInMps.toDouble())
+        speed.add(avgSpeed)
+        speed.add(maxSpeedInMps.toDouble())
+        ret.add(time)
+        ret.add(distance)
+        ret.add(speed)
         return ret
+    }
+
+    fun clearData(){
+        runStartTimeInMillis = SystemClock.elapsedRealtimeNanos() / 1000000
+        locationList.clear()
+        oldLocationList.clear()
+        noAccuracyLocationList.clear()
+        inaccurateLocationList.clear()
+        kalmanNGLocationList.clear()
     }
 
     /**
@@ -216,13 +249,7 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
         if (!this.isLocationManagerUpdatingLocation) {
             Log.d(LOG_TAG,"clearing data ---->>>>")
             isLocationManagerUpdatingLocation = true
-            runStartTimeInMillis = SystemClock.elapsedRealtimeNanos() / 1000000
-            locationList.clear()
-            oldLocationList.clear()
-            noAccuracyLocationList.clear()
-            inaccurateLocationList.clear()
-            kalmanNGLocationList.clear()
-
+            clearData()
             val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
             /**
              * Exception thrown when GPS or Network provider were not available on the user's device.
@@ -344,35 +371,35 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
     }
 
     /* Data Logging */
-    @Synchronized
-    fun saveLog(
-        timeInSeconds: Long,
-        distanceInMeters: Double,
-        gpsCount: Int
-    ) {
-        val fileNameDateTimeFormat = SimpleDateFormat("yyyy_MMdd_HHmm")
-        val filePath = (this.getExternalFilesDir(null)!!.absolutePath + "/"
-                + fileNameDateTimeFormat.format(Date()) + "_battery" + ".csv")
-
-        Log.d(LOG_TAG, "saving to $filePath")
-
-        var fileWriter: FileWriter? = null
-        try {
-            fileWriter = FileWriter(filePath, false)
-            Log.d(LOG_TAG, "Time: $timeInSeconds ,Distance: $distanceInMeters ,GPSCount: $gpsCount \n")
-            fileWriter.append("Time: $timeInSeconds ,Distance: $distanceInMeters ,GPSCount: $gpsCount \n")
-        } catch (e: Exception) {
-            e.printStackTrace()
-        } finally {
-            if (fileWriter != null) {
-                try {
-                    fileWriter.close()
-                } catch (ioe: IOException) {
-                    ioe.printStackTrace()
-                }
-            }
-        }
-    }
+//    @Synchronized
+//    fun saveLog(
+//        timeInSeconds: Long,
+//        distanceInMeters: Double,
+//        gpsCount: Int
+//    ) {
+//        val fileNameDateTimeFormat = SimpleDateFormat("yyyy_MMdd_HHmm")
+//        val filePath = (this.getExternalFilesDir(null)!!.absolutePath + "/"
+//                + fileNameDateTimeFormat.format(Date()) + "_battery" + ".csv")
+//
+//        Log.d(LOG_TAG, "saving to $filePath")
+//
+//        var fileWriter: FileWriter? = null
+//        try {
+//            fileWriter = FileWriter(filePath, false)
+//            Log.d(LOG_TAG, "Time: $timeInSeconds ,Distance: $distanceInMeters ,GPSCount: $gpsCount \n")
+//            fileWriter.append("Time: $timeInSeconds ,Distance: $distanceInMeters ,GPSCount: $gpsCount \n")
+//        } catch (e: Exception) {
+//            e.printStackTrace()
+//        } finally {
+//            if (fileWriter != null) {
+//                try {
+//                    fileWriter.close()
+//                } catch (ioe: IOException) {
+//                    ioe.printStackTrace()
+//                }
+//            }
+//        }
+//    }
 
     /**
      *

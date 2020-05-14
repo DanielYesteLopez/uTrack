@@ -3,21 +3,17 @@ package com.example.utrack.presenters
 import android.app.Activity
 import android.bluetooth.BluetoothDevice
 import android.content.Context
-import android.content.Intent
 import android.os.IBinder
 import android.util.Log
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.ListView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import com.example.utrack.R
+import com.example.utrack.model.Exercise
 import com.example.utrack.model.Facade
 import com.example.utrack.model.Session
+import com.example.utrack.model.Training
 import com.example.utrack.model.services.LocationService
 import com.example.utrack.model.services.SensorListenerAccelerometer
-import com.example.utrack.views.ViewMainPage
-import com.example.utrack.views.ViewTraining
 import com.google.android.gms.maps.model.LatLng
 import java.lang.Exception
 
@@ -29,6 +25,10 @@ class PresenterMaster private constructor (context: Context) {
     private val TAG = "MainActivity"
     private var locationService: LocationService? = null
     private var sensorListenerAccelerometro : SensorListenerAccelerometer = SensorListenerAccelerometer(context)
+
+    private var session : Session? = null
+
+    private var training : Training? = null
 
     companion object : SingletonHolder<PresenterMaster, Context>(::PresenterMaster)
 
@@ -44,9 +44,9 @@ class PresenterMaster private constructor (context: Context) {
         facade.initializeBikeDatabase(userId)
     }
 
-    fun addSession() {
-        val arra = getTrainigInfo()
-        facade.addNewSession(arra)
+    fun addSession(_session: Session) {
+        _session.let { training?.let { it1 -> it.setTraining(it1) } }
+        facade.addNewSession(_session)
     }
 
     fun onNegSaveDataButtonPressed() {
@@ -78,6 +78,7 @@ class PresenterMaster private constructor (context: Context) {
     }
 
     fun onStopTrainingButtonPressed() {
+        locationService?.stopLogging()
         Toast.makeText(con,
             con.resources?.getString(R.string.trainingstop),
             Toast.LENGTH_SHORT
@@ -102,7 +103,7 @@ class PresenterMaster private constructor (context: Context) {
 
     fun onPauseTrainingButtonPressed() {
         sensorListenerAccelerometro.pauseReading()
-        locationService?.stopLogging()
+        locationService?.pouseLogging()
         Toast.makeText(
             con,
             con.resources?.getString(R.string.trainingpaused),
@@ -110,9 +111,9 @@ class PresenterMaster private constructor (context: Context) {
         ).show()
     }
 
-    fun getTrainigInfo(): ArrayList<Double>? {
+    fun getTrainingInfo(): ArrayList<ArrayList<Double>>? {
         val info = locationService?.getTrainingLocationInfo()
-        info?.add(sensorListenerAccelerometro.getAccelerationAVG())
+        info?.add(sensorListenerAccelerometro.getAcceleracionInfo())
         return info
     }
 
@@ -129,7 +130,6 @@ class PresenterMaster private constructor (context: Context) {
         this.locationService?.let{
             if (it.isLogging) {
                 Log.d(TAG,"predicted ->> $latLng")
-                //findViewById<TextView>(R.id.location).text = latLng.toString()
                 Log.d(TAG,"is Logging")
             }
         }
@@ -185,6 +185,10 @@ class PresenterMaster private constructor (context: Context) {
         return value
     }
 
+    fun clearDataLocation() {
+        locationService?.clearData()
+    }
+
     fun onBluetoothDeviceChosen(_device: BluetoothDevice) {
         val deviceName = _device.name
         //val deviceHardwareAddress = device.address // MAC address
@@ -197,6 +201,39 @@ class PresenterMaster private constructor (context: Context) {
         // TODO
         // take user back to training page
         // TODO
+    }
+
+//    fun updateAcceleracion(accelerateActual: Float) {
+//
+//    }
+
+    fun createNewSession() : Session {
+        this.session = Session()
+        return this.session!!
+    }
+
+    fun createDummyTraining() {
+        val values : ArrayList<ArrayList<Double>>? = getTrainingInfo()
+        val time = values?.get(0)!![0]
+        val distance = values[1][0]
+        val speed = values[2]
+        val acce = values[3]
+        val exercise = Exercise(time,distance,distance,speed,acce)
+        training = Training(exercise,false)
+    }
+
+    fun createTrainingWithRecommendedExercise() {
+        val values : ArrayList<ArrayList<Double>>? = getTrainingInfo()
+        val time = values?.get(0)!![0]
+        val distance = values[1][0]
+        val speed = values[2]
+        val acce = values[3]
+        val exercise = Exercise(time,distance,distance,speed,acce)
+        training = Training(exercise,true)
+    }
+
+    fun getRecommendedExerciseDescription(): String {
+        return training?.getRecomendedExerciseDescrpcion()!!
     }
 
     /* presenter show recommended exercise */

@@ -84,9 +84,10 @@
     <string name="no">Nein</string>
     <string name="exit">Beenden</string>
     <!-- TODO class exercise that contain a string table full of exercises like this one -->
-    <string name="recomendedexercise">Fahren Sie 10 Minuten lang freie Runden mit einer
+    <!--<string name="recomendedexercise">Fahren Sie 10 Minuten lang freie Runden mit einer
         Durchschnittsgeschwindigkeit von bis zu 30 Km/S bei stabiler Trittfrequenz.
-        \n Sie sind bereit zu gehen </string>
+        \n Sie sind bereit zu gehen </string>-->
+    <string name="recomendedexercise"> Recommended Exercise?. \nYou are ready to go</string>
     <string name="recomendedexerciseyes">Lass uns gehen</string>
     <string name="recomendedexerciseno">Ein anderer Tag</string>
     <string name="trainingawesome">Genial</string>

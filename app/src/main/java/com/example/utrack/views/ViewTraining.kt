@@ -57,6 +57,7 @@ class ViewTraining : SecondViewClass() {
                 Log.d(TAG,"permission is been granted")
             }
         } else {
+            clearDataTraining()
             startService()
         }
         PresenterTraining.getInstance(this@ViewTraining).registerSensorListenerAccelerate()
@@ -85,6 +86,8 @@ class ViewTraining : SecondViewClass() {
         textViewstartresume.visibility = View.VISIBLE
         textViewpause.visibility = View.INVISIBLE
         textViewstop.visibility = View.INVISIBLE
+
+        PresenterTraining.getInstance(this).createNewSession()
 
         // button llisteners
         buttonStart.setOnClickListener {
@@ -157,12 +160,10 @@ class ViewTraining : SecondViewClass() {
 //            findViewById<TextView>(R.id.speed_gps).text = (presenter.let { it?.getSpeedGPS() }).toString()
 //            findViewById<TextView>(R.id.distance_gps).text = (presenter.let { it?.getDistanceGPS() }).toString()
             val formatTemplate = "%.2f%3s"
-            findViewById<TextView>(R.id.cadenceratetext).text =
-                formatTemplate.format(
-                    PresenterTraining.getInstance(this@ViewTraining).getAcceleration(),"rpm")
+            //findViewById<TextView>(R.id.cadenceratetext).text = formatTemplate.format(PresenterTraining.getInstance(this@ViewTraining).getAcceleration(),"rpm")
+            val aux = (PresenterTraining.getInstance(this@ViewTraining).getSpeedGPS()/1000)*3600      // m/s  -- > kph
             findViewById<TextView>(R.id.speedratetext).text =
-                formatTemplate.format(
-                    PresenterTraining.getInstance(this@ViewTraining).getSpeedGPS(),"m/s")
+                formatTemplate.format(aux ,"kph")
             //findViewById<>(R.id.).text = (presenterTraining.let { it?.getDistanceGPS() }).toString()
             PresenterTraining.getInstance(this@ViewTraining).onReceiveLocation(latLng)
         }
@@ -238,6 +239,12 @@ class ViewTraining : SecondViewClass() {
     }
 
     override fun onPause() {
+        try {
+            unregisterReceiver(locationUpdateReceiver)
+            unregisterReceiver(predictedLocationReceiver)
+        } catch (ex: IllegalArgumentException) {
+            ex.printStackTrace()
+        }
         PresenterTraining.getInstance(this@ViewTraining).unRegisterSensorListenerAccelerate()
         super.onPause()
     }
@@ -315,6 +322,10 @@ class ViewTraining : SecondViewClass() {
             arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
             MY_PERMISSIONS_REQUEST_LOCATION
         )
+    }
+
+    fun clearDataTraining() {
+        PresenterTraining.getInstance(this).clearDataTraining()
     }
 
     private fun startService() {

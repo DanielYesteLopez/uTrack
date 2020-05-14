@@ -187,11 +187,39 @@ class SensorListenerAccelerometer(context: Context) : SensorEventListener {
     }
 
     fun getAccelerationAVG() : Double {
-        var totalAcceleration : Float = 0f
+        var totalAcceleration = 0f
         for (i in 0 until accelerityList?.size!! - 1) {
             totalAcceleration += accelerityList!![i]
         }
         return (totalAcceleration/ accelerityList?.size!!).toDouble()
+    }
+
+
+    fun getAcceleracionInfo() : ArrayList<Double> {
+        var totalAcceleration = 0f
+        var acceleracionMin = 0f
+        var acceleracionMax = 0f
+
+        for (i in 0 until accelerityList?.size!! - 1) {
+            totalAcceleration += accelerityList!![i]
+            if (i == 0) {
+                acceleracionMin = accelerityList!![i]
+                acceleracionMax = accelerityList!![i]
+            } else {
+                if (acceleracionMin > accelerityList!![i]) {
+                    acceleracionMin = accelerityList!![i]
+                }
+                if (acceleracionMax < accelerityList!![i]) {
+                    acceleracionMax = accelerityList!![i]
+                }
+            }
+        }
+        val accelerationAVG = (totalAcceleration/ accelerityList?.size!!)
+        val ret : ArrayList<Double> = ArrayList()
+        ret.add(acceleracionMin.toDouble())
+        ret.add(accelerationAVG.toDouble())
+        ret.add(acceleracionMax.toDouble())
+        return ret
     }
 
     fun registerListener() {
