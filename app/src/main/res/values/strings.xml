@@ -98,7 +98,15 @@
     <string name="bluetooth_available">Bluetooth is available</string>
     <string name="discover_devices">Discover Devices</string>
     <string name="refresh_discovering">Refresh Scan</string>
-
+    <!-- TODO class exercise that contain a string table full of exercises like this one -->
+    <string name="recommended1">Stretch your legs for 5 minutes</string>
+    <string name="recommended2">Stretch your legs for 5 minutes</string>
+    <string name="recommended3">Stretch your legs for 5 minutes</string>
+    <string name="recommended4">Stretch your legs for 5 minutes</string>
+    <string name="recommended5">Stretch your legs for 5 minutes</string>
+    <string name="recommended6">Stretch your legs for 5 minutes</string>
+    <string name="recommended7">Stretch your legs for 5 minutes</string>
+    <string name="recommended8">Stretch your legs for 5 minutes</string>
 
     <string name="title_location_permission">Location permission</string>
     <string name="text_location_permission">please activate Location for better performance</string>

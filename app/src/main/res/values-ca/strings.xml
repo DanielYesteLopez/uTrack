@@ -80,7 +80,7 @@
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="exit">Sortir</string>
-    <!-- TODO class exercise that contain a string table full of exercises like this one -->
+
     <string name="recomendedexercise"> Recommended Exercise?. \nYou are ready to go</string>
     <string name="recomendedexerciseyes">Endavant!</string>
     <string name="recomendedexerciseno">Un altre dia</string>
@@ -99,6 +99,8 @@
     <string name="bluetooth_available">Bluetooth disponible</string>
     <string name="discover_devices">Discobrir dispositius</string>
     <string name="refresh_discovering">Refresh Scan</string>
+    <!-- TODO class exercise that contain a string table full of exercises like this one -->
+    <string name="recommended1">Estirar les cames durant uns 5 minutos</string>
 
     <string name="title_location_permission">Location permission</string>
     <string name="text_location_permission">please activate Location for better performence</string>
