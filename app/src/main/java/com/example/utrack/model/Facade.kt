@@ -3,24 +3,15 @@ package com.example.utrack.model
 import android.app.Activity
 import android.bluetooth.BluetoothDevice
 import android.content.Context
-import android.os.IBinder
-import android.provider.ContactsContract
-import android.util.Log
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import com.example.utrack.R
-import com.example.utrack.model.services.LocationService
-import com.google.android.gms.maps.model.LatLng
-import java.io.FileWriter
-import java.io.IOException
-import java.lang.Exception
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 class Facade (context : Context){
+    private var cadenceDevice: Sensor? = null
     private val user = User()
     private val database = Database()
     private var sessionList : SessionList? = null
@@ -30,6 +21,7 @@ class Facade (context : Context){
     init {
         /*user = User()
         database = Database()*/
+        cadenceDevice = Sensor()
         sessionList = SessionList()
     }
     fun setUserData(userDataMap: MutableMap<String, String>) {
@@ -75,20 +67,6 @@ class Facade (context : Context){
         return sessionList?.getSession(index)
     }
 
-    fun onBluetoothDeviceChosen(_device: BluetoothDevice) {
-        val deviceName = _device.name
-        //val deviceHardwareAddress = device.address // MAC address
-        Toast.makeText(
-            con,
-            deviceName,
-            Toast.LENGTH_SHORT
-        ).show()
-        // connect Device
-        // TODO
-        // take user back to training page
-        // TODO
-    }
-
     /* presenter show recommended exercise */
 //    fun onCanShowExerciseButtonPressed(fragmentActivity:FragmentActivity) {
 //        //val appContext :Context = fragmentActivity.applicationContext
@@ -128,7 +106,7 @@ class Facade (context : Context){
 
         if (sessionsList?.isNotEmpty()!!) {
             for (session : Session in sessionsList) {
-                arrayAdapter.add(session.toString())
+                arrayAdapter.insert(session.toString(),0)
             }
             activity.findViewById<ListView>(R.id.showDataList).adapter = arrayAdapter
             // Set item click listener
@@ -143,6 +121,14 @@ class Facade (context : Context){
         } else {
             activity.findViewById<ListView>(R.id.showDataList).adapter = arrayAdapter
         }
+    }
+
+    fun getSensorCadence(): BluetoothDevice? {
+        return this.cadenceDevice?.getABluetoothDevice()
+    }
+
+    fun setCadenceDevice(_device: BluetoothDevice) {
+        cadenceDevice?.setABluetoothDevice(_device)
     }
 
     /* presenter bluetooth */

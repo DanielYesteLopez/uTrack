@@ -4,12 +4,15 @@ import android.Manifest
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothSocket
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
@@ -19,13 +22,13 @@ import com.example.utrack.R
 import com.example.utrack.mc.SecondViewClass
 import com.example.utrack.presenters.PresenterTraining
 import kotlinx.android.synthetic.main.activity_bluetooth_pairing.*
+import java.io.IOException
+import java.lang.Thread.sleep
+import java.util.*
 import kotlin.collections.ArrayList
 
 
 class ViewBluetoothPairing : SecondViewClass() {
-
-    //private var presenterTraining = PresenterTraining(this@ViewBluetoothPairing.applicationContext)
-
     private val REQUESTCODEENABLEBLUETOOTH: Int = 1
     private val REQUESTCODEDISCOVERABLEBLUETOOTH: Int = 2
 //    private val SELECT_DEVICE_REQUEST_CODE = 42
@@ -44,6 +47,15 @@ class ViewBluetoothPairing : SecondViewClass() {
     private var devicesList: ArrayList<BluetoothDevice> = ArrayList()
     private lateinit var arrayAdapter: ArrayAdapter<String>
 
+    companion object {
+        var deviceUuid : UUID? = null
+        var bluetoothSocket : BluetoothSocket? = null
+        lateinit var bluetoothAdapter : BluetoothAdapter
+        var isConnected : Boolean = false
+        lateinit var address : String
+        var device : BluetoothDevice? = null
+        var hasCadenceDevice : String = "0"
+    }
     /**
      * Broadcast Receiver for changes made to bluetooth states such as:
      * 1) Discoverability mode on/off or expire.
@@ -137,6 +149,23 @@ class ViewBluetoothPairing : SecondViewClass() {
                         }
                     }
                 }
+                BluetoothAdapter.ACTION_DISCOVERY_FINISHED ->
+                {
+                    Log.d("ACTIONDISCOVERYFINISHED","HELLOO FROM THE OTHER SIDE ")
+                }
+                BluetoothDevice.ACTION_UUID ->
+                {
+                    val extradevice : BluetoothDevice? = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
+                    val uuidExtra : Array<Parcelable>? = intent.getParcelableArrayExtra(BluetoothDevice.EXTRA_UUID)
+                    Log.d("DeviceExtra address", "${extradevice?.address} ${extradevice?.name} -- ")
+                    if (uuidExtra != null) {
+                        for (p : Parcelable  in uuidExtra) {
+                            Log.d("uuidExtra","${p} ----\n")
+                        }
+                    } else {
+                        Log.d("fetching new uuid","uuidExtra is still null")
+                    }
+                }
             }
         }
     }
@@ -158,23 +187,40 @@ class ViewBluetoothPairing : SecondViewClass() {
         }
         // back button
         backButtonBluetoothPage.setOnClickListener {
-            turnBluetoothOff() //turn off bluetooth if user press back button
             PresenterTraining.getInstance(applicationContext).onBackBluetoothButtonPressed() // go back to exercise
         }
     }
 
     override fun onBackPressed() {
-        turnBluetoothOff()
         super.onBackPressed()
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
+    override fun onResume() {
+//        if(!this.bAdapterIsDiscovering()){
+//            getDiscoverableDevices()
+//        }
+        super.onResume()
+    }
+
     override fun onDestroy() {
+        // unregister the ACTION_FOUND receiver.
+        //unregisterReceiver(receiver1)
+        // unregister the Discoverability receiver.
+        //unregisterReceiver(receiver2)
+        //disconnect()
+        turnBluetoothOff()
         super.onDestroy()
+    }
+
+    override fun onStop() {
         // unregister the ACTION_FOUND receiver.
         unregisterReceiver(receiver1)
         // unregister the Discoverability receiver.
         unregisterReceiver(receiver2)
+        super.onStop()
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
@@ -199,16 +245,6 @@ class ViewBluetoothPairing : SecondViewClass() {
                     bluetoothIv.setImageResource(R.drawable.icon_bluetooth_off) //Bluetooth is off
                 }
             }
-//            SELECT_DEVICE_REQUEST_CODE -> when(resultCode) {
-//                Activity.RESULT_OK -> {
-//                    // User has chosen to pair with the Bluetooth device.
-//                    val deviceToPair: BluetoothDevice? =
-//                        data?.getParcelableExtra(CompanionDeviceManager.EXTRA_DEVICE)
-//                    deviceToPair?.createBond()
-//                    Log.d("bluetooth", "estamos en ello please wait")
-//                    // ... Continue interacting with the paired device.
-//                }
-//            }
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
@@ -228,8 +264,16 @@ class ViewBluetoothPairing : SecondViewClass() {
             pairedTv.adapter = arrayAdapter
             // 4 Set item click listener
             pairedTv.onItemClickListener = OnItemClickListener { _, _, position, _ ->
+                bAdapterCancelDiscovery()
                 val device: BluetoothDevice = devicesList[position]
+                Log.d("bluetooth device",">>>>>>>>>>>>>>>>   ${device.uuids}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+                deviceUuid = UUID.randomUUID()
+                address = device.address!!
+                Log.d("going to connect","if you get an error go to fit")
+                //ConnectToDevice(this).execute()
+                sleep(1)
                 PresenterTraining.getInstance(this).onBluetoothDeviceChosen(device)
+                PresenterTraining.getInstance(this).goToTrainingView()
             }
         }
     }
@@ -272,10 +316,14 @@ class ViewBluetoothPairing : SecondViewClass() {
 //    }
 
     private fun queryPairedDevices(){
+        bAdapterCancelDiscovery()
         val pairedDevices: Set<BluetoothDevice>? = bAdapter!!.bondedDevices // get list of paired Devices
         if (pairedDevices != null) {
             if (pairedDevices.isNotEmpty()) {
                 pairedDevices.forEach { device : BluetoothDevice ->
+                    var result = device.fetchUuidsWithSdp()
+                    Log.d("paired Devices","fetching uuids<  ${result} << < <  < < < < < < < < <")
+                    Log.d("paired Devices","fetching uuids<  ${device.address} -- ${device.name} \n")
                     devicesList.add(device)
                     arrayAdapter.add("${device.name} \n ${device.address}")
                 }
@@ -441,6 +489,61 @@ class ViewBluetoothPairing : SecondViewClass() {
                     ), 1001
                 ) //Any number
             }
+        }
+    }
+
+    private fun disconnect() {
+        if (bluetoothSocket != null) {
+            try {
+                bluetoothSocket!!.close()
+                bluetoothSocket = null
+                isConnected = false
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+        finish()
+    }
+
+    private class ConnectToDevice(c: Context) : AsyncTask<Void, Void, String>() {
+        private var connectSuccess: Boolean = true
+        private val context: Context
+
+        init {
+            this.context = c
+        }
+
+        override fun onPreExecute() {
+            Log.d("preExecute","you should make a progress bar please")
+            super.onPreExecute()
+        }
+
+        override fun doInBackground(vararg p0: Void?): String? {
+            try {
+                Log.d("socket Training view", "connecting in background")
+                if (bluetoothSocket == null || !isConnected) {
+                    bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+                    val device: BluetoothDevice = bluetoothAdapter.getRemoteDevice(address)
+                    bluetoothSocket = device.createInsecureRfcommSocketToServiceRecord(deviceUuid)
+                    BluetoothAdapter.getDefaultAdapter().cancelDiscovery()
+                    bluetoothSocket!!.connect()
+                }
+            } catch (e: IOException) {
+                connectSuccess = false
+                e.printStackTrace()
+            }
+            return null
+        }
+
+        override fun onPostExecute(result: String?) {
+
+            super.onPostExecute(result)
+            if (!connectSuccess) {
+                Log.d("data", "couldn't connect")
+            } else {
+                isConnected = true
+            }
+            Log.d("PosExecute","dissmis the progress bar")
         }
     }
 }

@@ -175,6 +175,17 @@ class PresenterMaster private constructor (context: Context) {
         return value
     }
 
+
+    fun getSpeedGPSAVG() : Float {
+        var value = 0.0f
+        try {
+            value = locationService.let { it?.getLocationSpeedAVG()!! }
+        }catch (e : Exception){
+            Log.d(TAG, "error getting speed GPS")
+        }
+        return value
+    }
+
     fun getDistanceGPS() : Float {
         var value = 0.0F
         try {
@@ -197,10 +208,11 @@ class PresenterMaster private constructor (context: Context) {
             deviceName,
             Toast.LENGTH_SHORT
         ).show()
-        // connect Device
-        // TODO
-        // take user back to training page
-        // TODO
+        facade.setCadenceDevice(_device)
+    }
+
+    fun getCadenceSensor() : BluetoothDevice? {
+        return facade.getSensorCadence()
     }
 
 //    fun updateAcceleracion(accelerateActual: Float) {

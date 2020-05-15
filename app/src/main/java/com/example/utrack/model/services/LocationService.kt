@@ -16,8 +16,6 @@ import androidx.core.app.NotificationCompat.PRIORITY_MIN
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.utrack.R
 import kotlin.collections.ArrayList
-import kotlin.math.max
-import kotlin.math.min
 
 @Suppress("DEPRECATION")
 class LocationService: Service(), LocationListener, GpsStatus.Listener {
@@ -45,9 +43,9 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
     private var currentTimeInMillis : Long = 0L
     private var elapsedTimeInSeconds : Long = 0L
     private var totalDistanceInMeters : Float = 0f
-    private var totalSpeedInMps = 0f
-    private var maxSpeedInMps = 0f
-    private var minSpeedInMps = 0f
+    private var totalSpeedInkph = 0f
+    private var maxSpeedInkph = 0f
+    private var minSpeedInkph = 0f
 
     init {
         isLocationManagerUpdatingLocation = false
@@ -191,21 +189,21 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
             currentTimeInMillis = SystemClock.elapsedRealtimeNanos() / 1000000
             elapsedTimeInSeconds = (currentTimeInMillis - runStartTimeInMillis) / 1000
             totalDistanceInMeters = 0f
-            totalSpeedInMps = 0f
+            totalSpeedInkph = 0f
             var speed: Float
             for (i in 0 until locationList.size - 1) {
                 totalDistanceInMeters += locationList[i].distanceTo(locationList[i + 1])
                 speed = getLocationSpeed()
-                totalSpeedInMps += speed
+                totalSpeedInkph += speed
                 if (i == 0) {
-                    minSpeedInMps = speed
-                    maxSpeedInMps = speed
+                    minSpeedInkph = speed
+                    maxSpeedInkph = speed
                 } else {
-                    if (minSpeedInMps > speed) {
-                        minSpeedInMps = speed
+                    if (minSpeedInkph > speed) {
+                        minSpeedInkph = speed
                     }
-                    if (maxSpeedInMps < speed) {
-                        maxSpeedInMps = speed
+                    if (maxSpeedInkph < speed) {
+                        maxSpeedInkph = speed
                     }
                 }
             }
@@ -213,6 +211,21 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
             //saveLog(elapsedTimeInSeconds, totalDistanceInMeters.toDouble(), gpsCount)
         }
         isLogging = false
+    }
+    fun getLocationSpeedAVG() : Float {
+        var speedAVG = 0.0f
+        var totalSpeed = 0.0f
+        var speed = 0.0f
+        if(locationList.size > 0) {
+            for (i in 0 until locationList.size - 1) {
+                speed = getLocationSpeed()
+                totalSpeed += speed
+            }
+            speedAVG = totalSpeed/locationList.size
+        }else {
+            speedAVG = 0.0f
+        }
+        return speedAVG
     }
 
     fun getTrainingLocationInfo() : ArrayList<ArrayList<Double>> {
@@ -222,10 +235,10 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
         val speed : ArrayList<Double> = ArrayList()
         time.add(elapsedTimeInSeconds.toDouble())
         distance.add(totalDistanceInMeters.toDouble())
-        val avgSpeed = (totalSpeedInMps/locationList.size).toDouble()
-        speed.add(minSpeedInMps.toDouble())
+        val avgSpeed = (totalSpeedInkph/locationList.size).toDouble()
+        speed.add(minSpeedInkph.toDouble())
         speed.add(avgSpeed)
-        speed.add(maxSpeedInMps.toDouble())
+        speed.add(maxSpeedInkph.toDouble())
         ret.add(time)
         ret.add(distance)
         ret.add(speed)
@@ -440,7 +453,7 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
     }
 
     fun getLocationSpeed() : Float {
-        return getActualLocation().speed
+        return (getActualLocation().speed/1000)*3600
     }
 
     fun getDistanceLocations() : Float {

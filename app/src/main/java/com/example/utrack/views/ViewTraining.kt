@@ -7,10 +7,7 @@ import android.content.*
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.location.Location
-import android.os.Build
-import android.os.Bundle
-import android.os.IBinder
-import android.os.SystemClock
+import android.os.*
 import android.util.Log
 import android.view.View
 import android.widget.TextView
@@ -28,7 +25,7 @@ class ViewTraining : SecondViewClass() {
 
     private val TAG = "MainActivity"
     val MY_PERMISSIONS_REQUEST_LOCATION = 99
-    //private var presenterTraining : PresenterTraining? = null
+
     private var myBluetoothFragment: FragmentBluetooth? = null
 
     @SuppressLint("SourceLockedOrientationActivity")
@@ -159,11 +156,15 @@ class ViewTraining : SecondViewClass() {
 //            findViewById<TextView>(R.id.distance_trapezi).text = (presenter.let { it?.getPositionTrapeze() }).toString()
 //            findViewById<TextView>(R.id.speed_gps).text = (presenter.let { it?.getSpeedGPS() }).toString()
 //            findViewById<TextView>(R.id.distance_gps).text = (presenter.let { it?.getDistanceGPS() }).toString()
-            val formatTemplate = "%.2f%3s"
+            val formatTemplate = "%00.2f%3s"
             //findViewById<TextView>(R.id.cadenceratetext).text = formatTemplate.format(PresenterTraining.getInstance(this@ViewTraining).getAcceleration(),"rpm")
-            val aux = (PresenterTraining.getInstance(this@ViewTraining).getSpeedGPS()/1000)*3600      // m/s  -- > kph
+            val aux1 = PresenterTraining.getInstance(this@ViewTraining).getSpeedGPS()    // kph
             findViewById<TextView>(R.id.speedratetext).text =
-                formatTemplate.format(aux ,"kph")
+                formatTemplate.format(aux1 ,"kph")
+            val aux2 = PresenterTraining.getInstance(this@ViewTraining).getSpeedGPSAVG()    // kph
+            findViewById<TextView>(R.id.agspeedratetext).text =
+                formatTemplate.format(aux2 ,"kph")
+
             //findViewById<>(R.id.).text = (presenterTraining.let { it?.getDistanceGPS() }).toString()
             PresenterTraining.getInstance(this@ViewTraining).onReceiveLocation(latLng)
         }
@@ -207,16 +208,17 @@ class ViewTraining : SecondViewClass() {
     }
 
     public override fun onDestroy() {
-        try {
+        /*try {
             unregisterReceiver(locationUpdateReceiver)
             unregisterReceiver(predictedLocationReceiver)
         } catch (ex: IllegalArgumentException) {
             ex.printStackTrace()
-        }
+        }*/
         super.onDestroy()
     }
 
     override fun onResume() {
+        Log.d("onResume Training view","it works yay")
         PresenterTraining.getInstance(this@ViewTraining).registerSensorListenerAccelerate()
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -302,6 +304,7 @@ class ViewTraining : SecondViewClass() {
                             Manifest.permission.ACCESS_FINE_LOCATION)
                         == PackageManager.PERMISSION_GRANTED
                     ) {
+                        clearDataTraining()
                         startService()
                     }
                 } else {
@@ -324,7 +327,7 @@ class ViewTraining : SecondViewClass() {
         )
     }
 
-    fun clearDataTraining() {
+    private fun clearDataTraining() {
         PresenterTraining.getInstance(this).clearDataTraining()
     }
 

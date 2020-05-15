@@ -9,8 +9,13 @@ import androidx.core.content.ContextCompat
 import com.example.utrack.model.Session
 import com.example.utrack.views.*
 import com.google.android.gms.maps.model.LatLng
+import java.util.*
+import kotlin.collections.ArrayList
 
 class PresenterTraining private constructor(context: Context) {
+
+    val EXTRA_MESSAGE_DEVICE: String = "extra device"
+
     private val TAG = "MainActivity"
     private var con : Context = context
     companion object : SingletonHolder<PresenterTraining, Context>(::PresenterTraining)
@@ -82,6 +87,10 @@ class PresenterTraining private constructor(context: Context) {
 
     fun getSpeedGPS() : Float {
         return  PresenterMaster.getInstance(con).getSpeedGPS()
+    }
+
+    fun getSpeedGPSAVG(): Float {
+        return PresenterMaster.getInstance(con).getSpeedGPSAVG()
     }
 
     fun getDistanceGPS() : Float {
@@ -165,6 +174,7 @@ class PresenterTraining private constructor(context: Context) {
     fun onBackBluetoothButtonPressed() {
         val intent = Intent(con, ViewTraining().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.putExtra(EXTRA_MESSAGE_DEVICE,"0")
         ContextCompat.startActivity(con,intent,null)
     }
 
@@ -178,5 +188,16 @@ class PresenterTraining private constructor(context: Context) {
 
     fun getDescriptionRecommendedExercise(): String {
         return PresenterMaster.getInstance(con).getRecommendedExerciseDescription()
+    }
+
+    fun getDeviceCadence(): BluetoothDevice? {
+        return PresenterMaster.getInstance(con).getCadenceSensor()
+    }
+
+    fun goToTrainingView() {
+        val intent = Intent(con, ViewTraining().javaClass)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.putExtra(EXTRA_MESSAGE_DEVICE,"1")
+        ContextCompat.startActivity(con,intent,null)
     }
 }
