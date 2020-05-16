@@ -19,9 +19,7 @@ import kotlin.collections.ArrayList
 
 @Suppress("DEPRECATION")
 class LocationService: Service(), LocationListener, GpsStatus.Listener {
-
-    private val LOG_TAG: String = LocationService::class.java.simpleName
-
+    //private val LOG_TAG: String = LocationService::class.java.simpleName
     private val binder = LocationServiceBinder()
     private var isLocationManagerUpdatingLocation: Boolean = false
 
@@ -73,24 +71,24 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
     }
 
     override fun onRebind(intent: Intent) {
-        Log.d(LOG_TAG, "onRebind ")
+        //Log.d(LOG_TAG, "onRebind ")
     }
 
     override fun onUnbind(intent: Intent): Boolean {
-        Log.d(LOG_TAG, "onUnbind ")
+        //Log.d(LOG_TAG, "onUnbind ")
 
         return true
     }
 
     override fun onDestroy() {
-        Log.d(LOG_TAG, "onDestroy ")
+        //Log.d(LOG_TAG, "onDestroy ")
     }
 
     /**
      * when the process stop, stop the service.
      */
     override fun onTaskRemoved(rootIntent: Intent) {
-        Log.d(LOG_TAG, "onTaskRemoved ")
+        //Log.d(LOG_TAG, "onTaskRemoved ")
         this.stopUpdatingLocation()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             stopForeground(true)
@@ -111,13 +109,13 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
         newLocation?.let{
             gpsCount++
             if (isLogging) {
-                Log.d(LOG_TAG, "going to filter this location")
+                //Log.d(LOG_TAG, "going to filter this location")
 
                 if (filterAndAddLocation(it)){
-                    Log.d(LOG_TAG, "Location -> (" + it.latitude + "," + it.longitude + ")")
+                    //Log.d(LOG_TAG, "Location -> (" + it.latitude + "," + it.longitude + ")")
                 }
             }
-            Log.d(LOG_TAG, "Broadcast for the new location")
+            //Log.d(LOG_TAG, "Broadcast for the new location")
             val intent = Intent("LocationUpdated")
             intent.putExtra("location", it)
             LocalBroadcastManager.getInstance(this.application).sendBroadcast(intent)
@@ -207,15 +205,16 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
                     }
                 }
             }
+            totalDistanceInMeters = totalDistanceInMeters / 1000 // to km
             //Log.d(LOG_TAG,"saving log $elapsedTimeInSeconds $totalDistanceInMeters")
             //saveLog(elapsedTimeInSeconds, totalDistanceInMeters.toDouble(), gpsCount)
         }
         isLogging = false
     }
     fun getLocationSpeedAVG() : Float {
-        var speedAVG = 0.0f
+        val speedAVG : Float
         var totalSpeed = 0.0f
-        var speed = 0.0f
+        var speed : Float
         if(locationList.size > 0) {
             for (i in 0 until locationList.size - 1) {
                 speed = getLocationSpeed()
@@ -258,9 +257,9 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
      *
      */
     fun startUpdatingLocation() {
-        Log.d(LOG_TAG,"Start updating location")
+        //Log.d(LOG_TAG,"Start updating location")
         if (!this.isLocationManagerUpdatingLocation) {
-            Log.d(LOG_TAG,"clearing data ---->>>>")
+            //Log.d(LOG_TAG,"clearing data ---->>>>")
             isLocationManagerUpdatingLocation = true
             clearData()
             val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -279,7 +278,7 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
                 criteria.verticalAccuracy = Criteria.ACCURACY_HIGH
 
                 locationManager.addGpsStatusListener(this)
-                Log.d(LOG_TAG, "requesting location update")
+                //Log.d(LOG_TAG, "requesting location update")
                 locationManager.requestLocationUpdates(
                     gpsFreqInMillis.toLong(),
                     gpsFreqInDistance.toFloat(),
@@ -289,11 +288,11 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
                 )
                 gpsCount = 0
             } catch (e: IllegalArgumentException) {
-                Log.e(LOG_TAG, e.localizedMessage!!)
+                //Log.e(LOG_TAG, e.localizedMessage!!)
             } catch (e: SecurityException) {
-                Log.e(LOG_TAG, e.localizedMessage!!)
+                //Log.e(LOG_TAG, e.localizedMessage!!)
             } catch (e: RuntimeException) {
-                Log.e(LOG_TAG, e.localizedMessage!!)
+                //Log.e(LOG_TAG, e.localizedMessage!!)
             }
         }
     }
@@ -326,19 +325,19 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
     private fun filterAndAddLocation(location: Location): Boolean {
         val age = getLocationAge(location)
         if (age > 5 * 1000) { //more than 5 seconds
-            Log.d(LOG_TAG, "Location is old")
+            //Log.d(LOG_TAG, "Location is old")
             oldLocationList.add(location)
             return false
         }
         if (location.accuracy <= 0) {
-            Log.d(LOG_TAG, "Latitude and longitude values are invalid.")
+            //Log.d(LOG_TAG, "Latitude and longitude values are invalid.")
             noAccuracyLocationList.add(location)
             return false
         }
         //setAccuracy(newLocation.getAccuracy());
         val horizontalAccuracy = location.accuracy
         if (horizontalAccuracy > 1000) { //10meter filter
-            Log.d(LOG_TAG, "Accuracy is too low.")
+            //Log.d(LOG_TAG, "Accuracy is too low.")
             inaccurateLocationList.add(location)
             return false
         }
@@ -363,7 +362,7 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
         val predictedDeltaInMeters = predictedLocation.distanceTo(location)
 
         if (predictedDeltaInMeters > 60) {
-            Log.d(LOG_TAG, "Kalman Filter detects mal GPS")
+            //Log.d(LOG_TAG, "Kalman Filter detects mal GPS")
             kalmanFilter.consecutiveRejectCount += 1
             if (kalmanFilter.consecutiveRejectCount > 3) {
                 kalmanFilter = KalmanLatLong(3f) //reset Kalman Filter if it rejects more than 3 times in raw.
@@ -377,7 +376,7 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
         val intent = Intent("PredictLocation")
         intent.putExtra("location", predictedLocation)
         LocalBroadcastManager.getInstance(this.application).sendBroadcast(intent)
-        Log.d(LOG_TAG, "Location quality is good enough.")
+        //Log.d(LOG_TAG, "Location quality is good enough.")
         currentSpeed = location.speed
         locationList.add(location)
         return true
