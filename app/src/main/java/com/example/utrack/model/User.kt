@@ -29,4 +29,10 @@ class User {
                 userBikeSettingsMap.getValue("stem"))
         }
     }
+
+    fun changeUserAccount(userName: String, realName: String, accountEmail: String) {
+        userData.name = userName
+        userData.realName = realName
+        userData.email = accountEmail
+    }
 }

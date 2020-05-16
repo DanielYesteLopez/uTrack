@@ -145,6 +145,11 @@ class Facade (context : Context){
         }
     }
 
+    fun changeUserAccount(userName: String, password: String, realName: String, accountEmail: String) {
+        database.changeUserAccount(userName,password,realName,accountEmail)
+        user.changeUserAccount(userName,realName,accountEmail)
+    }
+
     /* presenter bluetooth */
 //  fun onConnectDevicesBluetoothButtonPressed() {
 //    }

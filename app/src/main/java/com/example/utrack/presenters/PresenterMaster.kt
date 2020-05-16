@@ -236,6 +236,10 @@ class PresenterMaster private constructor (context: Context) {
         return training?.getRecomendedExerciseDescrpcion()!!
     }
 
+    fun changeUserAccount(userName: String, password: String, realName: String, accountEmail: String) {
+        facade.changeUserAccount(userName, password, realName, accountEmail)
+    }
+
     /* presenter show recommended exercise */
 //    fun onCanShowExerciseButtonPressed(fragmentActivity:FragmentActivity) {
 //        //val appContext :Context = fragmentActivity.applicationContext
