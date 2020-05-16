@@ -24,7 +24,7 @@ class PresenterMaster private constructor (context: Context) {
 
     private val TAG = "MainActivity"
     private var locationService: LocationService? = null
-    private var sensorListenerAccelerometro : SensorListenerAccelerometer = SensorListenerAccelerometer(context)
+    //private var sensorListenerAccelerometro : SensorListenerAccelerometer = SensorListenerAccelerometer(context)
 
     private var session : Session? = null
 
@@ -93,7 +93,7 @@ class PresenterMaster private constructor (context: Context) {
     }
 
     fun onStartTrainingButtonPressed() {
-        sensorListenerAccelerometro.resumeReading()
+       // sensorListenerAccelerometro.resumeReading()
         locationService?.startLogging()
         Toast.makeText(con,
             con.resources?.getString(R.string.trainingprogress),
@@ -102,7 +102,7 @@ class PresenterMaster private constructor (context: Context) {
     }
 
     fun onPauseTrainingButtonPressed() {
-        sensorListenerAccelerometro.pauseReading()
+        //sensorListenerAccelerometro.pauseReading()
         locationService?.pouseLogging()
         Toast.makeText(
             con,
@@ -113,7 +113,7 @@ class PresenterMaster private constructor (context: Context) {
 
     fun getTrainingInfo(): ArrayList<ArrayList<Double>>? {
         val info = locationService?.getTrainingLocationInfo()
-        info?.add(sensorListenerAccelerometro.getAcceleracionInfo())
+        //info?.add(sensorListenerAccelerometro.getAcceleracionInfo())
         return info
     }
 
@@ -146,25 +146,25 @@ class PresenterMaster private constructor (context: Context) {
     }
 
     fun registerSensorListenerAccelerate(){
-        sensorListenerAccelerometro.registerListener()
+        //sensorListenerAccelerometro.registerListener()
     }
 
     fun unRegisterSensorListenerAccelerate(){
-        sensorListenerAccelerometro.unregisterListener()
+        //sensorListenerAccelerometro.unregisterListener()
     }
 
-    fun getAcceleration() : Float {
-        return sensorListenerAccelerometro.getAccelerateActual()
+    /*fun getAcceleration() : Float {
+        //return sensorListenerAccelerometro.getAccelerateActual()
     }
 
     fun getSpeedTrapezi() : Float{
-        return sensorListenerAccelerometro.getVelocityActual()
+        //return sensorListenerAccelerometro.getVelocityActual()
     }
 
     fun getPositionTrapeze() : Float{
-        return sensorListenerAccelerometro.getPositionActual()
+        //return sensorListenerAccelerometro.getPositionActual()
     }
-
+*/
     fun getSpeedGPS() : Float {
         var value = 0.0F
         try {
@@ -229,8 +229,8 @@ class PresenterMaster private constructor (context: Context) {
         val time = values?.get(0)!![0]
         val distance = values[1][0]
         val speed = values[2]
-        val acce = values[3]
-        val exercise = Exercise(time,distance,distance,speed,acce)
+        //val acce = values[3]
+        val exercise = Exercise(time,distance,speed[1],speed,speed)
         training = Training(exercise,false)
     }
 
@@ -239,8 +239,8 @@ class PresenterMaster private constructor (context: Context) {
         val time = values?.get(0)!![0]
         val distance = values[1][0]
         val speed = values[2]
-        val acce = values[3]
-        val exercise = Exercise(time,distance,distance,speed,acce)
+        //val acce = values[3]
+        val exercise = Exercise(time,distance,speed[1],speed,speed)
         training = Training(exercise,true)
     }
 

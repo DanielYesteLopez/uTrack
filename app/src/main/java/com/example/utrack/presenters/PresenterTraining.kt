@@ -14,8 +14,8 @@ import kotlin.collections.ArrayList
 
 class PresenterTraining private constructor(context: Context) {
 
-    val EXTRA_MESSAGE_DEVICE: String = "extra device"
-
+    //val EXTRA_MESSAGE_DEVICE: String = "extra device"
+    private var isDoingRecomendedExercise = false
     private val TAG = "MainActivity"
     private var con : Context = context
     companion object : SingletonHolder<PresenterTraining, Context>(::PresenterTraining)
@@ -73,7 +73,7 @@ class PresenterTraining private constructor(context: Context) {
         PresenterMaster.getInstance(con).unRegisterSensorListenerAccelerate()
     }
 
-    fun getAcceleration() : Float {
+   /* fun getAcceleration() : Float {
         return  PresenterMaster.getInstance(con).getAcceleration()
     }
 
@@ -83,7 +83,7 @@ class PresenterTraining private constructor(context: Context) {
 
     fun getPositionTrapeze() : Float {
         return  PresenterMaster.getInstance(con).getPositionTrapeze()
-    }
+    }*/
 
     fun getSpeedGPS() : Float {
         return  PresenterMaster.getInstance(con).getSpeedGPS()
@@ -105,17 +105,22 @@ class PresenterTraining private constructor(context: Context) {
     fun onCanShowExerciseButtonPressed() {
         // do nothing
         Log.d(TAG, "user cancel stop training")
+        isDoingRecomendedExercise = false
     }
 
     fun onNegShowExerciseButtonPressed() {
         Log.d(TAG,"create dummy recomended exercise")
         PresenterMaster.getInstance(con).createDummyTraining()
+        isDoingRecomendedExercise = false
     }
 
     fun onPosShowExerciseButtonPressed() {
-        //
         Log.d(TAG,"positive button")
         PresenterMaster.getInstance(con).createTrainingWithRecommendedExercise()
+        isDoingRecomendedExercise = true
+    }
+    fun isDoingRecommendedExercise() : Boolean {
+        return this.isDoingRecomendedExercise
     }
 
     /* presenter save data */
@@ -174,7 +179,7 @@ class PresenterTraining private constructor(context: Context) {
     fun onBackBluetoothButtonPressed() {
         val intent = Intent(con, ViewTraining().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        intent.putExtra(EXTRA_MESSAGE_DEVICE,"0")
+        //intent.putExtra(EXTRA_MESSAGE_DEVICE,"0")
         ContextCompat.startActivity(con,intent,null)
     }
 
@@ -197,7 +202,7 @@ class PresenterTraining private constructor(context: Context) {
     fun goToTrainingView() {
         val intent = Intent(con, ViewTraining().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        intent.putExtra(EXTRA_MESSAGE_DEVICE,"1")
+        //intent.putExtra(EXTRA_MESSAGE_DEVICE,"1")
         ContextCompat.startActivity(con,intent,null)
     }
 }

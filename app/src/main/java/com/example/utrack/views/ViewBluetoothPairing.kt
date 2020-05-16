@@ -23,6 +23,7 @@ import com.example.utrack.mc.SecondViewClass
 import com.example.utrack.presenters.PresenterTraining
 import kotlinx.android.synthetic.main.activity_bluetooth_pairing.*
 import java.io.IOException
+import java.lang.IllegalArgumentException
 import java.lang.Thread.sleep
 import java.util.*
 import kotlin.collections.ArrayList
@@ -214,10 +215,15 @@ class ViewBluetoothPairing : SecondViewClass() {
     }
 
     override fun onStop() {
-        // unregister the ACTION_FOUND receiver.
-        unregisterReceiver(receiver1)
-        // unregister the Discoverability receiver.
-        unregisterReceiver(receiver2)
+        try {
+            // unregister the ACTION_FOUND receiver.
+            unregisterReceiver(receiver1)
+            // unregister the Discoverability receiver.
+            unregisterReceiver(receiver2)
+        }catch (e : IllegalArgumentException){
+            e.printStackTrace()
+        }
+
         super.onStop()
     }
 

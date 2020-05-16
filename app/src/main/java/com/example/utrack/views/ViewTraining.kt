@@ -134,8 +134,13 @@ class ViewTraining : SecondViewClass() {
         buttonStop.setOnClickListener {
             if(isWorking || ispaused) {
                 buttonPause.callOnClick()
-                val myExerciseFragment = FragmentShowExercise()
-                myExerciseFragment.show(supportFragmentManager, getString(R.string.notefication))
+                if(PresenterTraining.getInstance(this).isDoingRecommendedExercise()){
+                    val mySaveFragment = FragmentSaveData()
+                    mySaveFragment.show(supportFragmentManager,getString(R.string.notefication))
+                }else{
+                    val myExerciseFragment = FragmentShowExercise()
+                    myExerciseFragment.show(supportFragmentManager, getString(R.string.notefication))
+                }
                 PresenterTraining.getInstance(this@ViewTraining).onStopTrainingButtonPressed()
             }
         }
@@ -156,7 +161,7 @@ class ViewTraining : SecondViewClass() {
 //            findViewById<TextView>(R.id.distance_trapezi).text = (presenter.let { it?.getPositionTrapeze() }).toString()
 //            findViewById<TextView>(R.id.speed_gps).text = (presenter.let { it?.getSpeedGPS() }).toString()
 //            findViewById<TextView>(R.id.distance_gps).text = (presenter.let { it?.getDistanceGPS() }).toString()
-            val formatTemplate = "%00.2f%3s"
+            val formatTemplate = "%.2f%3s"
             //findViewById<TextView>(R.id.cadenceratetext).text = formatTemplate.format(PresenterTraining.getInstance(this@ViewTraining).getAcceleration(),"rpm")
             val aux1 = PresenterTraining.getInstance(this@ViewTraining).getSpeedGPS()    // kph
             findViewById<TextView>(R.id.speedratetext).text =

@@ -19,21 +19,6 @@ class Training constructor (exercise: Exercise, boolean: Boolean) {
     fun recommendExercise() {
         //TODO "dice un ejercicio recomendado"
         // algoritmo para recomendedExercise
-        var cadense : Double = exercise?.getAverageCadence()!!
-        var speed : Double = exercise?.getAverageSpeed()!!
-        var acceleration : Double = exercise?.getAcceleration()!!
-        var distance : Double = exercise?.getDistance()!!
-        var duration : Double = exercise?.getDuration()!!
-        var intesity : Int = 0;
-        //cadencia =
-        //speed =
-        //accelerate =
-        //distance =
-        //duration = 2h
-
-        //(duration)*acceleration;
-
-
         recommendedExercise = RecommendedExercise(10.0,"real recommended exercise",1)
     }
 
