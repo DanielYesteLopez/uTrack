@@ -100,8 +100,14 @@
         <string name="discover_devices">Discobrir dispositivos</string>
         <string name="refresh_discovering">Refresh Scan</string>
 
-    <!-- TODO class exercise that contain a string table full of exercises like this one -->
     <string name="recommended1">Estirar la piernas por unos 5 minutos</string>
+    <string name="recommended2">Estirar las piernas por 5 minutos y descansar por otros 5 min</string>
+    <string name="recommended3">Hacer vueltas a velocidad constante de 30 Km/h durante 10 min</string>
+    <string name="recommended4">Hacer vueltas a velocidad constante de 30 Km/h durante 15 min</string>
+    <string name="recommended5">Ejercicio progresivo durante 10 min empezando con velocidad minima 25 Km/h y luego pararse para estirar los musculos durante 5 min</string>
+    <string name="recommended6">Vueltas a 40 Km/h durante 10-15 min, estirar las piernas y hacer ejercicios fisicos en el gimnasio durante 5 min</string>
+    <string name="recommended7">Vueltas a velocidad constante de 40 Km/h por encima de la linea azul</string>
+    <string name="recommended8">Vueltas a velocidad constante de 35 Km/h por encima de la linea azul, cada 5 vueltas cambiar a la linea negra para aumentar la velocidad a 45 Km/h durante 2 vueltas y volver a la azul a la velocidad anterior para 1 vuelta mas</string>
 
     <string name="title_location_permission">Location permission</string>
     <string name="text_location_permission">please activate Location for better performence</string>

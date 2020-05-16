@@ -99,8 +99,15 @@
     <string name="bluetooth_available">Bluetooth disponible</string>
     <string name="discover_devices">Discobrir dispositius</string>
     <string name="refresh_discovering">Refresh Scan</string>
-    <!-- TODO class exercise that contain a string table full of exercises like this one -->
+
     <string name="recommended1">Estirar les cames durant uns 5 minutos</string>
+    <string name="recommended2">Estirar les cames durant uns 5 minutos i descansar per 5 min mes</string>
+    <string name="recommended3">Fer voltes a velocitat constant de 30 Km/h durant 10 min</string>
+    <string name="recommended4">Fer voltes a velocitat constant de 30 Km/h durant 15 min</string>
+    <string name="recommended5">Exercici progressiu durant 10 min començant a velocitat minima de 25 Km/h i després pararse per a estirar els musculs durant 5 min</string>
+    <string name="recommended6">Voltes a 40 Km/h durant 10-15 min, estirar les cames i fer exercicis fisics en el gimnas durant 5 min</string>
+    <string name="recommended7">Voltes a velocitat constant de 40 Km/h per sobre la linea blava</string>
+    <string name="recommended8">Voltes a velocitat constant de 35 Km/h per sobre la linea blava, cada 5 voltes canviar a la linea negra per a augmentar la velocitat a 45 Km/h durant 2 voltes i tornar a la blava a la velocitat anterior per a 1 volta mes</string>
 
     <string name="title_location_permission">Location permission</string>
     <string name="text_location_permission">please activate Location for better performence</string>

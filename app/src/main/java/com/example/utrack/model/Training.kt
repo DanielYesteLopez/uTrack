@@ -1,5 +1,8 @@
 package com.example.utrack.model
 
+import java.time.Duration
+import kotlin.math.roundToInt
+
 class Training constructor (exercise: Exercise, boolean: Boolean) {
     private var recommendedExercise: RecommendedExercise? = null
     private var exercise: Exercise? = exercise
@@ -13,7 +16,7 @@ class Training constructor (exercise: Exercise, boolean: Boolean) {
     }
 
     private fun setDummyExercise() {
-        recommendedExercise = RecommendedExercise(0.0,"dummy",0)
+        recommendedExercise = RecommendedExercise(0)
     }
 
     fun recommendExercise() {
@@ -24,17 +27,31 @@ class Training constructor (exercise: Exercise, boolean: Boolean) {
         var acceleration : Double = exercise?.getAcceleration()!!
         var distance : Double = exercise?.getDistance()!!
         var duration : Double = exercise?.getDuration()!!
-        var intesity : Int = 0;
-        //cadencia =
-        //speed =
-        //accelerate =
-        //distance =
-        //duration = 2h
+        var intesity : Double = 0.0;
 
-        //(duration)*acceleration;
-
-
-        recommendedExercise = RecommendedExercise(10.0,"real recommended exercise",1)
+        if (distance == 0.0 || speed == 0.0 || duration == 0.0){
+            intesity = 1.0
+        }
+        else {
+            distance /= 10
+            distance *= 0.5
+            duration /= 1000
+            duration *= 0.5
+            speed /= acceleration
+            speed /= 10
+            speed *= 0.5
+            while(cadense > 1){
+                cadense /= 10
+            }
+            intesity += duration + distance + cadense + speed
+        }
+        if (intesity > 8){
+            intesity = 8.0
+        }
+        else if (intesity < 1.0){
+            intesity = 1.0
+        }
+        recommendedExercise = RecommendedExercise(intesity.roundToInt())
     }
 
     fun getRecomendedExerciseDescrpcion() : String {
