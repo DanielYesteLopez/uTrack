@@ -1,6 +1,5 @@
 package com.example.utrack.model
 
-import java.time.Duration
 import kotlin.math.roundToInt
 
 class Training constructor (exercise: Exercise, boolean: Boolean) {
@@ -20,14 +19,11 @@ class Training constructor (exercise: Exercise, boolean: Boolean) {
     }
 
     fun recommendExercise() {
-        //TODO "dice un ejercicio recomendado"
-        // algoritmo para recomendedExercise
         var cadense : Double = exercise?.getAverageCadence()!!
         var speed : Double = exercise?.getAverageSpeed()!!
-        var acceleration : Double = exercise?.getAcceleration()!!
         var distance : Double = exercise?.getDistance()!!
         var duration : Double = exercise?.getDuration()!!
-        var intesity : Double = 0.0;
+        var intesity = 0.0
 
         if (distance == 0.0 || speed == 0.0 || duration == 0.0){
             intesity = 1.0
@@ -37,7 +33,7 @@ class Training constructor (exercise: Exercise, boolean: Boolean) {
             distance *= 0.5
             duration /= 1000
             duration *= 0.5
-            speed /= acceleration
+            speed /= (exercise?.getAcceleration()!!)
             speed /= 10
             speed *= 0.5
             while(cadense > 1){
