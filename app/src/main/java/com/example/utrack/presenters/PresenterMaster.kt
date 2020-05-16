@@ -229,7 +229,7 @@ class PresenterMaster private constructor (context: Context) {
         val speed = values[2]
         val acce = values[3]
         val exercise = Exercise(time,distance,acce[1],speed,speed)
-        training = Training(exercise,false)
+        training = Training(exercise,false, con)
     }
 
     fun createTrainingWithRecommendedExercise() {
@@ -239,7 +239,7 @@ class PresenterMaster private constructor (context: Context) {
         val speed = values[2]
         val acce = values[3]
         val exercise = Exercise(time,distance,acce[1],speed,speed)
-        training = Training(exercise,true)
+        training = Training(exercise,true, con)
     }
 
     fun getRecommendedExerciseDescription(): String {
