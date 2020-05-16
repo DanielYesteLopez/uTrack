@@ -45,9 +45,9 @@ class FragmentSaveData : MainFragmentClass() {
             Toast.LENGTH_SHORT
         ).show()
         PresenterTraining.getInstance(this.requireContext()).onPosSaveDataButtonPressed()
-        val intent = Intent(this.context, ViewData().javaClass)
+/*        val intent = Intent(this.context, ViewData().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        startActivity(intent,null)
+        startActivity(intent,null)*/
     } // go to result layout
 
     override fun sendNegButtonPressed(fragmentActivity: FragmentActivity){

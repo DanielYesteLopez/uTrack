@@ -29,6 +29,7 @@ class PresenterTraining private constructor(context: Context) {
         ContextCompat.startActivity(con,intent,null)
     }
 
+
     fun onStopTrainingButtonPressed() {
         PresenterMaster.getInstance(con).onStopTrainingButtonPressed()
     }
@@ -45,9 +46,9 @@ class PresenterTraining private constructor(context: Context) {
         PresenterMaster.getInstance(con).onPauseTrainingButtonPressed()
     }
 
-    fun getTrainigInfo(): ArrayList<ArrayList<Double>>? {
+/*    fun getTrainigInfo(): ArrayList<ArrayList<Double>>? {
         return PresenterMaster.getInstance(con).getTrainingInfo()
-    }
+    }*/
 
     fun onReceiveLocation(latLng: LatLng) {
         PresenterMaster.getInstance(con).onReceiveLocation(latLng)
@@ -168,15 +169,24 @@ class PresenterTraining private constructor(context: Context) {
 //    }
 
     fun onPosSaveDataButtonPressed() {
+        isDoingRecomendedExercise = false
         session?.let { PresenterMaster.getInstance(con).addSession(it) }
+        val intent = Intent(con, ViewData().javaClass)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        ContextCompat.startActivity(con, intent,null)
     }
 
     fun onNegSaveDataButtonPressed() {
+        isDoingRecomendedExercise = false
         PresenterMaster.getInstance(con).onNegSaveDataButtonPressed()
+        val intent = Intent(con, ViewMainPage().javaClass)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        ContextCompat.startActivity(con,intent,null)
     }
 
     /* presenter view bluetooth */
     fun onBackBluetoothButtonPressed() {
+        isDoingRecomendedExercise = false
         val intent = Intent(con, ViewTraining().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         //intent.putExtra(EXTRA_MESSAGE_DEVICE,"0")
@@ -184,6 +194,7 @@ class PresenterTraining private constructor(context: Context) {
     }
 
     fun onBluetoothDeviceChosen(_device: BluetoothDevice) {
+        isDoingRecomendedExercise = false
         PresenterMaster.getInstance(con).onBluetoothDeviceChosen(_device)
     }
 

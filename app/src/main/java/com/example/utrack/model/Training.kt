@@ -35,7 +35,7 @@ class Training constructor (exercise: Exercise, boolean: Boolean, con: Context) 
             distance *= 0.5
             duration /= 1000
             duration *= 0.5
-            speed /= (exercise?.getAcceleration()!!)
+            //speed /= (exercise?.getAcceleration()!!)
             speed /= 10
             speed *= 0.5
             while(cadense > 1){
