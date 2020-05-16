@@ -1,10 +1,12 @@
 package com.example.utrack.model
 
+import android.content.Context
 import kotlin.math.roundToInt
 
-class Training constructor (exercise: Exercise, boolean: Boolean) {
+class Training constructor (exercise: Exercise, boolean: Boolean, con: Context) {
     private var recommendedExercise: RecommendedExercise? = null
     private var exercise: Exercise? = exercise
+    private var con = con
 
     init {
         if(boolean){
@@ -15,7 +17,7 @@ class Training constructor (exercise: Exercise, boolean: Boolean) {
     }
 
     private fun setDummyExercise() {
-        recommendedExercise = RecommendedExercise(0)
+        recommendedExercise = RecommendedExercise(1, con)
     }
 
     fun recommendExercise() {
@@ -47,7 +49,7 @@ class Training constructor (exercise: Exercise, boolean: Boolean) {
         else if (intesity < 1.0){
             intesity = 1.0
         }
-        recommendedExercise = RecommendedExercise(intesity.roundToInt())
+        recommendedExercise = RecommendedExercise(intesity.roundToInt(),con)
     }
 
     fun getRecomendedExerciseDescrpcion() : String {

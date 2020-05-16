@@ -2,24 +2,28 @@ package com.example.utrack.model
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.content.Context
 import kotlinx.android.synthetic.main.signup.view.*
 import android.content.res.Resources
+
 import com.example.utrack.R
 
 class RecommendedExercise
-constructor( _intensity: Int) {
+constructor( _intensity: Int, con: Context) {
+
     var duration: Double = 0.0
     var description: String
-    var exerciseList: ArrayList<String> = arrayListOf(
-        Resources.getSystem().getString(R.string.recommended1),
-        Resources.getSystem().getString(R.string.recommended2),
-        Resources.getSystem().getString(R.string.recommended3),
-        Resources.getSystem().getString(R.string.recommended4),
-        Resources.getSystem().getString(R.string.recommended5),
-        Resources.getSystem().getString(R.string.recommended6),
-        Resources.getSystem().getString(R.string.recommended7),
-        Resources.getSystem().getString(R.string.recommended8))
-    var durationList: ArrayList<Double> = arrayListOf(
+    var exerciseList = arrayListOf(
+        con.getString(R.string.recommended1),
+        con.getString(R.string.recommended2),
+        con.getString(R.string.recommended3),
+        con.getString(R.string.recommended4),
+        con.getString(R.string.recommended5),
+        con.getString(R.string.recommended6),
+        con.getString(R.string.recommended7),
+        con.getString(R.string.recommended8)
+        )
+    var durationList = arrayListOf(
         5.0,
         5.0,
         10.0,
