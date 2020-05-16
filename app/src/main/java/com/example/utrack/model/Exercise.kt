@@ -41,21 +41,11 @@ class Exercise constructor(_duration: Double, _distance: Double, _accelerationAV
     }
 
     fun getAverageSpeed(): Double{
-        var temp = 0.0
-        for (value in speedList){
-            temp += value
-        }
-        temp /= (speedList.size - 1)
-        return temp
+        return speedList[1]
     }
 
     fun getAverageCadence(): Double{
-        var temp = 0.0
-        for (value in cadenceList){
-            temp += value
-        }
-        temp /= (cadenceList.size - 1)
-        return temp
+        return cadenceList[1]
     }
     override fun toString(): String {
         var s = ""
