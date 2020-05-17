@@ -4,7 +4,6 @@ import android.content.DialogInterface
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
-import com.example.utrack.R
 import com.example.utrack.ic.FragmentInterface
 
 abstract class MainFragmentClass : DialogFragment(), FragmentInterface {

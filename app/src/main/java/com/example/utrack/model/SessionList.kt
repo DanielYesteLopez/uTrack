@@ -20,12 +20,16 @@ class SessionList {
     }
 
     fun deleteSession(index: Int) {
-        if (sessionList?.isEmpty()!!) {
-            Log.d("deleteSession", "The sessionList is empty")
-        } else if (index >= sessionList?.size!!) {
-            Log.d("deleteSession", "The index is incorrect")
-        } else {
-            sessionList?.removeAt(index)
+        when {
+            sessionList?.isEmpty()!! -> {
+                Log.d("deleteSession", "The sessionList is empty")
+            }
+            index >= sessionList?.size!! -> {
+                Log.d("deleteSession", "The index is incorrect")
+            }
+            else -> {
+                sessionList?.removeAt(index)
+            }
         }
     }
 
@@ -62,7 +66,7 @@ class SessionList {
         try {
             fileWriter = FileWriter(filePath, false)
             for (session: Session in sessionList!!) {
-                fileWriter.append("${session.toString()} \n")
+                fileWriter.append("$session \n")
             }
         } catch (e: Exception) {
             e.printStackTrace()

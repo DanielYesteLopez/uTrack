@@ -11,39 +11,39 @@ import kotlin.math.sqrt
 
 class SensorListenerAccelerometer(context: Context) : SensorEventListener {
 
-    private var mSensorManager: SensorManager
+    private var mSensorManager: SensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
     private var mLinerAcceleration: Sensor? = null
-    private var mGyroScope: Sensor? = null
+/*    private var mGyroScope: Sensor? = null*/
     private var resume = false
-    private var counterdatareaded: Int = 0
-    private var accelerityAct: Float = 0.0F
-    private var accelerityList: ArrayList<Float>? = null
-    private var velocityActt: Float = 0.0F
-    private var positionActt: Float = 0.0F
-    private var velocityListt: ArrayList<Float>? = null
-    private var positionListt: ArrayList<Float>? = null
-    private var empsilon: Float = 0.1F
+    private var counterDataReadied: Int = 0
+    private var acceleratesAct: Float = 0.0F
+    private var acceleratesList: ArrayList<Float>? = null
+/*    private var velocityAct: Float = 0.0F*/
+/*    private var positionAct: Float = 0.0F*/
+/*    private var velocityList: ArrayList<Float>? = null
+    private var positionList: ArrayList<Float>? = null*/
+    private var epsilon: Float = 0.1F
 
     init {
-        mSensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
         checkSensor()
         mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION)?.let {
             mLinerAcceleration = it
         }
-        mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)?.let {
+/*        mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)?.let {
             mGyroScope = it
-        }
-        this.setAccelerateAct(0.0F)
-        this.setPositionAct(0.0F)
-        this.setVelocityAct(0.0F)
-        counterdatareaded = 0
-        accelerityList = ArrayList()
-        velocityListt = ArrayList()
-        positionListt = ArrayList()
-        accelerityList?.add(accelerityAct)
-        velocityListt?.add(velocityActt)
-        positionListt?.add(positionActt)
-        empsilon = 0.01F
+        }*/
+        this.setAccelerationAct(0.0F)
+/*        this.setPositionAct(0.0F)
+        this.setVelocityAct(0.0F)*/
+        counterDataReadied = 0
+        acceleratesList = ArrayList()
+        acceleratesList?.add(acceleratesAct)
+  /*      velocityList = ArrayList()
+        positionList = ArrayList()
+
+        velocityList?.add(velocityAct)
+        positionList?.add(positionAct)*/
+        epsilon = 0.01F
     }
 
     fun resumeReading() {
@@ -66,15 +66,15 @@ class SensorListenerAccelerometer(context: Context) : SensorEventListener {
         }
     }
 
-    private fun computeSumxyz(a: Float, b: Float, c: Float): Float {
-        val a_2 = a.pow(2)
-        val b_2 = b.pow(2)
-        val c_2 = c.pow(2)
-        var res = (a_2 + b_2 + c_2)
+    private fun computeSumXYZ(a: Float, b: Float, c: Float): Float {
+        val a2 = a.pow(2)
+        val b2 = b.pow(2)
+        val c2 = c.pow(2)
+        var res = (a2 + b2 + c2)
         res = sqrt(res)
         return res
     }
-
+/*
     fun doubleIntegration(
         _acc_act: Float,
         _acc_ant: Float,
@@ -82,7 +82,7 @@ class SensorListenerAccelerometer(context: Context) : SensorEventListener {
         _position: Float,
         _delta_t: Int
     ): ArrayList<Float> {
-        val count = counterdatareaded
+        val count = counterDataReadied
         val acc_act = _acc_act
         val acc_ant = _acc_ant
 
@@ -104,19 +104,19 @@ class SensorListenerAccelerometer(context: Context) : SensorEventListener {
         res.add(velocity)
         res.add(position)
         return res
-    }
+    }*/
 
     /**
      * h = 1 estamos usando dos puntos a y b sin tomar puntos en medio
      *
      */
-    fun integrationTrapeze(_acc_ant: Float, _acc_act: Float, _delta_t: Int): Float {
+   /* fun integrationTrapeze(_acc_ant: Float, _acc_act: Float, _delta_t: Int): Float {
         val fa = _acc_ant
         val fb = _acc_act
         var value = (fa + fb) / 2
         value *= _delta_t
         return value
-    }
+    }*/
 
     /**
      * sensor listener
@@ -132,93 +132,94 @@ class SensorListenerAccelerometer(context: Context) : SensorEventListener {
         if (event != null && resume) {
             if (event.sensor.type == Sensor.TYPE_LINEAR_ACCELERATION) {
                 var accelerateActual =
-                    computeSumxyz(event.values[0], event.values[1], event.values[2])
-                val accelerateAnterior = this.getAccelerateActual()
+                    computeSumXYZ(event.values[0], event.values[1], event.values[2])
+/*                val accelerateAnterior = this.getAccelerateActual()
                 var velocityActual = this.getVelocityActual()
-                var positionActual = this.getPositionActual()
-                if (accelerateActual < empsilon) {
+                var positionActual = this.getPositionActual()*/
+                if (accelerateActual < epsilon) {
                     accelerateActual = 0.0F
                 }
-
-                counterdatareaded += 1
+                counterDataReadied += 1
                 // delta_t change to real value
-                val valuesT =
+/*                val valuesT =
                     doubleIntegration(
                         accelerateActual,
                         accelerateAnterior,
                         velocityActual,
                         positionActual,
                         1000
-                    )
-                velocityActual = valuesT[0]
-                positionActual = valuesT[1]
-                accelerityList?.add(accelerateActual)
-                velocityListt?.add(velocityActual)
-                positionListt?.add(positionActual)
-                this.setAccelerateAct(accelerateActual)
-                this.setVelocityAct(velocityActual / 10)
-                this.setPositionAct(positionActual)
+                    )*/
+/*                velocityActual = valuesT[0]
+                positionActual = valuesT[1]*/
+                acceleratesList?.add(accelerateActual)
+/*                velocityList?.add(velocityActual)
+                positionList?.add(positionActual)*/
+                this.setAccelerationAct(accelerateActual)
+/*                this.setVelocityAct(velocityActual / 10)
+                this.setPositionAct(positionActual)*/
             }
         }
     }
 
-    fun getPositionActual(): Float {
-        return this.positionActt
+/*    fun getPositionActual(): Float {
+        return this.positionAct
     }
 
     fun getVelocityActual(): Float {
-        return this.velocityActt
-    }
+        return this.velocityAct
+    }*/
 
-    fun getAccelerateActual(): Float {
-        return this.accelerityAct
-    }
+ /*   private fun getAccelerateActual(): Float {
+        return this.acceleratesAct
+    }*/
 
-    private fun setPositionAct(positionact: Float) {
-        this.positionActt = positionact
+/*    private fun setPositionAct(positionact: Float) {
+        this.positionAct = positionact
     }
 
     private fun setVelocityAct(velocity: Float) {
-        this.velocityActt = velocity
+        this.velocityAct = velocity
+    }*/
+
+    private fun setAccelerationAct(acceleration: Float) {
+        this.acceleratesAct = acceleration
     }
 
-    private fun setAccelerateAct(accelerity: Float) {
-        this.accelerityAct = accelerity
-    }
 
     fun getAccelerationAVG() : Double {
         var totalAcceleration = 0f
-        for (i in 0 until accelerityList?.size!! - 1) {
-            totalAcceleration += accelerityList!![i]
+        for (i in 0 until acceleratesList?.size!! - 1) {
+            totalAcceleration += acceleratesList!![i]
         }
-        return (totalAcceleration/ accelerityList?.size!!).toDouble()
+        return (totalAcceleration/ acceleratesList?.size!!).toDouble()
     }
 
 
-    fun getAcceleracionInfo() : ArrayList<Double> {
-        var totalAcceleration = 0f
-        var acceleracionMin = 0f
-        var acceleracionMax = 0f
 
-        for (i in 0 until accelerityList?.size!! - 1) {
-            totalAcceleration += accelerityList!![i]
+    fun getAccelerationInfo() : ArrayList<Double> {
+        var totalAcceleration = 0f
+        var accelerationMin = 0f
+        var accelerationMax = 0f
+
+        for (i in 0 until acceleratesList?.size!! - 1) {
+            totalAcceleration += acceleratesList!![i]
             if (i == 0) {
-                acceleracionMin = accelerityList!![i]
-                acceleracionMax = accelerityList!![i]
+                accelerationMin = acceleratesList!![i]
+                accelerationMax = acceleratesList!![i]
             } else {
-                if (acceleracionMin > accelerityList!![i]) {
-                    acceleracionMin = accelerityList!![i]
+                if (accelerationMin > acceleratesList!![i]) {
+                    accelerationMin = acceleratesList!![i]
                 }
-                if (acceleracionMax < accelerityList!![i]) {
-                    acceleracionMax = accelerityList!![i]
+                if (accelerationMax < acceleratesList!![i]) {
+                    accelerationMax = acceleratesList!![i]
                 }
             }
         }
-        val accelerationAVG = (totalAcceleration/ accelerityList?.size!!)
+        val accelerationAVG = (totalAcceleration/ acceleratesList?.size!!)
         val ret : ArrayList<Double> = ArrayList()
-        ret.add(acceleracionMin.toDouble())
+        ret.add(accelerationMin.toDouble())
         ret.add(accelerationAVG.toDouble())
-        ret.add(acceleracionMax.toDouble())
+        ret.add(accelerationMax.toDouble())
         return ret
     }
 

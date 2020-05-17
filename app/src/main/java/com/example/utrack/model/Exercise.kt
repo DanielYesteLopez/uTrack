@@ -1,5 +1,8 @@
 package com.example.utrack.model
 
+import android.util.Log
+import kotlin.math.roundToInt
+
 class Exercise constructor(_duration: Double, _distance: Double, _accelerationAVG:Double, _speedList: ArrayList<Double>, _cadenceList: ArrayList<Double>) {
 
     private var duration: Double = _duration
@@ -9,26 +12,31 @@ class Exercise constructor(_duration: Double, _distance: Double, _accelerationAV
     private var acceleration: Double = _accelerationAVG
 
     fun getDuration() : Double {
-        return duration
+        Log.d("exercise ","-------------------------------------------------   get duration $duration m")
+        val r = (duration % 60)/100
+        var result = duration / 60
+        result = result.roundToInt() + r
+        Log.d("exercise ","-------------------------------------------------   get duration $result h")
+        return result
     }
 
-    fun setDuration(newDuration: Double) {
+/*    fun setDuration(newDuration: Double) {
         duration = newDuration
     }
+
+    fun setDistance(newDistance: Double) {
+        distance = newDistance
+    }*/
 
     fun getDistance() : Double {
         return distance
     }
 
-    fun setDistance(newDistance: Double) {
-        distance = newDistance
-    }
-
-    fun getAcceleration() : Double {
+    private fun getAcceleration() : Double {
         return acceleration
     }
 
-    fun setAcceleration(newAcceleration: Double) {
+/*    fun setAcceleration(newAcceleration: Double) {
         acceleration = newAcceleration
     }
 
@@ -38,7 +46,7 @@ class Exercise constructor(_duration: Double, _distance: Double, _accelerationAV
 
     fun getCadenceList() : ArrayList<Double> {
         return cadenceList
-    }
+    }*/
 
     fun getAverageSpeed(): Double{
         return speedList[1]
@@ -51,8 +59,8 @@ class Exercise constructor(_duration: Double, _distance: Double, _accelerationAV
     override fun toString(): String {
         var s = ""
         val formatTemplate = "%.2f%3s"
-        s += "Duration: ${formatTemplate.format(duration ,"m")} | Distance: ${formatTemplate.format(distance,"k")} | Acceleration: ${formatTemplate.format(acceleration,"m/s2")} \n " +
-                "S: ${formatTemplate.format(speedList[1],"kph")} | C: ${formatTemplate.format(cadenceList[1],"rpm")}"
+        s += "Duration: ${formatTemplate.format(getDuration() ,"m")} | Distance: ${formatTemplate.format(getDistance(),"k")} | Acceleration: ${formatTemplate.format(getAcceleration(),"m/s2")} \n " +
+                "Speed: ${formatTemplate.format(getAverageSpeed(),"kph")} | Cadence: ${formatTemplate.format(getAverageSpeed(),"rpm")}"
         return s
     }
 }

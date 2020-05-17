@@ -1,10 +1,6 @@
 package com.example.utrack.model
 
-import android.annotation.SuppressLint
-import android.app.Application
 import android.content.Context
-import kotlinx.android.synthetic.main.signup.view.*
-import android.content.res.Resources
 
 import com.example.utrack.R
 
@@ -12,8 +8,8 @@ class RecommendedExercise
 constructor( _intensity: Int, con: Context) {
 
     var duration: Double = 0.0
-    var description: String
-    var exerciseList = arrayListOf(
+    private var description: String
+    private var exerciseList = arrayListOf(
         con.getString(R.string.recommended1),
         con.getString(R.string.recommended2),
         con.getString(R.string.recommended3),
@@ -23,7 +19,7 @@ constructor( _intensity: Int, con: Context) {
         con.getString(R.string.recommended7),
         con.getString(R.string.recommended8)
         )
-    var durationList = arrayListOf(
+    private var durationList = arrayListOf(
         5.0,
         5.0,
         10.0,
@@ -33,24 +29,25 @@ constructor( _intensity: Int, con: Context) {
         20.0,
         20.0
     )
-    var intensity: Int = _intensity
+    private var intensity: Int = _intensity
 
     init {
         this.description=exerciseList[intensity - 1]
         this.duration=durationList[intensity - 1]
     }
-    fun get_Duration() : Double {
+/*    fun get_Duration() : Double {
         return duration
     }
 
     fun set_Duration(newDuration: Double) {
         duration = newDuration
-    }
+    }*/
 
-    fun get_Description() : String {
+    fun getDescription() : String {
         return description
     }
 
+/*
     fun set_Description(newDescription: String) {
         description = newDescription
     }
@@ -62,12 +59,13 @@ constructor( _intensity: Int, con: Context) {
     fun set_Intesity(newIntesity: Int) {
         intensity = newIntesity
     }
+*/
 
 
     override fun toString(): String {
-        var s: String = ""
+        var s = ""
 
-        s += "Intensity: ${intensity} | Duration: ${duration}"
+        s += "Intensity: $intensity | Duration: $duration"
         return s
     }
 }

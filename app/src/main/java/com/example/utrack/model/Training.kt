@@ -3,10 +3,9 @@ package com.example.utrack.model
 import android.content.Context
 import kotlin.math.roundToInt
 
-class Training constructor (exercise: Exercise, boolean: Boolean, con: Context) {
+class Training constructor (exercise: Exercise, boolean: Boolean, private var con: Context) {
     private var recommendedExercise: RecommendedExercise? = null
     private var exercise: Exercise? = exercise
-    private var con = con
 
     init {
         if(boolean){
@@ -20,7 +19,7 @@ class Training constructor (exercise: Exercise, boolean: Boolean, con: Context) 
         recommendedExercise = RecommendedExercise(1, con)
     }
 
-    fun recommendExercise() {
+    private fun recommendExercise() {
         var cadense : Double = exercise?.getAverageCadence()!!
         var speed : Double = exercise?.getAverageSpeed()!!
         var distance : Double = exercise?.getDistance()!!
@@ -52,13 +51,12 @@ class Training constructor (exercise: Exercise, boolean: Boolean, con: Context) 
         recommendedExercise = RecommendedExercise(intesity.roundToInt(),con)
     }
 
-    fun getRecomendedExerciseDescrpcion() : String {
-        return this.recommendedExercise?.get_Description()!!
+    fun getRecommendedExerciseDescription() : String {
+        return this.recommendedExercise?.getDescription()!!
     }
 
     override fun toString() : String {
         var s = ""
-
         s += exercise.toString() + "\n" + recommendedExercise.toString()
         return s
     }

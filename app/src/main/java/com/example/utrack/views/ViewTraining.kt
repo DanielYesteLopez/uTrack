@@ -7,7 +7,13 @@ import android.content.*
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.location.Location
-import android.os.*
+import android.location.LocationManager
+import android.os.Build
+import android.os.Bundle
+import android.os.IBinder
+import android.os.SystemClock
+import android.os.SystemClock.sleep
+import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.TextView
@@ -16,16 +22,17 @@ import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.utrack.R
 import com.example.utrack.mc.SecondViewClass
-import com.example.utrack.presenters.PresenterTraining
 import com.example.utrack.model.services.LocationService
+import com.example.utrack.presenters.PresenterTraining
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.trainingpage.*
+
 
 class ViewTraining : SecondViewClass() {
 
     private val TAG = "MainActivity"
     val MY_PERMISSIONS_REQUEST_LOCATION = 99
-
+    var locationManager: LocationManager? = null
     private var myBluetoothFragment: FragmentBluetooth? = null
 
     @SuppressLint("SourceLockedOrientationActivity")
@@ -37,11 +44,6 @@ class ViewTraining : SecondViewClass() {
         // start activity
         setContentView(R.layout.trainingpage)
         // ini
-        PresenterTraining.getInstance(this@ViewTraining)
-        myBluetoothFragment = FragmentBluetooth()
-        // check bluetooth connection
-        myBluetoothFragment.let { it?.show(supportFragmentManager, getString(R.string.notefication)) }
-
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -55,8 +57,20 @@ class ViewTraining : SecondViewClass() {
             }
         } else {
             clearDataTraining()
-            startService()
+            locationManager = this.applicationContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            assert(locationManager != null)
+            if (canGetLocation()) {
+                startService()
+            } else {
+                showSettingsAlert()
+            }
         }
+
+        PresenterTraining.getInstance(this@ViewTraining)
+        myBluetoothFragment = FragmentBluetooth()
+        // check bluetooth connection
+        myBluetoothFragment.let { it?.show(supportFragmentManager, getString(R.string.notefication)) }
+
         PresenterTraining.getInstance(this@ViewTraining).registerSensorListenerAccelerate()
 
         locationUpdateReceiver.let{
@@ -313,9 +327,7 @@ class ViewTraining : SecondViewClass() {
                         startService()
                     }
                 } else {
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                    // TODO tell user is being an as%#$ll
+                    // permission denied, boo!
                     Log.d(TAG,"permission denied go to hell")
                 }
                 return
@@ -345,5 +357,40 @@ class ViewTraining : SecondViewClass() {
             this.application.startService(locationServiceStart)
         }
         this.application.bindService(locationServiceStart, serviceConnection, Context.BIND_AUTO_CREATE)
+    }
+
+    private fun canGetLocation(): Boolean {
+        val result : Boolean
+        var gpsEnabled = false
+        var networkEnabled = false
+        try {
+            gpsEnabled = locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER)!!
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+        try {
+            networkEnabled = locationManager?.isProviderEnabled(LocationManager.NETWORK_PROVIDER)!!
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+        result = (gpsEnabled && networkEnabled)
+        return result
+    }
+
+    private fun showSettingsAlert() {
+        val alertDialog = AlertDialog.Builder(this)
+        // Setting Dialog Title
+        alertDialog.setTitle("Error!")
+        // Setting Dialog Message
+        alertDialog.setMessage(getString(R.string.activatelocation))
+        // On pressing Settings button
+        alertDialog.setPositiveButton(
+            resources.getString(R.string.ok)
+        ) { _, _ ->
+            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+            startActivity(intent)
+            startService()
+        }
+        alertDialog.show()
     }
 }

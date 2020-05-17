@@ -81,7 +81,7 @@
     <string name="no">Non</string>
     <string name="exit">Sortez</string>
 
-    <string name="recomendedexercise">do for 10 minuts free laps on avg speed of up to 30 km/h on a stable cadence. \nYou are ready to go</string>
+    <string name="recomendedexercise">Exercice recommandé? \n Vous êtes prêt à partir</string>
     <string name="recomendedexerciseyes">Allez-y!</string>
     <string name="recomendedexerciseno">Un atre jour</string>
     <string name="trainingawesome">Super</string>
@@ -97,11 +97,11 @@
     <string name="recommended3">Tournez à une vitesse constante de 30 Km/h pendant 10 min</string>
     <string name="recommended4">Faire des virages à une vitesse constante de 30 Km/h pendant 15 min</string>
     <string name="recommended5">Exercice progressif pendant 10 min en commençant à une vitesse minimale de 25 Km/h puis en s\'arrêtant pour étirer les muscles pendant 5 min</string>
-    <string name="recommended6">Tours à 40 Km/h pendant 10-15 min, étirez vos jambes et faites des exercices physiques dans le gymnase pendant 5 min</string>
+    <string name="recommended6">Tours à 40 Km/h pendant 10–15 min, étirez vos jambes et faites des exercices physiques dans le gymnase pendant 5 min</string>
     <string name="recommended7">Tourne à une vitesse constante de 40 Km/h au-dessus de la ligne bleue</string>
     <string name="recommended8">Tours à une vitesse constante de 35 Km/h au-dessus de la ligne bleue, tous les 5 tours passent à la ligne noire pour augmenter la vitesse à 45 Km/h pendant 2 tours et revenir au bleu à la vitesse précédente pour 1 tour supplémentaire</string>
 
-    <string name="bluetooth">You are not connected to a device, please connect to one or start session without one \n </string>
+    <string name="bluetooth">Vous n\'êtes pas connecté à un appareil, veuillez vous connecter à un ou démarrer la session sans un \n </string>
     <string name="choose_device">choisir l\'appareil</string>
     <string name="continue_without_device">Commencer Session</string>
     <string name="blutooth_not_available">Bluetooth non disponible</string>
@@ -110,7 +110,8 @@
     <string name="refresh_discovering">Refresh Scan</string>
 
     <string name="title_location_permission">Location permission</string>
-    <string name="text_location_permission">please activate Location for better performence</string>
-    <string name="ok">"activate "</string>
+    <string name="text_location_permission">veuillez activer la localisation pour de meilleures performances</string>
+    <string name="ok">"ok "</string>
     <string name="textViewSessionsRealitzades">Sessions tenues</string>
+    <string name="activatelocation">Activez l\'emplacement et le réseau avant de commencer</string>
 </resources>

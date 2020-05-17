@@ -38,7 +38,6 @@ class ViewBluetoothPairing : SecondViewClass() {
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 //            getSystemService(CompanionDeviceManager::class.java)
 //        } else {
-//            TODO("VERSION.SDK_INT < O")
 //        }
 //    }
 
@@ -152,7 +151,7 @@ class ViewBluetoothPairing : SecondViewClass() {
                 }
                 BluetoothAdapter.ACTION_DISCOVERY_FINISHED ->
                 {
-                    Log.d("ACTIONDISCOVERYFINISHED","HELLOO FROM THE OTHER SIDE ")
+                    Log.d("ACTIONDISCOVERYFINISHED","HELLO FROM THE OTHER SIDE ")
                 }
                 BluetoothDevice.ACTION_UUID ->
                 {
@@ -161,7 +160,7 @@ class ViewBluetoothPairing : SecondViewClass() {
                     Log.d("DeviceExtra address", "${extradevice?.address} ${extradevice?.name} -- ")
                     if (uuidExtra != null) {
                         for (p : Parcelable  in uuidExtra) {
-                            Log.d("uuidExtra","${p} ----\n")
+                            Log.d("uuidExtra","$p ----\n")
                         }
                     } else {
                         Log.d("fetching new uuid","uuidExtra is still null")
@@ -179,7 +178,7 @@ class ViewBluetoothPairing : SecondViewClass() {
         bAdapter = BluetoothAdapter.getDefaultAdapter()
         devicesList = ArrayList()
         arrayAdapter = ArrayAdapter<String>(applicationContext, android.R.layout.simple_list_item_1)
-        //turn on blutooth and ask for permission
+        //turn on bluetooth and ask for permission
         turnBluetoothOn()
         getDiscoverableDevices()
         discoverBtn.setOnClickListener {
@@ -193,6 +192,7 @@ class ViewBluetoothPairing : SecondViewClass() {
     }
 
     override fun onBackPressed() {
+        turnBluetoothOff()
         super.onBackPressed()
     }
 
@@ -327,8 +327,8 @@ class ViewBluetoothPairing : SecondViewClass() {
         if (pairedDevices != null) {
             if (pairedDevices.isNotEmpty()) {
                 pairedDevices.forEach { device : BluetoothDevice ->
-                    var result = device.fetchUuidsWithSdp()
-                    Log.d("paired Devices","fetching uuids<  ${result} << < <  < < < < < < < < <")
+                    val result = device.fetchUuidsWithSdp()
+                    Log.d("paired Devices","fetching uuids<  $result << < <  < < < < < < < < <")
                     Log.d("paired Devices","fetching uuids<  ${device.address} -- ${device.name} \n")
                     devicesList.add(device)
                     arrayAdapter.add("${device.name} \n ${device.address}")
@@ -497,7 +497,7 @@ class ViewBluetoothPairing : SecondViewClass() {
             }
         }
     }
-
+/*
     private fun disconnect() {
         if (bluetoothSocket != null) {
             try {
@@ -551,5 +551,5 @@ class ViewBluetoothPairing : SecondViewClass() {
             }
             Log.d("PosExecute","dissmis the progress bar")
         }
-    }
+    }*/
 }

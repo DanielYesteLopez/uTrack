@@ -1,6 +1,5 @@
 package com.example.utrack.model.services
 
-import kotlin.math.sqrt
 
 class KalmanLatLong(Q_metres_per_second: Float) {
     private val _minAccuracy = 1f
@@ -9,16 +8,18 @@ class KalmanLatLong(Q_metres_per_second: Float) {
     private var timeStampMilliseconds: Long = 0
     private var lat: Double = 0.toDouble()
     private var lng: Double = 0.toDouble()
-    private var variance: Float = -1f // Negative means object uninitialised.
+    private var variance: Float = -1f // Negative means uninitialised.
     var consecutiveRejectCount: Int = 0
 
     init {
         this.qMetresPerSecond = Q_metres_per_second
     }
 
+/*
     fun getTimestamp(): Long {
         return timeStampMilliseconds
     }
+*/
 
     fun getLat(): Double {
         return lat
@@ -27,7 +28,7 @@ class KalmanLatLong(Q_metres_per_second: Float) {
     fun getLng(): Double {
         return lng
     }
-
+/*
     fun get_accuracy(): Float {
         return sqrt(variance.toDouble()).toFloat()
     }
@@ -40,7 +41,7 @@ class KalmanLatLong(Q_metres_per_second: Float) {
         this.lng = _lng
         variance = _accuracy * _accuracy
         this.timeStampMilliseconds = _timeStampMilliseconds
-    }
+    }*/
 
     /**
      * <summary> Kalman filter processing for latitude and longitude </summary>
@@ -76,7 +77,6 @@ class KalmanLatLong(Q_metres_per_second: Float) {
                         _qMetresPerSecond *
                         _qMetresPerSecond) / 1000
                 this.timeStampMilliseconds = _timeStampMilliseconds
-                // TODO: USE VELOCITY INFORMATION HERE TO GET A BETTER ESTIMATE OF CURRENT POSITION
             }
             // Kalman gain matrix K = Covariance * Inverse(Covariance + MeasurementVariance)
             // NB: because K is dimensionless, it doesn't matter that variance

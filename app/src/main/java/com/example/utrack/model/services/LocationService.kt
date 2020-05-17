@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.location.*
+import android.location.LocationProvider.OUT_OF_SERVICE
 import android.os.*
 import android.util.Log
 import androidx.annotation.RequiresApi
@@ -19,7 +20,8 @@ import kotlin.collections.ArrayList
 
 @Suppress("DEPRECATION")
 class LocationService: Service(), LocationListener, GpsStatus.Listener {
-    //private val LOG_TAG: String = LocationService::class.java.simpleName
+
+    private val _lTAG: String = LocationService::class.java.simpleName
     private val binder = LocationServiceBinder()
     private var isLocationManagerUpdatingLocation: Boolean = false
 
@@ -34,8 +36,8 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
     private var runStartTimeInMillis: Long = 0
 
     private var gpsCount: Int = 0
-    private val gpsFreqInMillis = 2000
-    private val gpsFreqInDistance = 2  // in meters
+    private val gpsFreqInMillis = 1000
+    private val gpsFreqInDistance = 1  // in meters
     var isLogging: Boolean = false
 
     private var currentTimeInMillis : Long = 0L
@@ -71,17 +73,17 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
     }
 
     override fun onRebind(intent: Intent) {
-        //Log.d(LOG_TAG, "onRebind ")
+        Log.d(_lTAG, "onRebind ")
     }
 
     override fun onUnbind(intent: Intent): Boolean {
-        //Log.d(LOG_TAG, "onUnbind ")
+        Log.d(_lTAG, "onUnbind ")
 
         return true
     }
 
     override fun onDestroy() {
-        //Log.d(LOG_TAG, "onDestroy ")
+        Log.d(_lTAG, "onDestroy ")
     }
 
     /**
@@ -109,13 +111,13 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
         newLocation?.let{
             gpsCount++
             if (isLogging) {
-                //Log.d(LOG_TAG, "going to filter this location")
+                Log.d(_lTAG, "going to filter this location")
 
                 if (filterAndAddLocation(it)){
-                    //Log.d(LOG_TAG, "Location -> (" + it.latitude + "," + it.longitude + ")")
+                    Log.d(_lTAG, "Location -> (" + it.latitude + "," + it.longitude + ")")
                 }
             }
-            //Log.d(LOG_TAG, "Broadcast for the new location")
+            Log.d(_lTAG, "Broadcast for the new location")
             val intent = Intent("LocationUpdated")
             intent.putExtra("location", it)
             LocalBroadcastManager.getInstance(this.application).sendBroadcast(intent)
@@ -127,10 +129,10 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
      */
     override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
         if (provider == LocationManager.GPS_PROVIDER) {
-            if (status == LocationProvider.OUT_OF_SERVICE) {
-                notifyLocationProviderStatusUpdated(false)
+            if (status == OUT_OF_SERVICE) {
+                notifyLocationProviderStatusUpdated()
             } else {
-                notifyLocationProviderStatusUpdated(true)
+                notifyLocationProviderStatusUpdated()
             }
         }
     }
@@ -140,7 +142,7 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
      */
     override fun onProviderEnabled(provider: String?) {
         if (provider == LocationManager.GPS_PROVIDER) {
-            notifyLocationProviderStatusUpdated(true)
+            notifyLocationProviderStatusUpdated()
         }
     }
 
@@ -149,7 +151,7 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
      */
     override fun onProviderDisabled(provider: String?) {
         if (provider == LocationManager.GPS_PROVIDER) {
-            notifyLocationProviderStatusUpdated(false)
+            notifyLocationProviderStatusUpdated()
         }
 
     }
@@ -164,7 +166,7 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
     /**
      *
      */
-    private fun notifyLocationProviderStatusUpdated(isLocationProviderAvailable: Boolean) {
+    private fun notifyLocationProviderStatusUpdated() {
         //Broadcast location provider status change here
     }
 
@@ -205,9 +207,8 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
                     }
                 }
             }
-            totalDistanceInMeters = totalDistanceInMeters / 1000 // to km
-            //Log.d(LOG_TAG,"saving log $elapsedTimeInSeconds $totalDistanceInMeters")
-            //saveLog(elapsedTimeInSeconds, totalDistanceInMeters.toDouble(), gpsCount)
+            totalDistanceInMeters /= 1000 // to km
+            Log.d(_lTAG,"saving log $elapsedTimeInSeconds $totalDistanceInMeters")
         }
         isLogging = false
     }
@@ -257,9 +258,9 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
      *
      */
     fun startUpdatingLocation() {
-        //Log.d(LOG_TAG,"Start updating location")
+        Log.d(_lTAG,"Start updating location")
         if (!this.isLocationManagerUpdatingLocation) {
-            //Log.d(LOG_TAG,"clearing data ---->>>>")
+            Log.d(_lTAG,"clearing data ---->>>>")
             isLocationManagerUpdatingLocation = true
             clearData()
             val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -278,7 +279,7 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
                 criteria.verticalAccuracy = Criteria.ACCURACY_HIGH
 
                 locationManager.addGpsStatusListener(this)
-                //Log.d(LOG_TAG, "requesting location update")
+                Log.d(_lTAG, "requesting location update")
                 locationManager.requestLocationUpdates(
                     gpsFreqInMillis.toLong(),
                     gpsFreqInDistance.toFloat(),
@@ -288,11 +289,11 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
                 )
                 gpsCount = 0
             } catch (e: IllegalArgumentException) {
-                //Log.e(LOG_TAG, e.localizedMessage!!)
+                Log.e(_lTAG, e.localizedMessage!!)
             } catch (e: SecurityException) {
-                //Log.e(LOG_TAG, e.localizedMessage!!)
+                Log.e(_lTAG, e.localizedMessage!!)
             } catch (e: RuntimeException) {
-                //Log.e(LOG_TAG, e.localizedMessage!!)
+                Log.e(_lTAG, e.localizedMessage!!)
             }
         }
     }
@@ -325,19 +326,18 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
     private fun filterAndAddLocation(location: Location): Boolean {
         val age = getLocationAge(location)
         if (age > 5 * 1000) { //more than 5 seconds
-            //Log.d(LOG_TAG, "Location is old")
+            Log.d(_lTAG, "Location is old")
             oldLocationList.add(location)
             return false
         }
         if (location.accuracy <= 0) {
-            //Log.d(LOG_TAG, "Latitude and longitude values are invalid.")
+            Log.d(_lTAG, "Latitude and longitude values are invalid.")
             noAccuracyLocationList.add(location)
             return false
         }
-        //setAccuracy(newLocation.getAccuracy());
         val horizontalAccuracy = location.accuracy
         if (horizontalAccuracy > 1000) { //10meter filter
-            //Log.d(LOG_TAG, "Accuracy is too low.")
+            Log.d(_lTAG, "Accuracy is too low.")
             inaccurateLocationList.add(location)
             return false
         }
@@ -362,7 +362,7 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
         val predictedDeltaInMeters = predictedLocation.distanceTo(location)
 
         if (predictedDeltaInMeters > 60) {
-            //Log.d(LOG_TAG, "Kalman Filter detects mal GPS")
+            Log.d(_lTAG, "Kalman Filter detects mal GPS")
             kalmanFilter.consecutiveRejectCount += 1
             if (kalmanFilter.consecutiveRejectCount > 3) {
                 kalmanFilter = KalmanLatLong(3f) //reset Kalman Filter if it rejects more than 3 times in raw.
@@ -376,42 +376,11 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
         val intent = Intent("PredictLocation")
         intent.putExtra("location", predictedLocation)
         LocalBroadcastManager.getInstance(this.application).sendBroadcast(intent)
-        //Log.d(LOG_TAG, "Location quality is good enough.")
+        Log.d(_lTAG, "Location quality is good enough.")
         currentSpeed = location.speed
         locationList.add(location)
         return true
     }
-
-    /* Data Logging */
-//    @Synchronized
-//    fun saveLog(
-//        timeInSeconds: Long,
-//        distanceInMeters: Double,
-//        gpsCount: Int
-//    ) {
-//        val fileNameDateTimeFormat = SimpleDateFormat("yyyy_MMdd_HHmm")
-//        val filePath = (this.getExternalFilesDir(null)!!.absolutePath + "/"
-//                + fileNameDateTimeFormat.format(Date()) + "_battery" + ".csv")
-//
-//        Log.d(LOG_TAG, "saving to $filePath")
-//
-//        var fileWriter: FileWriter? = null
-//        try {
-//            fileWriter = FileWriter(filePath, false)
-//            Log.d(LOG_TAG, "Time: $timeInSeconds ,Distance: $distanceInMeters ,GPSCount: $gpsCount \n")
-//            fileWriter.append("Time: $timeInSeconds ,Distance: $distanceInMeters ,GPSCount: $gpsCount \n")
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//        } finally {
-//            if (fileWriter != null) {
-//                try {
-//                    fileWriter.close()
-//                } catch (ioe: IOException) {
-//                    ioe.printStackTrace()
-//                }
-//            }
-//        }
-//    }
 
     /**
      *
@@ -421,16 +390,12 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 createNotificationChannel()
             } else {
-                // If earlier version channel ID is not used
-                // https://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder.html#NotificationCompat.Builder(android.content.Context)
                 ""
             }
-
         val notificationBuilder = NotificationCompat.Builder(this, channelId )
         val notification = notificationBuilder.setOngoing(true)
             .setSmallIcon(R.mipmap.ic_launcher)
             .setPriority(PRIORITY_MIN)
-            //.setCategory(Notification.CATEGORY_SERVICE)
             .build()
         startForeground(101, notification)
     }
