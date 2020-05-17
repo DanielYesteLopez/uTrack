@@ -194,7 +194,9 @@ class SensorListenerAccelerometer(context: Context) : SensorEventListener {
         return (totalAcceleration/ acceleratesList?.size!!).toDouble()
     }
 
-
+    fun getAcceleration() : Double {
+        return acceleratesList?.last()?.toDouble()!!
+    }
 
     fun getAccelerationInfo() : ArrayList<Double> {
         var totalAcceleration = 0f

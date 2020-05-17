@@ -151,7 +151,7 @@ class PresenterMaster private constructor (private var context: Context) {
     }
 
     fun getAcceleration() : Double {
-        return sensorListenerAccelerometer.getAccelerationAVG()
+        return sensorListenerAccelerometer.getAcceleration()
     }
 
     fun getTimeInSeconds() : Double {
