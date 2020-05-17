@@ -260,6 +260,10 @@ class PresenterMaster private constructor (private var context: Context) {
 
     }
 
+    fun initializeSessionDatabase(userId: String) {
+        facade.initializeSessionDatabase(userId)
+    }
+
     /* presenter show recommended exercise */
 //    fun onCanShowExerciseButtonPressed(fragmentActivity:FragmentActivity) {
 //        //val appContext :Context = fragmentActivity.applicationContext
