@@ -58,7 +58,7 @@ class SessionList {
     fun exportSession(path: String) {
         val fileNameDateTimeFormat = SimpleDateFormat("yyyy_MMdd_HHmm")
         val filePath = (path + "/"
-                + fileNameDateTimeFormat.format(Date()) + ".csv")
+                + fileNameDateTimeFormat.format(Date()) + ".txt")
 
         Log.d("exportSession()", "saving to $filePath")
 
