@@ -2,7 +2,6 @@ package com.example.utrack.views
 
 import android.app.Dialog
 import android.content.DialogInterface.OnClickListener
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -53,8 +52,8 @@ class FragmentSaveData : MainFragmentClass() {
     override fun sendNegButtonPressed(fragmentActivity: FragmentActivity){
         // nothing is saved
         PresenterTraining.getInstance(this.requireContext()).onNegSaveDataButtonPressed()
-        val intent = Intent(this.context, ViewMainPage().javaClass)
+/*        val intent = Intent(this.context, ViewMainPage().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        startActivity(intent,null)
+        startActivity(intent,null)*/
     } // go to main activity
 }

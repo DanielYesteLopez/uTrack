@@ -67,7 +67,6 @@ class PresenterLogin private constructor (context : Context) {
                 currentUserDb.child("real_name").setValue(userRealName)
                 currentUserDb.child("email").setValue(clearEmailForKey(userEmail))
                 PresenterMaster.getInstance(con).initializeBikeDatabase(userId)
-                PresenterMaster.getInstance(con).initalizeSessionDatabase(userId)
                 updateUIToSingIn(applicationContext)
 
             }else{

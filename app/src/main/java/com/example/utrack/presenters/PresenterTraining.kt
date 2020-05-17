@@ -9,75 +9,62 @@ import androidx.core.content.ContextCompat
 import com.example.utrack.model.Session
 import com.example.utrack.views.*
 import com.google.android.gms.maps.model.LatLng
-import java.util.*
-import kotlin.collections.ArrayList
 
-class PresenterTraining private constructor(context: Context) {
+class PresenterTraining private constructor(private var context: Context) {
 
     //val EXTRA_MESSAGE_DEVICE: String = "extra device"
-    private var isDoingRecomendedExercise = false
-    private val TAG = "MainActivity"
-    private var con : Context = context
-    companion object : SingletonHolder<PresenterTraining, Context>(::PresenterTraining)
-
+    private var isDoingRecommendedExercise = false
+    private val _lTAG = "MainActivity"
     private var session : Session? = null
+    companion object : SingletonHolder<PresenterTraining, Context>(::PresenterTraining)
 
     /* presenter View Training */
     fun onBackTrainingButtonPressed() {
-        val intent = Intent(con, ViewMainPage().javaClass)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        ContextCompat.startActivity(con,intent,null)
+        val intent = Intent(context, ViewMainPage().javaClass)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        ContextCompat.startActivity(context,intent,null)
     }
 
-
     fun onStopTrainingButtonPressed() {
-        PresenterMaster.getInstance(con).onStopTrainingButtonPressed()
+        PresenterMaster.getInstance(context).onStopTrainingButtonPressed()
     }
 
     fun onResumeTrainingButtonPressed() {
-        PresenterMaster.getInstance(con).onResumeTrainingButtonPressed()
+        PresenterMaster.getInstance(context).onResumeTrainingButtonPressed()
     }
 
     fun onStartTrainingButtonPressed() {
-       PresenterMaster.getInstance(con).onStartTrainingButtonPressed()
+       PresenterMaster.getInstance(context).onStartTrainingButtonPressed()
     }
 
     fun onPauseTrainingButtonPressed() {
-        PresenterMaster.getInstance(con).onPauseTrainingButtonPressed()
+        PresenterMaster.getInstance(context).onPauseTrainingButtonPressed()
     }
 
-/*    fun getTrainigInfo(): ArrayList<ArrayList<Double>>? {
-        return PresenterMaster.getInstance(con).getTrainingInfo()
-    }*/
-
     fun onReceiveLocation(latLng: LatLng) {
-        PresenterMaster.getInstance(con).onReceiveLocation(latLng)
+        PresenterMaster.getInstance(context).onReceiveLocation(latLng)
     }
 
     fun onReceivePredictedLocation(latLng: LatLng) {
-        PresenterMaster.getInstance(con).onReceivePredictedLocation(latLng)
+        PresenterMaster.getInstance(context).onReceivePredictedLocation(latLng)
     }
 
     fun onServiceConnected(service: IBinder) {
-        PresenterMaster.getInstance(con).onServiceConnected(service)
+        PresenterMaster.getInstance(context).onServiceConnected(service)
     }
 
     fun onServiceDisconnected() {
-        PresenterMaster.getInstance(con).onServiceDisconnected()
+        PresenterMaster.getInstance(context).onServiceDisconnected()
     }
 
     fun registerSensorListenerAccelerate(){
-        PresenterMaster.getInstance(con).registerSensorListenerAccelerate()
+        PresenterMaster.getInstance(context).registerSensorListenerAccelerate()
     }
 
     fun unRegisterSensorListenerAccelerate(){
-        PresenterMaster.getInstance(con).unRegisterSensorListenerAccelerate()
+        PresenterMaster.getInstance(context).unRegisterSensorListenerAccelerate()
     }
-
-   /* fun getAcceleration() : Float {
-        return  PresenterMaster.getInstance(con).getAcceleration()
-    }
-
+/*
     fun getSpeedTrapezi() : Float{
         return PresenterMaster.getInstance(con).getSpeedTrapezi()
     }
@@ -86,134 +73,102 @@ class PresenterTraining private constructor(context: Context) {
         return  PresenterMaster.getInstance(con).getPositionTrapeze()
     }*/
 
+    fun getTrainigInfo(): ArrayList<ArrayList<Double>>? {
+        return PresenterMaster.getInstance(context).getTrainingInfo()
+    }
+
+    fun getAcceleration() : Double {
+        return  PresenterMaster.getInstance(context).getAcceleration()
+    }
+
+    fun getTimeTraining() : Double {
+        return  PresenterMaster.getInstance(context).getTimeInSeconds()
+    }
+
     fun getSpeedGPS() : Float {
-        return  PresenterMaster.getInstance(con).getSpeedGPS()
+        return  PresenterMaster.getInstance(context).getSpeedGPS()
     }
 
     fun getSpeedGPSAVG(): Float {
-        return PresenterMaster.getInstance(con).getSpeedGPSAVG()
+        return PresenterMaster.getInstance(context).getSpeedGPSAVG()
     }
 
     fun getDistanceGPS() : Float {
-        return  PresenterMaster.getInstance(con).getDistanceGPS()
+        return  PresenterMaster.getInstance(context).getDistanceGPS()
     }
 
     fun clearDataTraining() {
-        PresenterMaster.getInstance(con).clearDataLocation()
+        PresenterMaster.getInstance(context).clearDataLocation()
     }
 
+    fun isDoingRecommendedExercise() : Boolean {
+        return this.isDoingRecommendedExercise
+    }
     /* presenter show recommended exercise */
     fun onCanShowExerciseButtonPressed() {
         // do nothing
-        Log.d(TAG, "user cancel stop training")
-        isDoingRecomendedExercise = false
+        Log.d(_lTAG, "user cancel stop training")
+        isDoingRecommendedExercise = false
     }
 
     fun onNegShowExerciseButtonPressed() {
-        Log.d(TAG,"create dummy recomended exercise")
-        PresenterMaster.getInstance(con).createDummyTraining()
-        isDoingRecomendedExercise = false
+        Log.d(_lTAG,"create dummy recommended exercise")
+        PresenterMaster.getInstance(context).createDummyTraining()
+        isDoingRecommendedExercise = false
     }
 
     fun onPosShowExerciseButtonPressed() {
-        Log.d(TAG,"positive button")
-        PresenterMaster.getInstance(con).createTrainingWithRecommendedExercise()
-        isDoingRecomendedExercise = true
+        Log.d(_lTAG,"positive button")
+        PresenterMaster.getInstance(context).createTrainingWithRecommendedExercise()
+        isDoingRecommendedExercise = true
     }
-    fun isDoingRecommendedExercise() : Boolean {
-        return this.isDoingRecomendedExercise
-    }
-
-    /* presenter save data */
-//    fun onPosSaveDataButtonPressed(fragmentActivity: FragmentActivity) {
-//        val appContext :Context = fragmentActivity.applicationContext
-//        Toast.makeText(
-//            appContext,
-//            appContext.resources.getString(R.string.sessionsaved),
-//            Toast.LENGTH_SHORT
-//        ).show()
-//        val intent = Intent(appContext, ViewData().javaClass)
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//        ContextCompat.startActivity(appContext,intent,null)
-//    }
-//
-//    fun onNegSaveDataButtonPressed(fragmentActivity : FragmentActivity) {
-//        val appContext :Context = fragmentActivity.applicationContext
-//        Toast.makeText(
-//            appContext,
-//            appContext.resources.getString(R.string.sessionnotsaved),
-//            Toast.LENGTH_SHORT
-//        ).show()
-//        val intent = Intent(appContext, ViewMainPage().javaClass)
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//        ContextCompat.startActivity(appContext,intent,null)
-//    }
-
-    /* presenter bluetooth */
-//    fun onConnectDevicesBluetoothButtonPressed(fragmentActivity: FragmentActivity) {
-//        val appContext :Context = fragmentActivity.applicationContext
-//        val intent = Intent(appContext, ViewBluetoothPairing().javaClass)
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//        ContextCompat.startActivity(appContext,intent,null)
-//    }
-//    fun onStartTrainingBluetoothButtonPressed(fragmentActivity: FragmentActivity) {
-//        val appContext :Context = fragmentActivity.applicationContext
-//        Toast.makeText(
-//            appContext,
-//            appContext.resources.getString(R.string.trainingstart),
-//            Toast.LENGTH_SHORT
-//        ).show()
-//    }
 
     fun onPosSaveDataButtonPressed() {
-        isDoingRecomendedExercise = false
-        session?.let { PresenterMaster.getInstance(con).addSession(it) }
-        val intent = Intent(con, ViewData().javaClass)
+        isDoingRecommendedExercise = false
+        session?.let { PresenterMaster.getInstance(context).addSession(it) }
+        val intent = Intent(context, ViewData().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        ContextCompat.startActivity(con, intent,null)
+        ContextCompat.startActivity(context, intent,null)
     }
 
     fun onNegSaveDataButtonPressed() {
-        isDoingRecomendedExercise = false
-        PresenterMaster.getInstance(con).onNegSaveDataButtonPressed()
-        val intent = Intent(con, ViewMainPage().javaClass)
+        isDoingRecommendedExercise = false
+        PresenterMaster.getInstance(context).cancelFinishTraining()
+        val intent = Intent(context, ViewMainPage().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        ContextCompat.startActivity(con,intent,null)
+        ContextCompat.startActivity(context,intent,null)
     }
 
     /* presenter view bluetooth */
     fun onBackBluetoothButtonPressed() {
-        isDoingRecomendedExercise = false
-        val intent = Intent(con, ViewTraining().javaClass)
+        isDoingRecommendedExercise = false
+        val intent = Intent(context, ViewTraining().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         //intent.putExtra(EXTRA_MESSAGE_DEVICE,"0")
-        ContextCompat.startActivity(con,intent,null)
+        ContextCompat.startActivity(context,intent,null)
     }
 
     fun onBluetoothDeviceChosen(_device: BluetoothDevice) {
-        isDoingRecomendedExercise = false
-        PresenterMaster.getInstance(con).onBluetoothDeviceChosen(_device)
+        isDoingRecommendedExercise = false
+        PresenterMaster.getInstance(context).onBluetoothDeviceChosen(_device)
     }
 
     fun createNewSession() {
-        session = PresenterMaster.getInstance(con).createNewSession()
+        session = PresenterMaster.getInstance(context).createNewSession()
     }
 
     fun getDescriptionRecommendedExercise(): String {
-        return PresenterMaster.getInstance(con).getRecommendedExerciseDescription()
+        return PresenterMaster.getInstance(context).getRecommendedExerciseDescription()
     }
 
-    fun getDeviceCadence(): BluetoothDevice? {
+/*    fun getDeviceCadence(): BluetoothDevice? {
         return PresenterMaster.getInstance(con).getCadenceSensor()
-    }
+    }*/
 
     fun goToTrainingView() {
-        val intent = Intent(con, ViewTraining().javaClass)
+        val intent = Intent(context, ViewTraining().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         //intent.putExtra(EXTRA_MESSAGE_DEVICE,"1")
-        ContextCompat.startActivity(con,intent,null)
+        ContextCompat.startActivity(context,intent,null)
     }
 }

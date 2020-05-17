@@ -17,11 +17,9 @@ import com.example.utrack.model.services.SensorListenerAccelerometer
 import com.google.android.gms.maps.model.LatLng
 import java.lang.Exception
 
-class PresenterMaster private constructor (context: Context) {
+class PresenterMaster private constructor (private var context: Context) {
     private val facade = Facade(context)
-    private var con = context
-
-    private val TAG = "MainActivity"
+    private val _lTAG = "PresenterMaster"
     private var locationService: LocationService? = null
     private var sensorListenerAccelerometer : SensorListenerAccelerometer = SensorListenerAccelerometer(context)
 
@@ -48,17 +46,17 @@ class PresenterMaster private constructor (context: Context) {
         facade.addNewSession(_session)
     }
 
-    fun onNegSaveDataButtonPressed() {
-        // TODO nada de momento
+    fun cancelFinishTraining() {
+        //do nothing
     }
 
     fun visualizeSessionList(activity: Activity) {
         facade.visualizeSessionList(activity)
     }
 
-    fun deleteSession(index: Int) {
+/*    fun deleteSession(index: Int) {
         facade.deleteSession(index)
-    }
+    }*/
 
     fun deleteAll(){
         facade.deleteAll()
@@ -68,25 +66,25 @@ class PresenterMaster private constructor (context: Context) {
         facade.exportSession(path)
     }
 
-    fun getSessionList() : ArrayList<Session>? {
+/*    fun getSessionList() : ArrayList<Session>? {
         return facade.getSessionList()
     }
 
     fun getSession(index : Int) : Session? {
         return facade.getSession(index)
-    }
+    }*/
 
     fun onStopTrainingButtonPressed() {
         locationService?.stopLogging()
-        Toast.makeText(con,
-            con.resources?.getString(R.string.trainingstop),
+        Toast.makeText(context,
+            context.resources?.getString(R.string.trainingstop),
             Toast.LENGTH_SHORT
         ).show()
     }
 
     fun onResumeTrainingButtonPressed() {
-        Toast.makeText(con,
-            con.resources?.getString(R.string.trainingresume),
+        Toast.makeText(context,
+            context.resources?.getString(R.string.trainingresume),
             Toast.LENGTH_SHORT
         ).show()
     }
@@ -94,8 +92,8 @@ class PresenterMaster private constructor (context: Context) {
     fun onStartTrainingButtonPressed() {
         sensorListenerAccelerometer.resumeReading()
         locationService?.startLogging()
-        Toast.makeText(con,
-            con.resources?.getString(R.string.trainingprogress),
+        Toast.makeText(context,
+            context.resources?.getString(R.string.trainingprogress),
             Toast.LENGTH_SHORT
         ).show()
     }
@@ -104,23 +102,23 @@ class PresenterMaster private constructor (context: Context) {
         sensorListenerAccelerometer.pauseReading()
         locationService?.pouseLogging()
         Toast.makeText(
-            con,
-            con.resources?.getString(R.string.trainingpaused),
+            context,
+            context.resources?.getString(R.string.trainingpaused),
             Toast.LENGTH_SHORT
         ).show()
     }
 
-    fun getTrainingInfo(): ArrayList<ArrayList<Double>>? {
+    fun getTrainingInfo() : ArrayList<ArrayList<Double>>? {
         val info = locationService?.getTrainingLocationInfo()
-        info?.add(sensorListenerAccelerometer.getAcceleracionInfo())
+        info?.add(sensorListenerAccelerometer.getAccelerationInfo())
         return info
     }
 
     fun onReceiveLocation(latLng: LatLng) {
         this.locationService?.let{
             if (it.isLogging) {
-                Log.d(TAG," new ->> $latLng")
-                Log.d(TAG,"is Logging")
+                Log.d(_lTAG," new ->> $latLng")
+                Log.d(_lTAG,"is Logging")
             }
         }
     }
@@ -128,8 +126,8 @@ class PresenterMaster private constructor (context: Context) {
     fun onReceivePredictedLocation(latLng: LatLng) {
         this.locationService?.let{
             if (it.isLogging) {
-                Log.d(TAG,"predicted ->> $latLng")
-                Log.d(TAG,"is Logging")
+                Log.d(_lTAG,"predicted ->> $latLng")
+                Log.d(_lTAG,"is Logging")
             }
         }
     }
@@ -152,10 +150,16 @@ class PresenterMaster private constructor (context: Context) {
         sensorListenerAccelerometer.unregisterListener()
     }
 
-    /*fun getAcceleration() : Float {
-        //return sensorListenerAccelerometro.getAccelerateActual()
+    fun getAcceleration() : Double {
+        return sensorListenerAccelerometer.getAcceleration()
     }
 
+    fun getTimeInSeconds() : Double {
+        return locationService?.getTimeInSeconds()!!
+    }
+
+
+    /*
     fun getSpeedTrapezi() : Float{
         //return sensorListenerAccelerometro.getVelocityActual()
     }
@@ -169,7 +173,7 @@ class PresenterMaster private constructor (context: Context) {
         try {
             value = locationService.let { it?.getLocationSpeed()!! }
         }catch (e : Exception){
-            Log.d(TAG, "error getting speed GPS")
+            Log.d(_lTAG, "error getting speed GPS")
         }
         return value
     }
@@ -180,7 +184,7 @@ class PresenterMaster private constructor (context: Context) {
         try {
             value = locationService.let { it?.getLocationSpeedAVG()!! }
         }catch (e : Exception){
-            Log.d(TAG, "error getting speed GPS")
+            Log.d(_lTAG, "error getting speed GPS")
         }
         return value
     }
@@ -190,7 +194,7 @@ class PresenterMaster private constructor (context: Context) {
         try {
             value = locationService.let { it?.getDistanceLocations()!! }
         }catch (e : Exception){
-            Log.d(TAG, "error getting distance GPS")
+            Log.d(_lTAG, "error getting distance GPS")
         }
         return value
     }
@@ -203,18 +207,18 @@ class PresenterMaster private constructor (context: Context) {
         val deviceName = _device.name
         //val deviceHardwareAddress = device.address // MAC address
         Toast.makeText(
-            con,
+            context,
             deviceName,
             Toast.LENGTH_SHORT
         ).show()
         facade.setCadenceDevice(_device)
     }
 
-    fun getCadenceSensor() : BluetoothDevice? {
+/*    fun getCadenceSensor() : BluetoothDevice? {
         return facade.getSensorCadence()
-    }
+    }*/
 
-//    fun updateAcceleracion(accelerateActual: Float) {
+//    fun updateAcceleration(accelerateActual: Float) {
 //
 //    }
 
@@ -228,9 +232,9 @@ class PresenterMaster private constructor (context: Context) {
         val time = values?.get(0)!![0]
         val distance = values[1][0]
         val speed = values[2]
-        val acce = values[3]
-        val exercise = Exercise(time,distance,acce[1],speed,speed)
-        training = Training(exercise,false, con)
+        val acct = values[3]
+        val exercise = Exercise(time,distance,acct[1],speed,speed)
+        training = Training(exercise,false, context)
     }
 
     fun createTrainingWithRecommendedExercise() {
@@ -238,13 +242,13 @@ class PresenterMaster private constructor (context: Context) {
         val time = values?.get(0)!![0]
         val distance = values[1][0]
         val speed = values[2]
-        val acce = values[3]
-        val exercise = Exercise(time,distance,acce[1],speed,speed)
-        training = Training(exercise,true, con)
+        val acct = values[3]
+        val exercise = Exercise(time,distance,acct[1],speed,speed)
+        training = Training(exercise,true, context)
     }
 
     fun getRecommendedExerciseDescription(): String {
-        return training?.getRecomendedExerciseDescrpcion()!!
+        return training?.getRecommendedExerciseDescription()!!
     }
 
     fun changeUserAccount(userName: String, password: String, realName: String, accountEmail: String) {

@@ -3,8 +3,7 @@ package com.example.utrack.presenters
 import android.content.Context
 import android.widget.Toast
 
-class PresenterAccountSettings private constructor (context : Context) {
-    private var con : Context = context
+class PresenterAccountSettings private constructor (private var context : Context) {
     companion object : SingletonHolder<PresenterAccountSettings, Context>(::PresenterAccountSettings)
     fun changeUserAccount(
         userName: String,
@@ -16,7 +15,7 @@ class PresenterAccountSettings private constructor (context : Context) {
     ) {
         if(StringUtils.isAllValid(userName,password,confirmPassword,realName,accountEmail)){
             if (password.equals(confirmPassword)){
-                PresenterMaster.getInstance(con).changeUserAccount(userName,password,realName,accountEmail)
+                PresenterMaster.getInstance(context).changeUserAccount(userName,password,realName,accountEmail)
             }else{
                 Toast.makeText(applicationContext,"Passwords doesn't match", Toast.LENGTH_SHORT).show()
             }

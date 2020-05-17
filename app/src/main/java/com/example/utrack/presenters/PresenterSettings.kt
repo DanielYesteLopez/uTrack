@@ -2,8 +2,7 @@ package com.example.utrack.presenters
 
 import android.content.Context
 
-class PresenterSettings private constructor (context : Context) {
-    private var con : Context = context
+class PresenterSettings private constructor (private var context: Context) {
     companion object : SingletonHolder<PresenterSettings, Context>(::PresenterSettings)
     fun onSaveButtonUserSettingsPressed(frameSizeValue: String, heightValue: String, diskTeethValue: String, pinionTeethValue: String, stemValue: String) {
         var setFrameSizeValue = "0"
@@ -30,9 +29,6 @@ class PresenterSettings private constructor (context : Context) {
             "pinion_teeth" to setPinionTeethValue.toInt(),
             "stem" to setStemValue.toInt()
         )
-        PresenterMaster.getInstance(con).setBikeSettings(userBikeSettingsMap)
+        PresenterMaster.getInstance(context).setBikeSettings(userBikeSettingsMap)
     }
-
-    //val presenterMaster = PresenterMaster()
-
 }

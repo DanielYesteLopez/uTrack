@@ -7,28 +7,63 @@ import android.content.*
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.location.Location
+import android.location.LocationManager
 import android.os.*
+import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.anychart.AnyChart
+import com.anychart.AnyChartView
+import com.anychart.chart.common.dataentry.DataEntry
+import com.anychart.chart.common.dataentry.ValueDataEntry
+import com.anychart.charts.Cartesian
+import com.anychart.enums.TooltipPositionMode
+import com.anychart.graphics.vector.Stroke
 import com.example.utrack.R
 import com.example.utrack.mc.SecondViewClass
-import com.example.utrack.presenters.PresenterTraining
 import com.example.utrack.model.services.LocationService
+import com.example.utrack.presenters.PresenterTraining
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.trainingpage.*
+import com.anychart.core.cartesian.series.Line
+import com.anychart.data.Mapping
+import com.anychart.data.Set
+import com.anychart.enums.Anchor
+import com.anychart.enums.MarkerType
+
 
 class ViewTraining : SecondViewClass() {
 
     private val TAG = "MainActivity"
-    val MY_PERMISSIONS_REQUEST_LOCATION = 99
+    private val MY_PERMISSIONS_REQUEST_LOCATION = 99
+
+    private var locationManager: LocationManager? = null
+
+    private lateinit var anyChartView : AnyChartView
+    private lateinit var seriesData : ArrayList<DataEntry>
 
     private var myBluetoothFragment: FragmentBluetooth? = null
 
-    @SuppressLint("SourceLockedOrientationActivity")
+    var isWorking = false
+    var isPaused = true
+
+    private lateinit var dataSet: Set
+    private lateinit var series1: Line
+    private lateinit var series2: Line
+    private lateinit var series3: Line
+    private lateinit var series1Mapping: Mapping
+    private lateinit var series2Mapping: Mapping
+    private lateinit var series3Mapping: Mapping
+
+    private lateinit var mHandler: Handler
+    private lateinit var mRunnable:Runnable
+
+
+    @SuppressLint("SourceLockedOrientationActivity", "ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         // hide navigation bar
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -37,11 +72,6 @@ class ViewTraining : SecondViewClass() {
         // start activity
         setContentView(R.layout.trainingpage)
         // ini
-        PresenterTraining.getInstance(this@ViewTraining)
-        myBluetoothFragment = FragmentBluetooth()
-        // check bluetooth connection
-        myBluetoothFragment.let { it?.show(supportFragmentManager, getString(R.string.notefication)) }
-
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -55,8 +85,20 @@ class ViewTraining : SecondViewClass() {
             }
         } else {
             clearDataTraining()
-            startService()
+            locationManager = this.applicationContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            assert(locationManager != null)
+            if (canGetLocation()) {
+                startService()
+            } else {
+                showSettingsAlert()
+            }
         }
+        mHandler = Handler()
+        PresenterTraining.getInstance(this@ViewTraining)
+        myBluetoothFragment = FragmentBluetooth()
+        // check bluetooth connection
+        myBluetoothFragment.let { it?.show(supportFragmentManager, getString(R.string.notefication)) }
+
         PresenterTraining.getInstance(this@ViewTraining).registerSensorListenerAccelerate()
 
         locationUpdateReceiver.let{
@@ -70,10 +112,73 @@ class ViewTraining : SecondViewClass() {
         }
 
         c_meter.base = SystemClock.elapsedRealtime()
-
-        var isWorking = false
-        var ispaused = true
         var pauseOffset: Long = 0
+
+        anyChartView = findViewById(R.id.any_chart_view)
+        anyChartView.setProgressBar(findViewById(R.id.progress_bar))
+        anyChartView.setBackgroundColor(R.color.rosauserColor)
+
+        val cartesian : Cartesian = AnyChart.line()
+        cartesian.animation(true)
+        cartesian.padding(10, 20, 5, 20)
+        cartesian.crosshair().enabled(true)
+        cartesian.crosshair().yLabel(true).yStroke(null as Stroke?, null, null, null as String?, null as String?)
+        cartesian.tooltip().positionMode(TooltipPositionMode.POINT)
+        cartesian.xAxis(0).title("time")
+        cartesian.xAxis(0).labels().padding(1,1,1,1)
+        cartesian.yAxis(0).labels().padding(1,1,1,1)
+        seriesData = ArrayList<DataEntry>()
+        seriesData.add(CustomDataEntry("0",0,0,0))
+
+        dataSet = Set.instantiate()
+        dataSet.data(seriesData)
+        series1Mapping = dataSet.mapAs("{ x: 'x', value: 'value' }")
+        series2Mapping = dataSet.mapAs("{ x: 'x', value: 'value2' }")
+        series3Mapping= dataSet.mapAs("{ x: 'x', value: 'value3' }")
+
+        series1 = cartesian.line(series1Mapping)
+        series1.name("speed")
+        series1.hovered().markers().enabled(true)
+        series1.hovered().markers()
+            .type(MarkerType.CIRCLE)
+            .size(4.0)
+        series1.tooltip()
+            .position("right")
+            .anchor(Anchor.LEFT_CENTER)
+            .offsetX(5.0)
+            .offsetY(5.0)
+            .fontColor("black")
+
+        series2 = cartesian.line(series2Mapping)
+        series2.name("acceleration")
+        series2.hovered().markers().enabled(true)
+        series2.hovered().markers()
+            .type(MarkerType.CIRCLE)
+            .size(4.0)
+        series2.tooltip()
+            .position("right")
+            .anchor(Anchor.LEFT_CENTER)
+            .offsetX(5.0)
+            .offsetY(5.0)
+            .fontColor("black")
+
+        series3 = cartesian.line(series3Mapping)
+        series3.name("distance")
+        series3.hovered().markers().enabled(true)
+        series3.hovered().markers()
+            .type(MarkerType.CIRCLE)
+            .size(4.0)
+        series3.tooltip()
+            .position("right")
+            .anchor(Anchor.LEFT_CENTER)
+            .offsetX(5.0)
+            .offsetY(5.0)
+            .fontColor("black")
+
+        cartesian.legend().enabled(true)
+        cartesian.legend().fontSize(7.0)
+        cartesian.legend().padding(0.0, 0.0, 5.0, 0.0)
+        anyChartView.setChart(cartesian)
 
         // set layout visibility
         buttonStart.visibility = View.VISIBLE
@@ -101,8 +206,13 @@ class ViewTraining : SecondViewClass() {
                 c_meter.base = SystemClock.elapsedRealtime() - pauseOffset
                 c_meter.start()
                 isWorking = true
-                ispaused = false
+                isPaused = false
                 PresenterTraining.getInstance(this@ViewTraining).onStartTrainingButtonPressed()
+                mRunnable = Runnable {
+                    addPoint()
+                    mHandler.postDelayed(mRunnable, 1000)
+                }
+                mHandler.postDelayed(mRunnable, 1000)
             }
         }
 
@@ -126,13 +236,14 @@ class ViewTraining : SecondViewClass() {
                 c_meter.stop()
                 pauseOffset = SystemClock.elapsedRealtime() - c_meter.base
                 isWorking = false
-                ispaused = true
+                isPaused = true
                 PresenterTraining.getInstance(this@ViewTraining).onPauseTrainingButtonPressed()
+                mHandler.removeCallbacks(mRunnable)
             }
         }
 
         buttonStop.setOnClickListener {
-            if(isWorking || ispaused) {
+            if(isWorking || isPaused) {
                 buttonPause.callOnClick()
                 if(PresenterTraining.getInstance(this).isDoingRecommendedExercise()){
                     val mySaveFragment = FragmentSaveData()
@@ -143,6 +254,7 @@ class ViewTraining : SecondViewClass() {
                 }
                 PresenterTraining.getInstance(this@ViewTraining).onStopTrainingButtonPressed()
             }
+            mHandler.removeCallbacks(mRunnable)
         }
         backButtonTrainingPage.setOnClickListener {
             PresenterTraining.getInstance(this@ViewTraining).onBackTrainingButtonPressed()
@@ -161,17 +273,20 @@ class ViewTraining : SecondViewClass() {
 //            findViewById<TextView>(R.id.distance_trapezi).text = (presenter.let { it?.getPositionTrapeze() }).toString()
 //            findViewById<TextView>(R.id.speed_gps).text = (presenter.let { it?.getSpeedGPS() }).toString()
 //            findViewById<TextView>(R.id.distance_gps).text = (presenter.let { it?.getDistanceGPS() }).toString()
-            val formatTemplate = "%.2f%3s"
-            //findViewById<TextView>(R.id.cadenceratetext).text = formatTemplate.format(PresenterTraining.getInstance(this@ViewTraining).getAcceleration(),"rpm")
-            val aux1 = PresenterTraining.getInstance(this@ViewTraining).getSpeedGPS()    // kph
-            findViewById<TextView>(R.id.speedratetext).text =
-                formatTemplate.format(aux1 ,"kph")
-            val aux2 = PresenterTraining.getInstance(this@ViewTraining).getSpeedGPSAVG()    // kph
-            findViewById<TextView>(R.id.agspeedratetext).text =
-                formatTemplate.format(aux2 ,"kph")
-
-            //findViewById<>(R.id.).text = (presenterTraining.let { it?.getDistanceGPS() }).toString()
-            PresenterTraining.getInstance(this@ViewTraining).onReceiveLocation(latLng)
+            if(isWorking && !isPaused) {
+                val formatTemplate = "%.2f%3s"
+                //findViewById<TextView>(R.id.cadenceratetext).text = formatTemplate.format(PresenterTraining.getInstance(this@ViewTraining).getAcceleration(),"rpm")
+                val aux1 = PresenterTraining.getInstance(this@ViewTraining).getSpeedGPS()    // kph
+                findViewById<TextView>(R.id.speedratetext).text =
+                    formatTemplate.format(aux1, "kph")
+                val aux2 =
+                    PresenterTraining.getInstance(this@ViewTraining).getSpeedGPSAVG()    // kph
+                findViewById<TextView>(R.id.agspeedratetext).text =
+                    formatTemplate.format(aux2, "kph")
+                //findViewById<>(R.id.).text = (presenterTraining.let { it?.getDistanceGPS() }).toString()
+                PresenterTraining.getInstance(this@ViewTraining).onReceiveLocation(latLng)
+                //addPoint()
+            }
         }
     }
 
@@ -313,9 +428,7 @@ class ViewTraining : SecondViewClass() {
                         startService()
                     }
                 } else {
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                    // TODO tell user is being an as%#$ll
+                    // permission denied, boo!
                     Log.d(TAG,"permission denied go to hell")
                 }
                 return
@@ -345,5 +458,71 @@ class ViewTraining : SecondViewClass() {
             this.application.startService(locationServiceStart)
         }
         this.application.bindService(locationServiceStart, serviceConnection, Context.BIND_AUTO_CREATE)
+    }
+
+    private fun canGetLocation(): Boolean {
+        val result : Boolean
+        var gpsEnabled = false
+        var networkEnabled = false
+        try {
+            gpsEnabled = locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER)!!
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+        try {
+            networkEnabled = locationManager?.isProviderEnabled(LocationManager.NETWORK_PROVIDER)!!
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+        result = (gpsEnabled && networkEnabled)
+        return result
+    }
+
+    private fun showSettingsAlert() {
+        val alertDialog = AlertDialog.Builder(this)
+        // Setting Dialog Title
+        alertDialog.setTitle("Error!")
+        // Setting Dialog Message
+        alertDialog.setMessage(getString(R.string.activatelocation))
+        // On pressing Settings button
+        alertDialog.setPositiveButton(
+            resources.getString(R.string.ok)
+        ) { _, _ ->
+            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+            startActivity(intent)
+            startService()
+        }
+        alertDialog.show()
+    }
+
+    private class CustomDataEntry internal constructor(
+        var x: String,
+        var value: Number,
+        var value2: Number,
+        var value3: Number
+    ) :
+        ValueDataEntry(x, value) {
+        init {
+            setValue("value2", value2)
+            setValue("value3", value3)
+        }
+
+        override fun toString(): String {
+            var s = ""
+            s += "{ x: $x , value : $value , value1 : $value2 , value2 : $value3 }"
+            return s
+        }
+    }
+
+    fun  addPoint() {
+        // append data
+        seriesData.add(CustomDataEntry(
+                "${seriesData.size}",
+                PresenterTraining.getInstance(this).getSpeedGPS(),
+                PresenterTraining.getInstance(this).getAcceleration(),
+                PresenterTraining.getInstance(this).getDistanceGPS()
+            )
+        )
+        dataSet.data(seriesData)
     }
 }

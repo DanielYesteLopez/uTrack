@@ -80,8 +80,8 @@
         <string name="yes">Si</string>
         <string name="no">No</string>
         <string name="exit">Salir</string>
-        <!-- TODO class exercise that contain a string table full of exercises like this one -->
-    <string name="recomendedexercise"> Recommended Exercise?. \nYou are ready to go</string>
+
+        <string name="recomendedexercise"> Un ejercicio mas? \n estas listo para empezar</string>
         <string name="recomendedexerciseyes">Vamos!</string>
         <string name="recomendedexerciseno">Otro día</string>
         <string name="trainingawesome">Genial</string>
@@ -92,7 +92,7 @@
         <string name="continuesesion">Continuar</string>
         <string name="notefication">Hey espera</string>
 
-        <string name="bluetooth">You are not connected to a device, please connect to one or start session without one \n </string>
+        <string name="bluetooth">No está conectado a un dispositivo, conéctese a uno o inicie sesión sin uno\n </string>
         <string name="choose_device">Escoger dispositivo</string>
         <string name="continue_without_device">Empezar Sesión</string>
         <string name="blutooth_not_available">Bluetooth no disponible</string>
@@ -104,13 +104,14 @@
     <string name="recommended2">Estirar las piernas por 5 minutos y descansar por otros 5 min</string>
     <string name="recommended3">Hacer vueltas a velocidad constante de 30 Km/h durante 10 min</string>
     <string name="recommended4">Hacer vueltas a velocidad constante de 30 Km/h durante 15 min</string>
-    <string name="recommended5">Ejercicio progresivo durante 10 min empezando con velocidad minima 25 Km/h y luego pararse para estirar los musculos durante 5 min</string>
-    <string name="recommended6">Vueltas a 40 Km/h durante 10-15 min, estirar las piernas y hacer ejercicios fisicos en el gimnasio durante 5 min</string>
-    <string name="recommended7">Vueltas a velocidad constante de 40 Km/h por encima de la linea azul</string>
-    <string name="recommended8">Vueltas a velocidad constante de 35 Km/h por encima de la linea azul, cada 5 vueltas cambiar a la linea negra para aumentar la velocidad a 45 Km/h durante 2 vueltas y volver a la azul a la velocidad anterior para 1 vuelta mas</string>
+    <string name="recommended5">Ejercicio progresivo durante 10 min empezando con velocidad mínima 25 Km/h y luego pararse para estirar los musculos durante 5 min</string>
+    <string name="recommended6">Vueltas a 40 Km/h durante 10–15 min, estirar las piernas y hacer ejercicios fisicos en el gimnasio durante 5 min</string>
+    <string name="recommended7">Vueltas a velocidad constante de 40 Km/h por encima de la línea azul</string>
+    <string name="recommended8">Vueltas a velocidad constante de 35 Km/h por encima de la línea azul, cada 5 vueltas cambiar a la línea negra para aumentar la velocidad a 45 Km/h durante 2 vueltas y volver a la azul a la velocidad anterior para 1 vuelta mas</string>
 
-    <string name="title_location_permission">Location permission</string>
-    <string name="text_location_permission">please activate Location for better performence</string>
-    <string name="ok">"activate "</string>
-    <string name="textViewSessionsRealitzades">Sesiones realizades</string>
+    <string name="title_location_permission">Permiso de ubicación</string>
+    <string name="text_location_permission">active la ubicación para un mejor rendimiento </string>
+    <string name="ok">"ok "</string>
+    <string name="textViewSessionsRealitzades">Sesiones realizadas</string>
+    <string name="activatelocation">Active la ubicación y la red antes de comenzar</string>
 </resources>

@@ -8,15 +8,13 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import com.example.utrack.R
-import java.lang.Thread.sleep
 import kotlin.collections.ArrayList
 
-class Facade (context : Context){
+class Facade (private val context: Context){
     private var cadenceDevice: Sensor? = null
     private val user = User()
     private val database = Database()
     private var sessionList : SessionList? = null
-    private val con = context
     private lateinit var arrayAdapter: ArrayAdapter<String>
 
     init {
@@ -54,9 +52,9 @@ class Facade (context : Context){
         addSession(session)
     }
 
-    fun deleteSession(index: Int) {
+/*    fun deleteSession(index: Int) {
         sessionList?.deleteSession(index)
-    }
+    }*/
 
     fun deleteAll(){
         sessionList?.deleteAll()
@@ -66,11 +64,11 @@ class Facade (context : Context){
         sessionList?.exportSession(path)
     }
 
-    fun getSessionList() : ArrayList<Session>? {
+    private fun getSessionList() : ArrayList<Session>? {
         return sessionList?.getSessionList()
     }
 
-    fun getSession(index : Int) : Session? {
+    private fun getSession(index : Int) : Session? {
         return sessionList?.getSession(index)
     }
 
@@ -107,10 +105,9 @@ class Facade (context : Context){
 //    }
 
     fun visualizeSessionList(activity: Activity) {
-        val sessionsList = getSessionList()
         // Create an array adapter
         val arrayCheck = database.getDatabaseSessions()
-        arrayAdapter =  ArrayAdapter<String>(con, android.R.layout.simple_list_item_1)
+        arrayAdapter =  ArrayAdapter<String>(context, android.R.layout.simple_list_item_1)
         if (arrayCheck[0].isNotEmpty()) {
             for (session in arrayCheck) {
                 arrayAdapter.insert(session,0)
@@ -119,9 +116,9 @@ class Facade (context : Context){
             // Set item click listener
             activity.findViewById<ListView>(R.id.showDataList).onItemClickListener =
                 AdapterView.OnItemClickListener { _, _, position, _ ->
-                    val actual_session = getSession(position)
-                    if (actual_session != null) {
-                        Toast.makeText(con, actual_session.toString(),
+                    val actualSession = getSession(position)
+                    if (actualSession != null) {
+                        Toast.makeText(context, actualSession.toString(),
                             Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -130,9 +127,9 @@ class Facade (context : Context){
         }
     }
 
-    fun getSensorCadence(): BluetoothDevice? {
+/*    fun getSensorCadence(): BluetoothDevice? {
         return this.cadenceDevice?.getABluetoothDevice()
-    }
+    }*/
 
     fun setCadenceDevice(_device: BluetoothDevice) {
         cadenceDevice?.setABluetoothDevice(_device)
