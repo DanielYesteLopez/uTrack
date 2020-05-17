@@ -8,6 +8,7 @@ import android.widget.ImageButton
 import android.widget.Toast
 import com.example.utrack.R
 import com.example.utrack.mc.SecondViewClass
+import com.example.utrack.presenters.PresenterMaster
 import com.example.utrack.presenters.PresenterShowData
 import kotlinx.android.synthetic.main.showdata.*
 import java.text.SimpleDateFormat

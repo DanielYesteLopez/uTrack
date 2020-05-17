@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothDevice
 import android.content.Context
 import android.os.IBinder
 import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.example.utrack.R
 import com.example.utrack.model.Exercise
@@ -18,7 +19,6 @@ import java.lang.Exception
 
 class PresenterMaster private constructor (private var context: Context) {
     private val facade = Facade(context)
-
     private val _lTAG = "PresenterMaster"
     private var locationService: LocationService? = null
     private var sensorListenerAccelerometer : SensorListenerAccelerometer = SensorListenerAccelerometer(context)
@@ -250,4 +250,55 @@ class PresenterMaster private constructor (private var context: Context) {
     fun getRecommendedExerciseDescription(): String {
         return training?.getRecommendedExerciseDescription()!!
     }
+
+    fun changeUserAccount(userName: String, password: String, realName: String, accountEmail: String) {
+        facade.changeUserAccount(userName,password,realName,accountEmail)
+    }
+
+    fun initalizeSessionDatabase(userId: String) {
+        facade.initializeSessionDatabase(userId)
+
+    }
+
+    /* presenter show recommended exercise */
+//    fun onCanShowExerciseButtonPressed(fragmentActivity:FragmentActivity) {
+//        //val appContext :Context = fragmentActivity.applicationContext
+//        Toast.makeText(
+//            fragmentActivity.applicationContext,
+//            fragmentActivity.resources.getString(R.string.trainingpaused),
+//            Toast.LENGTH_SHORT
+//        ).show()
+//    }
+//
+//    fun onNegShowExerciseButtonPressed(fragmentActivity:FragmentActivity) {
+//        // user finish training
+//        val appContext :Context = fragmentActivity.applicationContext
+//        Toast.makeText(
+//            appContext,
+//            appContext.getString(R.string.trainingsad),
+//            Toast.LENGTH_SHORT
+//        ).show()
+//        val mySaveFragment =
+//            FragmentSaveData()
+//        mySaveFragment.show(fragmentActivity.supportFragmentManager, R.string.notefication.toString())
+//    }
+//
+//    fun onPosShowExerciseButtonPressed(fragmentActivity:FragmentActivity) {
+//        val appContext :Context = fragmentActivity.applicationContext
+//        Toast.makeText(
+//            appContext,
+//            appContext.getString(R.string.trainingawesome),
+//            Toast.LENGTH_SHORT
+//        ).show()
+//    }
+
+
+    /* presenter bluetooth */
+//  fun onConnectDevicesBluetoothButtonPressed() {
+//    }
+//
+//    fun onStartTrainingBluetoothButtonPressed() {
+//
+//    }
+
 }

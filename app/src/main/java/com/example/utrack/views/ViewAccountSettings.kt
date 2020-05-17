@@ -2,12 +2,12 @@ package com.example.utrack.views
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import com.example.utrack.R
 import com.example.utrack.mc.SecondViewClass
 import com.example.utrack.presenters.PresenterAccountSettings
-import com.example.utrack.presenters.PresenterSettings
 
 class ViewAccountSettings : SecondViewClass() {
 
@@ -24,12 +24,14 @@ class ViewAccountSettings : SecondViewClass() {
         }
         val saveButtonUserSettings = findViewById<ImageButton>(R.id.saveButtonAccountSettings)
         saveButtonUserSettings.setOnClickListener{
-            onSaveButtonAccountSettingsPressed()
+            val userName = findViewById<EditText>(R.id.accountNameEdit).text.toString()
+            val password = findViewById<EditText>(R.id.accountPassEdit).text.toString()
+            val confirmPassword = findViewById<EditText>(R.id.accountPassCheckEdit).text.toString()
+            val realName = findViewById<EditText>(R.id.accountRnameEdit).text.toString()
+            val accountEmail = findViewById<EditText>(R.id.accountemailEdit).text.toString()
+            PresenterAccountSettings.getInstance(this).changeUserAccount(userName,password,confirmPassword,realName,accountEmail,applicationContext)
+            Toast.makeText(applicationContext,"Saved!",Toast.LENGTH_SHORT).show()
         }
-    }
-
-    private fun onSaveButtonAccountSettingsPressed() {
-        Toast.makeText(applicationContext,"Saved!",Toast.LENGTH_SHORT).show()
     }
 
     private fun onBackAccountButtonSettingsPressed(){

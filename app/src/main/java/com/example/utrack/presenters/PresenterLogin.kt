@@ -15,8 +15,10 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 
-class PresenterLogin private constructor (private var context: Context) {
+class PresenterLogin private constructor (context : Context) {
+    private var con : Context = context
     companion object : SingletonHolder<PresenterLogin, Context>(::PresenterLogin)
+    //var presenterMaster = PresenterMaster()
     private var mDataFirebase = FirebaseDatabase.getInstance()
     private var mDatabaseReference = mDataFirebase.reference.child("Users")
     private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -64,7 +66,7 @@ class PresenterLogin private constructor (private var context: Context) {
                 currentUserDb.child("name").setValue(userName)
                 currentUserDb.child("real_name").setValue(userRealName)
                 currentUserDb.child("email").setValue(clearEmailForKey(userEmail))
-                PresenterMaster.getInstance(context).initializeBikeDatabase(userId)
+                PresenterMaster.getInstance(con).initializeBikeDatabase(userId)
                 updateUIToSingIn(applicationContext)
 
             }else{
@@ -133,7 +135,7 @@ class PresenterLogin private constructor (private var context: Context) {
                 children.forEach {
                     userDataMap[it.key.toString()] = it.value.toString()
                 }
-                PresenterMaster.getInstance(context).addNewUser(userDataMap)
+                PresenterMaster.getInstance(con).addNewUser(userDataMap)
             }
 
             override fun onCancelled(p0: DatabaseError) {
@@ -157,8 +159,8 @@ class PresenterLogin private constructor (private var context: Context) {
         ContextCompat.startActivity(applicationContext,intent,null)
     }
 
-    private fun clearEmailForKey(userEmail: String): String {
-        val clearUserEmail = userEmail.replace(".",",")
+    fun clearEmailForKey(userEmail: String): String {
+        var clearUserEmail = userEmail.replace(".",",")
         return clearUserEmail
     }
 

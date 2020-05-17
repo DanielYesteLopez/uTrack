@@ -37,7 +37,13 @@ class Facade (private val context: Context){
     }
 
     private fun addSession(session: Session) {
+        //TODO Guardar sesion en el database
         sessionList?.addSession(session)
+        //Guardar sesion to String
+        //Duracion
+        //ID
+        //....
+        database.addNewSession(session.toString())
     }
 
     fun addNewSession(_session: Session) {
@@ -99,13 +105,12 @@ class Facade (private val context: Context){
 //    }
 
     fun visualizeSessionList(activity: Activity) {
-        val sessionsList = getSessionList()
         // Create an array adapter
+        val arrayCheck = database.getDatabaseSessions()
         arrayAdapter =  ArrayAdapter<String>(context, android.R.layout.simple_list_item_1)
-
-        if (sessionsList?.isNotEmpty()!!) {
-            for (session : Session in sessionsList) {
-                arrayAdapter.insert(session.toString(),0)
+        if (arrayCheck[0].isNotEmpty()) {
+            for (session in arrayCheck) {
+                arrayAdapter.insert(session,0)
             }
             activity.findViewById<ListView>(R.id.showDataList).adapter = arrayAdapter
             // Set item click listener
@@ -128,6 +133,15 @@ class Facade (private val context: Context){
 
     fun setCadenceDevice(_device: BluetoothDevice) {
         cadenceDevice?.setABluetoothDevice(_device)
+    }
+
+    fun changeUserAccount(userName: String, password: String, realName: String, accountEmail: String) {
+        database.changeUserAccount(userName,password,realName,accountEmail)
+        user.changeUserAccount(userName,realName,accountEmail)
+    }
+
+    fun initializeSessionDatabase(userId: String) {
+        database.initializeSessionDatabase(userId)
     }
 
     /* presenter bluetooth */

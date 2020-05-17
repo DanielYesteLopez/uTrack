@@ -9,7 +9,6 @@ import com.example.utrack.R
 import com.example.utrack.mc.SecondViewClass
 
 class ViewSignIn : SecondViewClass() {
-    //var presenterLogin = PresenterLogin()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // hide navigation bar
