@@ -62,12 +62,12 @@
     <string name="maintext">Making your pedaling faster</string>
 
     <string name="heartrate">000bpm</string>
-    <string name="speedrate">00\'00kph</string>
+    <string name="speedrate">0.00kph</string>
     <string name="cadencerate">000rpm</string>
     <string name="duration">00,00min</string>
 
     <string name="avgheartrate">000bpm</string>
-    <string name="avgspeed">00\'00kph</string>
+    <string name="avgspeed">0.00kph</string>
     <string name="avgcadencerate">000rpm</string>
 
     <string name="informationText">This application was developed to improve your performance as a cyclist. All rights reserved. This application was created by : \n ·Daniel Yeste \n ·Joan Domenech \n

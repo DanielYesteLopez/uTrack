@@ -153,7 +153,13 @@ class PresenterMaster private constructor (private var context: Context) {
     fun getAcceleration() : Double {
         return sensorListenerAccelerometer.getAccelerationAVG()
     }
-/*
+
+    fun getTimeInSeconds() : Double {
+        return locationService?.getTimeInSeconds()!!
+    }
+
+
+    /*
     fun getSpeedTrapezi() : Float{
         //return sensorListenerAccelerometro.getVelocityActual()
     }

@@ -81,6 +81,10 @@ class PresenterTraining private constructor(private var context: Context) {
         return  PresenterMaster.getInstance(context).getAcceleration()
     }
 
+    fun getTimeTraining() : Double {
+        return  PresenterMaster.getInstance(context).getTimeInSeconds()
+    }
+
     fun getSpeedGPS() : Float {
         return  PresenterMaster.getInstance(context).getSpeedGPS()
     }

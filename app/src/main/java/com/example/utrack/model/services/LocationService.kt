@@ -245,6 +245,11 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
         return ret
     }
 
+    fun getTimeInSeconds() : Double {
+        elapsedTimeInSeconds = (currentTimeInMillis - runStartTimeInMillis) / 1000
+        return this.elapsedTimeInSeconds.toDouble()
+    }
+
     fun clearData(){
         runStartTimeInMillis = SystemClock.elapsedRealtimeNanos() / 1000000
         locationList.clear()
