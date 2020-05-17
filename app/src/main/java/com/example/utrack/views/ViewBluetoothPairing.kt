@@ -4,12 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
-import android.bluetooth.BluetoothSocket
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.os.AsyncTask
+import android.content.*
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
@@ -21,14 +16,23 @@ import androidx.annotation.RequiresApi
 import com.example.utrack.R
 import com.example.utrack.mc.SecondViewClass
 import com.example.utrack.presenters.PresenterTraining
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptionsExtension
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.fitness.Fitness
+import com.google.android.gms.fitness.FitnessOptions
+import com.google.android.gms.fitness.FitnessStatusCodes
+import com.google.android.gms.fitness.data.BleDevice
+import com.google.android.gms.fitness.data.DataType
+import com.google.android.gms.fitness.request.BleScanCallback
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.Task
 import kotlinx.android.synthetic.main.activity_bluetooth_pairing.*
-import java.io.IOException
-import java.lang.IllegalArgumentException
 import java.lang.Thread.sleep
-import java.util.*
-import kotlin.collections.ArrayList
 
 
+@Suppress("DEPRECATION")
 class ViewBluetoothPairing : SecondViewClass() {
     private val REQUESTCODEENABLEBLUETOOTH: Int = 1
     private val REQUESTCODEDISCOVERABLEBLUETOOTH: Int = 2
@@ -46,9 +50,11 @@ class ViewBluetoothPairing : SecondViewClass() {
     //init bluetooth adapter
     private var bAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
     private var devicesList: ArrayList<BluetoothDevice> = ArrayList()
+    private var devicesListB: ArrayList<BleDevice> = ArrayList()
     private lateinit var arrayAdapter: ArrayAdapter<String>
+    private lateinit var device : BleDevice
 
-    companion object {
+/*    companion object {
         var deviceUuid : UUID? = null
         var bluetoothSocket : BluetoothSocket? = null
         lateinit var bluetoothAdapter : BluetoothAdapter
@@ -56,7 +62,7 @@ class ViewBluetoothPairing : SecondViewClass() {
         lateinit var address : String
         var device : BluetoothDevice? = null
         var hasCadenceDevice : String = "0"
-    }
+    }*/
     /**
      * Broadcast Receiver for changes made to bluetooth states such as:
      * 1) Discoverability mode on/off or expire.
@@ -171,6 +177,27 @@ class ViewBluetoothPairing : SecondViewClass() {
         }
     }
 
+    private var bleScanCallbacks: BleScanCallback = object : BleScanCallback() {
+        override fun onDeviceFound(_device: BleDevice) {
+            // Discovery has found a device. Get the BluetoothDevice
+            // object and its info from the Intent.
+            val device: BleDevice = _device
+            /* log is for debug */
+            Log.d("Bluetooth1", "onReceive: " + device.name + ": " + device.address)
+            if (!(devicesListB.contains(device))){
+                /* rssi for testing only user do not need to see it */
+                devicesListB.add(device)
+                arrayAdapter.add("${device.name} \n ${device.address}")
+                arrayAdapter.notifyDataSetChanged()
+            }
+        }
+
+        override fun onScanStopped() {
+            Log.d("scan stoped","HELLOO FROM THE OTHER SIDE <dlsajdlaskjdlkasjdlajhflkj>")
+
+        }
+    }
+
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -178,6 +205,7 @@ class ViewBluetoothPairing : SecondViewClass() {
 
         bAdapter = BluetoothAdapter.getDefaultAdapter()
         devicesList = ArrayList()
+        devicesListB = ArrayList()
         arrayAdapter = ArrayAdapter<String>(applicationContext, android.R.layout.simple_list_item_1)
         //turn on blutooth and ask for permission
         turnBluetoothOn()
@@ -196,20 +224,25 @@ class ViewBluetoothPairing : SecondViewClass() {
         super.onBackPressed()
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onResume() {
-//        if(!this.bAdapterIsDiscovering()){
-//            getDiscoverableDevices()
-//        }
         super.onResume()
     }
 
     override fun onDestroy() {
-        // unregister the ACTION_FOUND receiver.
-        //unregisterReceiver(receiver1)
-        // unregister the Discoverability receiver.
-        //unregisterReceiver(receiver2)
         //disconnect()
+        try {
+            val response: Task<Void> =
+            Fitness.getBleClient(
+                this,
+                GoogleSignIn.getLastSignedInAccount(this)!!
+            ).unclaimBleDevice(device)
+            // unregister the ACTION_FOUND receiver.
+            unregisterReceiver(receiver1)
+            // unregister the Discoverability receiver.
+            unregisterReceiver(receiver2)
+        }catch (e : IllegalArgumentException){
+            e.printStackTrace()
+        }
         turnBluetoothOff()
         super.onDestroy()
     }
@@ -259,23 +292,46 @@ class ViewBluetoothPairing : SecondViewClass() {
     private fun getDiscoverableDevices() {
         if (bAdapterIsEnabled()) {
             // create array list for new devices
-            devicesList = ArrayList()
+            //devicesList = ArrayList()
+            devicesListB = ArrayList()
             // Create an array adapter
             arrayAdapter = ArrayAdapter<String>(applicationContext, android.R.layout.simple_list_item_1)
             // 1 query paired devices
-            queryPairedDevices()
+            //queryPairedDevices()
             // 2 discover new devices
-            discoverBluetoothDevice()
+            //discoverBluetoothDevice()
+            val fitnessOptions: GoogleSignInOptionsExtension =
+                FitnessOptions.builder()
+                .addDataType(
+                    DataType.TYPE_CYCLING_PEDALING_CADENCE,
+                    FitnessOptions.ACCESS_READ
+                ).build()
+            val googleSignInAccount: GoogleSignInAccount =
+                GoogleSignIn.getAccountForExtension(this, fitnessOptions)
+            val response =
+                    Fitness.getBleClient(this, googleSignInAccount)
+                        .startBleScan(
+                            listOf(DataType.TYPE_CYCLING_PEDALING_CADENCE),
+                            1000,
+                            bleScanCallbacks
+                        )
+            Log.d("Google account", response.toString())
             // 3 add array adapter to pairedTv (which is a list view)
             pairedTv.adapter = arrayAdapter
             // 4 Set item click listener
             pairedTv.onItemClickListener = OnItemClickListener { _, _, position, _ ->
-                bAdapterCancelDiscovery()
-                val device: BluetoothDevice = devicesList[position]
-                Log.d("bluetooth device",">>>>>>>>>>>>>>>>   ${device.uuids}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-                deviceUuid = UUID.randomUUID()
-                address = device.address!!
+                //bAdapterCancelDiscovery()
+                val _device: BleDevice = devicesListB[position]
+                this.device = _device
+                Log.d("ble device",">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+                //deviceUuid = UUID.randomUUID()
+                //address = device.address!!
                 Log.d("going to connect","if you get an error go to fit")
+                val response: Task<Void> =
+                    Fitness.getBleClient(
+                        this,
+                        GoogleSignIn.getLastSignedInAccount(this)!!
+                    ).claimBleDevice(device)
                 //ConnectToDevice(this).execute()
                 sleep(1)
                 PresenterTraining.getInstance(this).onBluetoothDeviceChosen(device)
@@ -497,7 +553,7 @@ class ViewBluetoothPairing : SecondViewClass() {
             }
         }
     }
-
+/*
     private fun disconnect() {
         if (bluetoothSocket != null) {
             try {
@@ -509,9 +565,9 @@ class ViewBluetoothPairing : SecondViewClass() {
             }
         }
         finish()
-    }
+    }*/
 
-    private class ConnectToDevice(c: Context) : AsyncTask<Void, Void, String>() {
+/*    private class ConnectToDevice(c: Context) : AsyncTask<Void, Void, String>() {
         private var connectSuccess: Boolean = true
         private val context: Context
 
@@ -551,5 +607,5 @@ class ViewBluetoothPairing : SecondViewClass() {
             }
             Log.d("PosExecute","dissmis the progress bar")
         }
-    }
+    }*/
 }

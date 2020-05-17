@@ -3,6 +3,7 @@ package com.example.utrack.presenters
 import android.app.Activity
 import android.bluetooth.BluetoothDevice
 import android.content.Context
+import android.graphics.BlendMode
 import android.os.IBinder
 import android.util.Log
 import android.widget.Toast
@@ -13,6 +14,7 @@ import com.example.utrack.model.Session
 import com.example.utrack.model.Training
 import com.example.utrack.model.services.LocationService
 import com.example.utrack.model.services.SensorListenerAccelerometer
+import com.google.android.gms.fitness.data.BleDevice
 import com.google.android.gms.maps.model.LatLng
 import java.lang.Exception
 
@@ -198,7 +200,7 @@ class PresenterMaster private constructor (context: Context) {
         locationService?.clearData()
     }
 
-    fun onBluetoothDeviceChosen(_device: BluetoothDevice) {
+    fun onBluetoothDeviceChosen(_device: BleDevice) {
         val deviceName = _device.name
         //val deviceHardwareAddress = device.address // MAC address
         Toast.makeText(
@@ -209,7 +211,7 @@ class PresenterMaster private constructor (context: Context) {
         facade.setCadenceDevice(_device)
     }
 
-    fun getCadenceSensor() : BluetoothDevice? {
+    fun getCadenceSensor() : BleDevice? {
         return facade.getSensorCadence()
     }
 

@@ -1,15 +1,15 @@
 package com.example.utrack.model
 
-import android.bluetooth.BluetoothDevice
+import com.google.android.gms.fitness.data.BleDevice
 
 class Sensor {
-    private var bluetoothDevice : BluetoothDevice? = null
+    private var bluetoothDevice : BleDevice? = null
 
-    fun getABluetoothDevice() : BluetoothDevice? {
+    fun getABluetoothDevice() : BleDevice? {
         return this.bluetoothDevice
     }
 
-    fun setABluetoothDevice(_device : BluetoothDevice) {
+    fun setABluetoothDevice(_device : BleDevice) {
         this.bluetoothDevice = _device
     }
 

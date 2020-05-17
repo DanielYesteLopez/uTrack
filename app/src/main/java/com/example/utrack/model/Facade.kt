@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import com.example.utrack.R
+import com.google.android.gms.fitness.data.BleDevice
 import kotlin.collections.ArrayList
 
 class Facade (context : Context){
@@ -123,11 +124,11 @@ class Facade (context : Context){
         }
     }
 
-    fun getSensorCadence(): BluetoothDevice? {
+    fun getSensorCadence(): BleDevice? {
         return this.cadenceDevice?.getABluetoothDevice()
     }
 
-    fun setCadenceDevice(_device: BluetoothDevice) {
+    fun setCadenceDevice(_device: BleDevice) {
         cadenceDevice?.setABluetoothDevice(_device)
     }
 

@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.core.content.ContextCompat
 import com.example.utrack.model.Session
 import com.example.utrack.views.*
+import com.google.android.gms.fitness.data.BleDevice
 import com.google.android.gms.maps.model.LatLng
 import java.util.*
 import kotlin.collections.ArrayList
@@ -193,7 +194,7 @@ class PresenterTraining private constructor(context: Context) {
         ContextCompat.startActivity(con,intent,null)
     }
 
-    fun onBluetoothDeviceChosen(_device: BluetoothDevice) {
+    fun onBluetoothDeviceChosen(_device: BleDevice) {
         isDoingRecomendedExercise = false
         PresenterMaster.getInstance(con).onBluetoothDeviceChosen(_device)
     }
@@ -206,7 +207,7 @@ class PresenterTraining private constructor(context: Context) {
         return PresenterMaster.getInstance(con).getRecommendedExerciseDescription()
     }
 
-    fun getDeviceCadence(): BluetoothDevice? {
+    fun getDeviceCadence(): BleDevice? {
         return PresenterMaster.getInstance(con).getCadenceSensor()
     }
 
