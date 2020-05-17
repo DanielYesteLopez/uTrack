@@ -3,24 +3,16 @@ package com.example.utrack.model
 import android.app.Activity
 import android.bluetooth.BluetoothDevice
 import android.content.Context
-import android.os.IBinder
-import android.provider.ContactsContract
-import android.util.Log
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import com.example.utrack.R
-import com.example.utrack.model.services.LocationService
-import com.google.android.gms.maps.model.LatLng
-import java.io.FileWriter
-import java.io.IOException
-import java.lang.Exception
-import java.text.SimpleDateFormat
-import java.util.*
+import java.lang.Thread.sleep
 import kotlin.collections.ArrayList
 
 class Facade (context : Context){
+    private var cadenceDevice: Sensor? = null
     private val user = User()
     private val database = Database()
     private var sessionList : SessionList? = null
@@ -30,6 +22,7 @@ class Facade (context : Context){
     init {
         /*user = User()
         database = Database()*/
+        cadenceDevice = Sensor()
         sessionList = SessionList()
     }
     fun setUserData(userDataMap: MutableMap<String, String>) {
@@ -46,7 +39,13 @@ class Facade (context : Context){
     }
 
     private fun addSession(session: Session) {
+        //TODO Guardar sesion en el database
         sessionList?.addSession(session)
+        //Guardar sesion to String
+        //Duracion
+        //ID
+        //....
+        database.addNewSession(session.toString())
     }
 
     fun addNewSession(_session: Session) {
@@ -73,20 +72,6 @@ class Facade (context : Context){
 
     fun getSession(index : Int) : Session? {
         return sessionList?.getSession(index)
-    }
-
-    fun onBluetoothDeviceChosen(_device: BluetoothDevice) {
-        val deviceName = _device.name
-        //val deviceHardwareAddress = device.address // MAC address
-        Toast.makeText(
-            con,
-            deviceName,
-            Toast.LENGTH_SHORT
-        ).show()
-        // connect Device
-        // TODO
-        // take user back to training page
-        // TODO
     }
 
     /* presenter show recommended exercise */
@@ -124,11 +109,11 @@ class Facade (context : Context){
     fun visualizeSessionList(activity: Activity) {
         val sessionsList = getSessionList()
         // Create an array adapter
+        val arrayCheck = database.getDatabaseSessions()
         arrayAdapter =  ArrayAdapter<String>(con, android.R.layout.simple_list_item_1)
-
-        if (sessionsList?.isNotEmpty()!!) {
-            for (session : Session in sessionsList) {
-                arrayAdapter.add(session.toString())
+        if (arrayCheck[0].isNotEmpty()) {
+            for (session in arrayCheck) {
+                arrayAdapter.insert(session,0)
             }
             activity.findViewById<ListView>(R.id.showDataList).adapter = arrayAdapter
             // Set item click listener
@@ -145,9 +130,21 @@ class Facade (context : Context){
         }
     }
 
+    fun getSensorCadence(): BluetoothDevice? {
+        return this.cadenceDevice?.getABluetoothDevice()
+    }
+
+    fun setCadenceDevice(_device: BluetoothDevice) {
+        cadenceDevice?.setABluetoothDevice(_device)
+    }
+
     fun changeUserAccount(userName: String, password: String, realName: String, accountEmail: String) {
         database.changeUserAccount(userName,password,realName,accountEmail)
         user.changeUserAccount(userName,realName,accountEmail)
+    }
+
+    fun initializeSessionDatabase(userId: String) {
+        database.initializeSessionDatabase(userId)
     }
 
     /* presenter bluetooth */
