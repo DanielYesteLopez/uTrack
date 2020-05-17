@@ -25,7 +25,7 @@ class Exercise constructor(_duration: Double, _distance: Double, _accelerationAV
     }
 
     fun getAcceleration() : Double {
-        return duration
+        return acceleration
     }
 
     fun setAcceleration(newAcceleration: Double) {
@@ -40,12 +40,19 @@ class Exercise constructor(_duration: Double, _distance: Double, _accelerationAV
         return cadenceList
     }
 
-    override fun toString(): String {
-        var s: String = ""
-
-        s += "Duration: ${duration} | Distance: ${distance} | Acceleration: ${acceleration} \n " +
-                "S: ${speedList[1]} | C: ${cadenceList[1]}"
-        return s
+    fun getAverageSpeed(): Double{
+        return speedList[1]
     }
 
+    fun getAverageCadence(): Double{
+        return cadenceList[1]
+    }
+
+    override fun toString(): String {
+        var s = ""
+        val formatTemplate = "%.2f%3s"
+        s += "Duration: ${formatTemplate.format(duration ,"m")} | Distance: ${formatTemplate.format(distance,"k")} | Acceleration: ${formatTemplate.format(acceleration,"m/s2")} \n " +
+                "S: ${formatTemplate.format(speedList[1],"kph")} | C: ${formatTemplate.format(cadenceList[1],"rpm")}"
+        return s
+    }
 }

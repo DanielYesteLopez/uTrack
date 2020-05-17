@@ -99,6 +99,14 @@
     <string name="discover_devices">Discover Devices</string>
     <string name="refresh_discovering">Refresh Scan</string>
 
+    <string name="recommended1">Stretch your legs for 5 minutes</string>
+    <string name="recommended2">Stretch your legs for 5 minutes and rest for another 5 min</string>
+    <string name="recommended3">Do laps at a constant speed of 30 Km/h for 10 min</string>
+    <string name="recommended4">Do laps at a constant speed of 30 Km/h for 15 min</string>
+    <string name="recommended5">Progessive exercise starting with a speed of 25 Km/h and then stop for muscle stretching for 5 min</string>
+    <string name="recommended6">Laps at 40 Km/h for 10-15 min, stretch legs and do physichal exercises at the gym</string>
+    <string name="recommended7">Laps at a constant speed of 40 Km/h over the blue line</string>
+    <string name="recommended8">Laps at a constant speed of 35 Km/h over the blue line, every 5 laps switch to black line and increase speed to 45 Km/h for 2 laps, go back to blue line with earlier speed for 1 more lap</string>
 
     <string name="title_location_permission">Location permission</string>
     <string name="text_location_permission">please activate Location for better performance</string>
