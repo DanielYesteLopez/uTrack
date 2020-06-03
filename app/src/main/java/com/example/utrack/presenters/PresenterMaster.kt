@@ -5,7 +5,6 @@ import android.bluetooth.BluetoothDevice
 import android.content.Context
 import android.os.IBinder
 import android.util.Log
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.example.utrack.R
 import com.example.utrack.model.Exercise
@@ -58,8 +57,12 @@ class PresenterMaster private constructor (private var context: Context) {
         facade.deleteSession(index)
     }*/
 
-    fun deleteAll(){
-        facade.deleteAll()
+    fun deleteAllSessions(){
+        facade.deleteAllSessions()
+    }
+
+    fun recoverAllSession(){
+        facade.addSessionsFromFireBase()
     }
 
     fun exportSession(path: String) {

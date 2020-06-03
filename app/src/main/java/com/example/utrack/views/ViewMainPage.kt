@@ -18,7 +18,9 @@ class ViewMainPage : MainViewClass() {
         PresenterMainPage.getInstance(this)
         buttonsMainActivityManagement()
         doubleBackToExitPressedOnce = false
+        PresenterMainPage.getInstance(this).recoverDataSessions()
     }
+
     fun buttonsMainActivityManagement(){
         val settingsButton = findViewById<ImageButton>(R.id.settingsButtonMainpage)
         val dataButton = findViewById<ImageButton>(R.id.dataButtonMainpage)

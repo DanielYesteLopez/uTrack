@@ -9,13 +9,13 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class SessionList {
-    private var sessionList: ArrayList<Session>? = null
+    private var sessionList: ArrayList<String>? = null
 
     init {
         sessionList = ArrayList()
     }
 
-    fun addSession(session: Session) {
+    fun addSession(session: String) {
         sessionList?.add(session)
     }
 
@@ -38,7 +38,7 @@ class SessionList {
         else sessionList?.clear()
     }
 
-    fun getSession(index: Int) : Session? {
+    fun getSession(index: Int) : String? {
         if (sessionList?.isEmpty()!!) {
             Log.d("getSession", "The list is empty")
             return null
@@ -50,7 +50,7 @@ class SessionList {
         return sessionList!![index]
     }
 
-    fun getSessionList() : ArrayList<Session>? {
+    fun getSessionList() : ArrayList<String>? {
         return sessionList
     }
 
@@ -65,7 +65,7 @@ class SessionList {
         var fileWriter: FileWriter? = null
         try {
             fileWriter = FileWriter(filePath, false)
-            for (session: Session in sessionList!!) {
+            for (session: String in sessionList!!) {
                 fileWriter.append("$session \n")
             }
         } catch (e: Exception) {

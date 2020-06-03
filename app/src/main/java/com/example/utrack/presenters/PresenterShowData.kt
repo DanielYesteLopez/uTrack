@@ -12,7 +12,7 @@ class PresenterShowData private constructor (private val context: Context) {
     }*/
 
     fun deleteAll() {
-        PresenterMaster.getInstance(context).deleteAll()
+        PresenterMaster.getInstance(context).deleteAllSessions()
     }
 
     fun exportSession(path: String) {

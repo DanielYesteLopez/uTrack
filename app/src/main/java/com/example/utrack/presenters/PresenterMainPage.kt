@@ -11,6 +11,11 @@ import kotlin.system.exitProcess
 
 class PresenterMainPage private constructor (private var context: Context) {
     companion object : SingletonHolder<PresenterMainPage, Context>(::PresenterMainPage)
+    var dataRecverd : Boolean
+
+    init {
+        dataRecverd = false
+    }
 
     //Working presenter
     fun onSettingsButtonPressed(applicationContext: Context) {
@@ -39,5 +44,11 @@ class PresenterMainPage private constructor (private var context: Context) {
         exitProcess(0)
     }
 
-
+    // data recovery always in singleton zone so in presenter MainPage is good
+    fun recoverDataSessions() {
+        if (!dataRecverd) {
+            PresenterMaster.getInstance(context).recoverAllSession()
+            dataRecverd = true
+        }
+    }
 }

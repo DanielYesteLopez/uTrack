@@ -37,12 +37,7 @@ class Facade (private val context: Context){
     }
 
     private fun addSession(session: Session) {
-        //TODO Guardar sesion en el database
-        sessionList?.addSession(session)
-        //Guardar sesion to String
-        //Duracion
-        //ID
-        //....
+        sessionList?.addSession(session.toString())
         database.addNewSession(session.toString())
     }
 
@@ -56,7 +51,8 @@ class Facade (private val context: Context){
         sessionList?.deleteSession(index)
     }*/
 
-    fun deleteAll(){
+    fun deleteAllSessions(){
+        database.clearSessions()
         sessionList?.deleteAll()
     }
 
@@ -64,53 +60,24 @@ class Facade (private val context: Context){
         sessionList?.exportSession(path)
     }
 
-    private fun getSessionList() : ArrayList<Session>? {
+    private fun getSessionList() : ArrayList<String>? {
         return sessionList?.getSessionList()
     }
 
-    private fun getSession(index : Int) : Session? {
+    private fun getSession(index : Int) : String? {
         return sessionList?.getSession(index)
     }
 
-    /* presenter show recommended exercise */
-//    fun onCanShowExerciseButtonPressed(fragmentActivity:FragmentActivity) {
-//        //val appContext :Context = fragmentActivity.applicationContext
-//        Toast.makeText(
-//            fragmentActivity.applicationContext,
-//            fragmentActivity.resources.getString(R.string.trainingpaused),
-//            Toast.LENGTH_SHORT
-//        ).show()
-//    }
-//
-//    fun onNegShowExerciseButtonPressed(fragmentActivity:FragmentActivity) {
-//        // user finish training
-//        val appContext :Context = fragmentActivity.applicationContext
-//        Toast.makeText(
-//            appContext,
-//            appContext.getString(R.string.trainingsad),
-//            Toast.LENGTH_SHORT
-//        ).show()
-//        val mySaveFragment =
-//            FragmentSaveData()
-//        mySaveFragment.show(fragmentActivity.supportFragmentManager, R.string.notefication.toString())
-//    }
-//
-//    fun onPosShowExerciseButtonPressed(fragmentActivity:FragmentActivity) {
-//        val appContext :Context = fragmentActivity.applicationContext
-//        Toast.makeText(
-//            appContext,
-//            appContext.getString(R.string.trainingawesome),
-//            Toast.LENGTH_SHORT
-//        ).show()
-//    }
-
     fun visualizeSessionList(activity: Activity) {
         // Create an array adapter
-        val arrayCheck = database.getDatabaseSessions()
+        //val arrayCheck = database.getDatabaseSessions()
+        val sessionsList = getSessionList()
         arrayAdapter =  ArrayAdapter<String>(context, android.R.layout.simple_list_item_1)
-        if (arrayCheck[0].isNotEmpty()) {
-            for (session in arrayCheck) {
-                arrayAdapter.insert(session,0)
+        if (sessionsList?.isNotEmpty()!!) {
+            for (session : String in sessionsList) {
+                if (session != "" && session != "0") {
+                    arrayAdapter.insert(session,0)
+                }
             }
             activity.findViewById<ListView>(R.id.showDataList).adapter = arrayAdapter
             // Set item click listener
@@ -118,7 +85,7 @@ class Facade (private val context: Context){
                 AdapterView.OnItemClickListener { _, _, position, _ ->
                     val actualSession = getSession(position)
                     if (actualSession != null) {
-                        Toast.makeText(context, actualSession.toString(),
+                        Toast.makeText(context, actualSession.subSequence(0,1),
                             Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -130,6 +97,23 @@ class Facade (private val context: Context){
 /*    fun getSensorCadence(): BluetoothDevice? {
         return this.cadenceDevice?.getABluetoothDevice()
     }*/
+
+    private fun getSavedSessions() : ArrayList<String> {
+        return database.getDatabaseSessions()
+    }
+
+    private fun addSessionFireBase( s : String) {
+        sessionList?.addSession(s)
+    }
+
+    fun addSessionsFromFireBase(){
+        val sessions = getSavedSessions()
+        for (session in sessions) {
+            if (session != "0" && session != "") {
+                addSessionFireBase(session)
+            }
+        }
+    }
 
     fun setCadenceDevice(_device: BluetoothDevice) {
         cadenceDevice?.setABluetoothDevice(_device)

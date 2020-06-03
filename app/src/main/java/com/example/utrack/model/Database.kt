@@ -63,6 +63,14 @@ class Database {
         return clearUserEmail
     }
 
+    fun clearSessions() {
+        val currentUserDb = mDatabaseReferenceSession.child(mAuth.currentUser!!.uid)
+        currentUserDb.child("1").setValue(0)
+        currentUserDb.child("2").setValue(0)
+        currentUserDb.child("3").setValue(0)
+    }
+
+
     fun initializeSessionDatabase(userId: String) {
         val currentUserDb = mDatabaseReferenceSession.child(userId)
         currentUserDb.child("1").setValue(0)

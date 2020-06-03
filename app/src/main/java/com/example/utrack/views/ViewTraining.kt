@@ -253,11 +253,14 @@ class ViewTraining : SecondViewClass() {
                     myExerciseFragment.show(supportFragmentManager, getString(R.string.notefication))
                 }
                 PresenterTraining.getInstance(this@ViewTraining).onStopTrainingButtonPressed()
+            } else {
+                mHandler.removeCallbacks(mRunnable)
             }
-            mHandler.removeCallbacks(mRunnable)
         }
         backButtonTrainingPage.setOnClickListener {
             PresenterTraining.getInstance(this@ViewTraining).onBackTrainingButtonPressed()
+            mHandler.removeCallbacks(mRunnable)
+            //finish()
         }
         // exit on create
     }
