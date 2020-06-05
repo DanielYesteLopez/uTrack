@@ -44,7 +44,7 @@ class Session() {
 
     override fun toString() : String {
         var s = ""
-        s += "${getId()+1}: ${getData()} \n " + training.toString()
+        s += "${getData()}: \n " + training.toString()
         return s
     }
 

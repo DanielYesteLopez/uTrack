@@ -16,6 +16,7 @@ class Facade (private val context: Context){
     private val database = Database()
     private var sessionList : SessionList? = null
     private lateinit var arrayAdapter: ArrayAdapter<String>
+    private var anadido = false
 
     init {
         /*user = User()
@@ -71,6 +72,10 @@ class Facade (private val context: Context){
     fun visualizeSessionList(activity: Activity) {
         // Create an array adapter
         //val arrayCheck = database.getDatabaseSessions()
+        if(!anadido) {
+            añadirSessionesdelFireBase()
+            anadido = true
+        }
         val sessionsList = getSessionList()
         arrayAdapter =  ArrayAdapter<String>(context, android.R.layout.simple_list_item_1)
         if (sessionsList?.isNotEmpty()!!) {
@@ -98,22 +103,25 @@ class Facade (private val context: Context){
         return this.cadenceDevice?.getABluetoothDevice()
     }*/
 
-    private fun getSavedSessions() : ArrayList<String> {
-        return database.getDatabaseSessions()
+    private fun getSavedSessions() {
+        database.getDatabaseSessions()
     }
 
-    private fun addSessionFireBase( s : String) {
-        sessionList?.addSession(s)
+    private fun addSessionFireBase( session : String) {
+        if (session != "" && session != "0")
+        sessionList?.addSession(session)
     }
 
-    fun addSessionsFromFireBase(){
-        val sessions = getSavedSessions()
-        for (session in sessions) {
-            if (session != "0" && session != "") {
-                addSessionFireBase(session)
-            }
-        }
+    fun recoverSessionsFromFireBase(){
+        getSavedSessions()
     }
+
+    fun añadirSessionesdelFireBase() {
+        addSessionFireBase(database.checkSession1)
+        addSessionFireBase(database.checkSession2)
+        addSessionFireBase(database.checkSession3)
+    }
+
 
     fun setCadenceDevice(_device: BluetoothDevice) {
         cadenceDevice?.setABluetoothDevice(_device)

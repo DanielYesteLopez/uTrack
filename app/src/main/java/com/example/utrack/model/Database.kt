@@ -7,6 +7,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.lang.Thread.sleep
 
 class Database {
     private var mDataFirebase = FirebaseDatabase.getInstance()
@@ -19,6 +20,7 @@ class Database {
     var checkSession3 = ""
     var listener = object:ValueEventListener{
         override fun onDataChange(dataSnapshot: DataSnapshot) {
+            Log.d("recovery","el listener ha ejecutado")
             checkSession1 = dataSnapshot.child("1").value.toString()
             checkSession2 = dataSnapshot.child("2").value.toString()
             checkSession3 = dataSnapshot.child("3").value.toString()
@@ -98,10 +100,9 @@ class Database {
             }
         }
     }
-    fun getDatabaseSessions(): ArrayList<String> {
+    fun getDatabaseSessions() {
         val currentUserDb = mDatabaseReferenceSession.child(mAuth.currentUser!!.uid)
         currentUserDb.addValueEventListener(listener)
-        return arrayListOf<String>(checkSession1,checkSession2,checkSession3)
     }
 }
 

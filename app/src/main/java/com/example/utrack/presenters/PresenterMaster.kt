@@ -62,7 +62,7 @@ class PresenterMaster private constructor (private var context: Context) {
     }
 
     fun recoverAllSession(){
-        facade.addSessionsFromFireBase()
+        facade.recoverSessionsFromFireBase()
     }
 
     fun exportSession(path: String) {
