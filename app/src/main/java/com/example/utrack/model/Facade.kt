@@ -112,8 +112,9 @@ class Facade (private val context: Context){
         sessionList?.addSession(session)
     }
 
-    fun recoverSessionsFromFireBase(){
+    fun recoverDataFromFireBase(){
         getSavedSessions()
+
     }
 
     fun añadirSessionesdelFireBase() {
