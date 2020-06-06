@@ -279,7 +279,9 @@ class ViewBluetoothPairing : SecondViewClass() {
             pairedTv.onItemClickListener = OnItemClickListener { _, _, position, _ ->
                 bAdapterCancelDiscovery()
                 val device: BluetoothDevice = devicesList[position]
-                Log.d("bluetooth device",">>>>>>>>>>>>>>>>   ${device.uuids}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+                Log.d("bluetooth device",">>>>>>>>>>>>>>>>   ${device.uuids[0]} ${device.uuids.size} >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+                device.fetchUuidsWithSdp()
+
                 //deviceUuid = UUID.randomUUID()
                 //address = device.address!!
                 //Log.d("going to connect","if you get an error go to fit")
