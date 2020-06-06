@@ -19,92 +19,115 @@
 
     <TextView
         android:id="@+id/accountNameText"
+        style="@style/BlackText"
+        android:textSize="15sp"
+        android:textColor="@color/textMainColor"
+        android:fontFamily="@font/audiowide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/username"
-        android:textColor="@color/blackColor" />
+        android:text="@string/username" />
 
     <EditText
         android:id="@+id/accountNameEdit"
+        style="@style/BlackText"
+        android:textSize="15sp"
+        android:textColor="@color/textMainColor"
+        android:fontFamily="@font/audiowide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints="@string/username"
         android:ems="10"
         android:hint="@string/username"
-        android:inputType="textPersonName"
-        android:text="@string/username"
-        android:textColor="@color/blackColor" />
+        android:inputType="textPersonName"/>
 
     <TextView
         android:id="@+id/accountPassText"
+        style="@style/BlackText"
+        android:textSize="15sp"
+        android:textColor="@color/textMainColor"
+        android:fontFamily="@font/audiowide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/password"
-        android:textColor="@color/blackColor" />
+        android:text="@string/password" />
 
     <EditText
         android:id="@+id/accountPassEdit"
+        style="@style/BlackText"
+        android:textSize="15sp"
+        android:textColor="@color/textMainColor"
+        android:fontFamily="@font/audiowide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints="@string/password"
         android:ems="10"
         android:hint="@string/password"
-        android:inputType="textPassword"
-        android:text="@string/password"
-        android:textColor="@color/blackColor" />
-
+        android:inputType="textPassword"/>
     <TextView
         android:id="@+id/accountPassCheckText"
+        style="@style/BlackText"
+        android:textSize="15sp"
+        android:textColor="@color/textMainColor"
+        android:fontFamily="@font/audiowide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/confirmpassword"
-        android:textColor="@color/blackColor" />
+        android:text="@string/confirmpassword" />
 
     <EditText
         android:id="@+id/accountPassCheckEdit"
+        style="@style/BlackText"
+        android:textSize="15sp"
+        android:textColor="@color/textMainColor"
+        android:fontFamily="@font/audiowide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints="@string/confirmpassword"
+        android:hint="@string/confirmpassword"
         android:ems="10"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:textColor="@color/blackColor" />
+        android:inputType="textPassword"/>
 
     <TextView
         android:id="@+id/accountRnameText"
+        style="@style/BlackText"
+        android:textSize="15sp"
+        android:textColor="@color/textMainColor"
+        android:fontFamily="@font/audiowide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/askname"
-        android:textColor="@color/blackColor" />
+        android:text="@string/askname" />
 
     <EditText
         android:id="@+id/accountRnameEdit"
+        style="@style/BlackText"
+        android:textSize="15sp"
+        android:textColor="@color/textMainColor"
+        android:fontFamily="@font/audiowide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints="@string/askname"
         android:ems="10"
         android:hint="@string/askname"
-        android:inputType="textPersonName"
-        android:text="@string/askname"
-        android:textColor="@color/blackColor" />
-
+        android:inputType="textPersonName"/>
     <TextView
         android:id="@+id/accountemailText"
+        style="@style/BlackText"
+        android:textSize="15sp"
+        android:textColor="@color/textMainColor"
+        android:fontFamily="@font/audiowide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/email"
-        android:textColor="@color/blackColor" />
+        android:text="@string/email"/>
 
     <EditText
         android:id="@+id/accountemailEdit"
+        style="@style/BlackText"
+        android:textSize="15sp"
+        android:textColor="@color/textMainColor"
+        android:fontFamily="@font/audiowide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints="@string/email"
         android:ems="10"
         android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        android:text="@string/email"
-        android:textColor="@color/blackColor" />
+        android:inputType="textEmailAddress"/>
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="200dp"

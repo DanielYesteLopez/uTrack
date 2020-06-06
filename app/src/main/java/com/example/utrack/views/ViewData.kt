@@ -8,6 +8,7 @@ import android.widget.ImageButton
 import android.widget.Toast
 import com.example.utrack.R
 import com.example.utrack.mc.SecondViewClass
+import com.example.utrack.presenters.PresenterMaster
 import com.example.utrack.presenters.PresenterShowData
 import kotlinx.android.synthetic.main.showdata.*
 import java.text.SimpleDateFormat
@@ -52,7 +53,7 @@ class ViewData : SecondViewClass() {
 
     private fun onClearButtonPressed() {
         PresenterShowData.getInstance(this).deleteAll()
-        Toast.makeText(this, "All sesions deleted", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "All sessions deleted", Toast.LENGTH_SHORT).show()
         PresenterShowData.getInstance(this).visualizeSessionList(this)
     }
 

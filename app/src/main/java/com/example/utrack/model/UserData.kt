@@ -1,5 +1,5 @@
 package com.example.utrack.model
 
-data class UserData(val email:String,val name:String,val realName:String) {
+data class UserData(var email:String, var name:String, var realName:String) {
 
 }

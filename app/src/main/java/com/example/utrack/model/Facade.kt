@@ -11,13 +11,13 @@ import com.example.utrack.R
 import com.google.android.gms.fitness.data.BleDevice
 import kotlin.collections.ArrayList
 
-class Facade (context : Context){
+class Facade (private val context: Context){
     private var cadenceDevice: Sensor? = null
     private val user = User()
     private val database = Database()
     private var sessionList : SessionList? = null
-    private val con = context
     private lateinit var arrayAdapter: ArrayAdapter<String>
+    private var anadido = false
 
     init {
         /*user = User()
@@ -39,7 +39,8 @@ class Facade (context : Context){
     }
 
     private fun addSession(session: Session) {
-        sessionList?.addSession(session)
+        sessionList?.addSession(session.toString())
+        database.addNewSession(session.toString())
     }
 
     fun addNewSession(_session: Session) {
@@ -48,11 +49,12 @@ class Facade (context : Context){
         addSession(session)
     }
 
-    fun deleteSession(index: Int) {
+/*    fun deleteSession(index: Int) {
         sessionList?.deleteSession(index)
-    }
+    }*/
 
-    fun deleteAll(){
+    fun deleteAllSessions(){
+        database.clearSessions()
         sessionList?.deleteAll()
     }
 
@@ -60,62 +62,36 @@ class Facade (context : Context){
         sessionList?.exportSession(path)
     }
 
-    fun getSessionList() : ArrayList<Session>? {
+    private fun getSessionList() : ArrayList<String>? {
         return sessionList?.getSessionList()
     }
 
-    fun getSession(index : Int) : Session? {
+    private fun getSession(index : Int) : String? {
         return sessionList?.getSession(index)
     }
 
-    /* presenter show recommended exercise */
-//    fun onCanShowExerciseButtonPressed(fragmentActivity:FragmentActivity) {
-//        //val appContext :Context = fragmentActivity.applicationContext
-//        Toast.makeText(
-//            fragmentActivity.applicationContext,
-//            fragmentActivity.resources.getString(R.string.trainingpaused),
-//            Toast.LENGTH_SHORT
-//        ).show()
-//    }
-//
-//    fun onNegShowExerciseButtonPressed(fragmentActivity:FragmentActivity) {
-//        // user finish training
-//        val appContext :Context = fragmentActivity.applicationContext
-//        Toast.makeText(
-//            appContext,
-//            appContext.getString(R.string.trainingsad),
-//            Toast.LENGTH_SHORT
-//        ).show()
-//        val mySaveFragment =
-//            FragmentSaveData()
-//        mySaveFragment.show(fragmentActivity.supportFragmentManager, R.string.notefication.toString())
-//    }
-//
-//    fun onPosShowExerciseButtonPressed(fragmentActivity:FragmentActivity) {
-//        val appContext :Context = fragmentActivity.applicationContext
-//        Toast.makeText(
-//            appContext,
-//            appContext.getString(R.string.trainingawesome),
-//            Toast.LENGTH_SHORT
-//        ).show()
-//    }
-
     fun visualizeSessionList(activity: Activity) {
-        val sessionsList = getSessionList()
         // Create an array adapter
-        arrayAdapter =  ArrayAdapter<String>(con, android.R.layout.simple_list_item_1)
-
+        //val arrayCheck = database.getDatabaseSessions()
+        if(!anadido) {
+            añadirSessionesdelFireBase()
+            anadido = true
+        }
+        val sessionsList = getSessionList()
+        arrayAdapter =  ArrayAdapter<String>(context, android.R.layout.simple_list_item_1)
         if (sessionsList?.isNotEmpty()!!) {
-            for (session : Session in sessionsList) {
-                arrayAdapter.insert(session.toString(),0)
+            for (session : String in sessionsList) {
+                if (session != "" && session != "0") {
+                    arrayAdapter.insert(session,0)
+                }
             }
             activity.findViewById<ListView>(R.id.showDataList).adapter = arrayAdapter
             // Set item click listener
             activity.findViewById<ListView>(R.id.showDataList).onItemClickListener =
                 AdapterView.OnItemClickListener { _, _, position, _ ->
-                    val actual_session = getSession(position)
-                    if (actual_session != null) {
-                        Toast.makeText(con, actual_session.toString(),
+                    val actualSession = getSession(position)
+                    if (actualSession != null) {
+                        Toast.makeText(context, actualSession.subSequence(0,1),
                             Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -124,13 +100,60 @@ class Facade (context : Context){
         }
     }
 
+/*    fun getSensorCadence(): BluetoothDevice? {
     fun getSensorCadence(): BleDevice? {
         return this.cadenceDevice?.getABluetoothDevice()
+    }*/
+
+    private fun getSavedSessions() {
+        database.getDatabaseSessions()
+        database.getDatabaseUserSettings()
     }
+
+    private fun addSessionFireBase( session : String) {
+        if (session != "" && session != "0")
+        sessionList?.addSession(session)
+    }
+
+    fun recoverDataFromFireBase(){
+        getSavedSessions()
+    }
+
+    fun añadirSessionesdelFireBase() {
+        addSessionFireBase(database.checkSession1)
+        addSessionFireBase(database.checkSession2)
+        addSessionFireBase(database.checkSession3)
+    }
+
 
     fun setCadenceDevice(_device: BleDevice) {
         cadenceDevice?.setABluetoothDevice(_device)
     }
+
+    fun changeUserAccount(userName: String, password: String, realName: String, accountEmail: String) {
+        database.changeUserAccount(userName,password,realName,accountEmail)
+        user.changeUserAccount(userName,realName,accountEmail)
+    }
+
+    fun initializeSessionDatabase(userId: String) {
+        database.initializeSessionDatabase(userId)
+    }
+
+    fun updateBikeSettings(
+        findViewById: EditText,
+        findViewById1: EditText,
+        findViewById2: EditText,
+        findViewById3: EditText,
+        findViewById4: EditText
+    ) {
+        findViewById.hint = database.frameSize
+        findViewById1.hint = database.height
+        findViewById2.hint = database.diskTeeth
+        findViewById3.hint = database.pinionTeeth
+        findViewById4.hint = database.stem
+
+    }
+
 
     /* presenter bluetooth */
 //  fun onConnectDevicesBluetoothButtonPressed() {

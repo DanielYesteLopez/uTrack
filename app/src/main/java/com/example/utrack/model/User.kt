@@ -1,6 +1,5 @@
 package com.example.utrack.model
 
-import android.util.Log
 
 /*
 Guardamos los datos del usuario para poder relacionarlos con los datos de la bicicleta.
@@ -28,5 +27,11 @@ class User {
                 userBikeSettingsMap.getValue("pinion_teeth"),
                 userBikeSettingsMap.getValue("stem"))
         }
+    }
+
+    fun changeUserAccount(userName: String, realName: String, accountEmail: String) {
+        userData.name = userName
+        userData.realName = realName
+        userData.email = accountEmail
     }
 }

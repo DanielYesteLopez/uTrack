@@ -18,7 +18,6 @@ import com.google.firebase.database.ValueEventListener
 class PresenterLogin private constructor (context : Context) {
     private var con : Context = context
     companion object : SingletonHolder<PresenterLogin, Context>(::PresenterLogin)
-    //var presenterMaster = PresenterMaster()
     private var mDataFirebase = FirebaseDatabase.getInstance()
     private var mDatabaseReference = mDataFirebase.reference.child("Users")
     private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -67,6 +66,7 @@ class PresenterLogin private constructor (context : Context) {
                 currentUserDb.child("real_name").setValue(userRealName)
                 currentUserDb.child("email").setValue(clearEmailForKey(userEmail))
                 PresenterMaster.getInstance(con).initializeBikeDatabase(userId)
+                PresenterMaster.getInstance(con).initializeSessionDatabase(userId)
                 updateUIToSingIn(applicationContext)
 
             }else{

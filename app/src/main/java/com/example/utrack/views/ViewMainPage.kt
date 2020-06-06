@@ -43,6 +43,7 @@ class ViewMainPage : MainViewClass(), OnDataPointListener,
         PresenterMainPage.getInstance(this)
         buttonsMainActivityManagement()
         doubleBackToExitPressedOnce = false
+        PresenterMainPage.getInstance(this).recoverDataSessions()
         if ( savedInstanceState != null ) {
             authInProgress = savedInstanceState.getBoolean(AUTH_PENDING)
         }

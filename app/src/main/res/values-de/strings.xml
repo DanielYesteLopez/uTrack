@@ -84,7 +84,7 @@
     <string name="no">Nein</string>
     <string name="exit">Beenden</string>
 
-    <string name="recomendedexercise"> Recommended Exercise?. \nYou are ready to go</string>
+    <string name="recomendedexercise">Empfohlene Übung? \n Sie sind bereit zu gehen</string>
     <string name="recomendedexerciseyes">Lass uns gehen</string>
     <string name="recomendedexerciseno">Ein anderer Tag</string>
     <string name="trainingawesome">Genial</string>
@@ -100,7 +100,7 @@
     <string name="recommended3">Schleudern Sie 10 Minuten lang mit einer konstanten Geschwindigkeit von 30 Km/h</string>
     <string name="recommended4">Machen Sie 15 Minuten lang Kurven mit einer konstanten Geschwindigkeit von 30 Km/h</string>
     <string name="recommended5">Progressives Training für 10 Minuten, beginnend mit einer Mindestgeschwindigkeit von 25 Km/h und dann anhalten, um die Muskeln für 5 Minuten zu dehnen</string>
-    <string name="recommended6">Runden Sie 10-15 Minuten lang mit 40 Km/h, strecken Sie Ihre Beine und machen Sie 5 Minuten lang körperliche Übungen im Fitnessstudio</string>
+    <string name="recommended6">Runden Sie 10–15 Minuten lang mit 40 Km/h, strecken Sie Ihre Beine und machen Sie 5 Minuten lang körperliche Übungen im Fitnessstudio</string>
     <string name="recommended7">Dreht mit einer konstanten Geschwindigkeit von 40 Km/h über der blauen Linie</string>
     <string name="recommended8">Runden mit einer konstanten Geschwindigkeit von 35 Km/h über der blauen Linie wechseln alle 5 Runden die schwarze Linie, um die Geschwindigkeit für 2 Runden auf 45 Km/h zu erhöhen und für eine weitere Runde mit der vorherigen Geschwindigkeit auf Blau zurückzukehren</string>
 
@@ -114,8 +114,9 @@
     <string name="discover_devices">Geräte entdecken</string>
     <string name="refresh_discovering">Refresh Scan</string>
 
-    <string name="title_location_permission">Location permission</string>
-    <string name="text_location_permission">please activate Location for better performence</string>
-    <string name="ok">"activate "</string>
+    <string name="title_location_permission">Standortgenehmigung</string>
+    <string name="text_location_permission">Bitte aktivieren Sie den Standort für eine bessere Leistung</string>
+    <string name="ok">"ok "</string>
     <string name="textViewSessionsRealitzades">Sitzungen abgehalten</string>
+    <string name="activatelocation">Aktivieren Sie Standort und Netzwerk vor dem Start</string>
 </resources>
