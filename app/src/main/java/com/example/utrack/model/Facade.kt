@@ -3,10 +3,7 @@ package com.example.utrack.model
 import android.app.Activity
 import android.bluetooth.BluetoothDevice
 import android.content.Context
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.Toast
+import android.widget.*
 import com.example.utrack.R
 import kotlin.collections.ArrayList
 
@@ -105,6 +102,7 @@ class Facade (private val context: Context){
 
     private fun getSavedSessions() {
         database.getDatabaseSessions()
+        database.getDatabaseUserSettings()
     }
 
     private fun addSessionFireBase( session : String) {
@@ -114,7 +112,6 @@ class Facade (private val context: Context){
 
     fun recoverDataFromFireBase(){
         getSavedSessions()
-
     }
 
     fun añadirSessionesdelFireBase() {
@@ -136,6 +133,22 @@ class Facade (private val context: Context){
     fun initializeSessionDatabase(userId: String) {
         database.initializeSessionDatabase(userId)
     }
+
+    fun updateBikeSettings(
+        findViewById: EditText,
+        findViewById1: EditText,
+        findViewById2: EditText,
+        findViewById3: EditText,
+        findViewById4: EditText
+    ) {
+        findViewById.hint = database.frameSize
+        findViewById1.hint = database.height
+        findViewById2.hint = database.diskTeeth
+        findViewById3.hint = database.pinionTeeth
+        findViewById4.hint = database.stem
+
+    }
+
 
     /* presenter bluetooth */
 //  fun onConnectDevicesBluetoothButtonPressed() {

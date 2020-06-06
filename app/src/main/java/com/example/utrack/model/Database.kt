@@ -7,7 +7,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import java.lang.Thread.sleep
 
 class Database {
     private var mDataFirebase = FirebaseDatabase.getInstance()
@@ -18,12 +17,32 @@ class Database {
     var checkSession1 = ""
     var checkSession2 = ""
     var checkSession3 = ""
-    var listener = object:ValueEventListener{
+    var frameSize = "0"
+    var height = "0"
+    var diskTeeth = "0"
+    var pinionTeeth = "0"
+    var stem = "0"
+    var listenerSessions = object:ValueEventListener{
         override fun onDataChange(dataSnapshot: DataSnapshot) {
             Log.d("recovery","el listener ha ejecutado")
             checkSession1 = dataSnapshot.child("1").value.toString()
             checkSession2 = dataSnapshot.child("2").value.toString()
             checkSession3 = dataSnapshot.child("3").value.toString()
+        }
+        override fun onCancelled(databaseError: DatabaseError) {
+            // Getting Post failed, log a message
+            Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+            // ...
+        }
+    }
+    var listenerBikeSettings =  object:ValueEventListener{
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
+            Log.d("recovery","el listener ha ejecutado")
+            frameSize = dataSnapshot.child("frame_size").value.toString()
+             height = dataSnapshot.child("height").value.toString()
+             diskTeeth= dataSnapshot.child("disk_teeth").value.toString()
+            pinionTeeth= dataSnapshot.child("pinion_teeth").value.toString()
+            stem= dataSnapshot.child("stem").value.toString()
         }
         override fun onCancelled(databaseError: DatabaseError) {
             // Getting Post failed, log a message
@@ -82,7 +101,7 @@ class Database {
 
     fun addNewSession(newSession:String){
         val currentUserDb = mDatabaseReferenceSession.child(mAuth.currentUser!!.uid)
-        currentUserDb.addValueEventListener(listener)
+        currentUserDb.addValueEventListener(listenerSessions)
         when {
             checkSession1.equals("0") -> {
                 currentUserDb.child("1").setValue(newSession)
@@ -102,7 +121,12 @@ class Database {
     }
     fun getDatabaseSessions() {
         val currentUserDb = mDatabaseReferenceSession.child(mAuth.currentUser!!.uid)
-        currentUserDb.addValueEventListener(listener)
+        currentUserDb.addValueEventListener(listenerSessions)
+    }
+    fun getDatabaseUserSettings(){
+        val currentUserDb = mDatabaseReferenceBikeSettings.child(mAuth.currentUser!!.uid)
+        currentUserDb.addValueEventListener(listenerBikeSettings)
+
     }
 }
 

@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothDevice
 import android.content.Context
 import android.os.IBinder
 import android.util.Log
+import android.widget.EditText
 import android.widget.Toast
 import com.example.utrack.R
 import com.example.utrack.model.Exercise
@@ -265,6 +266,22 @@ class PresenterMaster private constructor (private var context: Context) {
 
     fun initializeSessionDatabase(userId: String) {
         facade.initializeSessionDatabase(userId)
+    }
+
+    fun updateBikeSettings(
+        findViewById: EditText,
+        findViewById1: EditText,
+        findViewById2: EditText,
+        findViewById3: EditText,
+        findViewById4: EditText
+    ) {
+        facade.updateBikeSettings(
+            findViewById,
+            findViewById1,
+            findViewById2,
+            findViewById3,
+            findViewById4
+        )
     }
 
     /* presenter show recommended exercise */

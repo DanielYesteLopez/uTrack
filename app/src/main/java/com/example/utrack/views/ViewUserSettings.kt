@@ -1,16 +1,11 @@
 package com.example.utrack.views
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.Gravity
-import android.view.LayoutInflater
 import android.widget.*
 import com.example.utrack.R
 import com.example.utrack.mc.SecondViewClass
 import com.example.utrack.presenters.PresenterSettings
-import com.example.utrack.presenters.PresenterUserSettings
-import kotlinx.android.synthetic.main.usersettings.*
 
 class ViewUserSettings : SecondViewClass() {
     //var presenterSettings = PresenterSettings()
@@ -36,6 +31,16 @@ class ViewUserSettings : SecondViewClass() {
             PresenterSettings.getInstance(this).onSaveButtonUserSettingsPressed(frameSizeValue,heightValue,
                 diskTeethValue,pinionTeethValue,stemValue)
         }
+
+        PresenterSettings.getInstance(this).updateBikeSettings(
+            findViewById<EditText>(R.id.editTextFrameSize),
+            findViewById<EditText>(R.id.editTextHeight),
+            findViewById<EditText>(R.id.editTextDiskTeeth),
+            findViewById<EditText>(R.id.editTextPinionTeeth),
+            findViewById<EditText>(R.id.editTextStem)
+
+
+        )
     }
 
     private fun onSaveButtonUserSettingsPressed() {
