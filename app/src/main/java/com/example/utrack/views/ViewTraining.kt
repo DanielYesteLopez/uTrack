@@ -3,6 +3,7 @@ package com.example.utrack.views
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.bluetooth.BluetoothDevice
 import android.content.*
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
@@ -42,15 +43,12 @@ class ViewTraining : SecondViewClass() {
     private val MY_PERMISSIONS_REQUEST_LOCATION = 99
 
     private var locationManager: LocationManager? = null
-
+    private var bluetoothDevice : BluetoothDevice? = null
     private lateinit var anyChartView : AnyChartView
     private lateinit var seriesData : ArrayList<DataEntry>
 
-    private var myBluetoothFragment: FragmentBluetooth? = null
-
     private var isWorking = false
     private var isPaused = false
-    private var isExiting = false
 
     private lateinit var dataSet: Set
     private lateinit var series1: Line
@@ -96,9 +94,9 @@ class ViewTraining : SecondViewClass() {
         }
         mHandler = Handler()
         PresenterTraining.getInstance(this@ViewTraining)
-        myBluetoothFragment = FragmentBluetooth()
+        val myBluetoothFragment: FragmentBluetooth = FragmentBluetooth()
         // check bluetooth connection
-        myBluetoothFragment.let { it?.show(supportFragmentManager, getString(R.string.notefication)) }
+        myBluetoothFragment.show(supportFragmentManager, getString(R.string.notefication))
 
         PresenterTraining.getInstance(this@ViewTraining).registerSensorListenerAccelerate()
 
@@ -273,7 +271,19 @@ class ViewTraining : SecondViewClass() {
                 onBackDataButtonPressed()
             }
         }
+        //
+        gestionBluetoothDevice()
         // exit on create
+    }
+
+    private fun gestionBluetoothDevice() {
+        this.bluetoothDevice = PresenterTraining.getInstance(this).getDeviceCadence()
+        if (bluetoothDevice == null){
+            Log.d("Bluetooth","okey no bluetooth device chosen")
+        } else {
+            Log.d("Bluetoot","try to connect device")
+
+        }
     }
 
     private fun onBackDataButtonPressed(){

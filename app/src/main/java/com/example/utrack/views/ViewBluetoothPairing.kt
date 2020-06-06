@@ -187,7 +187,6 @@ class ViewBluetoothPairing : SecondViewClass() {
         }
         // back button
         backButtonBluetoothPage.setOnClickListener {
-            PresenterTraining.getInstance(applicationContext).onBackBluetoothButtonPressed()
             onBackPressed()
         }
     }
@@ -206,11 +205,17 @@ class ViewBluetoothPairing : SecondViewClass() {
     }
 
     override fun onDestroy() {
-        // unregister the ACTION_FOUND receiver.
-        //unregisterReceiver(receiver1)
-        // unregister the Discoverability receiver.
-        //unregisterReceiver(receiver2)
-        //disconnect()
+        try {
+            // unregister the ACTION_FOUND receiver.
+            unregisterReceiver(receiver1)
+            // unregister the Discoverability receiver.
+            unregisterReceiver(receiver2)
+
+            //disconnect()
+        }catch (e : IllegalArgumentException){
+            Log.d("Bluetooth", "exception unregister receivers" )
+        }
+
         turnBluetoothOff()
         super.onDestroy()
     }
@@ -221,10 +226,11 @@ class ViewBluetoothPairing : SecondViewClass() {
             unregisterReceiver(receiver1)
             // unregister the Discoverability receiver.
             unregisterReceiver(receiver2)
-        }catch (e : IllegalArgumentException){
-            e.printStackTrace()
-        }
 
+            //disconnect()
+        }catch (e : IllegalArgumentException){
+            Log.d("Bluetooth", "exception unregister receivers" )
+        }
         super.onStop()
     }
 
@@ -280,7 +286,6 @@ class ViewBluetoothPairing : SecondViewClass() {
                 //ConnectToDevice(this).execute()
                 //sleep(1000)
                 PresenterTraining.getInstance(this).onBluetoothDeviceChosen(device)
-                //PresenterTraining.getInstance(this).goToTrainingView()
                 onBackPressed()
             }
         }

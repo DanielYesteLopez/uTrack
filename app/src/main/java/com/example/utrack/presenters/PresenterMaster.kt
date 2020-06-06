@@ -162,16 +162,6 @@ class PresenterMaster private constructor (private var context: Context) {
         return locationService?.getTimeInSeconds()!!
     }
 
-
-    /*
-    fun getSpeedTrapezi() : Float{
-        //return sensorListenerAccelerometro.getVelocityActual()
-    }
-
-    fun getPositionTrapeze() : Float{
-        //return sensorListenerAccelerometro.getPositionActual()
-    }
-*/
     fun getSpeedGPS() : Float {
         var value = 0.0F
         try {
@@ -218,13 +208,9 @@ class PresenterMaster private constructor (private var context: Context) {
         facade.setCadenceDevice(_device)
     }
 
-/*    fun getCadenceSensor() : BluetoothDevice? {
+    fun getCadenceSensor() : BluetoothDevice? {
         return facade.getSensorCadence()
-    }*/
-
-//    fun updateAcceleration(accelerateActual: Float) {
-//
-//    }
+    }
 
     fun createNewSession() : Session {
         this.session = Session()
@@ -259,11 +245,6 @@ class PresenterMaster private constructor (private var context: Context) {
         facade.changeUserAccount(userName,password,realName,accountEmail)
     }
 
-    fun initalizeSessionDatabase(userId: String) {
-        facade.initializeSessionDatabase(userId)
-
-    }
-
     fun initializeSessionDatabase(userId: String) {
         facade.initializeSessionDatabase(userId)
     }
@@ -283,46 +264,4 @@ class PresenterMaster private constructor (private var context: Context) {
             findViewById4
         )
     }
-
-    /* presenter show recommended exercise */
-//    fun onCanShowExerciseButtonPressed(fragmentActivity:FragmentActivity) {
-//        //val appContext :Context = fragmentActivity.applicationContext
-//        Toast.makeText(
-//            fragmentActivity.applicationContext,
-//            fragmentActivity.resources.getString(R.string.trainingpaused),
-//            Toast.LENGTH_SHORT
-//        ).show()
-//    }
-//
-//    fun onNegShowExerciseButtonPressed(fragmentActivity:FragmentActivity) {
-//        // user finish training
-//        val appContext :Context = fragmentActivity.applicationContext
-//        Toast.makeText(
-//            appContext,
-//            appContext.getString(R.string.trainingsad),
-//            Toast.LENGTH_SHORT
-//        ).show()
-//        val mySaveFragment =
-//            FragmentSaveData()
-//        mySaveFragment.show(fragmentActivity.supportFragmentManager, R.string.notefication.toString())
-//    }
-//
-//    fun onPosShowExerciseButtonPressed(fragmentActivity:FragmentActivity) {
-//        val appContext :Context = fragmentActivity.applicationContext
-//        Toast.makeText(
-//            appContext,
-//            appContext.getString(R.string.trainingawesome),
-//            Toast.LENGTH_SHORT
-//        ).show()
-//    }
-
-
-    /* presenter bluetooth */
-//  fun onConnectDevicesBluetoothButtonPressed() {
-//    }
-//
-//    fun onStartTrainingBluetoothButtonPressed() {
-//
-//    }
-
 }

@@ -96,9 +96,9 @@ class Facade (private val context: Context){
         }
     }
 
-/*    fun getSensorCadence(): BluetoothDevice? {
+    fun getSensorCadence(): BluetoothDevice? {
         return this.cadenceDevice?.getABluetoothDevice()
-    }*/
+    }
 
     private fun getSavedSessions() {
         database.getDatabaseSessions()
@@ -148,13 +148,4 @@ class Facade (private val context: Context){
         findViewById4.hint = database.stem
 
     }
-
-
-    /* presenter bluetooth */
-//  fun onConnectDevicesBluetoothButtonPressed() {
-//    }
-//
-//    fun onStartTrainingBluetoothButtonPressed() {
-//
-//    }
 }
