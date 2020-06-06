@@ -31,15 +31,13 @@
         <activity
             android:name=".views.ViewSignIn"
             android:noHistory="true" />
-        <activity android:name=".views.ViewTraining"
-            android:noHistory="true"/>
+        <activity android:name=".views.ViewTraining" />
         <activity android:name=".views.ViewData" />
         <activity android:name=".views.ViewAccountSettings" />
         <activity android:name=".views.ViewUserSettings" />
         <activity android:name=".views.ViewMainPage" />
         <activity android:name=".views.ViewSettings" />
         <activity android:name=".views.ViewInformation"/>
-        <activity android:name=".views.FragmentShowExercise" />
         <activity android:name=".views.ViewBluetoothPairing" />
 
         <service

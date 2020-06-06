@@ -35,8 +35,9 @@ class ViewAccountSettings : SecondViewClass() {
     }
 
     private fun onBackAccountButtonSettingsPressed(){
-        val intent = Intent(application, ViewSettings().javaClass)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        startActivity(intent)
+        //val intent = Intent(application, ViewSettings().javaClass)
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        //startActivity(intent)
+        onBackPressed()
     }
 }

@@ -142,10 +142,10 @@ class PresenterTraining private constructor(private var context: Context) {
     /* presenter view bluetooth */
     fun onBackBluetoothButtonPressed() {
         isDoingRecommendedExercise = false
-        val intent = Intent(context, ViewTraining().javaClass)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        //val intent = Intent(context, ViewTraining().javaClass)
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         //intent.putExtra(EXTRA_MESSAGE_DEVICE,"0")
-        ContextCompat.startActivity(context,intent,null)
+        //ContextCompat.startActivity(context,intent,null)
     }
 
     fun onBluetoothDeviceChosen(_device: BluetoothDevice) {
@@ -166,9 +166,9 @@ class PresenterTraining private constructor(private var context: Context) {
     }*/
 
     fun goToTrainingView() {
-        val intent = Intent(context, ViewTraining().javaClass)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        //val intent = Intent(context, ViewTraining().javaClass)
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         //intent.putExtra(EXTRA_MESSAGE_DEVICE,"1")
-        ContextCompat.startActivity(context,intent,null)
+        //ContextCompat.startActivity(context,intent,null)
     }
 }

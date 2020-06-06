@@ -32,8 +32,13 @@ constructor( _intensity: Int, con: Context) {
     private var intensity: Int = _intensity
 
     init {
-        this.description=exerciseList[intensity - 1]
-        this.duration=durationList[intensity - 1]
+        if(intensity >= 1) {
+            this.description=exerciseList[intensity - 1]
+            this.duration=durationList[intensity - 1]
+        } else {
+            description = ""
+            duration = 0.0
+        }
     }
 /*    fun get_Duration() : Double {
         return duration

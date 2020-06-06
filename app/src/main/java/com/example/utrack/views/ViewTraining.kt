@@ -48,8 +48,9 @@ class ViewTraining : SecondViewClass() {
 
     private var myBluetoothFragment: FragmentBluetooth? = null
 
-    var isWorking = false
-    var isPaused = true
+    private var isWorking = false
+    private var isPaused = false
+    private var isExiting = false
 
     private lateinit var dataSet: Set
     private lateinit var series1: Line
@@ -254,31 +255,39 @@ class ViewTraining : SecondViewClass() {
                 }
                 PresenterTraining.getInstance(this@ViewTraining).onStopTrainingButtonPressed()
             } else {
-                mHandler.removeCallbacks(mRunnable)
+                // impossible so go out of activity
+                onBackPressed()
             }
         }
+
         backButtonTrainingPage.setOnClickListener {
-            PresenterTraining.getInstance(this@ViewTraining).onBackTrainingButtonPressed()
-            mHandler.removeCallbacks(mRunnable)
-            //finish()
+            //PresenterTraining.getInstance(this@ViewTraining).onBackTrainingButtonPressed()
+            if(isWorking || isPaused) {
+                buttonPause.callOnClick()
+                if(!PresenterTraining.getInstance(this).isDoingRecommendedExercise()){
+                    PresenterTraining.getInstance(this).onNegShowExerciseButtonPressed()
+                }
+                val mySaveFragment = FragmentSaveData()
+                mySaveFragment.show(supportFragmentManager,getString(R.string.notefication))
+            } else {
+                onBackDataButtonPressed()
+            }
         }
         // exit on create
     }
 
+    private fun onBackDataButtonPressed(){
+        val intent = Intent(application, ViewMainPage().javaClass)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
+    }
 
     private var locationUpdateReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val newLocation = intent.getParcelableExtra<Location>("location")
             val latLng = LatLng(newLocation?.latitude!!, newLocation.longitude)
-//            findViewById<TextView>(R.id.location).text = latLng.toString()
-//            findViewById<TextView>(R.id.liner).text = (presenter.let { it?.getAcceleration() }).toString()
-//            findViewById<TextView>(R.id.speed_trapezi).text = (presenter.let { it?.getSpeedTrapezi() }).toString()
-//            findViewById<TextView>(R.id.distance_trapezi).text = (presenter.let { it?.getPositionTrapeze() }).toString()
-//            findViewById<TextView>(R.id.speed_gps).text = (presenter.let { it?.getSpeedGPS() }).toString()
-//            findViewById<TextView>(R.id.distance_gps).text = (presenter.let { it?.getDistanceGPS() }).toString()
             if(isWorking && !isPaused) {
                 val formatTemplate = "%.2f%3s"
-                //findViewById<TextView>(R.id.cadenceratetext).text = formatTemplate.format(PresenterTraining.getInstance(this@ViewTraining).getAcceleration(),"rpm")
                 val aux1 = PresenterTraining.getInstance(this@ViewTraining).getSpeedGPS()    // kph
                 findViewById<TextView>(R.id.speedratetext).text =
                     formatTemplate.format(aux1, "kph")
@@ -286,9 +295,7 @@ class ViewTraining : SecondViewClass() {
                     PresenterTraining.getInstance(this@ViewTraining).getSpeedGPSAVG()    // kph
                 findViewById<TextView>(R.id.agspeedratetext).text =
                     formatTemplate.format(aux2, "kph")
-                //findViewById<>(R.id.).text = (presenterTraining.let { it?.getDistanceGPS() }).toString()
                 PresenterTraining.getInstance(this@ViewTraining).onReceiveLocation(latLng)
-                //addPoint()
             }
         }
     }
@@ -305,9 +312,7 @@ class ViewTraining : SecondViewClass() {
         /**
          *  This is called when the connection with the service has been
          *  established, giving us the service object we can use to
-         * interact with the service.  Because we have bound to a explicit
-         * service that we know is running in our own process, we can
-         * cast its IBinder to a concrete class and directly access it.
+         *  interact with the service.
          */
         override fun onServiceConnected(className: ComponentName, service: IBinder) {
             val name = className.className
@@ -358,7 +363,6 @@ class ViewTraining : SecondViewClass() {
             Log.d(TAG,"service is being foreground so no need to resume")
             // service is being foreground so no need to resume
             //startService()
-
         }
         super.onResume()
     }
@@ -419,8 +423,6 @@ class ViewTraining : SecondViewClass() {
                 if (grantResults.isNotEmpty()
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED
                 ) {
-                    // permission was granted, yay! Do the
-                    // location-related task you need to do.
                     Log.d(TAG, "Permission was granted, yay")
                     if (ContextCompat.checkSelfPermission(
                             this,
@@ -517,8 +519,8 @@ class ViewTraining : SecondViewClass() {
         }
     }
 
-    fun  addPoint() {
-        // append data
+    private fun  addPoint() {
+        // append data to  any chart
         seriesData.add(CustomDataEntry(
                 "${seriesData.size}",
                 PresenterTraining.getInstance(this).getSpeedGPS(),

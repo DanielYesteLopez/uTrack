@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
 import com.example.utrack.R
 import com.example.utrack.mc.MainFragmentClass
+import kotlin.system.exitProcess
 
 class FragmentBluetooth : MainFragmentClass() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -38,9 +39,11 @@ class FragmentBluetooth : MainFragmentClass() {
             getString(R.string.choose_device),
             Toast.LENGTH_SHORT
         ).show()
+        //this.activity?.onBackPressed()
         val intent = Intent(this.context, ViewBluetoothPairing().javaClass)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent,null)
+
     } // go to bluetooth fragment
 
     override fun sendNegButtonPressed(fragmentActivity: FragmentActivity) {

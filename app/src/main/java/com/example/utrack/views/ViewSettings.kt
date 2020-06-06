@@ -55,6 +55,7 @@ class ViewSettings : SecondViewClass() {
         val intent = Intent(this, ViewMainPage::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
+        //onBackPressed()
     }
 
     private fun onInformationButtonPressed() {

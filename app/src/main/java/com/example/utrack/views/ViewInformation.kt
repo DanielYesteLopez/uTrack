@@ -22,8 +22,9 @@ class ViewInformation : SecondViewClass() {
     }
 
     private fun onBackInformationButtonPressed(){
-        val intent = Intent(application, ViewSettings().javaClass)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        startActivity(intent)
+        //val intent = Intent(application, ViewSettings().javaClass)
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        //startActivity(intent)
+        onBackPressed()
     }
 }

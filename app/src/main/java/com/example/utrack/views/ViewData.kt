@@ -44,6 +44,7 @@ class ViewData : SecondViewClass() {
         val intent = Intent(application, ViewMainPage().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
+        //onBackPressed()
     }
 
     override fun onResume() {
@@ -59,7 +60,6 @@ class ViewData : SecondViewClass() {
 
     private fun onExportButtonPressed() {
         val filePath = (this.getExternalFilesDir(null)!!.absolutePath)
-
         PresenterShowData.getInstance(this).exportSession(filePath)
     }
 }

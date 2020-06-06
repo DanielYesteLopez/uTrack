@@ -187,7 +187,8 @@ class ViewBluetoothPairing : SecondViewClass() {
         }
         // back button
         backButtonBluetoothPage.setOnClickListener {
-            PresenterTraining.getInstance(applicationContext).onBackBluetoothButtonPressed() // go back to exercise
+            PresenterTraining.getInstance(applicationContext).onBackBluetoothButtonPressed()
+            onBackPressed()
         }
     }
 
@@ -263,7 +264,7 @@ class ViewBluetoothPairing : SecondViewClass() {
             // Create an array adapter
             arrayAdapter = ArrayAdapter<String>(applicationContext, android.R.layout.simple_list_item_1)
             // 1 query paired devices
-            queryPairedDevices()
+            // queryPairedDevices()
             // 2 discover new devices
             discoverBluetoothDevice()
             // 3 add array adapter to pairedTv (which is a list view)
@@ -273,13 +274,14 @@ class ViewBluetoothPairing : SecondViewClass() {
                 bAdapterCancelDiscovery()
                 val device: BluetoothDevice = devicesList[position]
                 Log.d("bluetooth device",">>>>>>>>>>>>>>>>   ${device.uuids}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-                deviceUuid = UUID.randomUUID()
-                address = device.address!!
-                Log.d("going to connect","if you get an error go to fit")
+                //deviceUuid = UUID.randomUUID()
+                //address = device.address!!
+                //Log.d("going to connect","if you get an error go to fit")
                 //ConnectToDevice(this).execute()
-                sleep(1)
+                //sleep(1000)
                 PresenterTraining.getInstance(this).onBluetoothDeviceChosen(device)
-                PresenterTraining.getInstance(this).goToTrainingView()
+                //PresenterTraining.getInstance(this).goToTrainingView()
+                onBackPressed()
             }
         }
     }
