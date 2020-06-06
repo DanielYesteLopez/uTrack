@@ -1,16 +1,16 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.utrack.model
 
 import android.app.Activity
 import android.bluetooth.BluetoothDevice
 import android.content.Context
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.Toast
+import android.widget.*
 import com.example.utrack.R
 import com.google.android.gms.fitness.data.BleDevice
 import kotlin.collections.ArrayList
 
+@Suppress("DEPRECATION")
 class Facade (private val context: Context){
     private var cadenceDevice: Sensor? = null
     private val user = User()

@@ -10,9 +10,9 @@ import com.example.utrack.mc.SecondViewClass
 
 class ViewSignIn : SecondViewClass() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         // hide navigation bar
         onCreateHideNavBar()
+        super.onCreate(savedInstanceState)
 
         setContentView(R.layout.signin)
         PresenterLogin.getInstance(this)

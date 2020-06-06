@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.utrack.views
 
 import android.Manifest
@@ -62,12 +64,12 @@ class ViewBluetoothPairing : SecondViewClass() {
         var device : BluetoothDevice? = null
         var hasCadenceDevice : String = "0"
     }*/
-    /**
+/*    *//**
      * Broadcast Receiver for changes made to bluetooth states such as:
      * 1) Discoverability mode on/off or expire.
      * 2) for ACTION_FOUND Bluetooth Device Discovery.
      *
-     */
+     *//*
     private val receiver2: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val action = intent.action
@@ -119,11 +121,11 @@ class ViewBluetoothPairing : SecondViewClass() {
         }
     }
 
-    /**
+    *//**
      * Broadcast Receiver for changes made to bluetooth states such as:
      * 1) for ACTION_FOUND Bluetooth Device Discovery.
      *
-     */
+     *//*
     private val receiver1 = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val action: String? = intent.action
@@ -138,7 +140,7 @@ class ViewBluetoothPairing : SecondViewClass() {
                         intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
                     val rssi: Int =
                         intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE).toInt()
-                    /* log is for debug */
+                    *//* log is for debug *//*
                     Log.d("Bluetooth1", "onReceive: " + device?.name + ": " + device?.address)
                     Log.d("Bluetooth2", "onReceive: $rssi")
 
@@ -148,7 +150,7 @@ class ViewBluetoothPairing : SecondViewClass() {
                             !(device.name.isNullOrEmpty()) &&
                             (rssi >= -90))
                         {
-                            /* rssi for testing only user do not need to see it */
+                            *//* rssi for testing only user do not need to see it *//*
                             devicesList.add(device)
                             arrayAdapter.add("${device.name} \n ${device.address} - $rssi")
                             arrayAdapter.notifyDataSetChanged()
@@ -174,7 +176,7 @@ class ViewBluetoothPairing : SecondViewClass() {
                 }
             }
         }
-    }
+    }*/
 
     private var bleScanCallbacks: BleScanCallback = object : BleScanCallback() {
         override fun onDeviceFound(_device: BleDevice) {
@@ -193,15 +195,14 @@ class ViewBluetoothPairing : SecondViewClass() {
 
         override fun onScanStopped() {
             Log.d("scan stoped","HELLOO FROM THE OTHER SIDE <dlsajdlaskjdlkasjdlajhflkj>")
-
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
+        onCreateHideNavBar()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bluetooth_pairing)
-
+        checkBTPermissions()
         bAdapter = BluetoothAdapter.getDefaultAdapter()
         devicesList = ArrayList()
         devicesListB = ArrayList()
@@ -231,31 +232,30 @@ class ViewBluetoothPairing : SecondViewClass() {
     override fun onDestroy() {
         //disconnect()
         try {
-            val response: Task<Void> =
             Fitness.getBleClient(
                 this,
                 GoogleSignIn.getLastSignedInAccount(this)!!
             ).unclaimBleDevice(device)
-            // unregister the ACTION_FOUND receiver.
+/*            // unregister the ACTION_FOUND receiver.
             unregisterReceiver(receiver1)
             // unregister the Discoverability receiver.
-            unregisterReceiver(receiver2)
+            unregisterReceiver(receiver2)*/
         }catch (e : IllegalArgumentException){
             e.printStackTrace()
-        }
+    }
         turnBluetoothOff()
         super.onDestroy()
     }
 
     override fun onStop() {
-        try {
+/*        try {
             // unregister the ACTION_FOUND receiver.
             unregisterReceiver(receiver1)
             // unregister the Discoverability receiver.
             unregisterReceiver(receiver2)
         }catch (e : IllegalArgumentException){
             e.printStackTrace()
-        }
+        }*/
 
         super.onStop()
     }
@@ -288,7 +288,6 @@ class ViewBluetoothPairing : SecondViewClass() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun getDiscoverableDevices() {
         if (bAdapterIsEnabled()) {
             // create array list for new devices
@@ -308,14 +307,12 @@ class ViewBluetoothPairing : SecondViewClass() {
                 ).build()
             val googleSignInAccount: GoogleSignInAccount =
                 GoogleSignIn.getAccountForExtension(this, fitnessOptions)
-            val response =
-                    Fitness.getBleClient(this, googleSignInAccount)
-                        .startBleScan(
-                            listOf(DataType.TYPE_CYCLING_PEDALING_CADENCE),
-                            1000,
-                            bleScanCallbacks
-                        )
-            Log.d("Google account", response.toString())
+            Fitness.getBleClient(this, googleSignInAccount)
+                .startBleScan(
+                    listOf(DataType.TYPE_CYCLING_PEDALING_CADENCE),
+                    1000,
+                    bleScanCallbacks
+                )
             // 3 add array adapter to pairedTv (which is a list view)
             pairedTv.adapter = arrayAdapter
             // 4 Set item click listener
@@ -327,13 +324,11 @@ class ViewBluetoothPairing : SecondViewClass() {
                 //deviceUuid = UUID.randomUUID()
                 //address = device.address!!
                 Log.d("going to connect","if you get an error go to fit")
-                val response: Task<Void> =
-                    Fitness.getBleClient(
-                        this,
-                        GoogleSignIn.getLastSignedInAccount(this)!!
-                    ).claimBleDevice(device)
+                Fitness.getBleClient(
+                    this,
+                    GoogleSignIn.getLastSignedInAccount(this)!!
+                ).claimBleDevice(device)
                 //ConnectToDevice(this).execute()
-                sleep(1)
                 PresenterTraining.getInstance(this).onBluetoothDeviceChosen(device)
                 PresenterTraining.getInstance(this).goToTrainingView()
             }
@@ -377,7 +372,7 @@ class ViewBluetoothPairing : SecondViewClass() {
 //
 //    }
 
-    private fun queryPairedDevices(){
+/*    private fun queryPairedDevices(){
         bAdapterCancelDiscovery()
         val pairedDevices: Set<BluetoothDevice>? = bAdapter!!.bondedDevices // get list of paired Devices
         if (pairedDevices != null) {
@@ -391,9 +386,9 @@ class ViewBluetoothPairing : SecondViewClass() {
                 }
             }
         }
-    }
+    }*/
 
-    @RequiresApi(Build.VERSION_CODES.M)
+/*    @RequiresApi(Build.VERSION_CODES.M)
     private fun discoverBluetoothDevice() {
         //make bluetooth discoverable
         if (bAdapterIsNotNull()) {
@@ -410,9 +405,9 @@ class ViewBluetoothPairing : SecondViewClass() {
                 Toast.LENGTH_LONG
             ).show()
         }
-    }
+    }*/
 
-    private fun makeBluetoothDiscoverable() {
+/*    private fun makeBluetoothDiscoverable() {
         //make bluetooth discoverable
         if (bAdapterIsNotNull()) {
             if (bAdapterIsNotDiscovering()) {
@@ -429,17 +424,17 @@ class ViewBluetoothPairing : SecondViewClass() {
                 Toast.LENGTH_LONG
             ).show()
         }
-    }
+    }*/
 
-    private fun registerReceiver1BroadCasts(){
+/*    private fun registerReceiver1BroadCasts(){
         val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
         registerReceiver(receiver1, filter)
-    }
-
+    }*/
+/*
     private fun registerReceiver2BroadCasts(){
         val filter = IntentFilter(BluetoothAdapter.ACTION_SCAN_MODE_CHANGED)
         registerReceiver(receiver2, filter)
-    }
+    }*/
 
     private fun bAdapterIsNull() : Boolean{
         return (bAdapter == null)
@@ -466,25 +461,25 @@ class ViewBluetoothPairing : SecondViewClass() {
         }
         return false
     }
-
+/*
     private fun bAdapterIsNotDiscovering() : Boolean{
         return !(bAdapterIsDiscovering())
-    }
+    }*/
 
-    private fun bAdapterStartDiscovery(){
+/*    private fun bAdapterStartDiscovery(){
         if (bAdapterIsNotNull()) {
             Log.d("Bluetooth", "asking for discoverable")
             makeBluetoothDiscoverable()
             Log.d("Bluetooth", "start discovery")
             bAdapter!!.startDiscovery()
         }
-    }
+    }*/
 
-    private fun bAdapterCancelDiscovery(){
+/*    private fun bAdapterCancelDiscovery(){
         if (bAdapterIsDiscovering()){
             bAdapter!!.cancelDiscovery()
         }
-    }
+    }*/
 
     /**
     * Enable Bluetooth by asking permission
@@ -537,22 +532,24 @@ class ViewBluetoothPairing : SecondViewClass() {
      *
      * NOTE: This will only execute on versions > LOLLIPOP because it is not needed otherwise.
      */
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun checkBTPermissions() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            var permissionCheck =
-                checkSelfPermission("Manifest.permission.ACCESS_FINE_LOCATION")
-            permissionCheck += checkSelfPermission("Manifest.permission.ACCESS_COARSE_LOCATION")
-            if (permissionCheck != 0) {
-                requestPermissions(
-                    arrayOf(
-                        Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.ACCESS_COARSE_LOCATION
-                    ), 1001
-                ) //Any number
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                var permissionCheck =
+                    checkSelfPermission("Manifest.permission.ACCESS_FINE_LOCATION")
+                permissionCheck += checkSelfPermission("Manifest.permission.ACCESS_COARSE_LOCATION")
+                if (permissionCheck != 0) {
+                    requestPermissions(
+                        arrayOf(
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                        ), 1001
+                    ) //Any number
+                }
             }
         }
     }
+
 /*
     private fun disconnect() {
         if (bluetoothSocket != null) {

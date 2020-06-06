@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.utrack.presenters
 
 import android.bluetooth.BluetoothDevice
@@ -151,7 +153,7 @@ class PresenterTraining private constructor(private var context: Context) {
 
 
     fun onBluetoothDeviceChosen(_device: BleDevice) {
-        isDoingRecomendedExercise = false
+        isDoingRecommendedExercise = false
         PresenterMaster.getInstance(context).onBluetoothDeviceChosen(_device)
     }
 

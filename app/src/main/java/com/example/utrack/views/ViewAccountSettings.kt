@@ -12,9 +12,9 @@ import com.example.utrack.presenters.PresenterAccountSettings
 class ViewAccountSettings : SecondViewClass() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         // hide navigation bar
         onCreateHideNavBar()
+        super.onCreate(savedInstanceState)
 
         setContentView(R.layout.accountsetting)
         PresenterAccountSettings.getInstance(this)

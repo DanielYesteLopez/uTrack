@@ -14,9 +14,9 @@ import com.example.utrack.mc.SecondViewClass
 
 class ViewSignUp : SecondViewClass() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         // hide navigation bar
         onCreateHideNavBar()
+        super.onCreate(savedInstanceState)
 
         setTheme(R.style.AppTheme)
         setContentView(R.layout.signup)

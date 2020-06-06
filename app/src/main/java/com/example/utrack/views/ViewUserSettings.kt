@@ -10,9 +10,9 @@ import com.example.utrack.presenters.PresenterSettings
 class ViewUserSettings : SecondViewClass() {
     //var presenterSettings = PresenterSettings()
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         // hide navigation bar
         onCreateHideNavBar()
+        super.onCreate(savedInstanceState)
 
         setContentView(R.layout.usersettings)
         PresenterSettings.getInstance(this)

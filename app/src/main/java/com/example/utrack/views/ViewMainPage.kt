@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.utrack.views
 
 
@@ -15,6 +17,7 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.ResultCallback
 import com.google.android.gms.fitness.Fitness
+import com.google.android.gms.fitness.Fitness.SensorsApi
 import com.google.android.gms.fitness.data.DataPoint
 import com.google.android.gms.fitness.data.DataSource
 import com.google.android.gms.fitness.data.DataType
@@ -26,6 +29,7 @@ import com.google.android.gms.fitness.result.DataSourcesResult
 import java.util.concurrent.TimeUnit
 
 
+@Suppress("DEPRECATION")
 class ViewMainPage : MainViewClass(), OnDataPointListener,
     GoogleApiClient.ConnectionCallbacks,
     GoogleApiClient.OnConnectionFailedListener {
@@ -90,7 +94,7 @@ class ViewMainPage : MainViewClass(), OnDataPointListener,
                     }
                 }
             }
-        Fitness.SensorsApi
+        SensorsApi
             .findDataSources(mApiClient, dataSourceRequest)
             .setResultCallback(dataSourcesResultCallback)
     }
@@ -104,7 +108,7 @@ class ViewMainPage : MainViewClass(), OnDataPointListener,
             .setDataType(dataType)
             .setSamplingRate(3, TimeUnit.SECONDS)
             .build()
-        Fitness.SensorsApi.add(mApiClient, request, this)
+        SensorsApi.add(mApiClient, request, this)
             .setResultCallback { status ->
                 if (status.isSuccess) {
                     Log.e("GoogleFit", "SensorApi successfully added")
@@ -163,12 +167,16 @@ class ViewMainPage : MainViewClass(), OnDataPointListener,
 
     override fun onStop() {
         super.onStop()
-        Fitness.SensorsApi.remove(mApiClient, this)
+    }
+
+    override fun onDestroy() {
+        SensorsApi.remove(mApiClient, this)
             .setResultCallback { status ->
                 if (status.isSuccess) {
                     mApiClient.disconnect()
                 }
             }
+        super.onDestroy()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

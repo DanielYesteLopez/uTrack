@@ -9,10 +9,9 @@ import com.example.utrack.mc.SecondViewClass
 class ViewInformation : SecondViewClass() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         // hide navigation bar
         onCreateHideNavBar()
-
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.information)
         val backButton = findViewById<ImageButton>(R.id.backButtonInformationPage)
         backButton.setOnClickListener {

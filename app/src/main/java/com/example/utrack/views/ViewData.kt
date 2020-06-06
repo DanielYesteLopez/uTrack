@@ -18,10 +18,9 @@ class ViewData : SecondViewClass() {
     //var presenterShowData : PresenterShowData? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         // hide navigation bar
         onCreateHideNavBar()
-
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.showdata)
         PresenterShowData.getInstance(this)
         PresenterShowData.getInstance(this).visualizeSessionList(this)
