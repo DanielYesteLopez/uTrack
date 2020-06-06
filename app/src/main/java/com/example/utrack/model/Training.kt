@@ -16,7 +16,7 @@ class Training constructor (exercise: Exercise, boolean: Boolean, private var co
     }
 
     private fun setDummyExercise() {
-        recommendedExercise = RecommendedExercise(1, con)
+        recommendedExercise = RecommendedExercise(0, con)
     }
 
     private fun recommendExercise() {

@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION")
-
 package com.example.utrack.model
 
 import android.app.Activity
@@ -100,10 +98,9 @@ class Facade (private val context: Context){
         }
     }
 
-/*    fun getSensorCadence(): BluetoothDevice? {
     fun getSensorCadence(): BleDevice? {
         return this.cadenceDevice?.getABluetoothDevice()
-    }*/
+    }
 
     private fun getSavedSessions() {
         database.getDatabaseSessions()
@@ -153,13 +150,4 @@ class Facade (private val context: Context){
         findViewById4.hint = database.stem
 
     }
-
-
-    /* presenter bluetooth */
-//  fun onConnectDevicesBluetoothButtonPressed() {
-//    }
-//
-//    fun onStartTrainingBluetoothButtonPressed() {
-//
-//    }
 }

@@ -30,13 +30,13 @@ class ViewAccountSettings : SecondViewClass() {
             val realName = findViewById<EditText>(R.id.accountRnameEdit).text.toString()
             val accountEmail = findViewById<EditText>(R.id.accountemailEdit).text.toString()
             PresenterAccountSettings.getInstance(this).changeUserAccount(userName,password,confirmPassword,realName,accountEmail,applicationContext)
-            Toast.makeText(applicationContext,"Saved!",Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun onBackAccountButtonSettingsPressed(){
-        val intent = Intent(application, ViewSettings().javaClass)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        startActivity(intent)
+        //val intent = Intent(application, ViewSettings().javaClass)
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        //startActivity(intent)
+        onBackPressed()
     }
 }

@@ -16,6 +16,7 @@ class PresenterAccountSettings private constructor (private var context : Contex
         if(StringUtils.isAllValid(userName,password,confirmPassword,realName,accountEmail)){
             if (password.equals(confirmPassword)){
                 PresenterMaster.getInstance(context).changeUserAccount(userName,password,realName,accountEmail)
+                Toast.makeText(context,"Saved!",Toast.LENGTH_SHORT).show()
             }else{
                 Toast.makeText(applicationContext,"Passwords doesn't match", Toast.LENGTH_SHORT).show()
             }

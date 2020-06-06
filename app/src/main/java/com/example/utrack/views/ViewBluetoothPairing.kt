@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION")
-
 package com.example.utrack.views
 
 import android.Manifest
@@ -64,6 +62,7 @@ class ViewBluetoothPairing : SecondViewClass() {
         var device : BluetoothDevice? = null
         var hasCadenceDevice : String = "0"
     }*/
+
 /*    *//**
      * Broadcast Receiver for changes made to bluetooth states such as:
      * 1) Discoverability mode on/off or expire.
@@ -216,7 +215,7 @@ class ViewBluetoothPairing : SecondViewClass() {
         }
         // back button
         backButtonBluetoothPage.setOnClickListener {
-            PresenterTraining.getInstance(applicationContext).onBackBluetoothButtonPressed() // go back to exercise
+            onBackPressed()
         }
     }
 
@@ -230,33 +229,32 @@ class ViewBluetoothPairing : SecondViewClass() {
     }
 
     override fun onDestroy() {
-        //disconnect()
         try {
-            Fitness.getBleClient(
-                this,
-                GoogleSignIn.getLastSignedInAccount(this)!!
-            ).unclaimBleDevice(device)
-/*            // unregister the ACTION_FOUND receiver.
-            unregisterReceiver(receiver1)
+            // unregister the ACTION_FOUND receiver.
+            //unregisterReceiver(receiver1)
             // unregister the Discoverability receiver.
-            unregisterReceiver(receiver2)*/
+            //unregisterReceiver(receiver2)
+
+            //disconnect()
         }catch (e : IllegalArgumentException){
-            e.printStackTrace()
-    }
+            Log.d("Bluetooth", "exception unregister receivers" )
+        }
+
         turnBluetoothOff()
         super.onDestroy()
     }
 
     override fun onStop() {
-/*        try {
+        try {
             // unregister the ACTION_FOUND receiver.
-            unregisterReceiver(receiver1)
+            //unregisterReceiver(receiver1)
             // unregister the Discoverability receiver.
-            unregisterReceiver(receiver2)
-        }catch (e : IllegalArgumentException){
-            e.printStackTrace()
-        }*/
+            //unregisterReceiver(receiver2)
 
+            //disconnect()
+        }catch (e : IllegalArgumentException){
+            Log.d("Bluetooth", "exception unregister receivers" )
+        }
         super.onStop()
     }
 
@@ -296,7 +294,7 @@ class ViewBluetoothPairing : SecondViewClass() {
             // Create an array adapter
             arrayAdapter = ArrayAdapter<String>(applicationContext, android.R.layout.simple_list_item_1)
             // 1 query paired devices
-            //queryPairedDevices()
+            // queryPairedDevices()
             // 2 discover new devices
             //discoverBluetoothDevice()
             val fitnessOptions: GoogleSignInOptionsExtension =
@@ -329,8 +327,9 @@ class ViewBluetoothPairing : SecondViewClass() {
                     GoogleSignIn.getLastSignedInAccount(this)!!
                 ).claimBleDevice(device)
                 //ConnectToDevice(this).execute()
+                //sleep(1000)
                 PresenterTraining.getInstance(this).onBluetoothDeviceChosen(device)
-                PresenterTraining.getInstance(this).goToTrainingView()
+                onBackPressed()
             }
         }
     }
