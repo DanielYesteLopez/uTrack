@@ -136,7 +136,7 @@ class PresenterTraining private constructor(private var context: Context) {
         PresenterMaster.getInstance(context).onBluetoothDeviceChosen(_device)
     }
 
-    fun getDeviceCadence(): BluetoothDevice? {
+    fun getDeviceCadence(): BleDevice? {
         if(hasBluetoothDevice){
             return PresenterMaster.getInstance(context).getCadenceSensor()
         } else {

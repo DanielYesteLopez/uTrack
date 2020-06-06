@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.utrack.views
 
 import android.Manifest

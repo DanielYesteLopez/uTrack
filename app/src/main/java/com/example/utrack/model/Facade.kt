@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.utrack.model
 
 import android.app.Activity

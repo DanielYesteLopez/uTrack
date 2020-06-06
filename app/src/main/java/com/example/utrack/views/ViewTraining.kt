@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.utrack.views
 
 import android.Manifest
@@ -35,15 +37,17 @@ import com.anychart.data.Mapping
 import com.anychart.data.Set
 import com.anychart.enums.Anchor
 import com.anychart.enums.MarkerType
+import com.google.android.gms.fitness.data.BleDevice
 
 
+@Suppress("DEPRECATION")
 class ViewTraining : SecondViewClass() {
 
     private val TAG = "MainActivity"
     private val MY_PERMISSIONS_REQUEST_LOCATION = 99
 
     private var locationManager: LocationManager? = null
-    private var bluetoothDevice : BluetoothDevice? = null
+    private var bluetoothDevice : BleDevice? = null
     private lateinit var anyChartView : AnyChartView
     private lateinit var seriesData : ArrayList<DataEntry>
 
