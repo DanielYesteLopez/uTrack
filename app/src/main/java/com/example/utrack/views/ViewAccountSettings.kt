@@ -30,7 +30,6 @@ class ViewAccountSettings : SecondViewClass() {
             val realName = findViewById<EditText>(R.id.accountRnameEdit).text.toString()
             val accountEmail = findViewById<EditText>(R.id.accountemailEdit).text.toString()
             PresenterAccountSettings.getInstance(this).changeUserAccount(userName,password,confirmPassword,realName,accountEmail,applicationContext)
-            Toast.makeText(applicationContext,"Saved!",Toast.LENGTH_SHORT).show()
         }
     }
 
