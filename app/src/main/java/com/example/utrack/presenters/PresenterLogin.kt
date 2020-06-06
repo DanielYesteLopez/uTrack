@@ -56,8 +56,6 @@ class PresenterLogin private constructor (context : Context) {
     ) {
         mAuth.createUserWithEmailAndPassword(userEmail,userPassword).addOnCompleteListener { task->
             if (task.isSuccessful){
-                Toast.makeText(applicationContext, "Authentication failed.",
-                    Toast.LENGTH_SHORT).show()
                 verifyEmail(applicationContext)
                 Log.d("UserCreated", "createUserWithEmail:success")
                 val userId = mAuth.currentUser!!.uid
