@@ -4,12 +4,10 @@ import android.Manifest
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
-import android.bluetooth.BluetoothSocket
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
@@ -17,37 +15,30 @@ import android.util.Log
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import com.example.utrack.R
 import com.example.utrack.mc.SecondViewClass
+import com.example.utrack.model.services.BluetoothConnectionService
 import com.example.utrack.presenters.PresenterTraining
 import kotlinx.android.synthetic.main.activity_bluetooth_pairing.*
-import java.io.IOException
-import java.lang.IllegalArgumentException
-import java.lang.Thread.sleep
-import java.util.*
 import kotlin.collections.ArrayList
 
 
 class ViewBluetoothPairing : SecondViewClass() {
     private val REQUESTCODEENABLEBLUETOOTH: Int = 1
     private val REQUESTCODEDISCOVERABLEBLUETOOTH: Int = 2
-//    private val SELECT_DEVICE_REQUEST_CODE = 42
-//
-//    private val deviceManager: CompanionDeviceManager by lazy(LazyThreadSafetyMode.NONE) {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            getSystemService(CompanionDeviceManager::class.java)
-//        } else {
-//        }
-//    }
-
+    var mBluetoothConnection: BluetoothConnectionService? = null
 
     //init bluetooth adapter
     private var bAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
     private var devicesList: ArrayList<BluetoothDevice> = ArrayList()
     private lateinit var arrayAdapter: ArrayAdapter<String>
 
-    companion object {
+    // testing the connection
+    var bluetoothDevice : BluetoothDevice? = null
+
+
+
+/*    companion object {
         var deviceUuid : UUID? = null
         var bluetoothSocket : BluetoothSocket? = null
         lateinit var bluetoothAdapter : BluetoothAdapter
@@ -55,14 +46,38 @@ class ViewBluetoothPairing : SecondViewClass() {
         lateinit var address : String
         var device : BluetoothDevice? = null
         var hasCadenceDevice : String = "0"
-    }
+    }*/
+
+
+    // Create a BroadcastReceiver for ACTION_FOUND
+/*    private val _broadcast_receiver1: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val action = intent.action
+            // When discovery finds a device
+            if (action == bAdapter.ACTION_STATE_CHANGED) {
+                val state =
+                    intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, bAdapter.ERROR)
+                when (state) {
+                    BluetoothAdapter.STATE_OFF ->
+                        Log.d("Bluetooth", "onReceive: STATE OFF")
+                    BluetoothAdapter.STATE_TURNING_OFF ->
+                        Log.d("Bluetooth", "mBroadcastReceiver1: STATE TURNING OFF")
+                    BluetoothAdapter.STATE_ON ->
+                        Log.d("Bluetooth", "mBroadcastReceiver1: STATE ON")
+                    BluetoothAdapter.STATE_TURNING_ON ->
+                        Log.d("Bluetooth", "mBroadcastReceiver1: STATE TURNING ON")
+                }
+            }
+        }
+    }*/
+
     /**
      * Broadcast Receiver for changes made to bluetooth states such as:
      * 1) Discoverability mode on/off or expire.
      * 2) for ACTION_FOUND Bluetooth Device Discovery.
      *
      */
-    private val receiver2: BroadcastReceiver = object : BroadcastReceiver() {
+    private val _broadcast_receiver1: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val action = intent.action
             if (action == BluetoothAdapter.ACTION_SCAN_MODE_CHANGED) {
@@ -87,21 +102,18 @@ class ViewBluetoothPairing : SecondViewClass() {
                             "receiver2: Discoverability Disabled. Able to receive connections."
                         )
                     }
-
                     BluetoothAdapter.SCAN_MODE_NONE ->
                     {
                         Log.d("Bluetooth",
                             "receiver2: Discoverability Disabled. Not able to receive connections."
                         )
                     }
-
                     BluetoothAdapter.STATE_CONNECTING ->
                     {
                         Log.d("Bluetooth",
                             "receiver2: Connecting...."
                         )
                     }
-
                     BluetoothAdapter.STATE_CONNECTED ->
                     {
                         Log.d("Bluetooth",
@@ -118,7 +130,7 @@ class ViewBluetoothPairing : SecondViewClass() {
      * 1) for ACTION_FOUND Bluetooth Device Discovery.
      *
      */
-    private val receiver1 = object : BroadcastReceiver() {
+    private val _broadcast_receiver2 = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val action: String? = intent.action
             Log.d("Bluetooth", "onReceive: ACTION FOUND.")
@@ -170,12 +182,46 @@ class ViewBluetoothPairing : SecondViewClass() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
+    /**
+     * Broadcast Receiver that detects bond state changes (Pairing status changes)
+     */
+    private val _broadcast_receiver3: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val action = intent.action
+            if (action == BluetoothDevice.ACTION_BOND_STATE_CHANGED) {
+                val _device = intent.getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE)
+                val bondState = _device.bondState
+                //3 cases:
+                when(bondState){
+                    //case1: bonded already
+                    BluetoothDevice.BOND_BONDED ->
+                    {
+                        Log.d("Bluetooth", "BroadcastReceiver: BOND_BONDED.")
+
+                    }
+                    //case2: creating a bone
+                    BluetoothDevice.BOND_BONDING ->
+                    {
+                        Log.d("Bluetooth", "BroadcastReceiver: BOND_BONDING.")
+                    }
+                    //case3: breaking a bond
+                    BluetoothDevice.BOND_NONE ->
+                    {
+                        Log.d("Bluetooth", "BroadcastReceiver: BOND_NONE.")
+                    }
+                }
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bluetooth_pairing)
 
         bAdapter = BluetoothAdapter.getDefaultAdapter()
+        //Broadcasts when bond state changes
+        registerReceiver4BroadCasts()
+
         devicesList = ArrayList()
         arrayAdapter = ArrayAdapter<String>(applicationContext, android.R.layout.simple_list_item_1)
         //turn on bluetooth and ask for permission
@@ -196,41 +242,42 @@ class ViewBluetoothPairing : SecondViewClass() {
         super.onBackPressed()
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onResume() {
-//        if(!this.bAdapterIsDiscovering()){
-//            getDiscoverableDevices()
-//        }
         super.onResume()
     }
 
     override fun onDestroy() {
         try {
+            // unregister the ACTION_STATE receiver.
+            // unregisterReceiver(_broadcast_receiver1)
+            // unregister the SCAN_MODE receiver.
+            unregisterReceiver(_broadcast_receiver1)
             // unregister the ACTION_FOUND receiver.
-            unregisterReceiver(receiver1)
-            // unregister the Discoverability receiver.
-            unregisterReceiver(receiver2)
-
+            unregisterReceiver(_broadcast_receiver2)
+            // unregister the BOND_STATE receiver.
+            unregisterReceiver(_broadcast_receiver3)
             //disconnect()
         }catch (e : IllegalArgumentException){
             Log.d("Bluetooth", "exception unregister receivers" )
         }
-
-        turnBluetoothOff()
+        //turnBluetoothOff()
         super.onDestroy()
     }
 
     override fun onStop() {
-        try {
+/*        try {
+            // unregister the ACTION_STATE receiver.
+            // unregisterReceiver(_broadcast_receiver1)
+            // unregister the SCAN_MODE receiver.
+            unregisterReceiver(_broadcast_receiver1)
             // unregister the ACTION_FOUND receiver.
-            unregisterReceiver(receiver1)
-            // unregister the Discoverability receiver.
-            unregisterReceiver(receiver2)
-
+            unregisterReceiver(_broadcast_receiver2)
+            // unregister the BOND_STATE receiver.
+            unregisterReceiver(_broadcast_receiver3)
             //disconnect()
         }catch (e : IllegalArgumentException){
             Log.d("Bluetooth", "exception unregister receivers" )
-        }
+        }*/
         super.onStop()
     }
 
@@ -262,7 +309,7 @@ class ViewBluetoothPairing : SecondViewClass() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
+
     private fun getDiscoverableDevices() {
         if (bAdapterIsEnabled()) {
             // create array list for new devices
@@ -278,57 +325,70 @@ class ViewBluetoothPairing : SecondViewClass() {
             // 4 Set item click listener
             pairedTv.onItemClickListener = OnItemClickListener { _, _, position, _ ->
                 bAdapterCancelDiscovery()
-                val device: BluetoothDevice = devicesList[position]
-                Log.d("bluetooth device",">>>>>>>>>>>>>>>>   ${device.uuids[0]} ${device.uuids.size} >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-                device.fetchUuidsWithSdp()
-
-                //deviceUuid = UUID.randomUUID()
-                //address = device.address!!
-                //Log.d("going to connect","if you get an error go to fit")
+                val _device: BluetoothDevice = devicesList[position]
+                //Log.d("bluetooth device",">>>>>>>>>>>>>>>>   ${device.uuids[0]} == / ${device.uuids.size}  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+                //deviceUuid = MY_UUID_INSECURE
+                //address = _device.address
+                Log.d("Bluetooth connect","mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm")
+                pairDevice(_device)
+                //hasCadenceDevice = "1"
+                //device = _device
+                PresenterTraining.getInstance(this).onBluetoothDeviceChosen(_device)
                 //ConnectToDevice(this).execute()
-                //sleep(1000)
-                PresenterTraining.getInstance(this).onBluetoothDeviceChosen(device)
-                onBackPressed()
+                // onBackPressed()
+                bluetoothDevice = _device
+                mBluetoothConnection = BluetoothConnectionService(this@ViewBluetoothPairing)
+                startConnection()
             }
         }
     }
-//
-//    @RequiresApi(Build.VERSION_CODES.O)
-//    fun pairDevice(_device : BluetoothDevice?) {
-//        // To skip filtering based on name and supported feature flags (UUIDs),
-//        // don't include calls to setNamePattern() and addServiceUuid(),
-//        // respectively. This example uses Bluetooth.
-//        val deviceFilter: BluetoothDeviceFilter = BluetoothDeviceFilter.Builder()
-//            .setNamePattern(Pattern.compile(_device?.name!!))
-//            .addServiceUuid(_device.uuids[0],null)
-//            .build()
-//
-//        // The argument provided in setSingleDevice() determines whether a single
-//        // device name or a list of device names is presented to the user as
-//        // pairing options.
-//        val pairingRequest: AssociationRequest = AssociationRequest.Builder()
-//            .addDeviceFilter(deviceFilter)
-//            .setSingleDevice(true)
-//            .build()
-//
-//        // When the app tries to pair with the Bluetooth device, show the
-//        // appropriate pairing request dialog to the user.
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            deviceManager.associate(pairingRequest,
-//                object : CompanionDeviceManager.Callback() {
-//
-//                    override fun onDeviceFound(chooserLauncher: IntentSender) {
-//                        startIntentSenderForResult(chooserLauncher,
-//                            SELECT_DEVICE_REQUEST_CODE, null, 0, 0, 0)
-//                    }
-//
-//                    override fun onFailure(error: CharSequence?) {
-//                        // Handle failure
-//                    }
-//                }, null)
-//        }
-//
-//    }
+
+    fun pairDevice(_device : BluetoothDevice) {
+        bAdapterCancelDiscovery()
+        /*// To skip filtering based on name and supported feature flags (UUIDs),
+        // don't include calls to setNamePattern() and addServiceUuid(),
+        // respectively. This example uses Bluetooth.
+        val deviceFilter: BluetoothDeviceFilter = BluetoothDeviceFilter.Builder()
+            *//*.setNamePattern(Pattern.compile(_device?.name!!))*//*
+            *//*.addServiceUuid(_device.uuids[0],null)*//*
+            .build()
+
+        // The argument provided in setSingleDevice() determines whether a single
+        // device name or a list of device names is presented to the user as
+        // pairing options.
+        val pairingRequest: AssociationRequest = AssociationRequest.Builder()
+            .addDeviceFilter(deviceFilter)
+            .setSingleDevice(true)
+            .build()
+
+        // When the app tries to pair with the Bluetooth device, show the
+        // appropriate pairing request dialog to the user.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            deviceManager.associate(pairingRequest,
+                object : CompanionDeviceManager.Callback() {
+                    override fun onDeviceFound(chooserLauncher: IntentSender) {
+                        startIntentSenderForResult(chooserLauncher,
+                            SELECT_DEVICE_REQUEST_CODE, null, 0, 0, 0)
+                   }
+                    override fun onFailure(error: CharSequence?) {
+                        // Handle failure
+                    }
+                }, null)
+        }*/
+        Log.d("Bluetooth", "onItemClick: You Clicked on a device.")
+        val deviceName: String = _device.name
+        val deviceAddress: String =  _device.address
+
+        Log.d("Bluetooth", "onItemClick: deviceName = $deviceName")
+        Log.d("Bluetooth", "onItemClick: deviceAddress = $deviceAddress")
+
+        //create the bond.
+        Log.d("Bluetooth", "Trying to pair with $deviceName")
+        _device.createBond()
+        val result = _device.fetchUuidsWithSdp()
+        Log.d("paired Devices","fetching uuids<  $result << < <  < < < < < < < < <")
+        Log.d("paired Devices","fetching uuids<  ${_device.address} -- ${_device.name} \n")
+    }
 
     private fun queryPairedDevices(){
         bAdapterCancelDiscovery()
@@ -346,16 +406,23 @@ class ViewBluetoothPairing : SecondViewClass() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun discoverBluetoothDevice() {
         //make bluetooth discoverable
         if (bAdapterIsNotNull()) {
-            bAdapterCancelDiscovery()
-            Log.d("Bluetooth", "checking permissions")
-            checkBTPermissions()
-            bAdapterStartDiscovery()
-            // Register for broadcasts when a device is discovered.
-            registerReceiver1BroadCasts()
+            if (bAdapterIsDiscovering()) {
+                bAdapterCancelDiscovery()
+                Log.d("Bluetooth", "checking permissions")
+                checkBTPermissions()
+                bAdapterStartDiscovery()
+                // Register for broadcasts when a device is discovered.
+                registerReceiver3BroadCasts()
+            } else if (bAdapterIsNotDiscovering()){
+                Log.d("Bluetooth", "checking permissions")
+                checkBTPermissions()
+                bAdapterStartDiscovery()
+                // Register for broadcasts when a device is discovered.
+                registerReceiver3BroadCasts()
+            }
         } else {
             Toast.makeText(
                 this,
@@ -384,14 +451,24 @@ class ViewBluetoothPairing : SecondViewClass() {
         }
     }
 
-    private fun registerReceiver1BroadCasts(){
-        val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
-        registerReceiver(receiver1, filter)
-    }
+//    private fun registerReceiver1BroadCasts(){
+//        val filter = IntentFilter(BluetoothDevice.ACTION_STATE_CHANGED)
+//        registerReceiver(_broadcast_receiver1, filter)
+//    }
 
     private fun registerReceiver2BroadCasts(){
         val filter = IntentFilter(BluetoothAdapter.ACTION_SCAN_MODE_CHANGED)
-        registerReceiver(receiver2, filter)
+        registerReceiver(_broadcast_receiver1, filter)
+    }
+
+    private fun registerReceiver3BroadCasts(){
+        val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
+        registerReceiver(_broadcast_receiver2, filter)
+    }
+
+    private fun registerReceiver4BroadCasts(){
+        val filter = IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED)
+        registerReceiver(_broadcast_receiver3, filter)
     }
 
     private fun bAdapterIsNull() : Boolean{
@@ -458,6 +535,8 @@ class ViewBluetoothPairing : SecondViewClass() {
                 val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
                 startActivityForResult(intent, REQUESTCODEENABLEBLUETOOTH)
                 Log.d("Bluetooth", "bluetooth turned on")
+
+                //registerReceiver1BroadCasts()
             }
         }
     }
@@ -469,6 +548,8 @@ class ViewBluetoothPairing : SecondViewClass() {
         if (bAdapterIsEnabled()) {
             // turn off
             bAdapter!!.disable()
+
+            //registerReceiver1BroadCasts()
         }
         bluetoothIv.setImageResource(R.drawable.icon_bluetooth_off)
     }
@@ -490,22 +571,43 @@ class ViewBluetoothPairing : SecondViewClass() {
      *
      * NOTE: This will only execute on versions > LOLLIPOP because it is not needed otherwise.
      */
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun checkBTPermissions() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            var permissionCheck =
-                checkSelfPermission("Manifest.permission.ACCESS_FINE_LOCATION")
-            permissionCheck += checkSelfPermission("Manifest.permission.ACCESS_COARSE_LOCATION")
-            if (permissionCheck != 0) {
-                requestPermissions(
-                    arrayOf(
-                        Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.ACCESS_COARSE_LOCATION
-                    ), 1001
-                ) //Any number
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                var permissionCheck =
+                    checkSelfPermission("Manifest.permission.ACCESS_FINE_LOCATION")
+                permissionCheck += checkSelfPermission("Manifest.permission.ACCESS_COARSE_LOCATION")
+                if (permissionCheck != 0) {
+                    requestPermissions(
+                        arrayOf(
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                        ), 1001
+                    ) //Any number
+                }
             }
+        } else {
+            Log.d("Bluetooth", "checkBTPermissions: No need to check permissions.");
         }
     }
+
+    //create method for starting connection
+    //***remember the conncction will fail and app will crash if you haven't paired first
+    fun startConnection() {
+        startBTConnection(bluetoothDevice, false)
+    }
+
+    /**
+     * starting chat service method
+     */
+    fun startBTConnection(device: BluetoothDevice?, secure : Boolean) {
+        Log.d(
+            "Bluetooth",
+            "startBTConnection: Initializing RFCOM Bluetooth Connection."
+        )
+        mBluetoothConnection?.startClient(device, secure)
+    }
+
 /*
     private fun disconnect() {
         if (bluetoothSocket != null) {
@@ -537,9 +639,13 @@ class ViewBluetoothPairing : SecondViewClass() {
             try {
                 Log.d("socket Training view", "connecting in background")
                 if (bluetoothSocket == null || !isConnected) {
+
                     bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+
                     val device: BluetoothDevice = bluetoothAdapter.getRemoteDevice(address)
+
                     bluetoothSocket = device.createInsecureRfcommSocketToServiceRecord(deviceUuid)
+
                     BluetoothAdapter.getDefaultAdapter().cancelDiscovery()
                     bluetoothSocket!!.connect()
                 }
