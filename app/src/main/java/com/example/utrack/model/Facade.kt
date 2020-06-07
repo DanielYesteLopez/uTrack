@@ -35,7 +35,7 @@ class Facade (private val context: Context){
     }
 
     private fun addSession(session: Session) {
-        sessionList?.addSession(session.toString())
+        //sessionList?.addSession(session.toString())
         database.addNewSession(session.toString())
     }
 
@@ -69,16 +69,17 @@ class Facade (private val context: Context){
     fun visualizeSessionList(activity: Activity) {
         // Create an array adapter
         //val arrayCheck = database.getDatabaseSessions()
-        if(!anadido) {
+/*        if(!anadido) {
             añadirSessionesdelFireBase()
             anadido = true
-        }
+        }*/
+        añadirSessionesdelFireBase()
         val sessionsList = getSessionList()
         arrayAdapter =  ArrayAdapter<String>(context, android.R.layout.simple_list_item_1)
         if (sessionsList?.isNotEmpty()!!) {
             for (session : String in sessionsList) {
                 if (session != "" && session != "0") {
-                    arrayAdapter.insert(session,0)
+                    arrayAdapter.add(session)
                 }
             }
             activity.findViewById<ListView>(R.id.showDataList).adapter = arrayAdapter
@@ -115,6 +116,7 @@ class Facade (private val context: Context){
     }
 
     fun añadirSessionesdelFireBase() {
+        sessionList?.getSessionList()?.clear()
         addSessionFireBase(database.checkSession1)
         addSessionFireBase(database.checkSession2)
         addSessionFireBase(database.checkSession3)

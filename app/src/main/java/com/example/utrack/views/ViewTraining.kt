@@ -94,7 +94,25 @@ class ViewTraining : SecondViewClass() {
             if (canGetLocation()) {
                 startService()
             } else {
-                showSettingsAlert()
+                var gpsIsNull = false
+                var networkIsNull = false
+                try {
+                    gpsIsNull = locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER)!!
+                    gpsIsNull = false
+                } catch (ex: Exception) {
+                    gpsIsNull = true
+                }
+                try {
+                    networkIsNull = locationManager?.isProviderEnabled(LocationManager.NETWORK_PROVIDER)!!
+                    networkIsNull = false
+                } catch (ex: Exception) {
+                    networkIsNull = true
+                }
+                if ( networkIsNull || gpsIsNull ) { // gps is null
+                    //showAlertNull() // desactiva el programa
+                } else {
+                    showSettingsAlert()  // activa el gps
+                }
             }
         }
         mHandler = Handler()
