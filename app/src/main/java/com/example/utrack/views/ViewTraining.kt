@@ -35,12 +35,15 @@ import com.anychart.data.Mapping
 import com.anychart.data.Set
 import com.anychart.enums.Anchor
 import com.anychart.enums.MarkerType
+import com.example.utrack.model.services.BluetoothConnectionService
 
 
 class ViewTraining : SecondViewClass() {
 
     private val TAG = "MainActivity"
     private val MY_PERMISSIONS_REQUEST_LOCATION = 99
+
+    private var mBluetoothConnection: BluetoothConnectionService? = null
 
     private var locationManager: LocationManager? = null
     private var bluetoothDevice : BluetoothDevice? = null
@@ -60,6 +63,9 @@ class ViewTraining : SecondViewClass() {
 
     private lateinit var mHandler: Handler
     private lateinit var mRunnable:Runnable
+
+    private lateinit var bHandler: Handler
+    private lateinit var bRunnable:Runnable
 
 
     @SuppressLint("SourceLockedOrientationActivity", "ResourceAsColor")
@@ -85,7 +91,6 @@ class ViewTraining : SecondViewClass() {
         } else {
             clearDataTraining()
             locationManager = this.applicationContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-            assert(locationManager != null)
             if (canGetLocation()) {
                 startService()
             } else {
@@ -93,11 +98,8 @@ class ViewTraining : SecondViewClass() {
             }
         }
         mHandler = Handler()
+        //bHandler = Handler()
         PresenterTraining.getInstance(this@ViewTraining)
-        val myBluetoothFragment: FragmentBluetooth = FragmentBluetooth()
-        // check bluetooth connection
-        myBluetoothFragment.show(supportFragmentManager, getString(R.string.notefication))
-
         PresenterTraining.getInstance(this@ViewTraining).registerSensorListenerAccelerate()
 
         locationUpdateReceiver.let{
@@ -126,7 +128,7 @@ class ViewTraining : SecondViewClass() {
         cartesian.xAxis(0).title("time")
         cartesian.xAxis(0).labels().padding(1,1,1,1)
         cartesian.yAxis(0).labels().padding(1,1,1,1)
-        seriesData = ArrayList<DataEntry>()
+        seriesData = ArrayList()
         seriesData.add(CustomDataEntry("0",0,0,0))
 
         dataSet = Set.instantiate()
@@ -189,6 +191,11 @@ class ViewTraining : SecondViewClass() {
         textViewstop.visibility = View.INVISIBLE
 
         PresenterTraining.getInstance(this).createNewSession()
+
+/*        val myBluetoothFragment = FragmentBluetooth()
+        // check bluetooth connection
+        myBluetoothFragment.show(supportFragmentManager, getString(R.string.notefication))
+        gestBluetoothDevice()*/
 
         // button llisteners
         buttonStart.setOnClickListener {
@@ -268,25 +275,60 @@ class ViewTraining : SecondViewClass() {
                 val mySaveFragment = FragmentSaveData()
                 mySaveFragment.show(supportFragmentManager,getString(R.string.notefication))
             } else {
-                onBackDataButtonPressed()
+                onBackTrainingButtonPressed()
             }
         }
         //
-        gestionBluetoothDevice()
+
         // exit on create
     }
 
-    private fun gestionBluetoothDevice() {
-        this.bluetoothDevice = PresenterTraining.getInstance(this).getDeviceCadence()
-        if (bluetoothDevice == null){
-            Log.d("Bluetooth","okey no bluetooth device chosen")
-        } else {
-            Log.d("Bluetoot","try to connect device")
-
+    private fun gestBluetoothDevice() {
+/*        bRunnable = Runnable {
+            this.bluetoothDevice = PresenterTraining.getInstance(this).getDeviceCadence()
+            if (bluetoothDevice == null){
+                Log.d("Bluetooth","okey no bluetooth device chosen--------")
+            } else {
+                if (mBluetoothConnection == null) {
+                    Log.d("Bluetoot", "try to connect device")
+                    mBluetoothConnection = BluetoothConnectionService(this)
+                }
+                if (mBluetoothConnection!!.getState() != mBluetoothConnection!!.STATE_CONNECTED ||
+                    mBluetoothConnection!!.getState() != mBluetoothConnection!!.STATE_CONNECTING){
+                    startConnection()
+                }
+            }
+            bHandler.postDelayed(bRunnable, 10000)
         }
+        bHandler.postDelayed(bRunnable, 10000)*/
     }
 
-    private fun onBackDataButtonPressed(){
+    //create method for starting connection
+    //***remember the connection will fail and app will crash if you haven't paired first
+    private fun startConnection() {
+        // false for insecure connection
+        startBTConnection(bluetoothDevice)
+    }
+
+    /**
+     * starting chat service method
+     */
+    private fun startBTConnection(device: BluetoothDevice?) {
+        Log.d(
+            "Bluetooth",
+            "startBTConnection: Initializing RFCOM Bluetooth Connection."
+        )
+        mBluetoothConnection?.startClient(device, true)
+    }
+
+    private fun onBackTrainingButtonPressed(){
+/*        try {
+            mHandler.removeCallbacks(mRunnable)
+            bHandler.removeCallbacks(bRunnable)
+        }catch (e : IllegalArgumentException) {
+            Log.d(TAG,"${e.message}")
+        }*/
+
         val intent = Intent(application, ViewMainPage().javaClass)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
@@ -346,11 +388,17 @@ class ViewTraining : SecondViewClass() {
     }
 
     public override fun onDestroy() {
-        /*try {
+        try {
             unregisterReceiver(locationUpdateReceiver)
             unregisterReceiver(predictedLocationReceiver)
         } catch (ex: IllegalArgumentException) {
             ex.printStackTrace()
+        }
+       /* try {
+            mHandler.removeCallbacks(mRunnable)
+            bHandler.removeCallbacks(bRunnable)
+        }catch (e : IllegalArgumentException) {
+            Log.d(TAG,"${e.message}")
         }*/
         super.onDestroy()
     }
@@ -381,10 +429,10 @@ class ViewTraining : SecondViewClass() {
         try {
             unregisterReceiver(locationUpdateReceiver)
             unregisterReceiver(predictedLocationReceiver)
+            PresenterTraining.getInstance(this@ViewTraining).unRegisterSensorListenerAccelerate()
         } catch (ex: IllegalArgumentException) {
             ex.printStackTrace()
         }
-        PresenterTraining.getInstance(this@ViewTraining).unRegisterSensorListenerAccelerate()
         super.onPause()
     }
 
